@@ -21,9 +21,10 @@ export const Alumno = sequelize.define('Alumno', {
         allowNull: false,
         unique: true,
     },
-    fechaNacimiento: {
-        type: DataTypes.DATEONLY,
+    legajo: {
+        type: DataTypes.INTEGER,
         allowNull: false,
+        unique: true,
     },
     }, {
     tableName: 'alumnos',
