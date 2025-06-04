@@ -1,12 +1,9 @@
-import { Sequelize, DataTypes } from 'sequelize';
+import { DataTypes } from 'sequelize';
+import { SequelizeDB } from '../Database/Sequelize';
 
-const sequelize = new Sequelize('');
+const sequelize = SequelizeDB;
 
-
-
-
-// Define the Alumno model
-export const Alumno = sequelize.define('Alumno', {
+sequelize.define('Alumno', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -30,7 +27,9 @@ export const Alumno = sequelize.define('Alumno', {
         allowNull: false,
         unique: true,
     },
-    }, {
-    tableName: 'alumnos',
+}, {
+    tableName: 'Alumnos',
     timestamps: false, // Disable createdAt and updatedAt fields
-    });
+});
+export const AlumnoModel = sequelize.models.Alumno;
+

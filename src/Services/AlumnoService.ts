@@ -1,13 +1,60 @@
+import { get } from 'http';
 import {AlumnoRepository} from '../Repositories/AlumnoRepository.ts';   
+
+
 export const AlumnoService = {
+
   getById: async (id) => {
     try {
-     // const alumno = await AlumnoRepository.findByPk(id);
-      //return alumno;
+      const alumno = await AlumnoRepository.findByPk(id);
+      return alumno;
     } catch (error) {
       console.error('Error fetching alumno by ID:', error);
       throw new Error('Database error');
     }
 
+    },
+  getAll: async () => {
+    try {
+      const alumnos = await AlumnoRepository.findAll();
+      return alumnos;
+    } catch (error) {
+      console.error('Error fetching all alumnos:', error);
+      throw new Error('Database error');
     }
+  },
+ 
+  create: async (alumnoData) => {
+    try {
+      const newAlumno = await AlumnoRepository.create(alumnoData);
+      return newAlumno;
+    } catch (error) {
+      console.error('Error creating alumno:', error);
+      throw new Error('Database error');
+    }
+  },
+  update: async (id, alumnoData) => {
+    try {
+      const updated = await AlumnoRepository.update(id, alumnoData);
+      if (!updated) {
+        throw new Error('Alumno not found or not updated');
+      }
+      return updated;
+    } catch (error) {
+      console.error('Error updating alumno:', error);
+      throw new Error('Database error');
+    }
+  },
+  delete: async (id) => {
+    try {
+      const deleted = await AlumnoRepository.delete(id);
+      if (!deleted) {
+        throw new Error('Alumno not found or not deleted');
+      }
+      return deleted;
+    } catch (error) {
+      console.error('Error deleting alumno:', error);
+      throw new Error('Database error');
+    }
+  }
 }
