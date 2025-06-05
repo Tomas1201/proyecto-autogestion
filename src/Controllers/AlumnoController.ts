@@ -1,6 +1,7 @@
-import { catchAsync } from '../Utils/catchAsync'; 
-import { AlumnoService } from "../Services/AlumnoService";
+import { catchAsync } from '../Utils/catchAsync.js'; 
+import { AlumnoService } from "../Services/AlumnoService.js";
 import { Request, Response, NextFunction } from 'express';
+
 export const AlumnoController = {
   // Methods for handling requests related to Alumnos
   getAlumno: catchAsync(async (req: Request, res: Response, next:NextFunction) => {

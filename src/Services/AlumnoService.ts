@@ -1,6 +1,6 @@
 import { get } from 'http';
-import {AlumnoRepository} from '../Repositories/AlumnoRepository';   
-import { Alumno } from '../Models/AlumnoModel'; // Assuming Alumno is a type or interface representing the model
+import {AlumnoRepository} from '../Repositories/AlumnoRepository.js';   
+import { Alumno } from '../Models/AlumnoModel.js'; // Assuming Alumno is a type or interface representing the model
 
 export const AlumnoService = {
 

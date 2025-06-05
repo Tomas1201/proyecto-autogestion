@@ -34,3 +34,5 @@ export const Alumno = sequelize.define('Alumno', {
     tableName: 'alumnos',
     timestamps: false, // Disable createdAt and updatedAt fields
     });
+
+    sequelize.sync()

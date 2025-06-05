@@ -1,4 +1,4 @@
-import { AlumnoModel } from "../Models/AlumnoModel";
+import { AlumnoModel } from "../Models/AlumnoModel.js";
 import { Alumno } from "../Models/AlumnoModel"; // Assuming Alumno is a type or interface representing the model
 export const AlumnoRepository = {  
     

@@ -1,5 +1,5 @@
 import { DataTypes, Model } from 'sequelize';
-import { SequelizeDB } from '../Database/Sequelize';
+import { SequelizeDB } from '../Database/Sequelize.js';
 
 const sequelize = SequelizeDB;
 
@@ -45,5 +45,6 @@ sequelize.define('Alumno', {
     tableName: 'Alumnos',
     timestamps: false, // Disable createdAt and updatedAt fields
 });
+sequelize.sync();
 export const AlumnoModel = sequelize.models.Alumno;
 
