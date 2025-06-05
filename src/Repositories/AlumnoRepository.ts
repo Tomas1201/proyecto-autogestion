@@ -26,12 +26,9 @@ export const AlumnoRepository = {
     },
    findByName: async (name: string) => {
     try {
-        console.log('=== DEBUG INFO ===');
-        console.log('Input name:', name);
-        console.log('Input type:', typeof name);
-        console.log('Model name:', AlumnoModel.name);
-        console.log('Table name:', AlumnoModel.tableName);
-        
+        if (!name || typeof name !== 'string') {
+            throw new Error('Invalid name parameter');
+        }
         const query = {
             where: {
                 nombre: {
@@ -40,20 +37,35 @@ export const AlumnoRepository = {
             }
         };
         
-        console.log('Query object:', JSON.stringify(query, null, 2));
-        
         const alumnos = await AlumnoModel.findAll(query);
-        
-        console.log('Results:', alumnos.length);
-        console.log('==================');
-        
+                
         return alumnos;
     } catch (error) {
         console.error('Error fetching alumno by name:', error);
         throw error;
     }
+},
+findByApellido: async (apellido: string) => {
+    try {
+        if (!apellido || typeof apellido !== 'string') {
+            throw new Error('Invalid apellido parameter');
+        }
+        const query = {
+            where: {
+                apellido: {
+                    [Op.like]: `%${apellido.toLowerCase()}%`
+                }
+            }
+        };
+        
+        const alumnos = await AlumnoModel.findAll(query);
+                
+        return alumnos;
+    } catch (error) {
+        console.error('Error fetching alumno by apellido:', error);
+    }
 }
-    ,
+,
     create: async (alumnoData: Alumno) => {
         try {
             const newAlumno = await AlumnoModel.create(alumnoData as any);

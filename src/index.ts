@@ -1,6 +1,7 @@
 import express, { Request, Response, NextFunction } from 'express';
 import dotenv from 'dotenv';
-import AlumnoRouter from './Routers/AlumnoRouter.js'; // Adjust the path as necessary
+import AlumnoRouter from './Routers/AlumnoRouter.js';
+import {Normalizador} from './Utils/Normalizador.js'
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;

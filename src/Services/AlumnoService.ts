@@ -33,6 +33,15 @@ export const AlumnoService = {
     }
   }
   ,
+  getByApellido: async (apellido: string) => {
+    try {
+      const alumnos = await AlumnoRepository.findByApellido(apellido);
+      return alumnos;
+    } catch (error) {
+      console.error('Error fetching alumno by apellido:', error);
+      throw new Error('Database error');}
+    }
+  ,
  
   create: async (alumnoData: Alumno) => {
     try {
