@@ -7,11 +7,9 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use('/alumnos', AlumnoRouter); // Use the AlumnoRouter for /alumnos endpoint
+app.use('/api/v1/alumnos', AlumnoRouter); // Use the AlumnoRouter for /alumnos endpoint
 
-app.get('/', (req, res) => {
-  res.send('Hello, World!');
-});
+
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   console.error(err.stack); // Muestra el stack del error en la consola
