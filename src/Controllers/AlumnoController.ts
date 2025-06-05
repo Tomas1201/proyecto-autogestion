@@ -1,8 +1,9 @@
+import { catchAsync } from '../Utils/catchAsync'; 
 import { AlumnoService } from "../Services/AlumnoService";
-
+import { Request, Response, NextFunction } from 'express';
 export const AlumnoController = {
   // Methods for handling requests related to Alumnos
-  getAlumno: async (req, res) => {
+  getAlumno: catchAsync(async (req: Request, res: Response, next:NextFunction) => {
     const { id } = req.params;
     try {
       const alumno = await AlumnoService.getById(id);
@@ -14,8 +15,8 @@ export const AlumnoController = {
       console.error('Error fetching alumno:', error);
       res.status(500).json({ message: 'Internal server error' });
     }
-  },
-  getAllAlumnos: async (req, res) => {
+  }),
+  getAllAlumnos: async (req:Request, res:Response) => {
     try {
       const alumnos = await AlumnoService.getAll();
       res.status(200).json(alumnos);
@@ -25,21 +26,21 @@ export const AlumnoController = {
     }
   },
   
-  createAlumno: async (req, res) => {
-    const { nombre, apellido, email, fechaNacimiento } = req.body;
+  createAlumno: async (req: Request, res: Response) => {
+    const alumno = req.body;
     try {
-      const newAlumno = await AlumnoService.create({ nombre, apellido, email, fechaNacimiento });
+      const newAlumno = await AlumnoService.create(alumno);
       res.status(201).json(newAlumno);
     } catch (error) {
       console.error('Error creating alumno:', error);
       res.status(500).json({ message: 'Internal server error' });
     }
   },
-  updateAlumno: async (req, res) => {
+  updateAlumno: catchAsync(async (req: Request, res: Response) => {
     const { id } = req.params;
-    const { nombre, apellido, email, fechaNacimiento } = req.body;
+    const alumno = req.body;
     try {
-      const updatedAlumno = await AlumnoService.update(id, { nombre, apellido, email, fechaNacimiento });
+      const updatedAlumno = await AlumnoService.update(id, alumno);
       if (!updatedAlumno) {
         return res.status(404).json({ message: 'Alumno not found' });
       }
@@ -48,8 +49,8 @@ export const AlumnoController = {
       console.error('Error updating alumno:', error);
       res.status(500).json({ message: 'Internal server error' });
     }
-  },
-  deleteAlumno: async (req, res) => {
+  }),
+  deleteAlumno: catchAsync(async (req: Request, res: Response) => {
     const { id } = req.params;
     try {
       const deleted = await AlumnoService.delete(id);
@@ -61,5 +62,5 @@ export const AlumnoController = {
       console.error('Error deleting alumno:', error);
       res.status(500).json({ message: 'Internal server error' });
     }
-  }
+  })
 };

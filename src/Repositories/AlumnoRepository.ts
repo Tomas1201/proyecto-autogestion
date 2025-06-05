@@ -1,9 +1,9 @@
 import { AlumnoModel } from "../Models/AlumnoModel";
-
+import { Alumno } from "../Models/AlumnoModel"; // Assuming Alumno is a type or interface representing the model
 export const AlumnoRepository = {  
     
     
-    findByPk: async (id) => {
+    findByPk: async (id: string) => {
         try {
             const alumno = await AlumnoModel.findByPk(id);
             return alumno;
@@ -23,16 +23,16 @@ export const AlumnoRepository = {
             throw new Error('Database error');
         }      
     },
-    create: async (alumnoData) => {
+    create: async (alumnoData: Alumno) => {
         try {
-            const newAlumno = await AlumnoModel.create(alumnoData);
+            const newAlumno = await AlumnoModel.create(alumnoData as any);
             return newAlumno;
         } catch (error) {
             console.error('Error creating alumno:', error);
             throw new Error('Database error');
         }
     },
-    update: async (id, alumnoData) => {
+    update: async (id: string, alumnoData: Alumno) => {
         try {
             const [updatedRows] = await AlumnoModel.update(alumnoData, {
                 where: { id }
@@ -43,7 +43,7 @@ export const AlumnoRepository = {
             throw new Error('Database error');
         }
     },
-    delete: async (id) => {
+    delete: async (id: string) => {
         try {
             const deletedRows = await AlumnoModel.destroy({
                 where: { id }

@@ -1,10 +1,10 @@
 import { get } from 'http';
-import {AlumnoRepository} from '../Repositories/AlumnoRepository.ts';   
-
+import {AlumnoRepository} from '../Repositories/AlumnoRepository';   
+import { Alumno } from '../Models/AlumnoModel'; // Assuming Alumno is a type or interface representing the model
 
 export const AlumnoService = {
 
-  getById: async (id) => {
+  getById: async (id: string) => {
     try {
       const alumno = await AlumnoRepository.findByPk(id);
       return alumno;
@@ -24,7 +24,7 @@ export const AlumnoService = {
     }
   },
  
-  create: async (alumnoData) => {
+  create: async (alumnoData: Alumno) => {
     try {
       const newAlumno = await AlumnoRepository.create(alumnoData);
       return newAlumno;
@@ -33,7 +33,7 @@ export const AlumnoService = {
       throw new Error('Database error');
     }
   },
-  update: async (id, alumnoData) => {
+  update: async (id: string, alumnoData: Alumno) => {
     try {
       const updated = await AlumnoRepository.update(id, alumnoData);
       if (!updated) {
@@ -45,7 +45,7 @@ export const AlumnoService = {
       throw new Error('Database error');
     }
   },
-  delete: async (id) => {
+  delete: async (id: string) => {
     try {
       const deleted = await AlumnoRepository.delete(id);
       if (!deleted) {

@@ -1,7 +1,21 @@
-import { DataTypes } from 'sequelize';
+import { DataTypes, Model } from 'sequelize';
 import { SequelizeDB } from '../Database/Sequelize';
 
 const sequelize = SequelizeDB;
+
+
+export class Alumno extends Model {
+    public id!: number;
+    public nombre!: string;
+    public apellido!: string;
+    public email!: string;
+    public legajo!: number;
+
+    // timestamps!
+    public readonly createdAt!: Date;
+    public readonly updatedAt!: Date;
+
+}
 
 sequelize.define('Alumno', {
     id: {

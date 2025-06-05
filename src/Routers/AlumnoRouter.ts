@@ -17,5 +17,5 @@ router.put('/:id', AlumnoController.updateAlumno);
 router.delete('/:id', AlumnoController.deleteAlumno);
 
 
-
+export default router;
 
