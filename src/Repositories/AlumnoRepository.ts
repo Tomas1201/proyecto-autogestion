@@ -1,3 +1,4 @@
+import { Op } from "../Database/Sequelize.js";
 import { AlumnoModel } from "../Models/AlumnoModel.js";
 import { Alumno } from "../Models/AlumnoModel"; // Assuming Alumno is a type or interface representing the model
 export const AlumnoRepository = {  
@@ -23,6 +24,36 @@ export const AlumnoRepository = {
             throw new Error('Database error');
         }      
     },
+   findByName: async (name: string) => {
+    try {
+        console.log('=== DEBUG INFO ===');
+        console.log('Input name:', name);
+        console.log('Input type:', typeof name);
+        console.log('Model name:', AlumnoModel.name);
+        console.log('Table name:', AlumnoModel.tableName);
+        
+        const query = {
+            where: {
+                nombre: {
+                    [Op.like]: `%${name.toLowerCase()}%`
+                }
+            }
+        };
+        
+        console.log('Query object:', JSON.stringify(query, null, 2));
+        
+        const alumnos = await AlumnoModel.findAll(query);
+        
+        console.log('Results:', alumnos.length);
+        console.log('==================');
+        
+        return alumnos;
+    } catch (error) {
+        console.error('Error fetching alumno by name:', error);
+        throw error;
+    }
+}
+    ,
     create: async (alumnoData: Alumno) => {
         try {
             const newAlumno = await AlumnoModel.create(alumnoData as any);

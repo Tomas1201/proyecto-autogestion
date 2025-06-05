@@ -1,6 +1,7 @@
 import { catchAsync } from '../Utils/catchAsync.js'; 
 import { AlumnoService } from "../Services/AlumnoService.js";
 import { Request, Response, NextFunction } from 'express';
+import { get } from 'http';
 
 export const AlumnoController = {
   // Methods for handling requests related to Alumnos
@@ -26,6 +27,21 @@ export const AlumnoController = {
       res.status(500).json({ message: 'Internal server error' });
     }
   },
+  getAlumnoByName: catchAsync(async (req: Request, res: Response) => {
+    const { name } = req.params;
+    console.log('Received request to get alumno by name:', name);
+    try {
+      const alumnos = await AlumnoService.getByName(name);
+      
+      if (!alumnos || alumnos.length === 0) {
+        return res.status(404).json({ message: 'No alumnos found with that name' });
+      }
+      res.status(200).json(alumnos);
+    } catch (error) {
+      console.error('Error fetching alumno by name:', error);
+      res.status(500).json({ message: 'Internal server error' });
+    }
+  }),
   
   createAlumno: async (req: Request, res: Response) => {
     const alumno = req.body;

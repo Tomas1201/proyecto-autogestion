@@ -8,7 +8,7 @@ router.get('/',AlumnoController.getAllAlumnos);
 
 router.get('/:id', AlumnoController.getAlumno);
 
-//router.get('/nombre/:name', AlumnoController.findByName);
+router.get('/nombre/:name', AlumnoController.getAlumnoByName);
 
 router.post('/', AlumnoController.createAlumno);
 

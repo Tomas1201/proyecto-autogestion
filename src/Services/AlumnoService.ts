@@ -23,6 +23,16 @@ export const AlumnoService = {
       throw new Error('Database error');
     }
   },
+  getByName: async (name: string) => {
+    try {
+      const alumnos = await AlumnoRepository.findByName(name);
+      return alumnos;
+    } catch (error) {
+      console.error('Error fetching alumno by name:', error);
+      throw new Error('Database error');
+    }
+  }
+  ,
  
   create: async (alumnoData: Alumno) => {
     try {

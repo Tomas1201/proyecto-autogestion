@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use('/api/v1/alumnos', AlumnoRouter); // Use the AlumnoRouter for /alumnos endpoint
+app.use('/api/v1/alumnos', AlumnoRouter); 
 
 
 
