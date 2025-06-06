@@ -1,6 +1,8 @@
-import { Op } from "../Database/Sequelize.js";
+import { Op } from "sequelize";
 import { AlumnoModel } from "../Models/AlumnoModel.js";
-import { Alumno } from "../Models/AlumnoModel"; // Assuming Alumno is a type or interface representing the model
+import { Alumno } from "../Models/AlumnoModel";
+
+
 export const AlumnoRepository = {  
     
     
@@ -24,6 +26,8 @@ export const AlumnoRepository = {
             throw new Error('Database error');
         }      
     },
+
+
    findByName: async (name: string) => {
     try {
         if (!name || typeof name !== 'string') {
@@ -43,9 +47,11 @@ export const AlumnoRepository = {
     } catch (error) {
         console.error('Error fetching alumno by name:', error);
         throw error;
-    }
-},
-findByApellido: async (apellido: string) => {
+        }
+    },
+
+    // Devuelve un alumno por apellido
+    findByApellido: async (apellido: string) => {
     try {
         if (!apellido || typeof apellido !== 'string') {
             throw new Error('Invalid apellido parameter');
@@ -63,9 +69,11 @@ findByApellido: async (apellido: string) => {
         return alumnos;
     } catch (error) {
         console.error('Error fetching alumno by apellido:', error);
-    }
-}
-,
+        }
+    },
+    
+    
+    // Crea un nuevo alumno
     create: async (alumnoData: Alumno) => {
         try {
             const newAlumno = await AlumnoModel.create(alumnoData as any);
@@ -75,6 +83,9 @@ findByApellido: async (apellido: string) => {
             throw new Error('Database error');
         }
     },
+
+
+    // Actualiza un alumno por ID
     update: async (id: string, alumnoData: Alumno) => {
         try {
             const [updatedRows] = await AlumnoModel.update(alumnoData, {
@@ -86,6 +97,9 @@ findByApellido: async (apellido: string) => {
             throw new Error('Database error');
         }
     },
+
+
+    // Elimina un alumno por ID   
     delete: async (id: string) => {
         try {
             const deletedRows = await AlumnoModel.destroy({

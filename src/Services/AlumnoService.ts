@@ -1,6 +1,6 @@
-import { get } from 'http';
 import {AlumnoRepository} from '../Repositories/AlumnoRepository.js';   
-import { Alumno } from '../Models/AlumnoModel.js'; // Assuming Alumno is a type or interface representing the model
+import { Alumno } from '../Models/AlumnoModel.js'; 
+
 
 export const AlumnoService = {
 
@@ -14,6 +14,8 @@ export const AlumnoService = {
     }
 
     },
+
+
   getAll: async () => {
     try {
       const alumnos = await AlumnoRepository.findAll();
@@ -23,6 +25,8 @@ export const AlumnoService = {
       throw new Error('Database error');
     }
   },
+
+
   getByName: async (name: string) => {
     try {
       const alumnos = await AlumnoRepository.findByName(name);
@@ -31,8 +35,9 @@ export const AlumnoService = {
       console.error('Error fetching alumno by name:', error);
       throw new Error('Database error');
     }
-  }
-  ,
+  },
+
+
   getByApellido: async (apellido: string) => {
     try {
       const alumnos = await AlumnoRepository.findByApellido(apellido);
@@ -40,9 +45,9 @@ export const AlumnoService = {
     } catch (error) {
       console.error('Error fetching alumno by apellido:', error);
       throw new Error('Database error');}
-    }
-  ,
+    },
  
+
   create: async (alumnoData: Alumno) => {
     try {
       const newAlumno = await AlumnoRepository.create(alumnoData);
@@ -52,6 +57,8 @@ export const AlumnoService = {
       throw new Error('Database error');
     }
   },
+
+
   update: async (id: string, alumnoData: Alumno) => {
     try {
       const updated = await AlumnoRepository.update(id, alumnoData);
@@ -64,6 +71,8 @@ export const AlumnoService = {
       throw new Error('Database error');
     }
   },
+
+
   delete: async (id: string) => {
     try {
       const deleted = await AlumnoRepository.delete(id);
