@@ -1,5 +1,5 @@
-import {AlumnoRepository} from '../Repositories/AlumnoRepository.js';   
-import { Alumno } from '../Models/AlumnoModel.js'; 
+import {AlumnoRepository} from './AlumnoRepository.js';   
+import { Alumno } from './AlumnoModel.js'; 
 
 
 export const AlumnoService = {

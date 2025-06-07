@@ -1,6 +1,6 @@
 import express, { Request, Response, NextFunction } from 'express';
 import dotenv from 'dotenv';
-import AlumnoRouter from './Routers/AlumnoRouter.js';
+import AlumnoRouter from './Alumno/AlumnoRouter.js';
 import {Normalizador} from './Utils/Sanitizador.js';
 
 dotenv.config();

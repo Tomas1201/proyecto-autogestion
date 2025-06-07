@@ -1,6 +1,6 @@
 import { Op } from "sequelize";
-import { AlumnoModel } from "../Models/AlumnoModel.js";
-import { Alumno } from "../Models/AlumnoModel";
+import { AlumnoModel } from "./AlumnoModel.js";
+import { Alumno } from "./AlumnoModel.js";
 
 
 export const AlumnoRepository = {  
