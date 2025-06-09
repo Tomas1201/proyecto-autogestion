@@ -13,13 +13,13 @@ export const AlumnoController = {
 
       const alumno = await AlumnoService.getById(id);
       if (!alumno) {
-        return res.status(404).json({ message: 'Alumno not found', ERROR_CODE: 404 });
+        return res.status(404).json({status:404, message: 'Alumno not found', ERROR_CODE: 404 });
       }
-      res.status(200).json({data: alumno});
+      res.status(200).json({status: 200, data: alumno});
         }
          catch (error) {
       console.error('Error buscando alumno:', error);
-      res.status(500).json({ message: 'Internal server error' });
+      res.status(500).json({status:500, message: 'Internal server error' });
     }
   }),
 
@@ -29,11 +29,11 @@ export const AlumnoController = {
     
     try {
       const alumnos = await AlumnoService.getAll();
-      res.status(200).json({data: alumnos});
+      res.status(200).json({status:200, data: alumnos});
     
     } catch (error) {
       console.error('Error buscando alumnos:', error);
-      res.status(500).json({ message: 'Internal server error' });
+      res.status(500).json({status:500, message: 'Internal server error' });
     }
   },
 
@@ -47,12 +47,12 @@ export const AlumnoController = {
       const alumnos = await AlumnoService.getByName(name);
       
       if (!alumnos || alumnos.length === 0) {
-        return res.status(404).json({ message: 'No alumnos found with that name' });
+        return res.status(404).json({status:404, message: 'No alumnos found with that name' });
       }
-      res.status(200).json({data: alumnos});
+      res.status(200).json({status:200, data: alumnos});
     } catch (error) {
       console.error('Error fetching alumno by name:', error);
-      res.status(500).json({ message: 'Internal server error' });
+      res.status(500).json({status:500, message: 'Internal server error' });
     }
   }),
 
@@ -65,12 +65,12 @@ export const AlumnoController = {
       const alumnos = await AlumnoService.getByApellido(apellido);
       
       if (!alumnos || alumnos.length === 0) {
-        return res.status(404).json({ message: 'No alumnos found with that apellido' });
+        return res.status(404).json({status:404, message: 'No alumnos found with that apellido' });
       }
-      res.status(200).json({data: alumnos});
+      res.status(200).json({status:200, data: alumnos});
     } catch (error) {
       console.error('Error fetching alumno by apellido:', error);
-      res.status(500).json({ message: 'Internal server error' });
+      res.status(500).json({status:500, message: 'Internal server error' });
     }
   }),
   
@@ -81,10 +81,10 @@ export const AlumnoController = {
     try {
       const newAlumno = await AlumnoService.create(alumno);
       res.setHeader('Location', `/api/v1/alumnos/${newAlumno.get('id')}`);
-      res.status(201).json({data: newAlumno});
+      res.status(201).json({status:201,data: newAlumno});
     } catch (error) {
       console.error('Error creating alumno:', error);
-      res.status(500).json({ message: 'Internal server error' });
+      res.status(500).json({status:500, message: 'Internal server error' });
     }
   },
 
@@ -96,12 +96,12 @@ export const AlumnoController = {
     try {
       const updatedAlumno = await AlumnoService.update(id, alumno);
       if (!updatedAlumno) {
-        return res.status(404).json({ message: 'Alumno not found' });
+        return res.status(404).json({status:404, message: 'Alumno not found' });
       }
-      res.status(200).json({data: updatedAlumno});
+      res.status(200).json({status:200, data: updatedAlumno});
     } catch (error) {
       console.error('Error updating alumno:', error);
-      res.status(500).json({ message: 'Internal server error' });
+      res.status(500).json({status:500, message: 'Internal server error' });
     }
   }),
 
@@ -112,12 +112,12 @@ export const AlumnoController = {
     try {
       const deleted = await AlumnoService.delete(id);
       if (!deleted) {
-        return res.status(404).json({ message: 'Alumno not found' });
+        return res.status(404).json({status:404, message: 'Alumno not found' });
       }
       res.status(204).send();
     } catch (error) {
       console.error('Error deleting alumno:', error);
-      res.status(500).json({ message: 'Internal server error' });
+      res.status(500).json({status:500, message: 'Internal server error' });
     }
   })
 };
