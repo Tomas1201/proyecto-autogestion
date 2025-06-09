@@ -13,9 +13,9 @@ export const AlumnoController = {
 
       const alumno = await AlumnoService.getById(id);
       if (!alumno) {
-        return res.status(404).json({status:404, message: 'Alumno not found', ERROR_CODE: 404 });
+        return res.status(404).json({status: 404, message: 'Alumno not found', ERROR_CODE: 404 });
       }
-      res.status(200).json({status: 200, data: alumno});
+      res.status(200).json({status: "OK", data: alumno});
         }
          catch (error) {
       console.error('Error buscando alumno:', error);
@@ -29,11 +29,11 @@ export const AlumnoController = {
     
     try {
       const alumnos = await AlumnoService.getAll();
-      res.status(200).json({status:200, data: alumnos});
+      res.status(200).json({status:"OK", data: alumnos});
     
     } catch (error) {
       console.error('Error buscando alumnos:', error);
-      res.status(500).json({status:500, message: 'Internal server error' });
+      res.status(500).json({status: "500", data:{error:'Internal server error' }});
     }
   },
 
