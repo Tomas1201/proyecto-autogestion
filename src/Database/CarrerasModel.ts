@@ -2,6 +2,22 @@ import { SequelizeDB } from './Sequelize.js';
 
 import { DataTypes, Model } from 'sequelize';
 
+
+
+export class Carrera extends Model {
+    public id!: number;
+    public nombre!: string;
+    public descripcion!: string;
+    public duracion!: number;
+    public titulo!: string;
+    public asignaturas_id!: number[];
+    public JefeCarrera_id!: number;
+
+    // timestamps!
+    public readonly createdAt!: Date;
+    public readonly updatedAt!: Date;
+
+}
 SequelizeDB.define('Carrera', {
     
     id:{
@@ -31,12 +47,20 @@ SequelizeDB.define('Carrera', {
         allowNull: false,
     },
     
-    asignaturas_id:{
-        type: DataTypes.ARRAY(DataTypes.INTEGER)
-    },
+    
     
     JefeCarrera_id:{
         type: DataTypes.INTEGER
     },
     
+},{
+    tableName: 'Carreras',
+    timestamps: true, // Agrega createdAt y updatedAt
+    createdAt: 'fecha_creacion',
+    updatedAt: 'fecha_actualizacion',
 });
+
+
+SequelizeDB.sync( );
+
+export const CarreraModel = SequelizeDB.models.Carrera;

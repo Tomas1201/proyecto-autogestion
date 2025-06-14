@@ -1,7 +1,7 @@
 import { DataTypes, Model } from 'sequelize';
 import { SequelizeDB } from '../Database/Sequelize.js';
 
-const sequelize = SequelizeDB;
+
 
 
 export class Alumno extends Model {
@@ -17,7 +17,7 @@ export class Alumno extends Model {
 
 }
 
-sequelize.define('Alumno', {
+SequelizeDB.define('Alumno', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -45,6 +45,6 @@ sequelize.define('Alumno', {
     tableName: 'Alumnos',
     timestamps: false, // Disable createdAt and updatedAt fields
 });
-sequelize.sync();
-export const AlumnoModel = sequelize.models.Alumno;
+SequelizeDB.sync();
+export const AlumnoModel = SequelizeDB.models.Alumno;
 

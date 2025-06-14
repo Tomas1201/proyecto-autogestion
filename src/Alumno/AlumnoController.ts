@@ -10,8 +10,10 @@ export const AlumnoController = {
     const { id } = req.params;
     
     try {
-
-      const alumno = await AlumnoService.getById(id);
+      if (!id || isNaN(Number(id))) {
+        return res.status(400).json({status: 400, message: 'Invalid ID format', ERROR_CODE: 400 });
+      }
+      const alumno = await AlumnoService.getById(Number(id));
       if (!alumno) {
         return res.status(404).json({status: 404, message: 'Alumno not found', ERROR_CODE: 404 });
       }
@@ -94,7 +96,10 @@ export const AlumnoController = {
     const { id } = req.params;
     const alumno = req.body;
     try {
-      const updatedAlumno = await AlumnoService.update(id, alumno);
+      if (!id || isNaN(Number(id))) {
+        return res.status(400).json({status: 400, message: 'Invalid ID format', ERROR_CODE: 400 });
+      }
+      const updatedAlumno = await AlumnoService.update(Number(id), alumno);
       if (!updatedAlumno) {
         return res.status(404).json({status:404, message: 'Alumno not found' });
       }
@@ -106,7 +111,7 @@ export const AlumnoController = {
   }),
 
 
-
+  /*
   deleteAlumno: catchAsync(async (req: Request, res: Response) => {
     const { id } = req.params;
     try {
@@ -120,4 +125,6 @@ export const AlumnoController = {
       res.status(500).json({status:500, message: 'Internal server error' });
     }
   })
+  */
+
 };

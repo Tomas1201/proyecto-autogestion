@@ -23,7 +23,7 @@ router.post('/', AlumnoController.createAlumno);
 router.put('/:id', AlumnoController.updateAlumno);
 
 // Elimina un alumno por ID
-router.delete('/:id', AlumnoController.deleteAlumno);
+//router.delete('/:id', AlumnoController.deleteAlumno);
 
 
 export default router;

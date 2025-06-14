@@ -1,13 +1,13 @@
 import { DataTypes, Model } from 'sequelize';
 import { SequelizeDB } from '../Database/Sequelize.js';
 
-SequelizeDB.define('Carrera/asignatura',{
+ SequelizeDB.define('Carrera_asignatura',{
     id:{
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
     },
-    carrera_id:{
+    Carrera_id:{
         type: DataTypes.INTEGER
     },
     Asignatura_id:{
@@ -21,3 +21,5 @@ SequelizeDB.define('Carrera/asignatura',{
     }
 
 });
+SequelizeDB.sync();
+export const C_AModel = SequelizeDB.models.Carrera_asignatura;
