@@ -1,19 +1,19 @@
 {
-     "compilerOptions": {
-       "incremental": true,
-       "target": "es2020",
-       "module": "ES2022",
-       "moduleResolution": "bundler",
-       "sourceMap": true,
-       "outDir": "./dist",
-       "esModuleInterop": true,
-       "forceConsistentCasingInFileNames": true,
-       "strict": true,
-       "alwaysStrict": true,
-       "skipLibCheck": true,
-       "emitDecoratorMetadata": true,
-       "experimentalDecorators": true
-     },
-     "include": ["src//*", "/*.ts"],
-     "exclude": ["node_modules"]
-   }
+  "compilerOptions": {
+    "incremental": true,
+    "target": "es2020",
+    "module": "ES2022",
+    "moduleResolution": "bundler",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "alwaysStrict": true,
+    "skipLibCheck": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
+  },
+  "include": ["src//*", "/*.ts", "src/Professor/Controllers", "src/Professor/Models", "src/Professor/ProfessorController.ts", "src/Database/AsignaturaModel.ts", "src/Database/CarreraAsignaturaModel.ts", "src/Professor/ProfessorModel.ts", "src/Database/CarrerasModel.ts"],
+  "exclude": ["node_modules"]
+}
