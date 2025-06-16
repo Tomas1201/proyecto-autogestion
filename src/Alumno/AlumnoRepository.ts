@@ -2,7 +2,7 @@ import { Op } from "sequelize";
 import { AlumnoModel } from "./AlumnoModel.js";
 import { Alumno } from "./AlumnoModel.js";
 import { AlumnoInterface } from "./AlumnoInterface.js";
-
+import {InscriptosModel} from '../Database/inscriptosModel.js'; // Importar el modelo de inscriptos si es necesario
 
 export class AlumnoRepository implements AlumnoInterface {  
     static instance: AlumnoRepository;
@@ -84,6 +84,28 @@ export class AlumnoRepository implements AlumnoInterface {
         }
     }
     
+
+
+    async findByAsignatura(asignaturaId: number): Promise<Alumno[] | null> {
+        try {
+            if (!asignaturaId || typeof asignaturaId !== 'number') {
+                throw new Error('Invalid asignaturaId parameter');
+            }
+            
+            const alumnos = await AlumnoModel.findAll({
+                include: [{
+                    model: InscriptosModel,
+                    where: { asignatura_id: asignaturaId },
+                    required: true
+                }]
+            });
+                    
+            return alumnos ? alumnos as Alumno[] : null;
+        } catch (error) {
+            console.error('Error fetching alumnos by asignatura:', error);
+            throw error;
+        }
+    }
     
     // Crea un nuevo alumno
     async create(alumnoData: Omit<Alumno, 'id'>) : Promise<Alumno> {

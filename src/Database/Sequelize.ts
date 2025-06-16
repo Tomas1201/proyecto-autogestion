@@ -1,5 +1,4 @@
 import dotenv from 'dotenv';
-import mysql from 'mysql2';
 import { Sequelize, Op } from 'sequelize';
 
 dotenv.config();
@@ -11,6 +10,8 @@ export const SequelizeDB = new Sequelize(process.env.DB_NAME || '', process.env.
     dialect: 'mysql',
     logging: console.log, // Disable logging for cleaner output
      });
+
+     
 
 
 
