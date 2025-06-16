@@ -48,6 +48,25 @@ export const AlumnoService = {
       throw new Error('Database error');}
     },
  
+    getByAsignatura: async (asignatura: string) => {
+      try{
+        const alumnos = await alumnoRepository.findByAsignatura(asignatura);
+        return alumnos;
+      }catch (error){
+        console.error('Error fetching alumno by apellido:', error);
+      throw new Error('Database error');}
+      
+    },
+
+ getByCarrera: async (carrera: string) => {
+      try{
+        const alumnos = await alumnoRepository.findByCarrera(carrera);
+        return alumnos;
+      }catch (error){
+        console.error('Error fetching alumno by apellido:', error);
+      throw new Error('Database error');}
+      
+    },
 
   create: async (alumnoData: Alumno) => {
     try {

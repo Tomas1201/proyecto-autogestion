@@ -76,7 +76,33 @@ export const AlumnoController = {
     }
   }),
   
+  getByAsignatura: catchAsync(async (req: Request, res: Response) => {
+    const {asignatura} = req.params;
+    try{
+      const alumnos = await AlumnoService.getByAsignatura(asignatura);
+     if (!alumnos || alumnos.length === 0) {
+        return res.status(404).json({status:404, message: 'No alumnos found with that apellido' });
+      }
+      res.status(200).json({status:200, data: alumnos});
+    } catch (error) {
+      console.error('Error fetching alumno by apellido:', error);
+      res.status(500).json({status:500, message: 'Internal server error' });
+    }
+  }),
 
+  getByCarrera: catchAsync(async (req: Request, res: Response) => {
+    const {carrera} = req.params;
+    try{
+      const alumnos = await AlumnoService.getByCarrera(carrera);
+     if (!alumnos || alumnos.length === 0) {
+        return res.status(404).json({status:404, message: 'No alumnos found with that apellido' });
+      }
+      res.status(200).json({status:200, data: alumnos});
+    } catch (error) {
+      console.error('Error fetching alumno by apellido:', error);
+      res.status(500).json({status:500, message: 'Internal server error' });
+    }
+  }),
 
   createAlumno: async (req: Request, res: Response) => {
     const alumno = req.body;

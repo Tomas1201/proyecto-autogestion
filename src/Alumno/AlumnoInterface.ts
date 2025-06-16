@@ -8,18 +8,19 @@ export interface AlumnoInterface {
   findByName(name: string): Promise<Alumno[] | null>;
 
   findByApellido(apellido: string): Promise<Alumno[] | null>;
+
+  findByCarrera(carrera: string): Promise<Alumno[] | null>; 
+
+  findByAsignatura(Asignatura: string): Promise<Alumno[] | null>; 
 /*
   findByEmail(email: string): Promise<Alumno | null>;
 
   findByLegajo(legajo: number): Promise<Alumno | null>;
 
-  findByCarrera(carreraId: number): Promise<Alumno[] | null>; 
-
   findByCicloElectivo(cicloElectivoId: number): Promise<Alumno[] | null>; 
 
   findByDni(dni: string): Promise<Alumno | null>; 
   
-  findByAsignatura(AsignaturaId: number): Promise<Alumno[] | null>; 
 */
   create(alumnoData: Omit<Alumno, 'id'>): Promise<Alumno>; 
 

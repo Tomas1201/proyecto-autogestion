@@ -2,7 +2,8 @@ import { Op } from "sequelize";
 import { AlumnoModel } from "./AlumnoModel.js";
 import { Alumno } from "./AlumnoModel.js";
 import { AlumnoInterface } from "./AlumnoInterface.js";
-import {InscriptosModel} from '../Database/inscriptosModel.js'; // Importar el modelo de inscriptos si es necesario
+import {InscriptosModel} from '../Database/inscriptosModel.js';
+import { SequelizeDB } from "../Database/Sequelize.js"; // Importar el modelo de inscriptos si es necesario
 
 export class AlumnoRepository implements AlumnoInterface {  
     static instance: AlumnoRepository;
@@ -86,19 +87,66 @@ export class AlumnoRepository implements AlumnoInterface {
     
 
 
-    async findByAsignatura(asignaturaId: number): Promise<Alumno[] | null> {
+    async findByAsignatura(asignatura: string): Promise<Alumno[] | null> {
         try {
-            if (!asignaturaId || typeof asignaturaId !== 'number') {
-                throw new Error('Invalid asignaturaId parameter');
-            }
-            
-            const alumnos = await AlumnoModel.findAll({
-                include: [{
-                    model: InscriptosModel,
-                    where: { asignatura_id: asignaturaId },
-                    required: true
-                }]
-            });
+const alumnos = await AlumnoModel.findAll({
+    include: [
+        {
+            model: SequelizeDB.models.inscriptos,
+            as: 'inscripcionesCarrera',
+            attributes: [],
+            required: true,
+            include: [
+                {
+                    model: SequelizeDB.models.asignatura, // Ajusta según tu estructura real
+                    as: 'asignatura',
+                    attributes: [],
+                    where: {
+                        nombre: {
+                            [Op.iLike]: `%${asignatura}%`
+                        }
+                    },
+                    required: true,
+                },
+            ],
+        },
+    ],
+});
+
+                    
+            return alumnos ? alumnos as Alumno[] : null;
+        } catch (error) {
+            console.error('Error fetching alumnos by asignatura:', error);
+            throw error;
+        }
+    }
+
+    async findByCarrera(carrera: string): Promise<Alumno[] | null> {
+        try {
+const alumnos = await AlumnoModel.findAll({
+    include: [
+        {
+            model: SequelizeDB.models.inscriptos,
+            as: 'inscripcionesCarrera',
+            attributes: [],
+            required: true,
+            include: [
+                {
+                    model: SequelizeDB.models.carrera, // Ajusta según tu estructura real
+                    as: 'carrera',
+                    attributes: [],
+                    where: {
+                        nombre: {
+                            [Op.iLike]: `%${carrera}%`
+                        }
+                    },
+                    required: true,
+                },
+            ],
+        },
+    ],
+});
+
                     
             return alumnos ? alumnos as Alumno[] : null;
         } catch (error) {
