@@ -12,16 +12,15 @@ export interface AlumnoInterface {
   findByCarrera(carrera: string): Promise<Alumno[] | null>; 
 
   findByAsignatura(Asignatura: string): Promise<Alumno[] | null>; 
-/*
-  findByEmail(email: string): Promise<Alumno | null>;
 
   findByLegajo(legajo: number): Promise<Alumno | null>;
 
-  findByCicloElectivo(cicloElectivoId: number): Promise<Alumno[] | null>; 
+  findByDni(dni: number): Promise<Alumno | null>; 
 
-  findByDni(dni: string): Promise<Alumno | null>; 
-  
-*/
+  findByEmail(email: string): Promise<Alumno | null>;
+
+  //findByCicloElectivo(cicloElectivoId: number): Promise<Alumno[] | null>; 
+
   create(alumnoData: Omit<Alumno, 'id'>): Promise<Alumno>; 
 
   update(id: number, alumnoData: Partial<Alumno>): Promise<boolean>; 

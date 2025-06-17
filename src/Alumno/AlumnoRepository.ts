@@ -121,6 +121,47 @@ const alumnos = await AlumnoModel.findAll({
         }
     }
 
+    async findByLegajo(legajo: number): Promise<Alumno | null> {
+        try{
+            const alumnos = await AlumnoModel.findAll({
+                    where: { legajo: legajo }
+            });
+
+            return alumnos.length > 0 ? alumnos[0] as Alumno : null;
+        }catch(error){
+             console.error('Error fetching alumnos by asignatura:', error);
+            throw error;
+        }
+
+    }
+
+    async findByDni(DNI: number): Promise<Alumno | null>{
+        try{
+            const alumnos = await AlumnoModel.findAll({
+                where: { dni: DNI }
+            }
+            );
+            return alumnos.length > 0 ? alumnos[0] as Alumno : null;
+        }catch(error){
+            console.error('Error fetching alumnos by asignatura:', error);
+            throw error;
+        }   
+    }
+
+    async findByEmail(Email: string): Promise<Alumno | null>{
+        try{
+            const alumnos = await AlumnoModel.findAll({
+                where: {email: Email}
+            })
+            return alumnos.length > 0 ? alumnos[0] as Alumno : null;
+        }catch(error){
+            console.error('Error fetching alumnos by asignatura:', error);
+            throw error;
+        }
+    }
+
+    
+
     async findByCarrera(carrera: string): Promise<Alumno[] | null> {
         try {
 const alumnos = await AlumnoModel.findAll({
