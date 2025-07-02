@@ -21,6 +21,10 @@ export interface AlumnoInterface {
 
   //findByCicloElectivo(cicloElectivoId: number): Promise<Alumno[] | null>; 
 
+  findByStatus(status: string): Promise<Alumno[] | null>;
+
+  
+
   create(alumnoData: Omit<Alumno, 'id'>): Promise<Alumno>; 
 
   update(id: number, alumnoData: Partial<Alumno>): Promise<boolean>; 

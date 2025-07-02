@@ -16,10 +16,13 @@ router.get('/nombre/:name', AlumnoController.getAlumnoByName);
 // Devuelve un alumno por apellido
 router.get('/apellido/:apellido', AlumnoController.getAlumnoByApellido);
 
+
 router.get('/asignatura/:asignatura', AlumnoController.getByAsignatura);
 
 // Crea un nuevo alumno
 router.post('/', AlumnoController.createAlumno);
+
+router.post('/carrera/:carreraid/asignatura/:asignaturaid/alumno/:id', AlumnoController.createAlumnoAsignatura);
 
 // Actualiza un alumno por ID
 router.put('/:id', AlumnoController.updateAlumno);

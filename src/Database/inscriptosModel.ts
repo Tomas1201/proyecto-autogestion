@@ -10,7 +10,7 @@ SequelizeDB.define('inscriptos', {
         primaryKey: true,
         autoIncrement: true
     },
-    Alumno_id: {
+    alumno_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
@@ -18,7 +18,15 @@ SequelizeDB.define('inscriptos', {
             key: 'id'
         }
     },
-    Carrera_id: {
+     asignatura_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'asignaturas',
+            key: 'id'
+        }
+    },
+    carrera_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
@@ -31,14 +39,7 @@ SequelizeDB.define('inscriptos', {
         allowNull: false,
         defaultValue: DataTypes.NOW
     },
-    asignatura_id: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-        references: {
-            model: 'asignaturas',
-            key: 'id'
-        }
-    }
+   
     },{
     tableName: 'inscriptos',
     timestamps: false,

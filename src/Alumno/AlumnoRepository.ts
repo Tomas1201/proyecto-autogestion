@@ -160,7 +160,24 @@ const alumnos = await AlumnoModel.findAll({
         }
     }
 
-    
+    async findByStatus(status: string): Promise<Alumno[] | null> {
+        try {
+            const query = {
+                where: {
+                    status: {
+                        [Op.eq]: status
+                    }
+                }
+            };
+            
+            const alumnos = await AlumnoModel.findAll(query);
+                    
+            return alumnos ? alumnos as Alumno[] : null;
+        }catch (error) {
+            console.error('Error fetching alumnos by status:', error);
+            throw error;}
+    }
+
 
     async findByCarrera(carrera: string): Promise<Alumno[] | null> {
         try {
@@ -207,9 +224,26 @@ const alumnos = await AlumnoModel.findAll({
         }
     }
 
+    createAsignaturaInscripcion = async (alumnoid: number,carreraid: number , asignatura: string): Promise<any> => {
+        
+        try {
+            
+            // Luego, crea la inscripción a la asignatura
+            const inscripcion = await InscriptosModel.create({
+                alumno_id: alumnoid,
+                asignatura_id: asignatura,
+                carrera_id: carreraid// Asegúrate de que 'asignatura' sea un ID válido
+            });
 
+            return { alumno: inscripcion };
+        } catch (error) {
+            console.error('Error creating alumno and asignatura inscripcion:', error);
+            throw new Error('Database error');
+        }
+    }
     // Actualiza un alumno por ID
     async update(id: number, alumnoData: Partial<Alumno>) : Promise<boolean> {
+        
         try {
             const [updatedRows] = await AlumnoModel.update(alumnoData, {
                 where: { id }
@@ -220,6 +254,8 @@ const alumnos = await AlumnoModel.findAll({
             throw new Error('Database error');
         }
     }
+
+
 
 
    /*  No se deberia eliminar un alumno, sino desactivarlo o marcarlo como eliminado

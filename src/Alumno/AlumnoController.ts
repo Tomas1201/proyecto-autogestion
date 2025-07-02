@@ -1,3 +1,4 @@
+import { create } from 'domain';
 import { catchAsync } from '../Utils/catchAsync.js'; 
 import { AlumnoService } from "./AlumnoService.js";
 import { Request, Response, NextFunction } from 'express';
@@ -116,7 +117,19 @@ export const AlumnoController = {
     }
   },
 
+ createAlumnoAsignatura: catchAsync(async (req: Request, res: Response) => {
+    const asignatura  = req.params.asignatura;
+    const alumnoid = Number(req.params.id);
+    const carreraid = Number(req.params.carreraid);
 
+    try {
+      const newinscripcion = await AlumnoService.createAsignaturainscripcion(alumnoid,carreraid ,asignatura);
+      res.json({status:201, data: newinscripcion});
+    } catch (error) {
+      console.error('Error creating alumno inscripcion:', error);
+      res.status(500).json({status:500, message: 'Internal server error' });
+    }
+  }),
 
   updateAlumno: catchAsync(async (req: Request, res: Response) => {
     const { id } = req.params;

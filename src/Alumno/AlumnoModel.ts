@@ -4,12 +4,15 @@ import { SequelizeDB } from '../Database/Sequelize.js';
 
 
 
+
 export class Alumno extends Model {
     public id!: number;
     public nombre!: string;
     public apellido!: string;
     public email!: string;
     public legajo!: number;
+    public status!: string;
+    
 
     // timestamps!
     public readonly createdAt!: Date;
@@ -37,6 +40,16 @@ SequelizeDB.define('Alumno', {
         unique: true,
     },
     legajo: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        unique: true,
+    },
+    status: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        defaultValue: 'activo',
+    },
+    dni: {
         type: DataTypes.INTEGER,
         allowNull: false,
         unique: true,

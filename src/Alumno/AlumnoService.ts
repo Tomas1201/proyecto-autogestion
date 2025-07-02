@@ -78,6 +78,15 @@ export const AlumnoService = {
     }
   },
 
+  createAsignaturainscripcion: async (alumnoid: number,carreraid: number, asignatura: string) => {
+    try {
+      const newInscripcion = await alumnoRepository.createAsignaturaInscripcion(alumnoid,carreraid, asignatura);
+      return newInscripcion;
+    }catch (error) {
+      console.error('Error creating alumno inscripcion:', error);
+      throw new Error('Database error');
+    }
+  },
 
   update: async (id: number, alumnoData: Alumno) => {
     try {
