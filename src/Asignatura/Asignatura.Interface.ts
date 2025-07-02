@@ -1,11 +1,11 @@
 import type { Asignatura } from './Asignatura.Model'; // Asegúrate de que la ruta sea correcta
 
-export interface CarreraInterface {
-  findAll(): Promise<Carrera[]>;
+export interface AsignaturaInterface {
+  findAll(): Promise<Asignatura[]>;
 
-  findById(id: number): Promise<Carrera | null>;
+  findById(id: number): Promise<Asignatura | null>;
 
-  findByName(name: string): Promise<Carrera[] | null>;
+  findByName(name: string): Promise<Asignatura[] | null>;
 
   
 /*
@@ -21,9 +21,9 @@ export interface CarreraInterface {
   
   findByAsignatura(AsignaturaId: number): Promise<Alumno[] | null>; 
 */
-  create(alumnoData: Omit<Carrera, 'id'>): Promise<Carrera>; 
+  create(alumnoData: Omit<Asignatura, 'id'>): Promise<Asignatura>; 
 
-  update(id: number, alumnoData: Partial<Carrera>): Promise<boolean>; 
+  update(id: number, alumnoData: Partial<Asignatura>): Promise<boolean>; 
   
 }
 

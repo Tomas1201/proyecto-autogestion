@@ -1,5 +1,5 @@
 
-import { AsignaturaInterface } from './Asignatura.interface';
+import { AsignaturaInterface } from './Asignatura.Interface';
 import  { Asignatura, AsignaturaModel } from './Asignatura.Model'; // Asegúrate de que la ruta sea correcta
 import { Op } from 'sequelize';
 
@@ -16,6 +16,8 @@ export class AsignaturaRepository implements AsignaturaInterface {
         }      
        
     }
+
+   
     
     async findById(id: number): Promise<Asignatura | null> {
         try {

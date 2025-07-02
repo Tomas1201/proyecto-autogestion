@@ -9,9 +9,9 @@ export interface CarreraInterface {
 
   
 
-  create(alumnoData: Omit<Carrera, 'id'>): Promise<Carrera>; 
+  create(carreraData: Omit<Carrera, 'id'>): Promise<Carrera>; 
 
-  update(id: number, alumnoData: Partial<Carrera>): Promise<boolean>; 
+  update(id: number, carreraData: Partial<Carrera>): Promise<boolean>; 
   
 }
 

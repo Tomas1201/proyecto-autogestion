@@ -2,7 +2,7 @@ import { Sequelize, DataTypes, Model } from 'sequelize';
 
 
 
-import Carrera from './CarreraModel'; // ✅ Usa import default si Carrera es exportado con `export default`
+import { Carrera } from './CarreraModel'; // Usa import nombrado porque Carrera no es exportado por defecto
 
 import sequelizeDB from '../Database/Sequelize'; 
 class Asignatura extends Model {
@@ -38,13 +38,13 @@ sequelizeDB.define('Asignatura', {
 }, {
   tableName: 'Asignatura', // ✅ tableName va aquí, no dentro de los atributos
 });
-
+/*
 // ✅ Asocia el modelo después de definirlo
 Asignatura.belongsTo(Carrera, {
   foreignKey: 'carreraId',
   as: 'carrera',
 });
-
+*/
 export default Asignatura;
 
 sequelizeDB.sync();

@@ -1,4 +1,4 @@
-import Carrera from './CarreraModel';
+import { Carrera } from './CarreraModel.ts';
 import Asignatura from './AsignaturaModel';
 
 // Relación N:M

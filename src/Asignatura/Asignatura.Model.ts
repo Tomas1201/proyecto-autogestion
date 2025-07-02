@@ -2,10 +2,10 @@ import { Sequelize, DataTypes, Model } from 'sequelize';
 
 
 
-import Carrera from './CarreraModel'; // ✅ Usa import default si Carrera es exportado con `export default`
+import {Carrera} from '../Carrera/CarreraModel'; // ✅ Usa import default si Carrera es exportado con `export default`
 
 import sequelizeDB from '../Database/Sequelize'; 
-class Asignatura extends Model {
+export class Asignatura extends Model {
     public id!: number;
   public nombre!: string;
  

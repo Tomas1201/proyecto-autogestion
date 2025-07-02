@@ -19,8 +19,8 @@ export class CarreraRepository implements CarreraInterface {
     
     async findById(id: number): Promise<Carrera | null> {
         try {
-            const alumno = await CarreraModel.findByPk(id);
-            return alumno ? alumno as Carrera : null;
+            const carrera = await CarreraModel.findByPk(id);
+            return carrera ? carrera as Carrera : null;
         } catch (error) {
             console.error('Error fetching de la carrera por ID:', error);
             throw new Error('Database error');
@@ -51,11 +51,58 @@ export class CarreraRepository implements CarreraInterface {
     
     async create(carreraData: Omit<Carrera, 'id'>): Promise<Carrera> {
         // Implementación para crear una nueva carrera
-        throw new Error('Method not implemented.');
-    }
+     
+               const ifExist= await Carrera.findOne({where: { name:carreraData.nombre}});            return await Carrera.create(carreraData);
+            
+               if (ifExist){
+                        console.log("La Carrra ya existe");
+
+               }else{
+                 try{
+
+
+                    const create= Carrera.create(carreraData);
+                    return create; 
+                 }catch(error){
+
+                console.log(error);
+               }
+                
+                    
+               };
+            
+      
+        
+
+        }
+
+
+        
+        async update(id: number, carreraData: Partial<Carrera>): Promise<boolean> {
+            try {
+                const [rowsUpdated] = await Carrera.update(carreraData, {
+                 where: { id },
+           });
+
+           return rowsUpdated > 0;
+           } catch (error) {
+             console.error(`Error al actualizar la carrera con ID ${id}:`, error);
+             throw new Error('Error al actualizar la carrera');
+            }
+} 
+            }
+          
+
+            // Implementación para actualizar una carrera existente
+         
+            
+            
+            /*const resultado = await Carrera.update({ nombre: 'Nuevo' }, { where: { id: 1 } });
+                console.log(resultado); // --> [1]
+
+                const [rowsUpdated] = resultado;
+                esto es equivalente a--->
+                const rowsUpdated = resultado[0];
+
+ */
     
-    async update(id: number, carreraData: Partial<Carrera>): Promise<boolean> {
-        // Implementación para actualizar una carrera existente
-        throw new Error('Method not implemented.');
-    }
-}
