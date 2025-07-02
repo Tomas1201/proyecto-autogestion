@@ -1,11 +1,10 @@
-import { create } from 'domain';
 import { catchAsync } from '../Utils/catchAsync.js'; 
 import { AlumnoService } from "./AlumnoService.js";
 import { Request, Response, NextFunction } from 'express';
 
 
 export const AlumnoController = {
-  
+    
   getAlumno: catchAsync(async (req: Request, res: Response, next:NextFunction) => {
     
     const { id } = req.params;
