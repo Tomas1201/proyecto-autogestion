@@ -8,8 +8,11 @@ import sequelizeDB from '../Database/Sequelize';
 export class Asignatura extends Model {
     public id!: number;
   public nombre!: string;
+ public planificacion!:object;//JSONNN
+ public horasCatedra!:number;
  
   public descripcion!: string;
+
  
   // Sequelize añade automáticamente createdAt y updatedAt si `timestamps: true`
   
@@ -20,7 +23,7 @@ export class Asignatura extends Model {
  
 
 // ✅ Define el modelo correctamente
-sequelizeDB.define('Asignatura', {
+sequelizeDB.define('Asignatura', {//terminarr
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,

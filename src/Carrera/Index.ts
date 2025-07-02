@@ -1,5 +1,5 @@
 import { Carrera } from './CarreraModel.ts';
-import Asignatura from './AsignaturaModel';
+import Asignatura from '../Asignatura/Asignatura.Model.ts';
 
 // Relación N:M
 Carrera.belongsToMany(Asignatura, {
