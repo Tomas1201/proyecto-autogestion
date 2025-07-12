@@ -1,8 +1,8 @@
-import { CarreraModel } from './CarrerasModel.js';
-import { C_AModel } from './CarreraAsignaturaModel.js'; 
-import { AsignaturaModel } from './AsignaturaModel.js'; 
-import { InscriptosModel } from './inscriptosModel.js';
-import { AlumnoModel} from '../Alumno/AlumnoModel.js';
+import { CarreraModel } from '../Models/CarrerasModel.js';
+import { C_AModel } from '../Models/CarreraAsignaturaModel.js'; 
+import { AsignaturaModel } from '../Models/AsignaturaModel.js'; 
+import { InscriptosModel } from '../Models/inscriptosModel.js';
+import { AlumnoModel} from '../Models/AlumnoModel.js';
 import { SequelizeDB } from './Sequelize.js';
 const a = [
   AsignaturaModel.belongsToMany(CarreraModel, { through: C_AModel, foreignKey: 'Asignatura_id' }),

@@ -19,7 +19,7 @@ app.use('/api/v1/alumnos', AlumnoRouter);
 
 
 
-import { Carrera, CarreraModel } from './Database/CarrerasModel.js';
+import { Carrera, CarreraModel } from './Models/CarrerasModel.js';
 
 SequelizeDB.authenticate()
   .then(() => {

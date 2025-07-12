@@ -1,5 +1,5 @@
 import { catchAsync } from '../Utils/catchAsync.js'; 
-import { AlumnoService } from "./AlumnoService.js";
+import { AlumnoService } from "../Services/AlumnoService.js";
 import { Request, Response, NextFunction } from 'express';
 
 

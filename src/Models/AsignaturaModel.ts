@@ -1,5 +1,5 @@
 import { DataTypes, Model } from 'sequelize';
-import { SequelizeDB } from './Sequelize.js';
+import { SequelizeDB } from '../Database/Sequelize.js';
 
    SequelizeDB.define('Asignatura',{
     id:{

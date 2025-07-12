@@ -1,8 +1,8 @@
 import { Op } from "sequelize";
-import { AlumnoModel } from "./AlumnoModel.js";
-import { Alumno } from "./AlumnoModel.js";
-import { AlumnoInterface } from "./AlumnoInterface.js";
-import {InscriptosModel} from '../Database/inscriptosModel.js';
+import { AlumnoModel } from "../Models/AlumnoModel.js";
+import { Alumno } from "../Models/AlumnoModel.js";
+import { AlumnoInterface } from "../Alumno/AlumnoInterface.js";
+import {InscriptosModel} from '../Models/inscriptosModel.js';
 import { SequelizeDB } from "../Database/Sequelize.js"; // Importar el modelo de inscriptos si es necesario
 
 export class AlumnoRepository implements AlumnoInterface {  

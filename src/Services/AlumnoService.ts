@@ -1,5 +1,5 @@
-import {AlumnoRepository} from './AlumnoRepository.js';   
-import { Alumno } from './AlumnoModel.js'; 
+import {AlumnoRepository} from '../Repositories/AlumnoRepository.js';   
+import { Alumno } from '../Models/AlumnoModel.js'; 
 
 const alumnoRepository = AlumnoRepository.getInstance();
 
