@@ -1,5 +1,5 @@
 import express from 'express';
-import {sequelize} from './Database/Sequelize.ts';
+import {sequelize} from './Database/Sequelize';
 //import carreraRoutes from './Routers/Carrera.router';
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -20,6 +20,10 @@ sequelize.authenticate().then(() => {
     }).catch((error) => {
     console.error('Unable to connect to the database:', error);
     });
+
+
+
+
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
