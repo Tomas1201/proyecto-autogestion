@@ -1,6 +1,6 @@
 import { Sequelize, DataTypes, Model } from 'sequelize';
 
-import sequelizeDB from '../Database/Sequelize'; 
+import {sequelize} from '../Database/Sequelize'; 
 export class Horarios extends Model {
     public id!: number;
   public hora_init!:Date;
@@ -14,7 +14,7 @@ export class Horarios extends Model {
 }
 
 
-sequelizeDB.define('Horarios', {
+sequelize.define('Horarios', {
   id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -37,5 +37,5 @@ sequelizeDB.define('Horarios', {
 //export default Carrera;
 
 
-sequelizeDB.sync();
-export const HorarioModel = sequelizeDB.models.Horarios;
+sequelize.sync();
+export const HorarioModel = sequelize.models.Horarios;

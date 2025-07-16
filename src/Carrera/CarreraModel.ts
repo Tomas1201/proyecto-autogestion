@@ -1,6 +1,6 @@
 import { Sequelize, DataTypes, Model } from 'sequelize';
 
-import sequelizeDB from '../Database/Sequelize'; 
+import {sequelize} from '../Database/Sequelize'; 
 export class Carrera extends Model {
     public id!: number;
   public nombre!: string;
@@ -15,7 +15,7 @@ export class Carrera extends Model {
 }
 
 
-sequelizeDB.define('Carrera', {
+sequelize.define('Carrera', {
   id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -46,5 +46,5 @@ sequelizeDB.define('Carrera', {
 //export default Carrera;
 
 
-sequelizeDB.sync();
-export const CarreraModel = sequelizeDB.models.Carrera;
+sequelize.sync();
+export const CarreraModel = sequelize.models.Carrera;

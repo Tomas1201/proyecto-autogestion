@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+/*import { Request, Response } from 'express';
 import { CarreraRepository } from '../Carrera/Carrera.repository.ts';
 
 const CarreraRepositories = new CarreraRepository();
@@ -74,4 +74,4 @@ export const CarreraController = {
       res.status(500).json({ message: 'Error al actualizar carrera', error: error.message });
     }
   },
-};
+};*/

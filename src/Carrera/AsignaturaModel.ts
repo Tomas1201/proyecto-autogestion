@@ -4,7 +4,7 @@ import { Sequelize, DataTypes, Model } from 'sequelize';
 
 import { Carrera } from './CarreraModel'; // Usa import nombrado porque Carrera no es exportado por defecto
 
-import sequelizeDB from '../Database/Sequelize'; 
+import {sequelize} from '../Database/Sequelize'; 
 class Asignatura extends Model {
     public id!: number;
   public nombre!: string;
@@ -20,7 +20,7 @@ class Asignatura extends Model {
  
 
 // ✅ Define el modelo correctamente
-sequelizeDB.define('Asignatura', {
+sequelize.define('Asignatura', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -47,5 +47,5 @@ Asignatura.belongsTo(Carrera, {
 */
 export default Asignatura;
 
-sequelizeDB.sync();
-export const AsignaturaModel = sequelizeDB.models.Asignatura;
+sequelize.sync();
+export const AsignaturaModel = sequelize.models.Asignatura;

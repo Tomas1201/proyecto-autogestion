@@ -49,38 +49,35 @@ export class CarreraRepository implements CarreraInterface {
         }
     }
     
-    async create(carreraData: Omit<Carrera, 'id'>): Promise<Carrera> {
-        // Implementación para crear una nueva carrera
-     
-               const ifExist= await Carrera.findOne({where: { name:carreraData.nombre}});            return await Carrera.create(carreraData);
+      async create(carreraData: Omit<Carrera, 'id'>): Promise<Carrera> {
+        try {
             
-               if (ifExist){
-                        console.log("La Carrra ya existe");
+            
+            const ifExist = await CarreraModel.findOne({ where: { nombre: carreraData.nombre } });
 
-               }else{
-                 try{
-
-
-                    const create= Carrera.create(carreraData);
-                    return create; 
-                 }catch(error){
-
-                console.log(error);
-               }
+            if (ifExist) {
                 
-                    
-               };
+                throw new Error(`La Carrera con el nombre '${carreraData.nombre}' ya existe.`);
+            }
+
+            
+            const newCarrera = await CarreraModel.create(carreraData);
+            return newCarrera as Carrera;
+
+        } catch (error) {
+            console.error('Error creating Carrera:', error);
+            
+            throw error;
+        }
+    }
             
       
         
 
-        }
-
-
         
         async update(id: number, carreraData: Partial<Carrera>): Promise<boolean> {
             try {
-                const [rowsUpdated] = await Carrera.update(carreraData, {
+                const [rowsUpdated] = await CarreraModel.update(carreraData, {
                  where: { id },
            });
 
@@ -90,7 +87,22 @@ export class CarreraRepository implements CarreraInterface {
              throw new Error('Error al actualizar la carrera');
             }
 } 
-            }
+    
+    async delete(id: number): Promise<boolean> { 
+        try {
+            const rowsDeleted = await CarreraModel.destroy({
+                where: { id },
+            });
+            return rowsDeleted > 0;
+        } catch (error) {
+            console.error(`Error deleting Carrera with ID ${id}:`, error);
+            throw new Error('Database error during deletion');
+        }
+    }      
+
+
+
+}
           
 
             // Implementación para actualizar una carrera existente

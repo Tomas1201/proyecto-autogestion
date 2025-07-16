@@ -2,13 +2,13 @@
   "name": "proyecto-autogestion",
   "version": "1.0.0",
   "description": "Sistema de autogestion academica",
-  "main": "index.js",
+  "main": "app.ts",
   "type": "module",
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
     "build": "tsc -p ./tsconfig.json",
-    "start:dev": "tsc-watch --noClear -p ./tsconfig.json --onSuccess \"node ./dist/index.js\"" 
+    "start:dev": "tsc-watch --noClear -p ./tsconfig.json --onSuccess \"node ./dist/app.js\"" 
   },
   "repository": {
     "type": "git",
