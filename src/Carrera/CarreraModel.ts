@@ -1,21 +1,20 @@
-import { Sequelize, DataTypes, Model } from 'sequelize';
+import { DataTypes, Model } from 'sequelize';
 
 import {sequelizeDB} from '../Database/Sequelize.js'; 
+
 export class Carrera extends Model {
     public id!: number;
   public nombre!: string;
   public cant_alumno!: number;
   public descripcion!: string;
   public duracion!: string;
-  // Sequelize añade automáticamente createdAt y updatedAt si `timestamps: true`
-  
- public readonly createdAt!: Date;
-    public readonly updatedAt!: Date;
+
+  public readonly createdAt!: Date;
+  public readonly updatedAt!: Date;
 
 }
 
-
-const CarreraModel= Carrera.init( {
+ sequelizeDB.define('Carrera', {
   id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -30,7 +29,7 @@ const CarreraModel= Carrera.init( {
         allowNull: false,
     },
     descripcion: {
-        type: DataTypes.TEXT,
+        type: DataTypes.STRING,
         allowNull: false,
         unique: true,
     },
@@ -39,16 +38,15 @@ const CarreraModel= Carrera.init( {
         allowNull: false,
     },
 
-}, {sequelize: sequelizeDB, // Conexión a la base de datos
-
+}, { // Conexión a la base de datos
   tableName: 'Carrera',
   modelName: 'Carrera',
   timestamps: true, // Esto añade createdAt y updatedAt automáticamente
 });
+sequelizeDB.sync();
+export const CarreraModel = sequelizeDB.models.Carrera;
 
-export default CarreraModel;
 
-/*
-sequelize.sync();
-export const CarreraModel = sequelize.models.Carrera;
-*/
+
+
+
