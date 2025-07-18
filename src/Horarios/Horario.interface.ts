@@ -1,6 +1,6 @@
-import type { Horarios } from './Horario.Model.ts'; 
-import type { Carrera } from '../Carrera/CarreraModel.ts';
-import type { Asignatura } from '../Asignatura/Asignatura.Model.ts'; 
+/*import type { Horarios } from './Horario.Model.js'; 
+import type { Carrera } from '../Carrera/CarreraModel.js';
+import type { Asignatura } from '../Asignatura/Asignatura.Model.js'; 
 export interface HorariosInterface {
   findAll(): Promise<Horarios[]>;
 
@@ -18,3 +18,4 @@ export interface HorariosInterface {
   
 }
 
+*/

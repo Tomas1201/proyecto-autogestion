@@ -1,10 +1,8 @@
-import { Sequelize, DataTypes, Model } from 'sequelize';
+/*import {  DataTypes, Model } from 'sequelize';
 
+import {Carrera} from '../Carrera/CarreraModel.js'; // ✅ Usa import default si Carrera es exportado con `export default`
 
-
-import {Carrera} from '../Carrera/CarreraModel'; // ✅ Usa import default si Carrera es exportado con `export default`
-
-import {sequelize} from '../Database/Sequelize'; 
+import {sequelize} from '../Database/Sequelize.js'; 
 export class Asignatura extends Model {
     public id!: number;
   public nombre!: string;
@@ -38,8 +36,19 @@ sequelize.define('Asignatura', {//terminarr
     allowNull: false,
     unique: true,
   },
+  horasCatedra:{ 
+    type: DataTypes.INTEGER,
+    allowNull: false,
+
+
+  },
+  planificacion: {
+    type: DataTypes.JSON, // Usa JSON para almacenar objetos
+    allowNull: true, // Permite que sea nulo si no hay planificación
+  },
 }, {
   tableName: 'Asignatura', // ✅ tableName va aquí, no dentro de los atributos
+  
 });
 
 // ✅ Asocia el modelo después de definirlo
@@ -51,4 +60,4 @@ Asignatura.belongsTo(Carrera, {
 export default Asignatura;
 
 sequelize.sync();
-export const AsignaturaModel = sequelize.models.Asignatura;
+export const AsignaturaModel = sequelize.models.Asignatura;*/

@@ -1,36 +1,42 @@
+
+// app.ts
 import express from 'express';
-import {sequelize} from './Database/Sequelize';
-//import carreraRoutes from './Routers/Carrera.router';
+import { sequelizeDB } from './Database/Sequelize.js';
+import CarreraModel from './Carrera/CarreraModel.js'; // ✅ Importa el modelo de Carrera
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Función asíncrona para inicializar la base de datos y el servidor
+async function initializeApp() {
+  try {
 
-
-
-app.get('/', (req, res) => {
-  res.send('Hello, World!');
-});
-
-sequelize.authenticate().then(() => {
-
-    console.log('Database connection established successfully.');
-    }).catch((error) => {
-    console.error('Unable to connect to the database:', error);
+      CarreraModel.findAll();
+    
+    await sequelizeDB.sync({ alter: true }); 
+    console.log('Todos los modelos fueron sincronizados exitosamente con la base de datos.');
+    console.log(sequelizeDB.models+" app.ts");
+    app.get('/', (req, res) => {
+      res.send('Hello, World!');
     });
 
+    app.listen(PORT, () => {
+      console.log(`Server is running on http://localhost:${PORT}`);
+    });
+
+  } catch (error) {
+    console.error('Error al inicializar la aplicación o la base de datos:', error);
+    process.exit(1); // Sale de la aplicación si hay un error crítico
+  }
+}
+
+initializeApp(); 
 
 
-
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
-});
-
-
-
-
-//app.use('/carreras', carreraRoutes);
 
 export default app;
+
+

@@ -1,4 +1,4 @@
-import type { Asignatura } from './Asignatura.Model'; // Asegúrate de que la ruta sea correcta
+/*import type { Asignatura } from './Asignatura.Model'; // Asegúrate de que la ruta sea correcta
 
 export interface AsignaturaInterface {
   findAll(): Promise<Asignatura[]>;
@@ -20,10 +20,10 @@ export interface AsignaturaInterface {
   findByDni(dni: string): Promise<Alumno | null>; 
   
   findByAsignatura(AsignaturaId: number): Promise<Alumno[] | null>; 
-*/
+
   create(alumnoData: Omit<Asignatura, 'id'>): Promise<Asignatura>; 
 
   update(id: number, alumnoData: Partial<Asignatura>): Promise<boolean>; 
   
-}
+}*/
 

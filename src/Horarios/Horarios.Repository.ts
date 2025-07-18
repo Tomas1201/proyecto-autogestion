@@ -1,7 +1,7 @@
-import { Horarios } from './Horario.Model.ts';
-import { Asignatura } from '../Asignatura/Asignatura.Model';
-import { Carrera } from '../Carrera/CarreraModel';
-import { HorariosInterface } from './Horario.interface.ts';
+/*import { Horarios } from './Horario.Model.js';
+import { Asignatura } from '../Asignatura/Asignatura.Model.js';
+import { Carrera } from '../Carrera/CarreraModel.js';
+import { HorariosInterface } from './Horario.interface.js';
 import { Op } from 'sequelize';
 /*
 export const HorariosRepository: HorariosInterface = {

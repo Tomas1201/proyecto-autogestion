@@ -3,20 +3,20 @@ import mysql from 'mysql2';
 import { Sequelize } from 'sequelize';
 dotenv.config();
 
-const sequelize = new Sequelize(process.env.DB_NAME || '', process.env.DB_USER || '', process.env.DB_PASSWORD || '', {
+ export const sequelizeDB = new Sequelize(process.env.DB_NAME || 'carreras', process.env.DB_USER || 'root', process.env.DB_PASSWORD || 'ivo123', {
     host: process.env.DB_HOST || 'localhost',
     port: parseInt(process.env.DB_PORT || '3306', 10),
     dialect: 'mysql',
     logging: console.log, // Disable logging for cleaner output
      });
      
-     async function testConnection(){
+   //  export async function testConnection(){
          
-         try{
+         /*try{
              
-             await sequelize.authenticate();
+             await sequelizeDB.authenticate();
              
-             console.log("Cnexión exitosa");
+             console.log("Conexión exitosa");
              
             }catch(err){
                 
@@ -28,13 +28,11 @@ const sequelize = new Sequelize(process.env.DB_NAME || '', process.env.DB_USER |
             
             console.error();
             
-        }
+        }*/
         
-        testConnection();
-        export { sequelize as sequelize };
+        
+        //export { sequelize as sequelize };
 
 
 
 //export default sequelize;
-
-    

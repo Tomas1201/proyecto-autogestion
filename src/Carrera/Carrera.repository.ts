@@ -1,7 +1,8 @@
 
-import { CarreraInterface } from './Carrera.interface';
-import  { Carrera, CarreraModel } from './CarreraModel'; // Asegúrate de que la ruta sea correcta
+import { CarreraInterface } from './Carrera.interface.js';
+import  { Carrera } from './CarreraModel.js'; // Asegúrate de que la ruta sea correcta
 import { Op } from 'sequelize';
+import CarreraModel from './CarreraModel.js';
 
 export class CarreraRepository implements CarreraInterface {
     // Aquí irían las implementaciones de los métodos definidos en CarreraInterface

@@ -1,4 +1,4 @@
-
+/*
 import { AsignaturaInterface } from './Asignatura.Interface';
 import  { Asignatura, AsignaturaModel } from './Asignatura.Model'; // Asegúrate de que la ruta sea correcta
 import { Op } from 'sequelize';
@@ -60,4 +60,4 @@ export class AsignaturaRepository implements AsignaturaInterface {
         // Implementación para actualizar una carrera existente
         throw new Error('Method not implemented.');
     }
-}
+}*/

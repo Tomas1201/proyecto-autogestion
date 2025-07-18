@@ -1,6 +1,6 @@
 import { Sequelize, DataTypes, Model } from 'sequelize';
 
-import {sequelize} from '../Database/Sequelize'; 
+import {sequelizeDB} from '../Database/Sequelize.js'; 
 export class Carrera extends Model {
     public id!: number;
   public nombre!: string;
@@ -15,7 +15,7 @@ export class Carrera extends Model {
 }
 
 
-sequelize.define('Carrera', {
+const CarreraModel= Carrera.init( {
   id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -39,12 +39,16 @@ sequelize.define('Carrera', {
         allowNull: false,
     },
 
-}, {
+}, {sequelize: sequelizeDB, // Conexión a la base de datos
+
   tableName: 'Carrera',
+  modelName: 'Carrera',
+  timestamps: true, // Esto añade createdAt y updatedAt automáticamente
 });
 
-//export default Carrera;
+export default CarreraModel;
 
-
+/*
 sequelize.sync();
 export const CarreraModel = sequelize.models.Carrera;
+*/
