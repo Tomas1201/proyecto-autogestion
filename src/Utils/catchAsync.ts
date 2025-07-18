@@ -1,12 +1,14 @@
-import { Request, Response, NextFunction } from 'express';
+// Utils/catchAsync.ts
+import { Request, Response, NextFunction, RequestHandler } from 'express';
 
-type AsyncController = (req: Request, res: Response, next: NextFunction) => Promise<any>;
+type AsyncHandler = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => Promise<any>; // <-- Este `any` permite `Promise<Response>`, `Promise<void>`, etc.
 
-export const catchAsync = (fn: AsyncController) => {
-  return (req: Request, res: Response, next: NextFunction) => {
-    Promise.resolve(fn(req, res, next)).catch(err => {
-      console.error('Async error:', err);
-      next(err);
-    });
+export const catchAsync = (fn: AsyncHandler): RequestHandler => {
+  return (req, res, next) => {
+    fn(req, res, next).catch(next);
   };
 };

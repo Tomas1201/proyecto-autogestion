@@ -1,36 +1,45 @@
-import { DataTypes } from 'sequelize';
-import { SequelizeDB } from './Sequelize.js';
+import { DataTypes, Model } from 'sequelize';
+import { sequelizedb } from './Sequelize.js';
 
-SequelizeDB.define('Asignatura', {
+export class Asignatura extends Model {
+  public id!: number;
+  public nombre!: string;
+  public dia!: string;
+  public horaInicio!: string;
+  public horaFin!: string;
+}
+
+Asignatura.init(
+  {
     id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
     },
     nombre: {
-        type: DataTypes.STRING,
-        allowNull: false,
+      type: DataTypes.STRING,
+      allowNull: false,
     },
-    codigo: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
+    dia: {
+      type: DataTypes.ENUM('lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'),
+      allowNull: false,
     },
-    horas: {
-        type: DataTypes.INTEGER,
+    horaInicio: {
+      type: DataTypes.TIME,
+      allowNull: false,
     },
-    horarios: {
-        type: DataTypes.JSON, // Cambiado a JSON
+    horaFin: {
+      type: DataTypes.TIME,
+      allowNull: false,
     },
-    aula: {
-        type: DataTypes.STRING,
-    },
-}, {
-    tableName: 'Asignaturas',
+  },
+  {
+    sequelize : sequelizedb,
+    modelName: 'Asignatura',
+    tableName: 'asignaturas',
     timestamps: true,
-    createdAt: 'fecha_creacion',
-    updatedAt: 'fecha_actualizacion',
-});
-
-SequelizeDB.sync();
-export const AsignaturaModel = SequelizeDB.models.Asignatura;
+  }
+);
+//Lo "reescribe"
+sequelizedb.sync();
+export const AsignaturaModel = sequelizedb.models.Asignatura;

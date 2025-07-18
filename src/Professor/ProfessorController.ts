@@ -1,133 +1,157 @@
-import { catchAsync } from '../Utils/catchAsync.js'; 
-import { ProfessorService } from "../Professor/ProfessorService.js";
 import { Request, Response } from 'express';
-import { validationResult } from 'express-validator';
+import { ProfessorService } from './ProfessorService.js';
+import { ProfessorSchema, UpdateProfessorSchema, SearchProfessorSchema } from './ProfessorValidator.js';
+import { NextFunction } from 'express';
 
-export const ProfessorController = {
-  getProfessor: catchAsync(async (req: Request, res: Response) => {
-    const { id } = req.params;
-    if (!id || isNaN(Number(id))) {
-      return res.status(400).json({status: 400, message: 'Invalid ID format'});
-    }
-    const professor = await ProfessorService.getById(Number(id));
-    if (!professor) {
-      return res.status(404).json({status: 404, message: 'Professor not found'});
-    }
-    res.status(200).json({status: "OK", data: professor});
-  }),
+const service = new ProfessorService();
 
-  getAllProfessors: catchAsync(async (req: Request, res: Response) => {
-    const professors = await ProfessorService.getAll();
-    res.status(200).json({status:"OK", data: professors});
-  }),
+export const registerProfessor = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const validatedData = ProfessorSchema.parse(req.body);
+    const professor = await service.registerProfessor(validatedData);
+    res.status(201).json({
+      code: 'CREATED',
+      message: 'Profesor registrado exitosamente',
+      data: professor,
+    });
+  } catch (error: any) {
+    if (error.name === 'ZodError') {
+      res.status(400).json({ errors: error.errors });
+    } else {
+      res.status(400).json({ error: error.message });
+    }
+  }
+};
 
-  getProfessorByName: catchAsync(async (req: Request, res: Response) => {  
-    const { name } = req.params;
-    const professors = await ProfessorService.getByName(name);
-    if (!professors || professors.length === 0) {
-      return res.status(404).json({status:404, message: 'No professors found with that name'});
+export const updateProfessor = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const validatedData = UpdateProfessorSchema.parse(req.body);
+    const id = Number(validatedData.id);
+    const updated = await service.updateProfessor(id, validatedData);
+    res.status(200).json({
+      code: 'UPDATED',
+      message: 'Profesor modificado exitosamente',
+      data: updated,
+    });
+  } catch (error: any) {
+    if (error.name === 'ZodError') {
+      res.status(400).json({ errors: error.errors });
+    } else {
+      res.status(400).json({ error: error.message });
     }
-    res.status(200).json({status:200, data: professors});
-  }),
+  }
+};
 
-  getProfessorByApellido: catchAsync(async (req: Request, res: Response) => {
-    const { apellido } = req.params;
-    const professors = await ProfessorService.getByApellido(apellido);
-    if (!professors || professors.length === 0) {
-      return res.status(404).json({status:404, message: 'No professors found with that apellido'});
+export const searchProfessors = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const results = await service.searchProfessors(req.body);
+    res.status(200).json({ data: results });
+  } catch (error: any) {
+    if (error.name === 'ZodError') {
+      res.status(400).json({ errors: error.errors });
+    } else {
+      res.status(400).json({ error: error.message });
     }
-    res.status(200).json({status:200, data: professors});
-  }),
+  }
+};
 
-  getProfessorByDni: catchAsync(async (req: Request, res: Response) => {
-    const { dni } = req.params;
-    const professor = await ProfessorService.getByDni(dni);
-    if (!professor) {
-      return res.status(404).json({status:404, message: 'Professor not found'});
+export const searchByState = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const state = req.params.state === 'true';
+    const results = await service.searchByState(state);
+    res.status(200).json({ data: results });
+  } catch (error: any) {
+    if (error.name === 'ZodError') {
+      res.status(400).json({ errors: error.errors });
+    } else {
+      res.status(400).json({ error: error.message });
     }
-    res.status(200).json({status:200, data: professor});
-  }),
-
-  getProfessorByLegajo: catchAsync(async (req: Request, res: Response) => {
-    const { legajo } = req.params;
-    const professor = await ProfessorService.getByLegajo(Number(legajo));
-    if (!professor) {
-      return res.status(404).json({status:404, message: 'Professor not found'});
-    }
-    res.status(200).json({status:200, data: professor});
-  }),
-  
-  createProfessor: catchAsync(async (req: Request, res: Response) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
-    
-    const professor = req.body;
-    const newProfessor = await ProfessorService.create(professor);
-    res.setHeader('Location', `/api/v1/professors/${newProfessor.id}`);
-    res.status(201).json({status:201, data: newProfessor});
-  }),
-
-  updateProfessor: catchAsync(async (req: Request, res: Response) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
-    
-    const { id } = req.params;
-    if (!id || isNaN(Number(id))) {
-      return res.status(400).json({status: 400, message: 'Invalid ID format'});
-    }
-    
-    const professor = req.body;
-    const updated = await ProfessorService.update(Number(id), professor);
-    if (!updated) {
-      return res.status(404).json({status:404, message: 'Professor not found'});
-    }
-    
-    const updatedProfessor = await ProfessorService.getById(Number(id));
-    res.status(200).json({status:200, data: updatedProfessor});
-  }),
-
-  archiveProfessor: catchAsync(async (req: Request, res: Response) => {
-    const { id } = req.params;
-    if (!id || isNaN(Number(id))) {
-      return res.status(400).json({status: 400, message: 'Invalid ID format'});
-    }
-    
-    const hasAssignments = await ProfessorService.hasActiveAssignments(Number(id));
-    if (hasAssignments) {
-      return res.status(400).json({ 
-        status: 400, 
-        message: 'Cannot archive professor with active assignments' 
-      });
-    }
-    
-    const archived = await ProfessorService.archive(Number(id));
-    if (!archived) {
-      return res.status(404).json({status:404, message: 'Professor not found'});
-    }
-    res.status(200).json({status:200, message: 'Professor archived successfully'});
-  })
+  }
 }
 
-  //Agregado para archivar un profesor
 
-
-  /*
-  deleteProfessor: catchAsync(async (req: Request, res: Response) => {
-    const { id } = req.params;
-    try {
-      const deleted = await ProfessorService.delete(id);
-      if (!deleted) {
-        return res.status(404).json({status:404, message: 'Professor not found' });
-      }
-      res.status(204).send();
-    } catch (error) {
-      console.error('Error deleting professor:', error);
-      res.status(500).json({status:500, message: 'Internal server error' });
+export const searchByName = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const results = await service.searchByName(req.params.name);
+    res.status(200).json({ data: results });
+  } catch (error: any) {
+    if (error.name === 'ZodError') {
+      res.status(400).json({ errors: error.errors });
+    } else {
+      res.status(400).json({ error: error.message });
     }
-  })
-  */
+  }
+};
+export const searchByDni = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const results = await service.searchByDni(req.params.dni);
+    res.status(200).json({ data: results });
+  } catch (error: any) {
+    if (error.name === 'ZodError') {
+      res.status(400).json({ errors: error.errors });
+    } else {
+      res.status(400).json({ error: error.message });
+    }
+  }
+};
+export const searchByLegajo = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const results = await service.searchByLegajo(req.params.legajo);
+    res.status(200).json({ data: results });
+  } catch (error: any) {
+    if (error.name === 'ZodError') {
+      res.status(400).json({ errors: error.errors });
+    } else {
+      res.status(400).json({ error: error.message });
+    }
+  }
+};
+
+export const deleteProfessor = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const id = Number(req.params.id);
+    await service.deleteProfessor(id);
+    res.status(200).json({ message: 'Profesor eliminado exitosamente' });
+  } catch (error: any) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+
+export const archiveProfessor = async (req: Request, res: Response) => {
+  const id = req.params.id;
+
+};
 

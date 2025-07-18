@@ -1,25 +1,27 @@
 import { Request, Response, NextFunction } from 'express';
 
-// Extend the Request type to include the user property
-declare global {
-    namespace Express {
-        interface Request {
-            user?: { role: string };
-        }
-    }
-}
+const authMiddleware = (roles: string[]) => {
+  return (req: Request, res: Response, next: NextFunction): void => {
+    const user = req.headers['rol'];
 
-export const academicAdminOnly = (
-    req: Request,
-    res: Response,
-    next: NextFunction
-) => {
-    // Simulación: en producción usar JWT
-    const user = { role: 'academic_admin' };
-    req.user = user;
-    
-    if (req.user.role !== 'academic_admin') {
-        return res.status(403).json({ error: 'Unauthorized access' });
+    if (!user || !roles.includes(user as string)) {
+      res.status(403).json({ error: 'Acceso denegado' });
+      return;
     }
+
     next();
+  };
 };
+
+const authorizeAdmin = (req: Request, res: Response, next: NextFunction): void => {
+  const user = req.headers['rol'];
+
+  if (user !== 'admin') {
+    res.status(403).json({ error: 'Acceso denegado: no tiene permisos suficientes.' });
+    return;
+  }
+
+  next();
+};
+
+export { authMiddleware, authorizeAdmin };

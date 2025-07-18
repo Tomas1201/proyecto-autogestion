@@ -1,32 +1,26 @@
-import { Router, Request, Response, NextFunction } from 'express';
-import { academicAdminOnly } from '../Utils/authMiddleware';
-import { AssignmentService } from '../Services/AssignmentService';
+import express from 'express';
+import { AssignmentService } from '../Services/AssignmentService.js';
+import {catchAsync} from '../Utils/catchAsync.js';
 
-const router = Router();
+const router = express.Router();
+const service = new AssignmentService();
 
-// Middleware de autenticación con firma correcta
-const academicAdminMiddleware = (req: Request, res: Response, next: NextFunction) => {
-    academicAdminOnly(req, res, next);
-};
+router.post('/asignar', catchAsync(async (req, res) => {
+  const { profesores, asignaturas, rol } = req.body;
+  if (!profesores || !asignaturas || !rol) {
+    return res.status(400).json({ error: 'Faltan datos requeridos para la asignación.' });
+  }
+  const result = await service.assign(profesores, asignaturas, rol);
+  res.status(201).json({ message: 'Asignación realizada exitosamente', result });
+}));
 
-router.post('/confirm', academicAdminMiddleware, async (req: Request, res: Response) => {
-    const { action, entityId } = req.body;
-    
-    try {
-        if (action === 'unassign') {
-            const result = await AssignmentService.unassignProfessor(entityId);
-            res.json({ 
-                confirmationId: Date.now().toString(36), 
-                success: true,
-                result
-            });
-        } else {
-            res.status(400).json({ error: 'Invalid action' });
-        }
-    } catch (error) {
-        console.error('Confirmation error:', error);
-        res.status(500).json({ error: 'Confirmation failed' });
-    }
-});
+router.delete('/desvincular', catchAsync(async (req, res) => {
+  const { profesorId, asignaturaId } = req.body;
+  if (!profesorId || !asignaturaId) {
+    return res.status(400).json({ error: 'Faltan datos requeridos para la desvinculación.' });
+  }
+  const result = await service.unassign(profesorId, asignaturaId);
+  res.status(200).json(result);
+}));
 
-export const ConfirmacionRouter = router;
+export default router;

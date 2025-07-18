@@ -1,28 +1,28 @@
-import { C_AModel } from '../Database/CarreraAsignaturaModel.js';
-import { AsignaturaModel } from '../Database/AsignaturaModel.js';
+import { Asignatura } from '../Database/AsignaturaModel.js';
+import { ProfessorAsignatura } from '../Database/ProfessorAsignaturaModel.js';
 
-function horariosSolapados(horario1: any, horario2: any): boolean {
-    if (!horario1 || !horario2) return false;
-    
-    return horario1.dia === horario2.dia && 
-           horario1.horaInicio < horario2.horaFin && 
-           horario1.horaFin > horario2.horaInicio;
-}
-
-export const checkScheduleOverlap = async (professorId: number, newSchedule: any) => {
-    const assignments = await C_AModel.findAll({ 
-        where: { Professor_id: professorId },
-        include: [{
-            model: AsignaturaModel,
-            as: 'Asignatura', // Ensure alias matches the expected property name
-            required: true
-        }]
+export class ScheduleService {
+  async verificarDisponibilidad(profesorId: number, nuevasAsignaturas: number[]) {
+    const asignacionesActuales = await ProfessorAsignatura.findAll({
+      where: { profesorId },
     });
-    
-        for (const assignment of assignments) {
-            if (horariosSolapados((assignment as any).Asignatura.horarios, newSchedule)) {
-                return true; // Return true if any schedule overlaps
-            }
+
+    const idsAsignaturasActuales = asignacionesActuales.map(a => a.asignaturaId);
+    const todasAsignaturas = await Asignatura.findAll({
+      where: { id: [...idsAsignaturasActuales, ...nuevasAsignaturas] },
+    });
+
+    const actuales = todasAsignaturas.filter(a => idsAsignaturasActuales.includes(a.id));
+    const nuevas = todasAsignaturas.filter(a => nuevasAsignaturas.includes(a.id));
+
+    for (const nueva of nuevas) {
+      for (const actual of actuales) {
+        if (nueva.dia === actual.dia &&
+            nueva.horaInicio < actual.horaFin &&
+            nueva.horaFin > actual.horaInicio) {
+          throw new Error(`Conflicto de horario con asignatura existente el ${nueva.dia} de ${nueva.horaInicio} a ${nueva.horaFin}`);
         }
-        return false; // Return false if no overlaps are found
-    };
+      }
+    }
+  }
+}
