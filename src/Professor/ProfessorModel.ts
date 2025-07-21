@@ -3,7 +3,8 @@ import {sequelizedb} from '../Database/Sequelize.js';
 
 export class Professor extends Model {
   public id!: number;
-  public nombre_completo!: string;
+  public nombre!: string;
+  public apellido!: string;
   public dni!: string;
   public legajo!: string;
   public titulo_academico!: string;
@@ -19,7 +20,11 @@ sequelizedb.define ('Professor',{
     autoIncrement: true,
     primaryKey: true,
   },
-  nombre_completo: {
+  nombre: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  apellido: {
     type: DataTypes.STRING,
     allowNull: false,
   },

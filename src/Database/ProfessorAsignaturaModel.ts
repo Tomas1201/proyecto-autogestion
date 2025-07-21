@@ -46,4 +46,3 @@ ProfessorAsignatura.init(
 
 sequelizedb.sync();
 export const ProfessorAsignaturaModel = sequelizedb.models.ProfessorAsignatura;
-

@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 export const ProfessorSchema = z.object({
-  nombre_completo: z.string().min(1, 'El nombre es obligatorio'),
+  nombre: z.string().min(1, 'El nombre es obligatorio'),
   dni: z.string().min(7, 'El DNI debe tener al menos 7 dígitos').max(10),
   legajo: z.string().min(1, 'El legajo es obligatorio'),
   correo: z.string().optional(),

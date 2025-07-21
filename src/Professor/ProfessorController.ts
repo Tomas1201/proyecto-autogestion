@@ -27,6 +27,28 @@ export const registerProfessor = async (
   }
 };
 
+export const registerAsignatura = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const validatedData = ProfessorSchema.parse(req.body);
+    const asignature = await service.registerAsignatura(validatedData);
+    res.status(201).json({
+      code: 'CREATED',
+      message: 'Asignatura registrada exitosamente',
+      data: asignature,
+    });
+  } catch (error: any) {
+    if (error.name === 'ZodError') {
+      res.status(400).json({ errors: error.errors });
+    } else {
+      res.status(400).json({ error: error.message });
+    }
+  }
+};
+
 export const updateProfessor = async (
   req: Request,
   res: Response,
@@ -102,6 +124,23 @@ export const searchByName = async (
     }
   }
 };
+export const searchByLastName = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const results = await service.searchByLastName(req.params.lastname);
+    res.status(200).json({ data: results });
+  } catch (error: any) {
+    if (error.lastname === 'ZodError') {
+      res.status(400).json({ errors: error.errors });
+    } else {
+      res.status(400).json({ error: error.message });
+    }
+  }
+};
+
 export const searchByDni = async (
   req: Request,
   res: Response,
@@ -118,6 +157,7 @@ export const searchByDni = async (
     }
   }
 };
+
 export const searchByLegajo = async (
   req: Request,
   res: Response,
@@ -135,23 +175,48 @@ export const searchByLegajo = async (
   }
 };
 
-export const deleteProfessor = async (
+export const archiveProfessor = async (
   req: Request,
   res: Response,
   next: NextFunction
 ): Promise<void> => {
   try {
     const id = Number(req.params.id);
-    await service.deleteProfessor(id);
-    res.status(200).json({ message: 'Profesor eliminado exitosamente' });
+    const archivedProfessor = await service.archiveProfessor(id);
+    res.status(200).json({
+      code: 'ARCHIVED',
+      message: 'Profesor archivado exitosamente',
+      data: archivedProfessor,
+    });
   } catch (error: any) {
-    res.status(400).json({ error: error.message });
+    if (error.name === 'ZodError') {
+      res.status(400).json({ errors: error.errors });
+    } else {
+      res.status(400).json({ error: error.message });
+    }
   }
 };
 
-
-export const archiveProfessor = async (req: Request, res: Response) => {
-  const id = req.params.id;
-
+export const unarchiveProfessor = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const id = Number(req.params.id);
+    const archivedProfessor = await service.unarchiveProfessor(id);
+    res.status(200).json({
+      code: 'UNARCHIVED',
+      message: 'Profesor desarchivado exitosamente',
+      data: archivedProfessor,
+    });
+  } catch (error: any) {
+    if (error.name === 'ZodError') {
+      res.status(400).json({ errors: error.errors });
+    } else {
+      res.status(400).json({ error: error.message });
+    }
+  }
 };
+
 
