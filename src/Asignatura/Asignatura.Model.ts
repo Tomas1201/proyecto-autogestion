@@ -1,8 +1,8 @@
-/*import {  DataTypes, Model } from 'sequelize';
+import {  DataTypes, Model } from 'sequelize';
 
-import {Carrera} from '../Carrera/CarreraModel.js'; // ✅ Usa import default si Carrera es exportado con `export default`
+import {CarreraModel} from '../Carrera/CarreraModel.js'; // ✅ Usa import default si Carrera es exportado con `export default`
 
-import {sequelize} from '../Database/Sequelize.js'; 
+import {sequelizeDB} from '../Database/Sequelize.js'; 
 export class Asignatura extends Model {
     public id!: number;
   public nombre!: string;
@@ -21,7 +21,7 @@ export class Asignatura extends Model {
  
 
 // ✅ Define el modelo correctamente
-sequelize.define('Asignatura', {//terminarr
+sequelizeDB.define('Asignatura', {//terminarr
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -34,7 +34,7 @@ sequelize.define('Asignatura', {//terminarr
   descripcion: {
     type: DataTypes.TEXT,
     allowNull: false,
-    unique: true,
+ 
   },
   horasCatedra:{ 
     type: DataTypes.INTEGER,
@@ -48,16 +48,21 @@ sequelize.define('Asignatura', {//terminarr
   },
 }, {
   tableName: 'Asignatura', // ✅ tableName va aquí, no dentro de los atributos
-  
+ 
+  timestamps: true,
+   indexes: [
+    {
+      unique: true,
+      fields: [{ name: 'descripcion', length: 255 }],}],
 });
 
-// ✅ Asocia el modelo después de definirlo
-Asignatura.belongsTo(Carrera, {
+/*
+Asignatura.belongsTo(CarreraModel, {
   foreignKey: 'carreraId',
   as: 'carrera',
-});
+});*/
 
-export default Asignatura;
 
-sequelize.sync();
-export const AsignaturaModel = sequelize.models.Asignatura;*/
+
+sequelizeDB.sync();
+export const AsignaturaModel = sequelizeDB.models.Asignatura;

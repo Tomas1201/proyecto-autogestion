@@ -1,13 +1,13 @@
 // src/services/CarreraService.ts
-/*
-import { Carrera } from '../models/Carrera'; // Tu modelo/interfaz Carrera
-import { CarreraInterface } from '../Carrera/Carrera.interface'; // Tu interfaz del repositorio
-import { CarreraRepository } from '../Carrera/Carrera.repository'; // Tu implementación del repositorio
+
+import { CarreraModel, Carrera} from './CarreraModel.js'; // Tu modelo/interfaz Carrera
+import { CarreraInterface } from '../Carrera/Carrera.interface.js'; // Tu interfaz del repositorio
+import { CarreraRepository } from '../Carrera/Carrera.repository.js'; // Tu implementación del repositorio
 import { FindOptions } from 'sequelize'; // Para el método getAllCarreras flexible
 
 
 export interface ICarreraService {//Opcional
-    getAllCarreras(queryOptions?: FindOptions): Promise<Carrera[]>;
+    getAllCarreras(): Promise<Carrera[]>;
     getCarreraById(id: number): Promise<Carrera | null>;
     getCarrerasByName(name: string): Promise<Carrera[] | null>;
     createCarrera(carreraData: Omit<Carrera, 'id'>): Promise<Carrera>;
@@ -23,11 +23,11 @@ export class CarreraService implements ICarreraService {
         this.carreraRepository = carreraRepository;
     }
 
-    public async getAllCarreras(queryOptions?: FindOptions): Promise<Carrera[]> {
-        console.log("Servicio: Solicitando todas las carreras con opciones:", queryOptions);
+    public async getAllCarreras(): Promise<Carrera[]> {
+        console.log("Servicio: Solicitando todas las carreras con opciones:", );
         try {
             // Lógica de negocio si la hay (ej. validaciones de permiso de alto nivel)
-            const carreras = await this.carreraRepository.findAll(queryOptions);
+            const carreras = await this.carreraRepository.findAll();
             return carreras; // El repositorio ya maneja si es [] o datos
         } catch (error) {
             console.error('Servicio Error: Fallo al obtener todas las Carreras.', error);
@@ -146,4 +146,4 @@ export class CarreraService implements ICarreraService {
             throw error;
         }
     }
-}*/
+}
