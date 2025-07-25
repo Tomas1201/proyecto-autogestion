@@ -3,11 +3,11 @@ import { DataTypes, Model } from 'sequelize';
 import {sequelizeDB} from '../Database/Sequelize.js'; 
 
 export class Carrera extends Model {
-    public id!: number;
+    public id!: string;
   public nombre!: string;
   public cant_alumno!: number;
   public descripcion!: string;
-  public duracion!: string;
+  public duracion!: number;
 
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
@@ -16,7 +16,7 @@ export class Carrera extends Model {
 
  sequelizeDB.define('Carrera', {
   id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUIDV4,
         primaryKey: true,
         autoIncrement: true,
     },
@@ -34,7 +34,7 @@ export class Carrera extends Model {
         unique: true,
     },
     duracion: {
-        type: DataTypes.CHAR,/**NO SE PUEDE USAR VARCHAR? */
+        type: DataTypes.INTEGER,/**NO SE PUEDE USAR VARCHAR? */
         allowNull: false,
     },
 

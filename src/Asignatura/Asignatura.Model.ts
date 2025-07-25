@@ -4,7 +4,7 @@ import {CarreraModel} from '../Carrera/CarreraModel.js'; // ✅ Usa import defau
 
 import {sequelizeDB} from '../Database/Sequelize.js'; 
 export class Asignatura extends Model {
-    public id!: number;
+    public id!: string;
   public nombre!: string;
  public planificacion!:object;//JSONNN
  public horasCatedra!:number;
@@ -23,7 +23,7 @@ export class Asignatura extends Model {
 // ✅ Define el modelo correctamente
 sequelizeDB.define('Asignatura', {//terminarr
   id: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.UUIDV4,
     primaryKey: true,
     autoIncrement: true,
   },
