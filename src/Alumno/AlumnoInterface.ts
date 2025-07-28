@@ -1,3 +1,4 @@
+
 import { Alumno } from '../Models/AlumnoModel'; // Asegúrate de que la ruta sea correcta
 
 export interface AlumnoInterface {
@@ -25,7 +26,7 @@ export interface AlumnoInterface {
 
   
 
-  create(alumnoData: Omit<Alumno, 'id'>): Promise<Alumno>; 
+  create(alumnoData: Alumno): Promise<Alumno | null>; 
 
   update(id: number, alumnoData: Partial<Alumno>): Promise<boolean>; 
   

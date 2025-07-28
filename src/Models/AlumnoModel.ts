@@ -2,9 +2,6 @@ import { DataTypes, Model } from 'sequelize';
 import { SequelizeDB } from '../Database/Sequelize.js';
 
 
-
-
-
 export class Alumno extends Model {
     public id!: number;
     public nombre!: string;
@@ -12,6 +9,8 @@ export class Alumno extends Model {
     public email!: string;
     public legajo!: number;
     public status!: string;
+    public dni!: number;
+    public carrera!: string[];
     
 
     // timestamps!
@@ -20,9 +19,9 @@ export class Alumno extends Model {
 
 }
 
-SequelizeDB.define('Alumno', {
+Alumno.init({
     id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUIDV4,
         primaryKey: true,
         autoIncrement: true,
     },
@@ -45,7 +44,7 @@ SequelizeDB.define('Alumno', {
         unique: true,
     },
     status: {
-        type: DataTypes.STRING,
+        type: DataTypes.ENUM('activo', 'inactivo', 'graduado'),
         allowNull: false,
         defaultValue: 'activo',
     },
@@ -54,10 +53,20 @@ SequelizeDB.define('Alumno', {
         allowNull: false,
         unique: true,
     },
+    carrera: {
+        type: DataTypes.STRING,
+        allowNull: true,   
+    },
+    createdAt: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: DataTypes.NOW,
+    },
 }, {
+    sequelize: SequelizeDB,
     tableName: 'Alumnos',
-    timestamps: false, // Disable createdAt and updatedAt fields
+    timestamps: true,
 });
-SequelizeDB.sync();
-export const AlumnoModel = SequelizeDB.models.Alumno;
+
+
 

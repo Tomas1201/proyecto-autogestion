@@ -5,7 +5,7 @@ import { DataTypes, Model } from 'sequelize';
 
 
 export class Carrera extends Model {
-    public id!: number;
+    public id!: string; // UUIDV4
     public nombre!: string;
     public descripcion!: string;
     public duracion!: number;
@@ -18,10 +18,10 @@ export class Carrera extends Model {
     public readonly updatedAt!: Date;
 
 }
-SequelizeDB.define('Carrera', {
+Carrera.init({
     
     id:{
-    type: DataTypes.INTEGER,
+    type: DataTypes.UUIDV4,
     primaryKey: true,
     autoIncrement: true,
     
@@ -54,13 +54,8 @@ SequelizeDB.define('Carrera', {
     },
     
 },{
+    sequelize: SequelizeDB,
     tableName: 'Carreras',
     timestamps: true, // Agrega createdAt y updatedAt
-    createdAt: 'fecha_creacion',
-    updatedAt: 'fecha_actualizacion',
 });
 
-
-SequelizeDB.sync( );
-
-export const CarreraModel = SequelizeDB.models.Carrera;

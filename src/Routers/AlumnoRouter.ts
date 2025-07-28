@@ -1,5 +1,6 @@
 import { Router } from 'express';
-import { AlumnoController } from './AlumnoController.js';
+import { AlumnoController } from '../Controllers/AlumnoController.js';
+import { validateAlumno } from '../Middlewares/validationMiddleware.js';
 
 
 const router = Router();
@@ -16,20 +17,29 @@ router.get('/nombre/:name', AlumnoController.getAlumnoByName);
 // Devuelve un alumno por apellido
 router.get('/apellido/:apellido', AlumnoController.getAlumnoByApellido);
 
-
 router.get('/asignatura/:asignatura', AlumnoController.getByAsignatura);
 
-// Crea un nuevo alumno
-router.post('/', AlumnoController.createAlumno);
+router.get('/carrera/:carrera', AlumnoController.getByCarrera);
 
-router.post('/carrera/:carreraid/asignatura/:asignaturaid/alumno/:id', AlumnoController.createAlumnoAsignatura);
+// Crea un nuevo alumno
+router.post('/',validateAlumno, AlumnoController.createAlumno);
+
+/*
+El usuario tendra que mandar un JSON con los siguientes datos:
+{
+    carrera_id: number,
+    asignatura_id: number,
+    alumno_id: number
+}
+*/ 
+router.post('/carrera/inscripcion',validateAlumno, AlumnoController.createAlumnoAsignatura);
 
 // Actualiza un alumno por ID
-router.put('/:id', AlumnoController.updateAlumno);
+router.put('/:id',validateAlumno, AlumnoController.updateAlumno);
 
-// Elimina un alumno por ID
-//router.delete('/:id', AlumnoController.deleteAlumno);
+router.post('/asignatura/:asignaturaid/inscripcion/alumno/:alumnoid', validateAlumno, AlumnoController.createAlumnoAsignatura);
+//router.delete('/:id', AlumnoController.changeStateAlumno);
 
-
+//router.get('/inscripcion/asignatura/:id/alumno/:id', AlumnoController.addInscripcion);
 export default router;
 

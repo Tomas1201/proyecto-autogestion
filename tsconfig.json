@@ -14,6 +14,6 @@
        "emitDecoratorMetadata": true,
        "experimentalDecorators": true
      },
-     "include": ["src//*", "/*.ts", "src/Alumno/Controllers", "src/Alumno/Models", "src/Controllers/AlumnoController.ts", "src/Models/AsignaturaModel.ts", "srsrc/Models/CarreraAsignaturaModel.ts ","src/Models/AlumnoModel.ts", "src/Models/CarrerasModel.ts"],
+     "include": ["src//*", "/*.ts","src/**/*.ts", "src/Alumno/Controllers", "src/Alumno/Models", "src/Controllers/AlumnoController.ts", "src/Models/AsignaturaModel.ts", "srsrc/Models/CarreraAsignaturaModel.ts ","src/Models/AlumnoModel.ts", "src/Models/CarrerasModel.ts"],
      "exclude": ["node_modules"]
    }

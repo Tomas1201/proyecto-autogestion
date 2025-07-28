@@ -7,16 +7,24 @@ import { SequelizeDB } from '../Database/Sequelize.js';
         primaryKey: true,
         autoIncrement: true,
     },
-    Carrera_id:{
-        type: DataTypes.INTEGER
-    },
-    Asignatura_id:{
+    carrera_id:{
         type: DataTypes.INTEGER,
+        references: {
+            model: 'Carrera', // Nombre de la tabla referenciada
+            key: 'id' // Clave primaria de la tabla referenciada
+        }
     },
-    Alumno_id:{
+    asignatura_id:{
+        type: DataTypes.INTEGER,
+        references: {
+            model: 'Asignatura', // Nombre de la tabla referenciada
+            key: 'id' // Clave primaria de la tabla referenciada
+        }
+    },
+    alumno_id:{
         type: DataTypes.INTEGER
     },
-    EvalGlob_id:{
+    evalGlob_id:{
         type: DataTypes.INTEGER
     }
 

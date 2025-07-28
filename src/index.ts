@@ -1,6 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import AlumnoRouter from './Alumno/AlumnoRouter.js';
+import AlumnoRouter from './Routers/AlumnoRouter.js';
 
 //import {Normalizador} from './Utils/Sanitizador.js';
 import { SequelizeDB } from './Database/Sequelize.js';
@@ -16,10 +16,6 @@ app.use(express.urlencoded({ extended: true }));
 a;
 app.use('/api/v1/alumnos', AlumnoRouter); 
 
-
-
-
-import { Carrera, CarreraModel } from './Models/CarrerasModel.js';
 
 SequelizeDB.authenticate()
   .then(() => {

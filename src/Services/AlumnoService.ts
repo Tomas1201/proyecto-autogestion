@@ -1,5 +1,6 @@
 import {AlumnoRepository} from '../Repositories/AlumnoRepository.js';   
 import { Alumno } from '../Models/AlumnoModel.js'; 
+import { AlumnoDTO } from '../Middlewares/validationMiddleware.js';
 
 const alumnoRepository = AlumnoRepository.getInstance();
 
@@ -78,9 +79,9 @@ export const AlumnoService = {
     }
   },
 
-  createAsignaturainscripcion: async (alumnoid: number,carreraid: number, asignatura: string) => {
+  createAsignaturainscripcion: async (alumnoid: number, asignaturaid: number) => {
     try {
-      const newInscripcion = await alumnoRepository.createAsignaturaInscripcion(alumnoid,carreraid, asignatura);
+      const newInscripcion = await alumnoRepository.createAsignaturaInscripcion(alumnoid, asignaturaid);
       return newInscripcion;
     }catch (error) {
       console.error('Error creating alumno inscripcion:', error);

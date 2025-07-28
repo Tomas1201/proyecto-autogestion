@@ -2,11 +2,21 @@ import { SequelizeDB } from "../Database/Sequelize.js";
 import { DataTypes, Model } from "sequelize";
 
 
-class Inscriptos extends Model {}
+export class Inscriptos extends Model {
+    public id!: string; // UUIDV4
+    public alumno_id!: number;
+    public fecha_inscripcion!: Date;
+    public puestoacademico_id!: number;
+    
 
-SequelizeDB.define('inscriptos', {
+    // timestamps!
+    public readonly createdAt!: Date;
+    public readonly updatedAt!: Date;
+}
+
+Inscriptos.init({
     id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUIDV4,
         primaryKey: true,
         autoIncrement: true
     },
@@ -14,37 +24,21 @@ SequelizeDB.define('inscriptos', {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'alumnos',
+            model: 'Alumnos',
             key: 'id'
         }
     },
-     asignatura_id: {
+     puestoacademico_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'asignaturas',
+            model: 'PuestoAcademico',
             key: 'id'
         }
-    },
-    carrera_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: 'carreras',
-            key: 'id'
-        }
-    },
-    fecha_inscripcion: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: DataTypes.NOW
-    },
-   
+    }
     },{
+    sequelize: SequelizeDB,
     tableName: 'inscriptos',
     timestamps: false,
       
     });
-SequelizeDB.sync()
-// Exportar el modelo
-export const InscriptosModel = SequelizeDB.models.inscriptos;

@@ -1,9 +1,22 @@
 import { DataTypes, Model } from 'sequelize';
 import { SequelizeDB } from '../Database/Sequelize.js';
 
-   SequelizeDB.define('Asignatura',{
+export class Asignatura extends Model {
+    public id!: string; // UUIDV4
+    public nombre!: string;
+  public codigo!: string;
+  public horas!: number;
+  public horariosid!: number; // ID de Horario
+  public aula!: string;
+    // timestamps!
+    public readonly createdAt!: Date;
+    public readonly updatedAt!: Date;
+}
+
+
+   Asignatura.init({
     id:{
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUIDV4,
         primaryKey: true,
         autoIncrement: true,
     },
@@ -19,14 +32,15 @@ import { SequelizeDB } from '../Database/Sequelize.js';
     horas:{
         type: DataTypes.INTEGER,
     },
-    horarios:{
-        type: DataTypes.DATE,
+    horariosid:{
+        type: DataTypes.INTEGER,
     },
     aula:{
         type: DataTypes.STRING,
     },
 
 },{
+    sequelize: SequelizeDB,
     tableName: 'Asignaturas',
     timestamps: true, // Agrega createdAt y updatedAt
     createdAt: 'fecha_creacion',
@@ -34,5 +48,3 @@ import { SequelizeDB } from '../Database/Sequelize.js';
 }
 
 );
-SequelizeDB.sync();
-export const AsignaturaModel = SequelizeDB.models.Asignatura;
