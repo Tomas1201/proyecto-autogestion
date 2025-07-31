@@ -75,7 +75,13 @@ export class CarreraService implements ICarreraService {
         if (carreraData.cant_alumno <= 0) {
             throw new Error('La cantidad de alumnos debe ser un número positivo.');
         }
-        // ... otras validaciones de datos de negocio aquí
+
+        //Ver donde imlementar la siguiente validacion:  const existingCarrera = await this.carreraRepository.findByName(carreraData.nombre);
+        /*
+        // Si la búsqueda devuelve resultados, significa que ya existe
+        if (existingCarrera.length > 0) {
+            throw new Error('Ya existe una carrera con ese nombre');
+        }*/
 
         try {
             const newCarrera = await this.carreraRepository.create(carreraData);

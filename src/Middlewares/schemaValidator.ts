@@ -12,7 +12,7 @@ export const duracionSchema = z.number()
 
 export const createCarreraSchema = z.object({
   nombre: z.string()
-    .min(3, { message: "El nombre de la carrera debe tener al menos 3 caracteres." })
+    .min(50, { message: "El nombre de la carrera debe tener al menos 50 caracteres." })
     .max(255, { message: "El nombre de la carrera no puede exceder los 255 caracteres." }),
   cant_alumno: z.number()
     .int({ message: "La cantidad de alumnos debe ser un número entero." })
