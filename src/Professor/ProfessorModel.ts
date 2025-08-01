@@ -1,5 +1,5 @@
-import { DataTypes, Model, Sequelize } from 'sequelize';
-import {sequelizedb} from '../Database/Sequelize.js';
+import { DataTypes, Model, Sequelize } from "sequelize";
+import { sequelizedb } from "../Database/Sequelize.js";
 
 export class Professor extends Model {
   public id!: number;
@@ -14,57 +14,60 @@ export class Professor extends Model {
   public state!: boolean;
 }
 
-sequelizedb.define ('Professor',{
-  id: {
-    type: DataTypes.INTEGER.UNSIGNED,
-    autoIncrement: true,
-    primaryKey: true,
+sequelizedb.define(
+  "Professor",
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    nombre: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    apellido: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    dni: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
+    legajo: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
+    titulo_academico: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    correo: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: { isEmail: true },
+    },
+    telefono: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    disponibilidad_horaria: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+    state: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true,
+    },
   },
-  nombre: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  apellido: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  dni: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    unique: true,
-  },
-  legajo: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    unique: true,
-  },
-  titulo_academico: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  correo: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    validate: { isEmail: true },
-  },
-  telefono: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  disponibilidad_horaria: {
-    type: DataTypes.TEXT,
-    allowNull: false,
-  },
-  state: {
-    type: DataTypes.BOOLEAN,
-    allowNull: false,
-    defaultValue: true,
-  },
-
-}, {
-  modelName: 'Professor',
-  tableName: 'profesores',
-  timestamps: false,
-});
+  {
+    modelName: "Professor",
+    tableName: "profesores",
+    timestamps: false,
+  }
+);
 sequelizedb.sync();
 export const professorModel = sequelizedb.models.Professor;

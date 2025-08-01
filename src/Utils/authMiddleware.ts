@@ -1,11 +1,11 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response, NextFunction } from "express";
 
 const authMiddleware = (roles: string[]) => {
   return (req: Request, res: Response, next: NextFunction): void => {
-    const user = req.headers['rol'];
+    const user = req.headers["rol"];
 
     if (!user || !roles.includes(user as string)) {
-      res.status(403).json({ error: 'Acceso denegado' });
+      res.status(403).json({ error: "Acceso denegado" });
       return;
     }
 
@@ -13,11 +13,17 @@ const authMiddleware = (roles: string[]) => {
   };
 };
 
-const authorizeAdmin = (req: Request, res: Response, next: NextFunction): void => {
-  const user = req.headers['rol'];
+const authorizeAdmin = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): void => {
+  const user = req.headers["rol"];
 
-  if (user !== 'admin') {
-    res.status(403).json({ error: 'Acceso denegado: no tiene permisos suficientes.' });
+  if (user !== "admin") {
+    res
+      .status(403)
+      .json({ error: "Acceso denegado: no tiene permisos suficientes." });
     return;
   }
 

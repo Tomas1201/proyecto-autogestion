@@ -1,41 +1,69 @@
-import professorRepository from './ProfessorRepository.js';
-import { ProfessorAsignaturaModel } from '../Database/ProfessorAsignaturaModel.js';
-import { professorModel } from './ProfessorModel.js';
+import professorRepository from "./ProfessorRepository.js";
+import { ProfessorAsignaturaModel } from "../Database/ProfessorAsignaturaModel.js";
+import { professorModel } from "./ProfessorModel.js";
+import { AsignaturaModel } from "../Database/AsignaturaModel.js";
 
 export class ProfessorService {
-
-
   async registerProfessor(data: any) {
     // Validaciones simples
-    console.log('Datos recibidos para registrar profesor:', data);
-    if (!data.id || !data.nombre || !data.dni || !data.legajo || !data.titulo_academico || !data.correo || !data.telefono || !data.disponibilidad_horaria ) {
-      throw new Error('Todos los campos son obligatorios');
+    console.log("Datos recibidos para registrar profesor:", data);
+    if (
+      !data.id ||
+      !data.nombre ||
+      !data.dni ||
+      !data.legajo ||
+      !data.titulo_academico ||
+      !data.correo ||
+      !data.telefono ||
+      !data.disponibilidad_horaria
+    ) {
+      throw new Error("Todos los campos son obligatorios");
     }
 
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.correo)) {
-      throw new Error('Correo electrónico inválido');
+      throw new Error("Correo electrónico inválido");
     }
 
-    const existing = await professorRepository.findByDniOrLegajo(data.dni, data.legajo);
+    const existing = await professorRepository.findByDniOrLegajo(
+      data.dni,
+      data.legajo
+    );
     if (existing) {
-      throw new Error('Ya existe un profesor con ese DNI o Legajo');
+      throw new Error("Ya existe un profesor con ese DNI o Legajo");
     }
 
     return await professorRepository.create(data);
   }
+  //Esto aun falta
+  async registerProfessorToAsignatura(data: any) {
+    console.log("Datos recibidos para registrar profesor a asignatura:", data);
+    if (!data.professorId || !data.asignaturaId || !data.rol || !data.horario) {
+      throw new Error(
+        "Los campos professorId, asignaturaId, rol y horario son obligatorios"
+      );
+    }
+
+    const existing = await ProfessorAsignaturaModel.findOne({
+      where: { professorId: data.professorId, asignaturaId: data.asignaturaId },
+    });
+
+    if (existing) {
+      throw new Error("El profesor ya está asignado a esta asignatura");
+    }
+
+    return await ProfessorAsignaturaModel.create(data);
+  }
+
   async registerAsignatura(data: any) {
-    console.log('Datos recibidos para registrar asignaturas:', data);
-    if (!data.Id || !data.nombre || !data.dia || !data.hora_inicio || !data.hora_fin) {
-      throw new Error('Los campos professorId y asignaturaId son obligatorios');
-   }
-   const existing = await professorRepository.findByDniOrLegajo(data.nombre, data.dia);
+    console.log("Datos recibidos para registrar asignaturas:");
+    const existing = await AsignaturaModel.findOne({
+      where: { nombre: data.nombre, dia: data.dia },
+    });
     if (existing) {
-      throw new Error('Ya existe un profesor con ese DNI o Legajo');
+      throw new Error("Ya existe una materia con ese nombre ");
     }
-    return await professorRepository.create(data);
-
+    return await AsignaturaModel.create(data);
   }
-  
 
   //Busco Todos los profesores
   async searchProfessors(query: any) {
@@ -44,6 +72,15 @@ export class ProfessorService {
   //Busco por estado
   async searchByState(state: boolean) {
     return await professorRepository.searchByState(state);
+  }
+
+  // Busco por ID
+  async searchProfessorById(id: number) {
+    const professor = await professorRepository.findById(id);
+    if (!professor) {
+      throw new Error("Profesor no encontrado");
+    }
+    return professor;
   }
   // Busco por nombre
   async searchByName(name: string) {
@@ -63,17 +100,17 @@ export class ProfessorService {
   // Actualizo un profesor
   async updateProfessor(id: number, data: Partial<any>) {
     if (data.correo && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.correo)) {
-      throw new Error('Correo electrónico inválido');
+      throw new Error("Correo electrónico inválido");
     }
-  
+
     return await professorRepository.updateById(id, data);
   }
-  
+
   async deleteProfessor(id: number): Promise<number> {
     const asignaciones = await ProfessorAsignaturaModel.findAll({
       where: { professorId: id },
     });
-  
+
     if (asignaciones.length > 0) {
       class CustomError extends Error {
         Code: number;
@@ -82,21 +119,21 @@ export class ProfessorService {
           this.Code = code;
         }
       }
-  
+
       throw new CustomError(
-        'El profesor está asignado a una o más asignaturas y no puede ser eliminado.',
+        "El profesor está asignado a una o más asignaturas y no puede ser eliminado.",
         400
       );
     }
-  
+
     return await professorModel.destroy({ where: { id } });
   }
-  
+
   async archiveProfessor(id: number) {
     const profesor = await professorRepository.archiveProfessorById(id);
     return profesor;
   }
-  
+
   async unarchiveProfessor(id: number) {
     const profesor = await professorRepository.unarchiveProfessorById(id);
     return profesor;

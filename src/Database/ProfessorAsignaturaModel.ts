@@ -1,5 +1,5 @@
-import { DataTypes, Model } from 'sequelize';
-import {sequelizedb} from './Sequelize.js'; 
+import { DataTypes, Model } from "sequelize";
+import { sequelizedb } from "./Sequelize.js";
 
 export class ProfessorAsignatura extends Model {
   public id!: number;
@@ -22,10 +22,18 @@ ProfessorAsignatura.init(
     professorId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      references: {
+        model: "profesores",
+        key: "id",
+      },
     },
     asignaturaId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      references: {
+        model: "asignaturas",
+        key: "id",
+      },
     },
     rol: {
       type: DataTypes.STRING,
@@ -37,9 +45,9 @@ ProfessorAsignatura.init(
     },
   },
   {
-    sequelize : sequelizedb,
-    modelName: 'ProfessorAsignatura',
-    tableName: 'professor_asignaturas',
+    sequelize: sequelizedb,
+    modelName: "ProfessorAsignatura",
+    tableName: "professor_asignaturas",
     timestamps: true,
   }
 );

@@ -1,5 +1,5 @@
-import { DataTypes, Model } from 'sequelize';
-import { sequelizedb } from './Sequelize.js';
+import { DataTypes, Model } from "sequelize";
+import { sequelizedb } from "./Sequelize.js";
 
 export class Asignatura extends Model {
   public id!: number;
@@ -21,7 +21,14 @@ Asignatura.init(
       allowNull: false,
     },
     dia: {
-      type: DataTypes.ENUM('lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'),
+      type: DataTypes.ENUM(
+        "lunes",
+        "martes",
+        "miércoles",
+        "jueves",
+        "viernes",
+        "sábado"
+      ),
       allowNull: false,
     },
     horaInicio: {
@@ -34,9 +41,9 @@ Asignatura.init(
     },
   },
   {
-    sequelize : sequelizedb,
-    modelName: 'Asignatura',
-    tableName: 'asignaturas',
+    sequelize: sequelizedb,
+    modelName: "Asignatura",
+    tableName: "asignaturas",
     timestamps: true,
   }
 );
