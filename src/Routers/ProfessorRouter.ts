@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { authMiddleware } from "../Utils/authMiddleware.js";
-import * as ProfessorController from "./ProfessorController.js";
+import * as ProfessorController from "../Controllers/ProfessorController.js";
 //import { deleteProfessor } from './ProfessorController.js';
 import { authorizeAdmin } from "../Utils/authMiddleware.js";
 import { catchAsync } from "../Utils/catchAsync.js";

@@ -3,8 +3,8 @@ import { Op } from "sequelize";
 import {
   ProfessorAsignatura,
   ProfessorAsignaturaModel,
-} from "../Database/ProfessorAsignaturaModel.js";
-import { AsignaturaModel } from "../Database/AsignaturaModel.js";
+} from "../Models/ProfessorAsignaturaModel.js";
+import { AsignaturaModel } from "../Models/AsignaturaModel.js";
 
 //REVISAR BIEN LOS DE LAS ASIGNATURAS
 

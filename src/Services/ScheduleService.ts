@@ -1,5 +1,5 @@
-import { Asignatura } from "../Database/AsignaturaModel.js";
-import { ProfessorAsignatura } from "../Database/ProfessorAsignaturaModel.js";
+import { Asignatura } from "../Models/AsignaturaModel.js";
+import { ProfessorAsignatura } from "../Models/ProfessorAsignaturaModel.js";
 
 export class ScheduleService {
   async verificarDisponibilidad(

@@ -14,8 +14,7 @@ export class Professor extends Model {
   public state!: boolean;
 }
 
-sequelizedb.define(
-  "Professor",
+Professor.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -64,10 +63,10 @@ sequelizedb.define(
     },
   },
   {
+    sequelize: sequelizedb,
     modelName: "Professor",
     tableName: "profesores",
     timestamps: false,
   }
 );
-sequelizedb.sync();
 export const professorModel = sequelizedb.models.Professor;

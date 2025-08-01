@@ -2,7 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import { P } from "./Routers/ProfessorRouter.js";
 import confirmacionRouter from "./Routers/ConfirmationRouter.js";
-import { ProfessorAsignatura } from "./Database/ProfessorAsignaturaModel";
+import { ProfessorAsignatura } from "./Models/ProfessorAsignaturaModel";
 import { sequelizedb } from "./Database/Sequelize.js";
 
 const app = express();
@@ -31,6 +31,7 @@ sequelizedb
   .catch((error: Error) => {
     console.error("Unable to connect to the database:", error);
   });
+sequelizedb.sync()
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

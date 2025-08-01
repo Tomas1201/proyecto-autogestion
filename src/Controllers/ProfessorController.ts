@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { ProfessorService } from "../Services/ProfessorService.js";
 import * as Validator from "../Middlewares/ProfessorValidatorMiddleware.js";
 import { NextFunction } from "express";
-import { Asignatura } from "../Database/AsignaturaModel.js";
+import { Asignatura } from "../Models/AsignaturaModel.js";
 
 const service = new ProfessorService();
 

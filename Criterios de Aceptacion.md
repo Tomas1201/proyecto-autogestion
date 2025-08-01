@@ -41,7 +41,7 @@ DADO que un profesor ha sido asignado previamente a una asignatura
 CUANDO el Administrador Académico desea eliminar esa asignación y confirma la acción
 ENTONCES el sistema elimina la relación entre el profesor y la asignatura, actualiza los registros y muestra una confirmación de que la desvinculación fue exitosa.
 
-8. Restricción de Acceso
+8. (No realizado por falta de SCRUM-27) Restricción de Acceso
 
 DADO que un usuario intenta acceder a funcionalidades de gestión de profesores
 CUANDO su rol no es el de Administrador Académico

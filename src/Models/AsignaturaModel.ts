@@ -1,5 +1,5 @@
 import { DataTypes, Model } from "sequelize";
-import { sequelizedb } from "./Sequelize.js";
+import { sequelizedb } from "../Database/Sequelize.js";
 
 export class Asignatura extends Model {
   public id!: number;
@@ -47,6 +47,5 @@ Asignatura.init(
     timestamps: true,
   }
 );
-//Lo "reescribe"
-sequelizedb.sync();
+
 export const AsignaturaModel = sequelizedb.models.Asignatura;

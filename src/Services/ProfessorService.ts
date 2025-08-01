@@ -1,7 +1,7 @@
 import professorRepository from "../Repositories/ProfessorRepository.js";
-import { ProfessorAsignaturaModel } from "../Database/ProfessorAsignaturaModel.js";
+import { ProfessorAsignaturaModel } from "../Models/ProfessorAsignaturaModel.js";
 import { professorModel } from "../Models/ProfessorModel.js";
-import { AsignaturaModel } from "../Database/AsignaturaModel.js";
+import { AsignaturaModel } from "../Models/AsignaturaModel.js";
 
 export class ProfessorService {
   async registerProfessor(data: any) {
