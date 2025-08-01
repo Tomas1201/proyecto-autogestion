@@ -1,4 +1,4 @@
-import { professorModel, Professor } from "./ProfessorModel.js";
+import { professorModel, Professor } from "../Models/ProfessorModel.js";
 import { Op } from "sequelize";
 import {
   ProfessorAsignatura,

@@ -1,6 +1,6 @@
-import professorRepository from "./ProfessorRepository.js";
+import professorRepository from "../Repositories/ProfessorRepository.js";
 import { ProfessorAsignaturaModel } from "../Database/ProfessorAsignaturaModel.js";
-import { professorModel } from "./ProfessorModel.js";
+import { professorModel } from "../Models/ProfessorModel.js";
 import { AsignaturaModel } from "../Database/AsignaturaModel.js";
 
 export class ProfessorService {

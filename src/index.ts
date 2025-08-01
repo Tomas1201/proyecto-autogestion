@@ -1,6 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
-import { P } from "./Professor/ProfessorRouter.js";
+import { P } from "./Routers/ProfessorRouter.js";
 import confirmacionRouter from "./Routers/ConfirmationRouter.js";
 import { ProfessorAsignatura } from "./Database/ProfessorAsignaturaModel";
 import { sequelizedb } from "./Database/Sequelize.js";
