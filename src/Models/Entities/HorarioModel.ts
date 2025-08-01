@@ -1,5 +1,5 @@
 import { DataTypes, Model } from "sequelize";
-import { SequelizeDB } from "../Database/Sequelize.js";
+import { SequelizeDB } from "../../Database/Sequelize.js";
 
 export class Horario extends Model {
   public id!: string; // UUIDV4
@@ -16,9 +16,9 @@ export class Horario extends Model {
 Horario.init(
   {
     id: {
-      type: DataTypes.UUIDV4,
-      primaryKey: true,
-      autoIncrement: true,
+      type: DataTypes.UUID,
+  defaultValue: DataTypes.UUIDV4,
+  primaryKey: true,
     },
     dia: {
       type: DataTypes.STRING,

@@ -1,7 +1,7 @@
 /*Revisando implementacion, sujeto a remocion */
 
 import {Model, DataTypes} from 'sequelize';
-import { SequelizeDB } from '../Database/Sequelize.js';
+import { SequelizeDB } from '../../Database/Sequelize.js';
 
 
 /*
@@ -26,7 +26,7 @@ AlumnoCarrera.init({
         autoIncrement: true,
     },
     alumnoId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         allowNull: false,
         references: {
             model: 'Alumnos', // Nombre de la tabla referenciada
@@ -34,7 +34,7 @@ AlumnoCarrera.init({
         }
     },
     carreraId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         allowNull: false,
         references: {
             model: 'Carreras', // Nombre de la tabla referenciada
@@ -42,7 +42,7 @@ AlumnoCarrera.init({
         }
     },
     planCarreraId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         allowNull: false,
         references: {
             model: 'PlanCarrera', // Nombre de la tabla referenciada

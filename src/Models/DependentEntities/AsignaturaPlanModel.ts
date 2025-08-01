@@ -1,28 +1,28 @@
 import { DataTypes, Model } from "sequelize";
-import { SequelizeDB } from '../Database/Sequelize.js';
+import { SequelizeDB } from '../../Database/Sequelize.js';
 
-export class PuestoAcademicoModel extends Model {
+export class AsignaturaPlanModel extends Model {
     public id!: number;
     public planCarreraId!: number;
     public asignaturaId!: number;
     public anio!: number;
     public cuatrimestre!: number;
-    public CicloElectivoId!: number;
-    public profesorId!: number;
+    public cargaHoraria!: number;
+    public isoptativa!: boolean;
 
     // timestamps!
     public readonly createdAt!: Date;
     public readonly updatedAt!: Date;
 }
 
-PuestoAcademicoModel.init({
+AsignaturaPlanModel.init({
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
     },
     planCarreraId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         allowNull: false,
         references: {
             model: 'PlanCarrera', // Nombre de la tabla referenciada
@@ -30,44 +30,27 @@ PuestoAcademicoModel.init({
         }
     },
     asignaturaId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         allowNull: false,
         references: {
             model: 'Asignaturas', // Nombre de la tabla referenciada
             key: 'id' // Clave primaria de la tabla referenciada    
         }
     },
-    CicloElectivoId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: 'ciclo_electivo', // Nombre de la tabla referenciada
-            key: 'id' // Clave primaria de la tabla referenciada
-        }
-    },
-    profesorId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: 'professors', // Nombre de la tabla referenciada
-            key: 'id' // Clave primaria de la tabla referenciada
-        }
-    },
     cargaHoraria: {
         type: DataTypes.INTEGER,
-        allowNull: false,  
-    },
+        allowNull: false,
+    },  
     isoptativa: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
         defaultValue: false,
     }
-
 }, {
     sequelize: SequelizeDB,
-    modelName: 'PuestoAcademico',
-    tableName: 'PuestoAcademico',
-    timestamps: true, // Agrega createdAt y updatedAt
-    createdAt: 'fecha_creacion',
-    updatedAt: 'fecha_actualizacion',
+    modelName: 'AsignaturaPlan',
+    tableName: 'AsignaturaPlan',
+    timestamps: true,
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
 });

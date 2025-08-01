@@ -1,5 +1,5 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
-import {SequelizeDB} from '../Database/Sequelize.js';
+import {SequelizeDB} from '../../Database/Sequelize.js';
 
 export class Professor extends Model {
   public id!: string; // UUIDV4
@@ -15,9 +15,9 @@ export class Professor extends Model {
 
 Professor.init({
   id: {
-    type: DataTypes.UUIDV4,
-    autoIncrement: true,
-    primaryKey: true,
+   type: DataTypes.UUID,
+  defaultValue: DataTypes.UUIDV4,
+  primaryKey: true,
   },
   nombre_completo: {
     type: DataTypes.STRING,
@@ -40,7 +40,6 @@ Professor.init({
   correo: {
     type: DataTypes.STRING,
     allowNull: false,
-    validate: { isEmail: true },
   },
   telefono: {
     type: DataTypes.STRING,
@@ -62,4 +61,4 @@ Professor.init({
   tableName: 'professors',
   timestamps: false,
 });
-SequelizeDB.sync();
+

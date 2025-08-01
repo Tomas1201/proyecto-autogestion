@@ -18,6 +18,17 @@ const AlumnoSchema = z.object({
   carrera: z.array(z.string()).optional(),
 });
 
+const AlumnoUpdateSchema = z.object({
+  nombre: z.string().min(1, "Nombre is required").optional(),
+  apellido: z.string().min(1, "Apellido is required").optional(),
+  email: z.email("Invalid email format").optional(),
+  legajo: z.number().int().positive("Legajo must be a positive integer").optional(),
+  status: z.enum(["activo", "inactivo", "egresado", "libre"], "").optional(),
+  dni: z.number("El DNI tiene que ser numerico").int().positive("DNI must be a positive integer").optional(),
+  carrera: z.array(z.string()).optional(),
+}); 
+
+
 export const validateAlumno = async (
   req: Request,
   res: Response,
@@ -42,5 +53,25 @@ export const validateAlumno = async (
     return; // Solo return, sin valor
   }
 };
+
+export const validateUpdate = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+
+  try {
+    // Validar el parámetro de estado
+    const data = req.body;
+    AlumnoUpdateSchema.parse(data);
+    
+    // Si la validación es exitosa, continúa al siguiente middleware
+    next();
+  } catch (error) {
+    // En caso de error, envía respuesta pero no la retornes
+    res.status(400).json({ error: "Invalid information", details: error });
+    return; // Solo return, sin valor
+  }
+}
 
 export type AlumnoDTO = z.infer<typeof AlumnoSchema>;

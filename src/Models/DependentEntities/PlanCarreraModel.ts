@@ -1,5 +1,5 @@
-import { DataTypes, Model } from "sequelize";
-import { SequelizeDB } from '../Database/Sequelize.js';
+import { DataTypes, Model, Sequelize } from "sequelize";
+import { SequelizeDB } from '../../Database/Sequelize.js';
 
 /*
 Modelo que representa el plan de carrera, que vincula una carrera con un ciclo electivo.
@@ -9,7 +9,7 @@ export class PlanCarreraModel extends Model {
     public id!: string; // UUIDV4
     public carreraId!: number;
     public CicloElectivoId!: number;
-
+    
 
     // timestamps!
     public readonly createdAt!: Date;
@@ -18,28 +18,28 @@ export class PlanCarreraModel extends Model {
 
 SequelizeDB.define('PlanCarrera', {
     id: {
-        type: DataTypes.UUIDV4,
-        primaryKey: true,
-        autoIncrement: true,
+       type: DataTypes.UUID,
+  defaultValue: DataTypes.UUIDV4,
+  primaryKey: true,
     },
     carreraId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         allowNull: false,
         references: {
-            model: 'Carreras', // Nombre de la tabla referenciada
-            key: 'id' // Clave primaria de la tabla referenciada
+            model: 'Carreras', 
+            key: 'id' 
     }
 },
     CicloElectivoId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'ciclo_electivo', // Modelo referenciado
-            key: 'id' // Clave primaria del modelo referenciado
+            model: 'ciclo_electivo', 
+            key: 'id' 
         }
     },
 }, {
     tableName: 'PlanCarrera',
-    timestamps: true, // Agrega createdAt y updatedAt
+    timestamps: true, 
 });
 

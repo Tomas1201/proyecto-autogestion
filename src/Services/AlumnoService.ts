@@ -1,5 +1,5 @@
 import {AlumnoRepository} from '../Repositories/AlumnoRepository.js';   
-import { Alumno } from '../Models/AlumnoModel.js'; 
+import { Alumno } from '../Models/Entities/AlumnoModel.js'; 
 import { AlumnoDTO } from '../Middlewares/validationMiddleware.js';
 
 const alumnoRepository = AlumnoRepository.getInstance();
@@ -101,6 +101,19 @@ export const AlumnoService = {
       throw new Error('Database error');
     }
   },
+
+  changeStatus: async (id: number, status: string) => {
+    try {
+      const updated = await alumnoRepository.changeStatus(id, status);
+      if (!updated) { 
+        throw new Error('Alumno not found or not updated');
+      }
+      return updated;
+    } catch (error) {
+      console.error('Error changing alumno status:', error);
+        return;
+      }
+    },
 
   /*
   delete: async (id: string) => {

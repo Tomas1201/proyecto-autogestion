@@ -1,17 +1,17 @@
-import { Carrera } from '../Models/CarrerasModel.js';
-import { C_AModel } from '../Models/CarreraAsignaturaModel.js'; 
-import { Asignatura } from '../Models/AsignaturaModel.js'; 
-import { Inscriptos } from '../Models/inscriptosModel.js';
-import { Alumno} from '../Models/AlumnoModel.js';
-import {CicloElectivoModel} from '../Models/CicloElectivoModel.js';
+import { Carrera } from '../Models/DependentEntities/CarrerasModel.js';
+import { C_AModel } from '../Models/MiddleTables/CarreraAsignaturaModel.js'; 
+import { Asignatura } from '../Models/Entities/AsignaturaModel.js'; 
+import { Inscriptos } from '../Models/DependentEntities/inscriptosModel.js';
+import { Alumno} from '../Models/Entities/AlumnoModel.js';
+import {CicloElectivoModel} from '../Models/Entities/CicloElectivoModel.js';
 import { SequelizeDB } from './Sequelize.js';
-import {AsignaturaPlanModel} from '../Models/AsignaturaPlanModel.js';
-import { PlanCarreraModel } from '../Models/PlanCarreraModel.js';
-import { PuestoAcademicoModel } from '../Models/PuestoAcademicoModel.js';
-import { AlumnoCarrera } from '../Models/AlumnoCarreraModel.js';
+import {AsignaturaPlanModel} from '../Models/DependentEntities/AsignaturaPlanModel.js';
+import { PlanCarreraModel } from '../Models/DependentEntities/PlanCarreraModel.js';
+import { PuestoAcademicoModel } from '../Models/DependentEntities/PuestoAcademicoModel.js';
+import { AlumnoCarrera } from '../Models/MiddleTables/AlumnoCarreraModel.js';
 
-import { Professor } from '../Models/ProfessorModel.js';
-import { Horario } from '../Models/HorarioModel.js';
+import { Professor } from '../Models/Entities/ProfessorModel.js';
+import { Horario } from '../Models/Entities/HorarioModel.js';
 const a = [
   CicloElectivoModel,
   AsignaturaPlanModel,
@@ -29,7 +29,7 @@ const a = [
   Alumno.hasMany(Inscriptos, { foreignKey: 'alumno_id' }),
   Inscriptos.belongsTo(Alumno, { foreignKey: 'alumno_id' }),
 
-  SequelizeDB.sync(),
+  SequelizeDB.sync({force: true}),
     
 ];
 export default a;

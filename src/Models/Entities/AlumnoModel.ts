@@ -1,5 +1,5 @@
 import { DataTypes, Model } from 'sequelize';
-import { SequelizeDB } from '../Database/Sequelize.js';
+import { SequelizeDB } from '../../Database/Sequelize.js';
 
 
 export class Alumno extends Model {
@@ -20,11 +20,11 @@ export class Alumno extends Model {
 }
 
 Alumno.init({
-    id: {
-        type: DataTypes.UUIDV4,
-        primaryKey: true,
-        autoIncrement: true,
-    },
+   id: {
+  type: DataTypes.UUID,
+  defaultValue: DataTypes.UUIDV4,
+  primaryKey: true,
+},
     nombre: {
         type: DataTypes.STRING,
         allowNull: false,

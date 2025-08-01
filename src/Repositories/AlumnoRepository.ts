@@ -1,9 +1,9 @@
 import { Op } from "sequelize";
-import { Alumno } from "../Models/AlumnoModel.js";
+import { Alumno } from "../Models/Entities/AlumnoModel.js";
 import { AlumnoInterface } from "../Alumno/AlumnoInterface.js";
-import { Inscriptos } from "../Models/inscriptosModel.js";
+import { Inscriptos } from "../Models/DependentEntities/inscriptosModel.js";
 import { SequelizeDB } from "../Database/Sequelize.js"; // Importar el modelo de inscriptos si es necesario
-import { AlumnoDTO } from "../Middlewares/validationMiddleware.js";
+import { PuestoAcademicoModel } from "../Models/DependentEntities/PuestoAcademicoModel.js";
 
 export class AlumnoRepository implements AlumnoInterface {
   static instance: AlumnoRepository;
@@ -13,8 +13,7 @@ export class AlumnoRepository implements AlumnoInterface {
     }
     return AlumnoRepository.instance;
   }
-  constructor() {
-  }
+  constructor() {}
 
   async findById(id: number): Promise<Alumno | null> {
     try {
@@ -175,7 +174,7 @@ export class AlumnoRepository implements AlumnoInterface {
   async findByCarrera(carrera: string): Promise<Alumno[] | null> {
     try {
       const alumnos = await Alumno.findAll({
-       where: {
+        where: {
           carrera: {
             [Op.like]: `%${carrera.toLowerCase()}%`,
           },
@@ -197,14 +196,15 @@ export class AlumnoRepository implements AlumnoInterface {
           [Op.or]: [
             { email: alumnoData.email },
             { dni: alumnoData.dni },
-            { legajo: alumnoData.legajo },    
+            { legajo: alumnoData.legajo },
           ],
         },
       });
       if (existingAlumno) {
-        console.error("Alumno with the same email, dni or legajo already exists");
+        console.error(
+          "Alumno with the same email, dni or legajo already exists"
+        );
         return null; // O lanzar un error según tu lógica
-        
       }
       const newAlumno = await Alumno.create(alumnoData as any);
       return newAlumno as Alumno;
@@ -223,7 +223,7 @@ export class AlumnoRepository implements AlumnoInterface {
       // Luego, crea la inscripción a la asignatura
       const inscripcion = await Inscriptos.create({
         alumno_id: alumnoid,
-        carrera_id: asignatura_id, // Asegúrate de que 'asignatura' sea un ID válido
+        PuestoAcademicoid: asignatura_id, // Asegúrate de que 'asignatura' sea un ID válido
       });
 
       return { alumno: inscripcion };
@@ -245,6 +245,20 @@ export class AlumnoRepository implements AlumnoInterface {
     }
   }
 
+  async changeStatus(id: number, status: string): Promise<boolean> {
+    try {
+      const [updatedRows] = await Alumno.update(
+        { status: status },
+        {
+          where: { id },
+        }
+      );
+      return updatedRows > 0 ? true : false;
+    } catch (error) {
+      console.error("Error changing alumno status:", error);
+      throw new Error("Database error");
+    }
+  }
   /*  No se deberia eliminar un alumno, sino desactivarlo o marcarlo como eliminado
 
     delete: async (id: string) => {

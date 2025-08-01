@@ -1,5 +1,5 @@
 
-import { Alumno } from '../Models/AlumnoModel'; // Asegúrate de que la ruta sea correcta
+import { Alumno } from '../Models/Entities/AlumnoModel'; // Asegúrate de que la ruta sea correcta
 
 export interface AlumnoInterface {
   findAll(): Promise<Alumno[]>;

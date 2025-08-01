@@ -1,5 +1,5 @@
 import { DataTypes, Model } from 'sequelize';
-import { SequelizeDB } from '../Database/Sequelize.js';
+import { SequelizeDB } from '../../Database/Sequelize.js';
 
  SequelizeDB.define('Carrera_asignatura',{
     id:{
@@ -29,5 +29,5 @@ import { SequelizeDB } from '../Database/Sequelize.js';
     }
 
 });
-SequelizeDB.sync();
+
 export const C_AModel = SequelizeDB.models.Carrera_asignatura;
