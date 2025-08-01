@@ -1,4 +1,4 @@
-import type { Carrera } from './CarreraModel.js'; // Asegúrate de que la ruta sea correcta
+import type { Carrera } from '../Models/Entities/CarreraModel.js'; // Asegúrate de que la ruta sea correcta
 import { FindOptions } from 'sequelize';
 export interface CarreraInterface {
   findAll(queryOptions?: FindOptions): Promise<Carrera[]>;/* */

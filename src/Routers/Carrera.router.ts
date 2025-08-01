@@ -1,8 +1,8 @@
 // src/routes/Carrera.Router.ts
 import { Router } from 'express';
 import { CarreraController } from './Carrera.Controller.js';
-import { validate } from '../Middlewares/validateRequest';
-import { createCarreraSchema, updateCarreraSchema, carreraIdSchema } from '../Middlewares/schemaValidator';
+import { validate } from '../Middlewares/validateRequest.js';
+import { createCarreraSchema, updateCarreraSchema, carreraIdSchema } from '../Middlewares/schemaValidator.js';
 
 const router = Router();
 

@@ -1,8 +1,8 @@
 // src/services/CarreraService.ts
 
-import { CarreraModel, Carrera} from './CarreraModel.js'; // Tu modelo/interfaz Carrera
-import { CarreraInterface } from '../Carrera/Carrera.interface.js'; // Tu interfaz del repositorio
-import { CarreraRepository } from '../Carrera/Carrera.repository.js'; // Tu implementación del repositorio
+import { CarreraModel, Carrera} from '../Models/Entities/CarreraModel.js'; // Tu modelo/interfaz Carrera
+import { CarreraInterface } from '../Repositories/Carrera.interface.js'; // Tu interfaz del repositorio
+import { CarreraRepository } from '../Repositories/Carrera.repository.js'; // Tu implementación del repositorio
 import { FindOptions } from 'sequelize'; // Para el método getAllCarreras flexible
 
 

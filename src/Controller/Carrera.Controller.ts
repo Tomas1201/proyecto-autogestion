@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { CarreraRepository } from '../Carrera/Carrera.repository.js';
+import { CarreraRepository } from '../Repositories/Carrera.repository.js';
 import { CarreraService } from './Carrera.Services.js';
 
 const CarreraServices = new CarreraService();

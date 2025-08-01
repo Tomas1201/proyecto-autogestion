@@ -1,4 +1,4 @@
-import {CarreraModel} from '../Carrera/CarreraModel.js';
+import {CarreraModel} from '../Entities/CarreraModel.js';
 import { AsignaturaModel } from '../Asignatura/Asignatura.Model.js';
 //import {carrera_asignatura_model} from '../Carrera/Index.js';
 

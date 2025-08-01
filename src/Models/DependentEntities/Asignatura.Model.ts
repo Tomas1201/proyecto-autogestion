@@ -1,8 +1,8 @@
 import {  DataTypes, Model } from 'sequelize';
 
-import {CarreraModel} from '../Carrera/CarreraModel.js'; // ✅ Usa import default si Carrera es exportado con `export default`
+import {CarreraModel} from '../Entities/CarreraModel.js'; // ✅ Usa import default si Carrera es exportado con `export default`
 
-import {sequelizeDB} from '../Database/Sequelize.js'; 
+import {sequelizeDB} from '../../Database/Sequelize.js'; 
 export class Asignatura extends Model {
     public id!: string;
   public nombre!: string;
@@ -20,10 +20,11 @@ export class Asignatura extends Model {
 }
  
 
-// ✅ Define el modelo correctamente
+
 sequelizeDB.define('Asignatura', {//terminarr
   id: {
-    type: DataTypes.UUIDV4,
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4, 
     primaryKey: true,
     autoIncrement: true,
   },

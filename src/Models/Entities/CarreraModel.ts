@@ -1,6 +1,6 @@
 import { DataTypes, Model } from 'sequelize';
 
-import {sequelizeDB} from '../Database/Sequelize.js'; 
+import {sequelizeDB} from '../../Database/Sequelize.js'; 
 
 export class Carrera extends Model {
     public id!: string;
@@ -16,7 +16,8 @@ export class Carrera extends Model {
 
  sequelizeDB.define('Carrera', {
   id: {
-        type: DataTypes.UUIDV4,
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
         autoIncrement: true,
     },
