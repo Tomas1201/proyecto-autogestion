@@ -1,6 +1,6 @@
 import { Op } from "sequelize";
 import { Alumno } from "../Models/Entities/AlumnoModel.js";
-import { AlumnoInterface } from "../Alumno/AlumnoInterface.js";
+import { AlumnoInterface } from "./AlumnoInterface.js";
 import { Inscriptos } from "../Models/DependentEntities/inscriptosModel.js";
 import { SequelizeDB } from "../Database/Sequelize.js"; // Importar el modelo de inscriptos si es necesario
 import { PuestoAcademicoModel } from "../Models/DependentEntities/PuestoAcademicoModel.js";
