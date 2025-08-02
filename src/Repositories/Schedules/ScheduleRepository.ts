@@ -1,6 +1,6 @@
 /*import { Horarios } from './Horario.Model.js';
-import { Asignatura } from '../Asignatura/Asignatura.Model.js';
-import { Carrera } from '../Carrera/CarreraModel.js';
+import { Subject } from '../Subject/Subject.Model.js';
+import { Career } from '../Career/CareerModel.js';
 import { HorariosInterface } from './Horario.interface.js';
 import { Op } from 'sequelize';
 /*
@@ -13,16 +13,16 @@ export const HorariosRepository: HorariosInterface = {
     return await Horarios.findByPk(id);
   },
 
-  async findByCarrera(carreras: Carrera[]) {
-    const carreraIds = carreras.map((c) => c.id);
+  async findByCareer(Careers: Career[]) {
+    const CareerIds = Careers.map((c) => c.id);
 
     return await Horarios.findAll({
       include: [
         {
-          model: Asignatura,
+          model: Subject,
           where: {
-            id_carrera: {
-              [Op.in]: carreraIds,
+            id_Career: {
+              [Op.in]: CareerIds,
             },
           },
         },
@@ -30,13 +30,13 @@ export const HorariosRepository: HorariosInterface = {
     });
   },
 
-  async findByAsignature(asignaturas: Asignatura[]) {
-    const asignaturaIds = asignaturas.map((a) => a.id);
+  async findByAsignature(Subjects: Subject[]) {
+    const SubjectIds = Subjects.map((a) => a.id);
 
     return await Horarios.findAll({
       where: {
-        id_asignatura: {
-          [Op.in]: asignaturaIds,
+        id_Subject: {
+          [Op.in]: SubjectIds,
         },
       },
     });

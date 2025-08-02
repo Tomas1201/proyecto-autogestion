@@ -3,34 +3,34 @@ import * as z from 'zod';
 
 
 
-export const duracionSchema = z.number()
-  .int({ message: "La duración debe ser un número entero de años/semestres." })
-  .min(1, { message: "La duración mínima de una carrera es de 1 unidad (año o semestre)." })
-  .max(10, { message: "La duración máxima de una carrera no puede exceder las 10 unidades." })
-  .positive({ message: "La duración debe ser un número positivo." });
+export const durationSchema = z.number()
+  .int({ message: "The duration must be a whole number of years/semesters." })
+  .min(1, { message: "The minimum duration of a Career is 1 unit (year or semester)." })
+  .max(10, { message: "The maximum duration of a Career cannot exceed 10 units.." })
+  .positive({ message: "The duration must be a positive number." });
 
 
-export const createCarreraSchema = z.object({
-  nombre: z.string()
-    .min(50, { message: "El nombre de la carrera debe tener al menos 50 caracteres." })
-    .max(255, { message: "El nombre de la carrera no puede exceder los 255 caracteres." }),
-  cant_alumno: z.number()
-    .int({ message: "La cantidad de alumnos debe ser un número entero." })
-    .min(0, { message: "La cantidad de alumnos no puede ser negativa." }),
-  descripcion: z.string()
-    .min(10, { message: "La descripción de la carrera debe tener al menos 10 caracteres." })
-    .max(1000, { message: "La descripción de la carrera no puede exceder los 1000 caracteres." }),
-  duracion: duracionSchema, // Reutilizamos el esquema de duración
+export const createCareerSchema = z.object({
+  name: z.string()
+    .min(50, { message: "The name of the Career must have at least 50 characters." })
+    .max(255, { message: "The Career name cannot exceed 255 characters.." }),
+  numberStudents: z.number()
+    .int({ message: "The number of students must be a Interger number." })
+    .min(0, { message: "The number of students cannot be negative." }),
+  description: z.string()
+    .min(10, { message: "The Career description must be at least 10 characters." })
+    .max(1000, { message: "The Career description cannot exceed 1000 characters." }),
+  duration: durationSchema, // Reutilizamos el esquema de duración
 });
 
 
-export const updateCarreraSchema = createCarreraSchema.partial();
+export const UpdateCareerSchema = createCareerSchema.partial();
 
-export const carreraIdSchema = z.object({
-  id: z.uuid({ message: "El ID de la carrera debe ser un UUID válido." }),
+export const CareerIdSchema = z.object({
+  id: z.uuid({ message: "The Career ID must be a valid UUID." }),
 });
 
 
-export type CreateCarreraDto = z.infer<typeof createCarreraSchema>;
-export type UpdateCarreraDto = z.infer<typeof updateCarreraSchema>;
-export type CarreraIdDto = z.infer<typeof carreraIdSchema>;
+export type CreateCareerDto = z.infer<typeof createCareerSchema>;
+export type UpdateCareerDto = z.infer<typeof UpdateCareerSchema>;
+export type CareerIdDto = z.infer<typeof CareerIdSchema>;

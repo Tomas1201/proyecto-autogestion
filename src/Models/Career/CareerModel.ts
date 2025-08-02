@@ -2,50 +2,50 @@ import { DataTypes, Model } from 'sequelize';
 
 import {sequelizeDB} from '../../Database/Sequelize.js'; 
 
-export class Carrera extends Model {
+export class Career extends Model {
     public id!: string;
-  public nombre!: string;
-  public cant_alumno!: number;
-  public descripcion!: string;
-  public duracion!: number;
+  public name!: string;
+  public numberStudents!: number;
+  public description!: string;
+  public duration!: number;
 
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 
 }
 
- sequelizeDB.define('Carrera', {
+ sequelizeDB.define('Career', {
   id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
         autoIncrement: true,
     },
-    nombre: {
+    name: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    cant_alumno: {
+    numberStudents: {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
-    descripcion: {
+    description: {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,
     },
-    duracion: {
+    duration: {
         type: DataTypes.INTEGER,/**NO SE PUEDE USAR VARCHAR? */
         allowNull: false,
     },
 
 }, { // Conexión a la base de datos
-  tableName: 'Carrera',
-  modelName: 'Carrera',
+  tableName: 'Career',
+  modelName: 'Career',
   timestamps: true, // Esto añade createdAt y updatedAt automáticamente
 });
 sequelizeDB.sync();
-export const CarreraModel = sequelizeDB.models.Carrera;
+export const CareerModel = sequelizeDB.models.Career;
 
 
 

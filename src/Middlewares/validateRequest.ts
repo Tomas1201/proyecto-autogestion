@@ -29,12 +29,12 @@ export const validate = (schemas: Schemas) => {
         }));
 
         res.status(400).json({
-          message: 'Error de validación',
+          message: 'Validation Error',
           errors,
         });
       } else {
-        console.error("Error inesperado en validación:", error);
-        res.status(500).json({ message: 'Error interno del servidor' });
+        console.error("Unexpected error in validation:", error);
+        res.status(500).json({ message: 'Internal Server Error' });
       }
     }
   };
