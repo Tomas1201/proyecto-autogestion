@@ -1,12 +1,14 @@
-import { get } from 'http';
 import {AlumnoRepository} from '../Repositories/AlumnoRepository.js';   
-import { Alumno } from '../Models/AlumnoModel.js'; // Assuming Alumno is a type or interface representing the model
+import { Alumno } from '../Models/Entities/AlumnoModel.js'; 
+import { AlumnoDTO } from '../Middlewares/validationMiddleware.js';
+
+const alumnoRepository = AlumnoRepository.getInstance();
 
 export const AlumnoService = {
 
-  getById: async (id: string) => {
+  getById: async (id: number) => {
     try {
-      const alumno = await AlumnoRepository.findByPk(id);
+      const alumno = await alumnoRepository.findById(id);
       return alumno;
     } catch (error) {
       console.error('Error fetching alumno by ID:', error);
@@ -14,47 +16,82 @@ export const AlumnoService = {
     }
 
     },
+
+
   getAll: async () => {
     try {
-      const alumnos = await AlumnoRepository.findAll();
+      const alumnos = await alumnoRepository.findAll();
       return alumnos;
     } catch (error) {
       console.error('Error fetching all alumnos:', error);
       throw new Error('Database error');
     }
   },
+
+
   getByName: async (name: string) => {
     try {
-      const alumnos = await AlumnoRepository.findByName(name);
+      const alumnos = await alumnoRepository.findByName(name);
       return alumnos;
     } catch (error) {
       console.error('Error fetching alumno by name:', error);
       throw new Error('Database error');
     }
-  }
-  ,
+  },
+
+
   getByApellido: async (apellido: string) => {
     try {
-      const alumnos = await AlumnoRepository.findByApellido(apellido);
+      const alumnos = await alumnoRepository.findByApellido(apellido);
       return alumnos;
     } catch (error) {
       console.error('Error fetching alumno by apellido:', error);
       throw new Error('Database error');}
-    }
-  ,
+    },
  
+    getByAsignatura: async (asignatura: string) => {
+      try{
+        const alumnos = await alumnoRepository.findByAsignatura(asignatura);
+        return alumnos;
+      }catch (error){
+        console.error('Error fetching alumno by apellido:', error);
+      throw new Error('Database error');}
+      
+    },
+
+ getByCarrera: async (carrera: string) => {
+      try{
+        const alumnos = await alumnoRepository.findByCarrera(carrera);
+        return alumnos;
+      }catch (error){
+        console.error('Error fetching alumno by apellido:', error);
+      throw new Error('Database error');}
+      
+    },
+
   create: async (alumnoData: Alumno) => {
     try {
-      const newAlumno = await AlumnoRepository.create(alumnoData);
+      const newAlumno = await alumnoRepository.create(alumnoData);
       return newAlumno;
     } catch (error) {
       console.error('Error creating alumno:', error);
       throw new Error('Database error');
     }
   },
-  update: async (id: string, alumnoData: Alumno) => {
+
+  createAsignaturainscripcion: async (alumnoid: number, asignaturaid: number) => {
     try {
-      const updated = await AlumnoRepository.update(id, alumnoData);
+      const newInscripcion = await alumnoRepository.createAsignaturaInscripcion(alumnoid, asignaturaid);
+      return newInscripcion;
+    }catch (error) {
+      console.error('Error creating alumno inscripcion:', error);
+      throw new Error('Database error');
+    }
+  },
+
+  update: async (id: number, alumnoData: Alumno) => {
+    try {
+      const updated = await alumnoRepository.update(id, alumnoData);
       if (!updated) {
         throw new Error('Alumno not found or not updated');
       }
@@ -64,6 +101,21 @@ export const AlumnoService = {
       throw new Error('Database error');
     }
   },
+
+  changeStatus: async (id: number, status: string) => {
+    try {
+      const updated = await alumnoRepository.changeStatus(id, status);
+      if (!updated) { 
+        throw new Error('Alumno not found or not updated');
+      }
+      return updated;
+    } catch (error) {
+      console.error('Error changing alumno status:', error);
+        return;
+      }
+    },
+
+  /*
   delete: async (id: string) => {
     try {
       const deleted = await AlumnoRepository.delete(id);
@@ -76,4 +128,6 @@ export const AlumnoService = {
       throw new Error('Database error');
     }
   }
+  */  
+ 
 }

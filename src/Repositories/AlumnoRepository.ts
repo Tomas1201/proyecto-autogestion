@@ -1,94 +1,269 @@
-import { Op } from "../Database/Sequelize.js";
-import { AlumnoModel } from "../Models/AlumnoModel.js";
-import { Alumno } from "../Models/AlumnoModel"; // Assuming Alumno is a type or interface representing the model
-export const AlumnoRepository = {  
-    
-    
-    findByPk: async (id: string) => {
-        try {
-            const alumno = await AlumnoModel.findByPk(id);
-            return alumno;
-        } catch (error) {
-            console.error('Error fetching alumno by ID:', error);
-            throw new Error('Database error');
-        }
-    },
-  
+import { Op } from "sequelize";
+import { Alumno } from "../Models/Entities/AlumnoModel.js";
+import { AlumnoInterface } from "./AlumnoInterface.js";
+import { Inscriptos } from "../Models/DependentEntities/inscriptosModel.js";
+import { SequelizeDB } from "../Database/Sequelize.js"; // Importar el modelo de inscriptos si es necesario
+import { PuestoAcademicoModel } from "../Models/DependentEntities/PuestoAcademicoModel.js";
 
-    findAll: async () => {
-        try {
-            const alumnos = await AlumnoModel.findAll();
-            return alumnos;
-        } catch (error) {
-            console.error('Error fetching all alumnos:', error);
-            throw new Error('Database error');
-        }      
-    },
-   findByName: async (name: string) => {
-    try {
-        if (!name || typeof name !== 'string') {
-            throw new Error('Invalid name parameter');
-        }
-        const query = {
-            where: {
-                nombre: {
-                    [Op.like]: `%${name.toLowerCase()}%`
-                }
-            }
-        };
-        
-        const alumnos = await AlumnoModel.findAll(query);
-                
-        return alumnos;
-    } catch (error) {
-        console.error('Error fetching alumno by name:', error);
-        throw error;
+export class AlumnoRepository implements AlumnoInterface {
+  static instance: AlumnoRepository;
+  static getInstance(): AlumnoRepository {
+    if (!AlumnoRepository.instance) {
+      AlumnoRepository.instance = new AlumnoRepository();
     }
-},
-findByApellido: async (apellido: string) => {
+    return AlumnoRepository.instance;
+  }
+  constructor() {}
+
+  async findById(id: number): Promise<Alumno | null> {
     try {
-        if (!apellido || typeof apellido !== 'string') {
-            throw new Error('Invalid apellido parameter');
-        }
-        const query = {
-            where: {
-                apellido: {
-                    [Op.like]: `%${apellido.toLowerCase()}%`
-                }
-            }
-        };
-        
-        const alumnos = await AlumnoModel.findAll(query);
-                
-        return alumnos;
+      const alumno = await Alumno.findByPk(id);
+      return alumno ? (alumno as Alumno) : null;
     } catch (error) {
-        console.error('Error fetching alumno by apellido:', error);
+      console.error("Error fetching alumno by ID:", error);
+      throw new Error("Database error");
     }
-}
-,
-    create: async (alumnoData: Alumno) => {
-        try {
-            const newAlumno = await AlumnoModel.create(alumnoData as any);
-            return newAlumno;
-        } catch (error) {
-            console.error('Error creating alumno:', error);
-            throw new Error('Database error');
+  }
+
+  async findAll(): Promise<Alumno[]> {
+    try {
+      const alumnos = await Alumno.findAll();
+      return alumnos ? (alumnos as Alumno[]) : [];
+      // condicion ? true : false
+    } catch (error) {
+      console.error("Error fetching all alumnos:", error);
+      throw new Error("Database error");
+    }
+  }
+
+  async findByName(name: string): Promise<Alumno[] | null> {
+    try {
+      if (!name || typeof name !== "string") {
+        throw new Error("Invalid name parameter");
+      }
+      const query = {
+        where: {
+          nombre: {
+            [Op.like]: `%${name.toLowerCase()}%`,
+          },
+        },
+      };
+
+      const alumnos = await Alumno.findAll(query);
+
+      return alumnos ? (alumnos as Alumno[]) : null;
+    } catch (error) {
+      console.error("Error fetching alumno by name:", error);
+      throw error;
+    }
+  }
+
+  // Devuelve un alumno por apellido
+
+  async findByApellido(apellido: string): Promise<Alumno[] | null> {
+    try {
+      if (!apellido || typeof apellido !== "string") {
+        throw new Error("Invalid apellido parameter");
+      }
+      const query = {
+        where: {
+          apellido: {
+            [Op.like]: `%${apellido.toLowerCase()}%`,
+          },
+        },
+      };
+
+      const alumnos = await Alumno.findAll(query);
+
+      return alumnos ? (alumnos as Alumno[]) : null;
+    } catch (error) {
+      console.error("Error fetching alumno by apellido:", error);
+      return null;
+    }
+  }
+
+  async findByAsignatura(asignatura: string): Promise<Alumno[] | null> {
+    try {
+      const alumnos = await Alumno.findAll({
+        include: [
+          {
+            model: SequelizeDB.models.inscriptos,
+            as: "inscripcionesCarrera",
+            attributes: [],
+            required: true,
+            include: [
+              {
+                model: SequelizeDB.models.asignatura, // Ajusta según tu estructura real
+                as: "asignatura",
+                attributes: [],
+                where: {
+                  nombre: {
+                    [Op.iLike]: `%${asignatura}%`,
+                  },
+                },
+                required: true,
+              },
+            ],
+          },
+        ],
+      });
+
+      return alumnos ? (alumnos as Alumno[]) : null;
+    } catch (error) {
+      console.error("Error fetching alumnos by asignatura:", error);
+      throw error;
+    }
+  }
+
+  async findByLegajo(legajo: number): Promise<Alumno | null> {
+    try {
+      const alumnos = await Alumno.findAll({
+        where: { legajo: legajo },
+      });
+
+      return alumnos.length > 0 ? (alumnos[0] as Alumno) : null;
+    } catch (error) {
+      console.error("Error fetching alumnos by asignatura:", error);
+      throw error;
+    }
+  }
+
+  async findByDni(DNI: number): Promise<Alumno | null> {
+    try {
+      const alumnos = await Alumno.findAll({
+        where: { dni: DNI },
+      });
+      return alumnos.length > 0 ? (alumnos[0] as Alumno) : null;
+    } catch (error) {
+      console.error("Error fetching alumnos by asignatura:", error);
+      throw error;
+    }
+  }
+
+  async findByEmail(Email: string): Promise<Alumno | null> {
+    try {
+      const alumnos = await Alumno.findAll({
+        where: { email: Email },
+      });
+      return alumnos.length > 0 ? (alumnos[0] as Alumno) : null;
+    } catch (error) {
+      console.error("Error fetching alumnos by asignatura:", error);
+      throw error;
+    }
+  }
+
+  async findByStatus(status: string): Promise<Alumno[] | null> {
+    try {
+      const query = {
+        where: {
+          status: {
+            [Op.eq]: status,
+          },
+        },
+      };
+
+      const alumnos = await Alumno.findAll(query);
+
+      return alumnos ? (alumnos as Alumno[]) : null;
+    } catch (error) {
+      console.error("Error fetching alumnos by status:", error);
+      throw error;
+    }
+  }
+
+  async findByCarrera(carrera: string): Promise<Alumno[] | null> {
+    try {
+      const alumnos = await Alumno.findAll({
+        where: {
+          carrera: {
+            [Op.like]: `%${carrera.toLowerCase()}%`,
+          },
+        },
+      });
+
+      return alumnos ? (alumnos as Alumno[]) : null;
+    } catch (error) {
+      console.error("Error fetching alumnos by asignatura:", error);
+      throw error;
+    }
+  }
+
+  // Crea un nuevo alumno
+  async create(alumnoData: Alumno): Promise<Alumno | null> {
+    try {
+      const existingAlumno = await Alumno.findOne({
+        where: {
+          [Op.or]: [
+            { email: alumnoData.email },
+            { dni: alumnoData.dni },
+            { legajo: alumnoData.legajo },
+          ],
+        },
+      });
+      if (existingAlumno) {
+        console.error(
+          "Alumno with the same email, dni or legajo already exists"
+        );
+        return null; // O lanzar un error según tu lógica
+      }
+      const newAlumno = await Alumno.create(alumnoData as any);
+      return newAlumno as Alumno;
+    } catch (error) {
+      console.error("Error creating alumno:", error);
+      return null; // O puedes lanzar un error según tu lógica
+      throw new Error("Database error");
+    }
+  }
+
+  createAsignaturaInscripcion = async (
+    alumnoid: number,
+    asignatura_id: number
+  ): Promise<any> => {
+    try {
+      // Luego, crea la inscripción a la asignatura
+      const inscripcion = await Inscriptos.create({
+        alumno_id: alumnoid,
+        PuestoAcademicoid: asignatura_id, // Asegúrate de que 'asignatura' sea un ID válido
+      });
+
+      return { alumno: inscripcion };
+    } catch (error) {
+      console.error("Error creating alumno and asignatura inscripcion:", error);
+      throw new Error("Database error");
+    }
+  };
+  // Actualiza un alumno por ID
+  async update(id: number, alumnoData: Partial<Alumno>): Promise<boolean> {
+    try {
+      const [updatedRows] = await Alumno.update(alumnoData, {
+        where: { id },
+      });
+      return updatedRows > 0 ? true : false;
+    } catch (error) {
+      console.error("Error updating alumno:", error);
+      throw new Error("Database error");
+    }
+  }
+
+  async changeStatus(id: number, status: string): Promise<boolean> {
+    try {
+      const [updatedRows] = await Alumno.update(
+        { status: status },
+        {
+          where: { id },
         }
-    },
-    update: async (id: string, alumnoData: Alumno) => {
-        try {
-            const [updatedRows] = await AlumnoModel.update(alumnoData, {
-                where: { id }
-            });
-            return updatedRows > 0;
-        } catch (error) {
-            console.error('Error updating alumno:', error);
-            throw new Error('Database error');
-        }
-    },
+      );
+      return updatedRows > 0 ? true : false;
+    } catch (error) {
+      console.error("Error changing alumno status:", error);
+      throw new Error("Database error");
+    }
+  }
+  /*  No se deberia eliminar un alumno, sino desactivarlo o marcarlo como eliminado
+
     delete: async (id: string) => {
         try {
-            const deletedRows = await AlumnoModel.destroy({
+            const deletedRows = await Alumno.destroy({
                 where: { id }
             });
             return deletedRows > 0;
@@ -97,6 +272,5 @@ findByApellido: async (apellido: string) => {
             throw new Error('Database error');
         }
     },
-
-
+   */
 }
