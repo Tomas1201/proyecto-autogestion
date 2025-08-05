@@ -4,7 +4,7 @@ import { DataTypes, Model } from 'sequelize';
 
 
 
-export class Carrera extends Model {
+export class Career extends Model {
     public id!: string; // UUIDV4
     public nombre!: string;
     public descripcion!: string;
@@ -18,7 +18,7 @@ export class Carrera extends Model {
     public readonly updatedAt!: Date;
 
 }
-Carrera.init({
+Career.init({
     
     id:{
     type: DataTypes.UUID,

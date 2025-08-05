@@ -1,35 +1,35 @@
-import { Carrera } from '../Models/DependentEntities/CarrerasModel.js';
+import { Career } from '../Models/DependentEntities/CareerModel.js';
 import { C_AModel } from '../Models/MiddleTables/CarreraAsignaturaModel.js'; 
-import { Asignatura } from '../Models/Entities/AsignaturaModel.js'; 
-import { Inscriptos } from '../Models/DependentEntities/inscriptosModel.js';
-import { Alumno} from '../Models/Entities/AlumnoModel.js';
-import {CicloElectivoModel} from '../Models/Entities/CicloElectivoModel.js';
+import { Subject } from '../Models/Entities/SubjectModel.js'; 
+import { Registration } from '../Models/DependentEntities/RegistrationModel.js';
+import { Student} from '../Models/Entities/StudentModel.js';
+import {CicloElectivoModel} from '../Shared/Models/Domain/CicloElectivoModel.js';
 import { SequelizeDB } from './Sequelize.js';
-import {AsignaturaPlanModel} from '../Models/DependentEntities/AsignaturaPlanModel.js';
-import { PlanCarreraModel } from '../Models/DependentEntities/PlanCarreraModel.js';
-import { PuestoAcademicoModel } from '../Models/DependentEntities/PuestoAcademicoModel.js';
+import {SubjectPlanModel} from '../Models/DependentEntities/SubjectPlanModel.js';
+import { CareerPlanModel } from '../Shared/Models/Domain/CareerPlanModel.js';
+import { AcademicPositionModelModel } from '../Models/DependentEntities/AcademicPositionModel.js';
 import { AlumnoCarrera } from '../Models/MiddleTables/AlumnoCarreraModel.js';
 
 import { Professor } from '../Models/Entities/ProfessorModel.js';
 import { Horario } from '../Models/Entities/HorarioModel.js';
 const a = [
   CicloElectivoModel,
-  AsignaturaPlanModel,
-  PlanCarreraModel,
-  PuestoAcademicoModel,
+  AcademicPositionModelModel,
+  CareerPlanModel,
+  SubjectPlanModel,
   Professor,
   Horario,
-  Alumno.belongsToMany(Carrera, { through: AlumnoCarrera, foreignKey: 'alumnoId' }),
-  Carrera.belongsToMany(Alumno, { through: AlumnoCarrera, foreignKey: 'carreraId' }),
-  Asignatura.belongsToMany(Carrera, { through: C_AModel, foreignKey: 'asignatura_id' }),
-  Carrera.belongsToMany(Asignatura, { through: C_AModel, foreignKey: 'carrera_id' }),
+  Student.belongsToMany(Career, { through: AlumnoCarrera, foreignKey: 'alumnoId' }),
+  Career.belongsToMany(Student, { through: AlumnoCarrera, foreignKey: 'carreraId' }),
+  Subject.belongsToMany(Career, { through: C_AModel, foreignKey: 'asignatura_id' }),
+  Career.belongsToMany(Subject, { through: C_AModel, foreignKey: 'carrera_id' }),
 
  // Asignatura.hasMany(Inscriptos, { foreignKey: 'asignatura_id' }),
  // Inscriptos.belongsTo(Asignatura, { foreignKey: 'asignatura_id' }),
-  Alumno.hasMany(Inscriptos, { foreignKey: 'alumno_id' }),
-  Inscriptos.belongsTo(Alumno, { foreignKey: 'alumno_id' }),
+  Student.hasMany(Registration, { foreignKey: 'alumno_id' }),
+  Registration.belongsTo(Student, { foreignKey: 'alumno_id' }),
 
-  SequelizeDB.sync({force: true}),
+  SequelizeDB.sync(),
     
 ];
 export default a;

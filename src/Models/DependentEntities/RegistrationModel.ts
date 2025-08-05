@@ -2,43 +2,40 @@ import { SequelizeDB } from "../../Database/Sequelize.js";
 import { DataTypes, Model } from "sequelize";
 
 
-export class Inscriptos extends Model {
+export class Registration extends Model {
     public id!: string; // UUIDV4
-    public alumno_id!: number;
-    public fecha_inscripcion!: Date;
-    public puestoacademico_id!: number;
+    public StudentId!: number;
+    public AcademicPositionId!: number;
     
 
     // timestamps!
-    public readonly createdAt!: Date;
-    public readonly updatedAt!: Date;
+    public readonly CreatedAt!: Date;
+    public readonly UpdatedAt!: Date;
 }
 
-Inscriptos.init({
-    id: {
+Registration.init({
+    Id: {
         type: DataTypes.UUID,
   defaultValue: DataTypes.UUIDV4,
   primaryKey: true,
     },
-    alumno_id: {
+    StudentId: {
         type: DataTypes.UUID,
         allowNull: false,
         references: {
-            model: 'Alumnos',
-            key: 'id'
+            model: 'Student',
+            key: 'Id'
         }
     },
-     puestoacademico_id: {
+     AcademicPositionId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'PuestoAcademico',
-            key: 'id'
+            model: 'AcademicPosition',
+            key: 'Id'
         }
     }
     },{
     sequelize: SequelizeDB,
-    tableName: 'inscriptos',
-    timestamps: false,
-      
+    timestamps: true,
     });

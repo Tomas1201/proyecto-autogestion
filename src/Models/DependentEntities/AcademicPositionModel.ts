@@ -1,28 +1,28 @@
 import { DataTypes, Model } from "sequelize";
 import { SequelizeDB } from "../../Database/Sequelize.js";
 
-export class PuestoAcademicoModel extends Model {
-  public id!: number;
-  public planCarreraId!: number;
-  public asignaturaId!: number;
-  public anio!: number;
-  public cuatrimestre!: number;
-  public CicloElectivoId!: number;
-  public profesorId!: number;
+export class AcademicPositionModelModel extends Model {
+  public Id!: number;
+  public CareerPlanId!: number;
+  public SubjectId!: number;
+  public year!: number;
+  public FourMonthPeriod!: number;
+  public ElectiveCycleId!: number;
+  public ProfessorId!: number;
 
   // timestamps!
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
 
-PuestoAcademicoModel.init(
+AcademicPositionModelModel.init(
   {
-    id: {
+    Id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    planCarreraId: {
+    CareerPlanId: {
       type: DataTypes.UUID,
       allowNull: false,
       references: {

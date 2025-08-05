@@ -2,15 +2,15 @@ import { DataTypes, Model } from 'sequelize';
 import { SequelizeDB } from '../../Database/Sequelize.js';
 
 
-export class Alumno extends Model {
+export class Student extends Model {
     public id!: number;
-    public nombre!: string;
-    public apellido!: string;
-    public email!: string;
+    public name!: string;
+    public LastName!: string;
+    public Email!: string;
     public legajo!: number;
     public status!: string;
     public dni!: number;
-    public carrera!: string[];
+    public Career!: string[];
     
 
     // timestamps!
@@ -19,21 +19,21 @@ export class Alumno extends Model {
 
 }
 
-Alumno.init({
+Student.init({
    id: {
   type: DataTypes.UUID,
   defaultValue: DataTypes.UUIDV4,
   primaryKey: true,
 },
-    nombre: {
+    Name: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    apellido: {
+    LastName: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    email: {
+    Email: {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,

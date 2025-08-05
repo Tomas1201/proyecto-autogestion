@@ -1,8 +1,8 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import AlumnoRouter from './Routers/AlumnoRouter.js';
+import AlumnoRouter from './Features/Student/StudentCRUD/StudentCRUDRouter.js';
 
-//import {Normalizador} from './Utils/Sanitizador.js';
+
 import { SequelizeDB } from './Database/Sequelize.js';
 import a from './Database/Relaciones.js'; // Importar las relaciones
 dotenv.config();

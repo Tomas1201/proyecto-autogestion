@@ -1,11 +1,11 @@
 import { DataTypes, Model, Sequelize } from "sequelize";
-import { SequelizeDB } from '../../Database/Sequelize.js';
+import { SequelizeDB } from '../../../Database/Sequelize.js';
 
 /*
 Modelo que representa el plan de carrera, que vincula una carrera con un ciclo electivo.
 Cada plan de carrera puede tener múltiples asignaturas y está asociado a un ciclo electivo específico.
 */
-export class PlanCarreraModel extends Model {
+export class CareerPlanModel extends Model {
     public id!: string; // UUIDV4
     public carreraId!: number;
     public CicloElectivoId!: number;
@@ -16,7 +16,7 @@ export class PlanCarreraModel extends Model {
     public readonly updatedAt!: Date;
 }
 
-SequelizeDB.define('PlanCarrera', {
+CareerPlanModel.init( {
     id: {
        type: DataTypes.UUID,
   defaultValue: DataTypes.UUIDV4,
@@ -39,7 +39,7 @@ SequelizeDB.define('PlanCarrera', {
         }
     },
 }, {
-    tableName: 'PlanCarrera',
+    sequelize: SequelizeDB,
     timestamps: true, 
 });
 

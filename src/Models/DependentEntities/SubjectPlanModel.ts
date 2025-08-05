@@ -1,7 +1,7 @@
 import { DataTypes, Model } from "sequelize";
 import { SequelizeDB } from '../../Database/Sequelize.js';
 
-export class AsignaturaPlanModel extends Model {
+export class SubjectPlanModel extends Model {
     public id!: number;
     public planCarreraId!: number;
     public asignaturaId!: number;
@@ -15,7 +15,7 @@ export class AsignaturaPlanModel extends Model {
     public readonly updatedAt!: Date;
 }
 
-AsignaturaPlanModel.init({
+    SubjectPlanModel.init({
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,

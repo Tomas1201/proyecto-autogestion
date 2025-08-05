@@ -1,25 +1,25 @@
-import { AlumnoService } from "../Services/AlumnoService.js";
+import { StudentService } from "./StudentCRUDService.js";
 import { Request, Response, NextFunction } from "express";
 
-export const AlumnoController = {
-  getAlumno: async (req: Request, res: Response, next: NextFunction) => {
-    const { id } = req.params;
+export const StudentController = {
+  getStudent: async (req: Request, res: Response, next: NextFunction) => {
+    const { Id } = req.params;
 
     try {
-      if (!id || isNaN(Number(id))) {
+      if (!Id || isNaN(Number(Id))) {
         res
           .status(400)
           .json({ status: 400, message: "Invalid ID format", ERROR_CODE: 400 });
         return;
       }
-      const alumno = await AlumnoService.getById(Number(id));
-      if (!alumno) {
+      const Student = await StudentService.getById(Number(Id));
+      if (!Student) {
         res
           .status(404)
           .json({ status: 404, message: "Alumno not found", ERROR_CODE: 404 });
         return;
       }
-      res.status(200).json({ status: "OK", data: alumno });
+      res.status(200).json({ status: "OK", data: Student });
       return;
     } catch (error) {
       console.error("Error buscando alumno:", error);
@@ -28,10 +28,10 @@ export const AlumnoController = {
     }
   },
 
-  getAllAlumnos: async (req: Request, res: Response) => {
+  getAllStudents: async (req: Request, res: Response) => {
     try {
-      const alumnos = await AlumnoService.getAll();
-      res.status(200).json({ status: "OK", data: alumnos });
+      const Students = await StudentService.getAll();
+      res.status(200).json({ status: "OK", data: Students });
     } catch (error) {
       console.error("Error buscando alumnos:", error);
       res
@@ -40,19 +40,19 @@ export const AlumnoController = {
     }
   },
 
-  getAlumnoByName: async (req: Request, res: Response) => {
+  getStudentsByName: async (req: Request, res: Response) => {
     const { name } = req.params;
 
     try {
-      const alumnos = await AlumnoService.getByName(name);
+      const Students = await StudentService.getByName(name);
 
-      if (!alumnos || alumnos.length === 0) {
+      if (!Students || Students.length === 0) {
         res
           .status(404)
           .json({ status: 404, message: "No alumnos found with that name" });
         return;
       }
-      res.status(200).json({ status: 200, data: alumnos });
+      res.status(200).json({ status: 200, data: Students });
       return;
     } catch (error) {
       console.error("Error fetching alumno by name:", error);
@@ -61,13 +61,13 @@ export const AlumnoController = {
     }
   },
 
-  getAlumnoByApellido: async (req: Request, res: Response) => {
-    const { apellido } = req.params;
+  getStudentsByLastName: async (req: Request, res: Response) => {
+    const { LastName } = req.params;
 
     try {
-      const alumnos = await AlumnoService.getByApellido(apellido);
+      const Students = await StudentService.getByLastName(LastName);
 
-      if (!alumnos || alumnos.length === 0) {
+      if (!Students || Students.length === 0) {
         res
           .status(404)
           .json({
@@ -76,19 +76,19 @@ export const AlumnoController = {
           });
         return;
       }
-      res.status(200).json({ status: 200, data: alumnos });
+      res.status(200).json({ status: 200, data: Students });
       return;
     } catch (error) {
-      console.error("Error fetching alumno by apellido:", error);
+      console.error("Error fetching student by last name:", error);
       res.status(500).json({ status: 500, message: "Internal server error" });
       return;
     }
   },
 
-  getByAsignatura: async (req: Request, res: Response) => {
+  getBySubject: async (req: Request, res: Response) => {
     const { asignatura } = req.params;
     try {
-      const alumnos = await AlumnoService.getByAsignatura(asignatura);
+      const alumnos = await StudentService.getBySubject(asignatura);
       if (!alumnos || alumnos.length === 0) {
         res
           .status(404)
@@ -107,10 +107,10 @@ export const AlumnoController = {
     }
   },
 
-  getByCarrera: async (req: Request, res: Response) => {
+  getByCareer: async (req: Request, res: Response) => {
     const { carrera } = req.params;
     try {
-      const alumnos = await AlumnoService.getByCarrera(carrera);
+      const alumnos = await StudentService.getByCareer(carrera);
       if (!alumnos || alumnos.length === 0) {
         res
           .status(404)
@@ -129,10 +129,10 @@ export const AlumnoController = {
     }
   },
 
-  createAlumno: async (req: Request, res: Response) => {
+  CreateStudent: async (req: Request, res: Response) => {
     const alumno = req.body;
     try {
-      const newAlumno = await AlumnoService.create(alumno);
+      const newAlumno = await StudentService.Create(alumno);
       if (!newAlumno) {
         res
           .status(400)
@@ -150,12 +150,12 @@ export const AlumnoController = {
     }
   },
 
-  createAlumnoAsignatura: async (req: Request, res: Response) => {
+  CreateStudentSubject: async (req: Request, res: Response) => {
     const asignaturaid = Number(req.body.asignatura_id);
     const alumnoid = Number(req.body.alumno_id);
 
     try {
-      const newinscripcion = await AlumnoService.createAsignaturainscripcion(
+      const newinscripcion = await StudentService.CreateSubjectRegistration(
         alumnoid,
         asignaturaid
       );
@@ -168,7 +168,7 @@ export const AlumnoController = {
     }
   },
 
-  updateAlumno: async (req: Request, res: Response) => {
+  UpdateStudent: async (req: Request, res: Response) => {
     const { id } = req.params;
     const alumno = req.body;
     try {
@@ -178,7 +178,7 @@ export const AlumnoController = {
           .json({ status: 400, message: "Invalid ID format", ERROR_CODE: 400 });
         return;
       }
-      const updatedAlumno = await AlumnoService.update(Number(id), alumno);
+      const updatedAlumno = await StudentService.update(Number(id), alumno);
       if (!updatedAlumno) {
         res.status(404).json({ status: 404, message: "Alumno not found" });
         return;
@@ -192,7 +192,7 @@ export const AlumnoController = {
     }
   },
 
-  ChangeStatusAlumno: async (req: Request, res: Response) => {
+  ChangeStatusStudent: async (req: Request, res: Response) => {
     const { id, status } = req.params;
     try {
       if (!id || isNaN(Number(id))) {
@@ -202,15 +202,15 @@ export const AlumnoController = {
 400 });
         return;
       }
-      const updatedAlumno = await AlumnoService.changeStatus(Number(id), status);
-      if (!updatedAlumno) {
+      const UpdatedStudent = await StudentService.changeStatus(Number(id), status);
+      if (!UpdatedStudent) {
         res.status(404).json({ status: 404, message: "Alumno not found" });
         return;
       }
-      res.status(200).json({ status: 200, data: updatedAlumno });
+      res.status(200).json({ status: 200, data: UpdatedStudent });
       return;
     } catch (error) {
-      console.error("Error changing alumno status:", error);
+      console.error("Error changing student status:", error);
       res.status(500).json({ status: 500, message: "Internal server error" });
       return;
     }
@@ -219,7 +219,7 @@ export const AlumnoController = {
   deleteAlumno: catchAsync(async (req: Request, res: Response) => {
     const { id } = req.params;
     try {
-      const deleted = await AlumnoService.delete(id);
+      const deleted = await StudentService.delete(id);
       if (!deleted) {
         return res.status(404).json({status:404, message: 'Alumno not found' });
       }

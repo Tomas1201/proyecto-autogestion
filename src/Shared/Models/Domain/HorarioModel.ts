@@ -1,5 +1,5 @@
 import { DataTypes, Model } from "sequelize";
-import { SequelizeDB } from "../../Database/Sequelize.js";
+import { SequelizeDB } from "../../../Database/Sequelize.js";
 
 export class Horario extends Model {
   public id!: string; // UUIDV4

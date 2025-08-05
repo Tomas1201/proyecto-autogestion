@@ -1,14 +1,14 @@
-import {AlumnoRepository} from '../Repositories/AlumnoRepository.js';   
-import { Alumno } from '../Models/Entities/AlumnoModel.js'; 
-import { AlumnoDTO } from '../Middlewares/validationMiddleware.js';
+import {StudentRepository} from './StudentCRUDRepository.js';   
+import { Student } from '../../../Models/Entities/StudentModel.js'; 
+import { AlumnoDTO } from '../../../Middlewares/validationMiddleware.js';
 
-const alumnoRepository = AlumnoRepository.getInstance();
+const StudentRepositoryI = StudentRepository.getInstance();
 
-export const AlumnoService = {
+export const StudentService = {
 
   getById: async (id: number) => {
     try {
-      const alumno = await alumnoRepository.findById(id);
+      const alumno = await StudentRepositoryI.FindById(id);
       return alumno;
     } catch (error) {
       console.error('Error fetching alumno by ID:', error);
@@ -20,7 +20,7 @@ export const AlumnoService = {
 
   getAll: async () => {
     try {
-      const alumnos = await alumnoRepository.findAll();
+      const alumnos = await StudentRepositoryI.FindAll();
       return alumnos;
     } catch (error) {
       console.error('Error fetching all alumnos:', error);
@@ -31,7 +31,7 @@ export const AlumnoService = {
 
   getByName: async (name: string) => {
     try {
-      const alumnos = await alumnoRepository.findByName(name);
+      const alumnos = await StudentRepositoryI.FindByName(name);
       return alumnos;
     } catch (error) {
       console.error('Error fetching alumno by name:', error);
@@ -40,18 +40,18 @@ export const AlumnoService = {
   },
 
 
-  getByApellido: async (apellido: string) => {
+  getByLastName: async (apellido: string) => {
     try {
-      const alumnos = await alumnoRepository.findByApellido(apellido);
+      const alumnos = await StudentRepositoryI.FindByLastName(apellido);
       return alumnos;
     } catch (error) {
       console.error('Error fetching alumno by apellido:', error);
       throw new Error('Database error');}
     },
  
-    getByAsignatura: async (asignatura: string) => {
+    getBySubject: async (asignatura: string) => {
       try{
-        const alumnos = await alumnoRepository.findByAsignatura(asignatura);
+        const alumnos = await StudentRepositoryI.FindBySubject(asignatura);
         return alumnos;
       }catch (error){
         console.error('Error fetching alumno by apellido:', error);
@@ -59,19 +59,19 @@ export const AlumnoService = {
       
     },
 
- getByCarrera: async (carrera: string) => {
+ getByCareer: async (carrera: string) => {
       try{
-        const alumnos = await alumnoRepository.findByCarrera(carrera);
+        const alumnos = await StudentRepositoryI.FindByCareer(carrera);
         return alumnos;
       }catch (error){
-        console.error('Error fetching alumno by apellido:', error);
+        console.error('Error fetching student by last name:', error);
       throw new Error('Database error');}
       
     },
 
-  create: async (alumnoData: Alumno) => {
+  Create: async (StudentData: Student) => {
     try {
-      const newAlumno = await alumnoRepository.create(alumnoData);
+      const newAlumno = await StudentRepositoryI.Create(StudentData);
       return newAlumno;
     } catch (error) {
       console.error('Error creating alumno:', error);
@@ -79,9 +79,9 @@ export const AlumnoService = {
     }
   },
 
-  createAsignaturainscripcion: async (alumnoid: number, asignaturaid: number) => {
+  CreateSubjectRegistration: async (alumnoid: number, asignaturaid: number) => {
     try {
-      const newInscripcion = await alumnoRepository.createAsignaturaInscripcion(alumnoid, asignaturaid);
+      const newInscripcion = await StudentRepositoryI.CreateSubjectRegistration(alumnoid, asignaturaid);
       return newInscripcion;
     }catch (error) {
       console.error('Error creating alumno inscripcion:', error);
@@ -89,11 +89,11 @@ export const AlumnoService = {
     }
   },
 
-  update: async (id: number, alumnoData: Alumno) => {
+  update: async (id: number, alumnoData: Student) => {
     try {
-      const updated = await alumnoRepository.update(id, alumnoData);
+      const updated = await StudentRepositoryI.Update(id, alumnoData);
       if (!updated) {
-        throw new Error('Alumno not found or not updated');
+        throw new Error('Student not found or not updated');
       }
       return updated;
     } catch (error) {
@@ -104,9 +104,9 @@ export const AlumnoService = {
 
   changeStatus: async (id: number, status: string) => {
     try {
-      const updated = await alumnoRepository.changeStatus(id, status);
+      const updated = await StudentRepositoryI.ChangeStatus(id, status);
       if (!updated) { 
-        throw new Error('Alumno not found or not updated');
+        throw new Error('Student not found or not updated');
       }
       return updated;
     } catch (error) {
@@ -120,7 +120,7 @@ export const AlumnoService = {
     try {
       const deleted = await AlumnoRepository.delete(id);
       if (!deleted) {
-        throw new Error('Alumno not found or not deleted');
+        throw new Error('Student not found or not deleted');
       }
       return deleted;
     } catch (error) {

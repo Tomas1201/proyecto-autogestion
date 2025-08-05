@@ -1,34 +1,53 @@
 import { Op } from "sequelize";
-import { Alumno } from "../Models/Entities/AlumnoModel.js";
-import { AlumnoInterface } from "./AlumnoInterface.js";
-import { Inscriptos } from "../Models/DependentEntities/inscriptosModel.js";
-import { SequelizeDB } from "../Database/Sequelize.js"; // Importar el modelo de inscriptos si es necesario
-import { PuestoAcademicoModel } from "../Models/DependentEntities/PuestoAcademicoModel.js";
+import { Student } from "../../../Models/Entities/StudentModel.js";
+import { StudentInterface } from "../Repositories/StudentInterface.js";
+import { Registration } from "../../../Models/DependentEntities/RegistrationModel.js";
+import { SequelizeDB } from "../../../Database/Sequelize.js"; // Importar el modelo de inscriptos si es necesario
+import { PuestoAcademicoModel } from "../../../Models/DependentEntities/AcademicPositionModel.js";
 
-export class AlumnoRepository implements AlumnoInterface {
-  static instance: AlumnoRepository;
-  static getInstance(): AlumnoRepository {
-    if (!AlumnoRepository.instance) {
-      AlumnoRepository.instance = new AlumnoRepository();
+export class StudentRepository implements StudentInterface {
+  static instance: StudentRepository;
+  static getInstance(): StudentRepository {
+    if (!StudentRepository.instance) {
+      StudentRepository.instance = new StudentRepository();
     }
-    return AlumnoRepository.instance;
+    return StudentRepository.instance;
   }
   constructor() {}
-
-  async findById(id: number): Promise<Alumno | null> {
+  
+  async FindByName(Name: string): Promise<Student[] | null> {
     try {
-      const alumno = await Alumno.findByPk(id);
-      return alumno ? (alumno as Alumno) : null;
+      if (!Name || typeof Name !== "string") {
+        throw new Error("Invalid Name parameter");
+      }
+      const alumnos = await Student.findAll({
+        where: {
+          nombre: {
+            [Op.like]: `%${Name.toLowerCase()}%`,
+          },
+        },
+      });
+      return alumnos ? (alumnos as Student[]) : null;
+    } catch (error) {
+      console.error("Error fetching alumnos by name:", error);
+      throw error;
+    }
+  }
+
+  async FindById(id: number): Promise<Student | null> {
+    try {
+      const alumno = await Student.findByPk(id);
+      return alumno ? (alumno as Student) : null;
     } catch (error) {
       console.error("Error fetching alumno by ID:", error);
       throw new Error("Database error");
     }
   }
 
-  async findAll(): Promise<Alumno[]> {
+  async FindAll(): Promise<Student[]> {
     try {
-      const alumnos = await Alumno.findAll();
-      return alumnos ? (alumnos as Alumno[]) : [];
+      const alumnos = await Student.findAll();
+      return alumnos ? (alumnos as Student[]) : [];
       // condicion ? true : false
     } catch (error) {
       console.error("Error fetching all alumnos:", error);
@@ -36,55 +55,34 @@ export class AlumnoRepository implements AlumnoInterface {
     }
   }
 
-  async findByName(name: string): Promise<Alumno[] | null> {
-    try {
-      if (!name || typeof name !== "string") {
-        throw new Error("Invalid name parameter");
-      }
-      const query = {
-        where: {
-          nombre: {
-            [Op.like]: `%${name.toLowerCase()}%`,
-          },
-        },
-      };
-
-      const alumnos = await Alumno.findAll(query);
-
-      return alumnos ? (alumnos as Alumno[]) : null;
-    } catch (error) {
-      console.error("Error fetching alumno by name:", error);
-      throw error;
-    }
-  }
 
   // Devuelve un alumno por apellido
 
-  async findByApellido(apellido: string): Promise<Alumno[] | null> {
+  async FindByLastName(LastName: string): Promise<Student[] | null> {
     try {
-      if (!apellido || typeof apellido !== "string") {
+      if (!LastName || typeof LastName !== "string") {
         throw new Error("Invalid apellido parameter");
       }
       const query = {
         where: {
-          apellido: {
-            [Op.like]: `%${apellido.toLowerCase()}%`,
+          LastName: {
+            [Op.like]: `%${LastName.toLowerCase()}%`,
           },
         },
       };
 
-      const alumnos = await Alumno.findAll(query);
+      const Students = await Student.findAll(query);
 
-      return alumnos ? (alumnos as Alumno[]) : null;
+      return Students ? (Students as Student[]) : null;
     } catch (error) {
       console.error("Error fetching alumno by apellido:", error);
       return null;
     }
   }
 
-  async findByAsignatura(asignatura: string): Promise<Alumno[] | null> {
+  async FindBySubject(Subject: string): Promise<Student[] | null> {
     try {
-      const alumnos = await Alumno.findAll({
+      const Students = await Student.findAll({
         include: [
           {
             model: SequelizeDB.models.inscriptos,
@@ -97,8 +95,8 @@ export class AlumnoRepository implements AlumnoInterface {
                 as: "asignatura",
                 attributes: [],
                 where: {
-                  nombre: {
-                    [Op.iLike]: `%${asignatura}%`,
+                  Name: {
+                    [Op.iLike]: `%${Subject}%`,
                   },
                 },
                 required: true,
@@ -108,51 +106,51 @@ export class AlumnoRepository implements AlumnoInterface {
         ],
       });
 
-      return alumnos ? (alumnos as Alumno[]) : null;
+      return Students ? (Students as Student[]) : null;
     } catch (error) {
-      console.error("Error fetching alumnos by asignatura:", error);
+      console.error("Error fetching student by subject:", error);
       throw error;
     }
   }
 
-  async findByLegajo(legajo: number): Promise<Alumno | null> {
+  async FindByFile(File: number): Promise<Student | null> {
     try {
-      const alumnos = await Alumno.findAll({
-        where: { legajo: legajo },
+      const Studentf = await Student.findAll({
+        where: { File: File },
       });
 
-      return alumnos.length > 0 ? (alumnos[0] as Alumno) : null;
+      return Studentf.length > 0 ? (Studentf[0] as Student) : null;
     } catch (error) {
-      console.error("Error fetching alumnos by asignatura:", error);
+      console.error("Error fetching student by subject:", error);
       throw error;
     }
   }
 
-  async findByDni(DNI: number): Promise<Alumno | null> {
+  async FindByDni(DNI: number): Promise<Student | null> {
     try {
-      const alumnos = await Alumno.findAll({
+      const alumnos = await Student.findAll({
         where: { dni: DNI },
       });
-      return alumnos.length > 0 ? (alumnos[0] as Alumno) : null;
+      return alumnos.length > 0 ? (alumnos[0] as Student) : null;
     } catch (error) {
       console.error("Error fetching alumnos by asignatura:", error);
       throw error;
     }
   }
 
-  async findByEmail(Email: string): Promise<Alumno | null> {
+  async FindByEmail(Email: string): Promise<Student | null> {
     try {
-      const alumnos = await Alumno.findAll({
+      const alumnos = await Student.findAll({
         where: { email: Email },
       });
-      return alumnos.length > 0 ? (alumnos[0] as Alumno) : null;
+      return alumnos.length > 0 ? (alumnos[0] as Student) : null;
     } catch (error) {
       console.error("Error fetching alumnos by asignatura:", error);
       throw error;
     }
   }
 
-  async findByStatus(status: string): Promise<Alumno[] | null> {
+  async FindByStatus(status: string): Promise<Student[] | null> {
     try {
       const query = {
         where: {
@@ -162,18 +160,18 @@ export class AlumnoRepository implements AlumnoInterface {
         },
       };
 
-      const alumnos = await Alumno.findAll(query);
+      const alumnos = await Student.findAll(query);
 
-      return alumnos ? (alumnos as Alumno[]) : null;
+      return alumnos ? (alumnos as Student[]) : null;
     } catch (error) {
       console.error("Error fetching alumnos by status:", error);
       throw error;
     }
   }
 
-  async findByCarrera(carrera: string): Promise<Alumno[] | null> {
+  async FindByCareer(carrera: string): Promise<Student[] | null> {
     try {
-      const alumnos = await Alumno.findAll({
+      const alumnos = await Student.findAll({
         where: {
           carrera: {
             [Op.like]: `%${carrera.toLowerCase()}%`,
@@ -181,7 +179,7 @@ export class AlumnoRepository implements AlumnoInterface {
         },
       });
 
-      return alumnos ? (alumnos as Alumno[]) : null;
+      return alumnos ? (alumnos as Student[]) : null;
     } catch (error) {
       console.error("Error fetching alumnos by asignatura:", error);
       throw error;
@@ -189,12 +187,12 @@ export class AlumnoRepository implements AlumnoInterface {
   }
 
   // Crea un nuevo alumno
-  async create(alumnoData: Alumno): Promise<Alumno | null> {
+  async Create(alumnoData: Student): Promise<Student | null> {
     try {
-      const existingAlumno = await Alumno.findOne({
+      const existingAlumno = await Student.findOne({
         where: {
           [Op.or]: [
-            { email: alumnoData.email },
+            { email: alumnoData.Email },
             { dni: alumnoData.dni },
             { legajo: alumnoData.legajo },
           ],
@@ -202,12 +200,12 @@ export class AlumnoRepository implements AlumnoInterface {
       });
       if (existingAlumno) {
         console.error(
-          "Alumno with the same email, dni or legajo already exists"
+          "Student with the same email, dni or legajo already exists"
         );
         return null; // O lanzar un error según tu lógica
       }
-      const newAlumno = await Alumno.create(alumnoData as any);
-      return newAlumno as Alumno;
+      const newAlumno = await Student.create(alumnoData as any);
+      return newAlumno as Student;
     } catch (error) {
       console.error("Error creating alumno:", error);
       return null; // O puedes lanzar un error según tu lógica
@@ -215,27 +213,27 @@ export class AlumnoRepository implements AlumnoInterface {
     }
   }
 
-  createAsignaturaInscripcion = async (
+  CreateSubjectRegistration = async (
     alumnoid: number,
     asignatura_id: number
   ): Promise<any> => {
     try {
       // Luego, crea la inscripción a la asignatura
-      const inscripcion = await Inscriptos.create({
+      const Registrationf = await Registration.create({
         alumno_id: alumnoid,
         PuestoAcademicoid: asignatura_id, // Asegúrate de que 'asignatura' sea un ID válido
       });
 
-      return { alumno: inscripcion };
+      return { alumno: Registrationf };
     } catch (error) {
       console.error("Error creating alumno and asignatura inscripcion:", error);
       throw new Error("Database error");
     }
   };
   // Actualiza un alumno por ID
-  async update(id: number, alumnoData: Partial<Alumno>): Promise<boolean> {
+  async Update(id: number, alumnoData: Partial<Student>): Promise<boolean> {
     try {
-      const [updatedRows] = await Alumno.update(alumnoData, {
+      const [updatedRows] = await Student.update(alumnoData, {
         where: { id },
       });
       return updatedRows > 0 ? true : false;
@@ -245,9 +243,9 @@ export class AlumnoRepository implements AlumnoInterface {
     }
   }
 
-  async changeStatus(id: number, status: string): Promise<boolean> {
+  async ChangeStatus(id: number, status: string): Promise<boolean> {
     try {
-      const [updatedRows] = await Alumno.update(
+      const [updatedRows] = await Student.update(
         { status: status },
         {
           where: { id },
@@ -261,9 +259,21 @@ export class AlumnoRepository implements AlumnoInterface {
   }
   /*  No se deberia eliminar un alumno, sino desactivarlo o marcarlo como eliminado
 
-    delete: async (id: string) => {
+    d
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    elete: async (id: string) => {
         try {
-            const deletedRows = await Alumno.destroy({
+            const deletedRows = await Student.destroy({
                 where: { id }
             });
             return deletedRows > 0;
