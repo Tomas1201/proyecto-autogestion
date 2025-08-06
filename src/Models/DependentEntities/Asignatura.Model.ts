@@ -1,15 +1,15 @@
 import {  DataTypes, Model } from 'sequelize';
 
-import {CareerModel} from '../../Models/Career/CareerModel.js'; // ✅ Usa import default si Career es exportado con `export default`
+import {CarreraModel} from '../Entities/CarreraModel.js'; // ✅ Usa import default si Carrera es exportado con `export default`
 
 import {sequelizeDB} from '../../Database/Sequelize.js'; 
-export class Subject extends Model {
+export class Asignatura extends Model {
     public id!: string;
-  public name!: string;
- public planning!:object;//JSONNN
+  public nombre!: string;
+ public planificacion!:object;//JSONNN
  public horasCatedra!:number;
  
-  public description!: string;
+  public descripcion!: string;
 
  
   // Sequelize añade automáticamente createdAt y updatedAt si `timestamps: true`
@@ -21,18 +21,18 @@ export class Subject extends Model {
  
 
 
-sequelizeDB.define('Subject', {//terminarr
+sequelizeDB.define('Asignatura', {//terminarr
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4, 
     primaryKey: true,
     autoIncrement: true,
   },
-  name: {
+  nombre: {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  description: {
+  descripcion: {
     type: DataTypes.TEXT,
     allowNull: false,
  
@@ -43,27 +43,27 @@ sequelizeDB.define('Subject', {//terminarr
 
 
   },
-  planning: {
+  planificacion: {
     type: DataTypes.JSON, // Usa JSON para almacenar objetos
     allowNull: true, // Permite que sea nulo si no hay planificación
   },
 }, {
-  tableName: 'Subject', // ✅ tableName va aquí, no dentro de los atributos
+  tableName: 'Asignatura', // ✅ tableName va aquí, no dentro de los atributos
  
   timestamps: true,
    indexes: [
     {
       unique: true,
-      fields: [{ name: 'description', length: 255 }],}],
+      fields: [{ name: 'descripcion', length: 255 }],}],
 });
 
 /*
-Subject.belongsTo(CareerModel, {
-  foreignKey: 'CareerId',
-  as: 'Career',
+Asignatura.belongsTo(CarreraModel, {
+  foreignKey: 'carreraId',
+  as: 'carrera',
 });*/
 
 
 
 sequelizeDB.sync();
-export const SubjectModel = sequelizeDB.models.Subject;
+export const AsignaturaModel = sequelizeDB.models.Asignatura;

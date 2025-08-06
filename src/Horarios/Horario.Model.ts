@@ -34,7 +34,7 @@ sequelize.define('Horarios', {
   tableName: 'Horarios',
 });
 
-//export default Career;
+//export default Carrera;
 
 
 sequelize.sync();
