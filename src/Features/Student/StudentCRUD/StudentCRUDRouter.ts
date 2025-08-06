@@ -3,7 +3,7 @@ import { StudentController } from "./StudentCRUDController.js";
 import {
   validateAlumno,
   validateUpdate,
-} from "../../../Middlewares/validationMiddleware.js";
+} from "../../../Middlewares/StudentValidationMiddleware.js";
 
 const router = Router();
 

@@ -1,5 +1,5 @@
 import { Op } from "sequelize";
-import { Student } from "../../../Models/Entities/StudentModel.js";
+import { Student } from "../../../Shared/Models/StudentModel.js";
 import { StudentInterface } from "../Repositories/StudentInterface.js";
 import { Registration } from "../../../Models/DependentEntities/RegistrationModel.js";
 import { SequelizeDB } from "../../../Database/Sequelize.js"; // Importar el modelo de inscriptos si es necesario

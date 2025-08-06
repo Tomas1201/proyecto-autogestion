@@ -1,6 +1,6 @@
 import {StudentRepository} from './StudentCRUDRepository.js';   
-import { Student } from '../../../Models/Entities/StudentModel.js'; 
-import { AlumnoDTO } from '../../../Middlewares/validationMiddleware.js';
+import { Student } from '../../../Shared/Models/StudentModel.js'; 
+import { AlumnoDTO } from '../../../Middlewares/StudentValidationMiddleware.js';
 
 const StudentRepositoryI = StudentRepository.getInstance();
 

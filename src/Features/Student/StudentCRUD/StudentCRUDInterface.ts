@@ -1,5 +1,5 @@
 
-import { Student } from '../../../Models/Entities/StudentModel.js'; // Asegúrate de que la ruta sea correcta
+import { Student } from '../../../Shared/Models/StudentModel.js'; // Asegúrate de que la ruta sea correcta
 
 export interface StudentInterface {
   FindAll(): Promise<Student[]>;
