@@ -1,5 +1,5 @@
 import express from 'express';
-import { sequelizeDB } from './Database/Sequelize.js';
+import { SequelizeDB } from './Database/Sequelize.js';
 import relaciones from './Models/MiddleTables/CarreerSubject.js';
 import CareerRouter from './Routers/Career/CareerRouter.js';
 const app = express();
