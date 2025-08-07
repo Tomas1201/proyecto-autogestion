@@ -23,14 +23,24 @@ export const createCareerSchema = z.object({
   duration: durationSchema, // Reutilizamos el esquema de duración
 });
 
+export const findByNameSchema = z.object({
+  params: z.object({
+    name: z.string()
+      .min(1, { message: "The Career name must have at least 1 character." })
+      .max(20, { message: "The Career name cannot exceed 255 characters." }),
+  }),
+});
+
 
 export const UpdateCareerSchema = createCareerSchema.partial();
 
-export const CareerIdSchema = z.object({
-  id: z.uuid({ message: "The Career ID must be a valid UUID." }),
+export const findCareerByIdSchema = z.object({
+  params: z.object({
+    id: z.uuid({ message: "The Career ID must be a valid UUID." }),
+  }),
 });
 
 
 export type CreateCareerDto = z.infer<typeof createCareerSchema>;
 export type UpdateCareerDto = z.infer<typeof UpdateCareerSchema>;
-export type CareerIdDto = z.infer<typeof CareerIdSchema>;
+export type CareerIdDto = z.infer<typeof findCareerByIdSchema>;

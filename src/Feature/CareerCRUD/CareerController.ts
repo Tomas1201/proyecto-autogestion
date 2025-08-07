@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { CareerRepository } from '../../Repositories/Career/CareerRepository.js';
-import { CareerService } from '../../Services/Career/CareerServices.js';
+import { CareerRepository } from './CareerRepository.js';
+import { CareerService } from './CareerServices.js';
 
 const CareerServices = new CareerService();
 

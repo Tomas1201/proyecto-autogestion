@@ -1,6 +1,6 @@
 import {  DataTypes, Model } from 'sequelize';
 
-import {CareerModel} from '../../Models/Career/CareerModel.js'; // ✅ Usa import default si Career es exportado con `export default`
+import {CareerModel} from '../Career/CareerModel.js'; // ✅ Usa import default si Career es exportado con `export default`
 
 import {sequelizeDB} from '../../Database/Sequelize.js'; 
 export class Subject extends Model {

@@ -1,7 +1,7 @@
 // src/services/CareerService.ts
 
 import { CareerModel, Career} from '../../Models/Career/CareerModel.js'; // Tu modelo/interfaz Career
-import { CareerInterface } from '../../Interfaces/Career/CareerInterface.js'; // Tu interfaz del repositorio
+import { CareerInterface } from './CareerInterface.js'; // Tu interfaz del repositorio
 import { CareerRepository } from '../../Repositories/Career/CareerRepository.js'; // Tu implementación del repositorio
 import { FindOptions } from 'sequelize'; // Para el método getAllCareers flexible
 
@@ -19,8 +19,8 @@ export class CareerService implements ICareerService {
     private CareerRepository: CareerInterface;
 
     // Inyección de dependencia del repositorio
-    constructor(CareerRepository: CareerInterface = new CareerRepository()) {
-        this.CareerRepository = CareerRepository;
+    constructor(careerRepository: CareerInterface = new CareerRepository()) {
+        this.CareerRepository = careerRepository;
     }
 
     public async getAllCareers(): Promise<Career[]> {

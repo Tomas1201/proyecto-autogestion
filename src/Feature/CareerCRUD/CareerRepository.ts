@@ -1,5 +1,5 @@
 
-import { CareerInterface } from '../../Interfaces/Career/CareerInterface.js';
+import { CareerInterface } from '../../Feature/CareerCRUD/CareerInterface.js';
 import type { Career } from '../../Models/Career/CareerModel.js'; // Asegúrate de que la ruta sea correcta
 import { Op } from 'sequelize';
 import { CareerModel } from '../../Models/Career/CareerModel.js'; // Asegúrate de que la ruta sea correcta
