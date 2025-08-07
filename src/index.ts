@@ -1,12 +1,13 @@
 import express from "express";
 import bodyParser from "body-parser";
-import { ProfessorRouter } from "./Features/Professor/ProfessorCRUD/ProfessorCRUDRouter.js";
+import { ProfessorCRUDRouter } from "./Features/Professor/ProfessorCRUD/ProfessorCRUDRouter.js";
 import { sequelizedb } from "./Database/Sequelize.js";
+import { GeneralRouter } from "./Shared/GeneralRouter.js";
 
 const app = express();
 app.use(bodyParser.json());
 
-app.use("/api/v1/professors", ProfessorRouter);
+app.use("/api/v1/professors", GeneralRouter);
 
 app.use(
   (err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
