@@ -1,12 +1,12 @@
 import express from 'express';
-import { sequelizeDB } from './Database/Sequelize.js';
-import relaciones from './Models/Middle Tables/Relaciones.js';
-import carreraRouter from './Routers/Carrera.router.js';
+import { SequelizeDB } from './Database/Sequelize.js';
+import relaciones from './Models/MiddleTables/CarreerSubject.js';
+import CareerRouter from './Routers/Career/CareerRouter.js';
 const app = express();
 const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use('/carrera', carreraRouter);
+app.use('/Career', CareerRouter);
 
  relaciones;
   
