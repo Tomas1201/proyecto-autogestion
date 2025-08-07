@@ -1,41 +1,38 @@
 import { ScheduleService } from "./ScheduleService.js";
-import { ProfessorAsignatura } from "../Models/ProfessorAsignaturaModel.js";
+import { ProfessorSubject } from "../Shared/Models/ProfessorSubjectModel.js";
 
 const scheduleService = new ScheduleService();
 
 export class AssignmentService {
-  async assign(profesores: number[], asignaturas: number[], rol: string) {
-    if (!rol || !["titular", "adjunto", "ayudante"].includes(rol)) {
-      throw new Error("Rol inválido");
+  async assign(professors: number[], subjects: number[], role: string) {
+    if (!role || !["titular", "adjunct", "assistant"].includes(role)) {
+      throw new Error("Invalid role");
     }
 
-    for (const profesorId of profesores) {
-      await scheduleService.verificarDisponibilidad(profesorId, asignaturas);
+    for (const professorId of professors) {
+      await scheduleService.checkAvailability(professorId, subjects);
     }
 
-    const asignaciones = profesores.flatMap((profesorId) =>
-      asignaturas.map((asignaturaId) => ({
-        profesorId,
-        asignaturaId,
-        rol,
+    const assignments = professors.flatMap(professorId =>
+      subjects.map(subjectId => ({
+        professorId,
+        subjectId,
+        role,
       }))
     );
 
-    return await ProfessorAsignatura.bulkCreate(asignaciones);
+    return await ProfessorSubject.bulkCreate(assignments);
   }
 
-  async unassign(profesorId: number, asignaturaId: number) {
-    const deleted = await ProfessorAsignatura.destroy({
-      where: {
-        profesorId,
-        asignaturaId,
-      },
+  async unassign(professorId: number, subjectId: number) {
+    const deleted = await ProfessorSubject.destroy({
+      where: { professorId, subjectId },
     });
 
     if (deleted === 0) {
-      throw new Error("La asignación no existe o ya fue eliminada.");
+      throw new Error("Assignment does not exist or already deleted");
     }
 
-    return { message: "Desvinculación exitosa" };
+    return { message: "Unassignment successful" };
   }
 }

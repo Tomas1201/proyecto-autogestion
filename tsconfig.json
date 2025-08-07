@@ -14,6 +14,6 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true
   },
-  "include": ["src//*", "/*.ts", "src/**/*.ts", "src/Professor/Controllers", "src/Professor/Models", "src/Repositories/ProfessorRepository.ts", "src/Professor/ProfessorRouter.ts", "src/Models/AsignaturaModel.ts", "src/Database/CarreraAsignaturaModel.ts", "src/Services/ProfessorService.ts", "src/Middlewares/ProfessorValidatorMiddleware.ts", "src/Database/CarrerasModel.ts"],
+  "include": ["src//*", "/*.ts", "src/**/*.ts", "src/Professor/Controllers", "src/Professor/Models", "src/Repositories/ProfessorRepository.ts", "src/Professor/ProfessorRouter.ts", "src/Models/SubjectModel.ts", "src/Database/CarreraAsignaturaModel.ts", "src/Professor/ProfessorService.ts", "src/Professor/ProfessorValidatorMiddleware.ts", "src/Database/CarrerasModel.ts"],
   "exclude": ["node_modules"]
 }

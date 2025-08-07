@@ -1,23 +1,15 @@
 import express from "express";
 import bodyParser from "body-parser";
-import { P } from "./Routers/ProfessorRouter.js";
-import confirmacionRouter from "./Routers/ConfirmationRouter.js";
-import { ProfessorAsignatura } from "./Models/ProfessorAsignaturaModel";
+import { ProfessorRouter } from "./Features/Professor/ProfessorCRUD/ProfessorCRUDRouter.js";
 import { sequelizedb } from "./Database/Sequelize.js";
 
 const app = express();
 app.use(bodyParser.json());
 
-app.use("/api/v1/professors", P);
-app.use("/api/v1/confirm", confirmacionRouter);
+app.use("/api/v1/professors", ProfessorRouter);
 
 app.use(
-  (
-    err: Error,
-    req: express.Request,
-    res: express.Response,
-    next: express.NextFunction
-  ) => {
+  (err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
     console.error("Global error:", err);
     res.status(500).json({ error: "Internal server error" });
   }
@@ -25,18 +17,12 @@ app.use(
 
 sequelizedb
   .authenticate()
-  .then(() => {
-    console.log("Database connection established successfully.");
-  })
-  .catch((error: Error) => {
-    console.error("Unable to connect to the database:", error);
-  });
-sequelizedb.sync()
+  .then(() => console.log("Database connection established"))
+  .catch((error: Error) => console.error("Database connection error:", error));
+  
+sequelizedb.sync();
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 export default app;
-export { app };

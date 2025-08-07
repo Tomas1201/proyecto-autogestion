@@ -1,38 +1,32 @@
-import { Asignatura } from "../Models/AsignaturaModel.js";
-import { ProfessorAsignatura } from "../Models/ProfessorAsignaturaModel.js";
+import { Subject } from "../Shared/Models/SubjectModel.js";
+import { ProfessorSubject } from "../Shared/Models/ProfessorSubjectModel.js";
 
 export class ScheduleService {
-  async verificarDisponibilidad(
-    profesorId: number,
-    nuevasAsignaturas: number[]
+  async checkAvailability(
+    professorId: number,
+    newSubjects: number[]
   ) {
-    const asignacionesActuales = await ProfessorAsignatura.findAll({
-      where: { profesorId },
+    const currentAssignments = await ProfessorSubject.findAll({
+      where: { professorId },
     });
 
-    const idsAsignaturasActuales = asignacionesActuales.map(
-      (a) => a.asignaturaId
-    );
-    const todasAsignaturas = await Asignatura.findAll({
-      where: { id: [...idsAsignaturasActuales, ...nuevasAsignaturas] },
+    const currentSubjectIds = currentAssignments.map(a => a.subjectId);
+    const allSubjects = await Subject.findAll({
+      where: { id: [...currentSubjectIds, ...newSubjects] },
     });
 
-    const actuales = todasAsignaturas.filter((a) =>
-      idsAsignaturasActuales.includes(a.id)
-    );
-    const nuevas = todasAsignaturas.filter((a) =>
-      nuevasAsignaturas.includes(a.id)
-    );
+    const current = allSubjects.filter(a => currentSubjectIds.includes(a.id));
+    const newOnes = allSubjects.filter(a => newSubjects.includes(a.id));
 
-    for (const nueva of nuevas) {
-      for (const actual of actuales) {
+    for (const newSubject of newOnes) {
+      for (const currentSubject of current) {
         if (
-          nueva.dia === actual.dia &&
-          nueva.horaInicio < actual.horaFin &&
-          nueva.horaFin > actual.horaInicio
+          newSubject.day === currentSubject.day &&
+          newSubject.startTime < currentSubject.endTime &&
+          newSubject.endTime > currentSubject.startTime
         ) {
           throw new Error(
-            `Conflicto de horario con asignatura existente el ${nueva.dia} de ${nueva.horaInicio} a ${nueva.horaFin}`
+            `Schedule conflict with existing subject on ${newSubject.day} from ${newSubject.startTime} to ${newSubject.endTime}`
           );
         }
       }

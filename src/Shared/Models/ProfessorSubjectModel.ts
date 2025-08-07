@@ -1,18 +1,18 @@
 import { DataTypes, Model } from "sequelize";
-import { sequelizedb } from "../Database/Sequelize.js";
+import { sequelizedb } from "../../Database/Sequelize.js";
 
-export class ProfessorAsignatura extends Model {
+export class ProfessorSubject extends Model {
   public id!: number;
   public professorId!: number;
-  public asignaturaId!: number;
-  public rol!: string;
-  public horario!: string;
+  public subjectId!: number;
+  public role!: string;
+  public schedule!: string;
 
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
 
-ProfessorAsignatura.init(
+ProfessorSubject.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -23,33 +23,33 @@ ProfessorAsignatura.init(
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: "profesores",
+        model: "professors",
         key: "id",
       },
     },
-    asignaturaId: {
+    subjectId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: "asignaturas",
+        model: "subjects",
         key: "id",
       },
     },
-    rol: {
+    role: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    horario: {
+    schedule: {
       type: DataTypes.STRING,
       allowNull: false,
     },
   },
   {
     sequelize: sequelizedb,
-    modelName: "ProfessorAsignatura",
-    tableName: "professor_asignaturas",
+    modelName: "ProfessorSubject",
+    tableName: "professor_subjects",
     timestamps: true,
   }
 );
 
-export const ProfessorAsignaturaModel = sequelizedb.models.ProfessorAsignatura;
+export const ProfessorSubjectModel = sequelizedb.models.ProfessorSubject;

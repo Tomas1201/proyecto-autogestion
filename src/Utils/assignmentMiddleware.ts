@@ -1,41 +1,31 @@
 import { Request, Response, NextFunction } from "express";
-import { z, ZodError } from "zod";
 
-// Enum compatible con Zod
-export enum RolEnum {
-  titular = "titular",
-  adjunto = "adjunto",
-  ayudante = "ayudante",
-}
+const authMiddleware = (roles: string[]) => {
+  return (req: Request, res: Response, next: NextFunction): void => {
+    const userRole = req.headers["role"];
 
-// Esquema de validación
-export const AssignmentSchema = z.object({
-  professorId: z
-    .number()
-    .int()
-    .min(1, "El ID del profesor debe ser un número positivo"),
-  asignaturaId: z
-    .number()
-    .int()
-    .min(1, "El ID de la asignatura debe ser un número positivo"),
-  rol: z.enum(RolEnum), // sin errorMap
-});
+    if (!userRole || !roles.includes(userRole as string)) {
+      res.status(403).json({ error: "Access denied" });
+      return;
+    }
 
-// Middleware de validación
-export const validateAssignment = (
+    next();
+  };
+};
+
+const authorizeAdmin = (
   req: Request,
   res: Response,
   next: NextFunction
-) => {
-  try {
-    req.body = AssignmentSchema.parse(req.body);
-    next();
-  } catch (error) {
-    if (error instanceof ZodError) {
-      return res.status(400).json({ errors: error.issues }); // ✅ usar error.issues
-    }
-    return res
-      .status(500)
-      .json({ error: "Error interno al validar la asignación" });
+): void => {
+  const userRole = req.headers["role"];
+
+  if (userRole !== "admin") {
+    res.status(403).json({ error: "Access denied: insufficient permissions" });
+    return;
   }
+
+  next();
 };
+
+export { authMiddleware, authorizeAdmin };

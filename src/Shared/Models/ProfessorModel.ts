@@ -1,16 +1,16 @@
 import { DataTypes, Model, Sequelize } from "sequelize";
-import { sequelizedb } from "../Database/Sequelize.js";
+import { sequelizedb } from "../../Database/Sequelize.js";
 
 export class Professor extends Model {
   public id!: number;
-  public nombre!: string;
-  public apellido!: string;
+  public firstName!: string;
+  public lastName!: string;
   public dni!: string;
-  public legajo!: string;
-  public titulo_academico!: string;
-  public correo!: string;
-  public telefono!: string;
-  public disponibilidad_horaria!: string;
+  public fileNumber!: string;
+  public academicTitle!: string;
+  public email!: string;
+  public phone!: string;
+  public timeAvailability!: string;
   public state!: boolean;
 }
 
@@ -21,11 +21,11 @@ Professor.init(
       autoIncrement: true,
       primaryKey: true,
     },
-    nombre: {
+    firstName: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    apellido: {
+    lastName: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -34,25 +34,25 @@ Professor.init(
       allowNull: false,
       unique: true,
     },
-    legajo: {
+    fileNumber: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
     },
-    titulo_academico: {
+    academicTitle: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    correo: {
+    email: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: { isEmail: true },
     },
-    telefono: {
+    phone: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    disponibilidad_horaria: {
+    timeAvailability: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
@@ -65,8 +65,8 @@ Professor.init(
   {
     sequelize: sequelizedb,
     modelName: "Professor",
-    tableName: "profesores",
+    tableName: "professors",
     timestamps: false,
   }
 );
-export const professorModel = sequelizedb.models.Professor;
+export const ProfessorModel = sequelizedb.models.Professor;

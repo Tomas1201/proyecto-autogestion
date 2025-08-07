@@ -52,3 +52,5 @@ ENTONCES el sistema restringe el acceso, redirige al usuario o muestra un mensaj
 DADO que el Administrador Académico está ingresando o modificando los datos de un profesor
 CUANDO alguno de los campos contiene errores (como un correo no válido, teléfono incorrecto o campos vacíos obligatorios)
 ENTONCES el sistema muestra mensajes de error específicos, evitando guardar los datos hasta que sean corregidos.
+
+## Todo en PascalCase
