@@ -1,6 +1,7 @@
+/*
 import { z } from "zod";
 
-export enum RoleEnum {
+ enum RoleEnum {
   titular = "titular",
   adjunct = "adjunct",
   assistant = "assistant",
@@ -11,3 +12,5 @@ export const AssignmentSchema = z.object({
   subjectId: z.number().int().min(1, "subjectId must be valid number"),
   role: z.enum(RoleEnum),
 });
+
+*/

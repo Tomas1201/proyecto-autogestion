@@ -1,5 +1,5 @@
 import { DataTypes, Model, Sequelize } from "sequelize";
-import { sequelizedb } from "../../Database/Sequelize.js";
+import { SequelizeDB } from "../../Database/Sequelize.js";
 
 export class Professor extends Model {
   public id!: number;
@@ -16,39 +16,38 @@ export class Professor extends Model {
 
 Professor.init(
   {
-    id: {
+    Id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
-    firstName: {
+    Name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    lastName: {
+    LastName: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    dni: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
-    },
-    fileNumber: {
+    Dni: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
     },
-    academicTitle: {
+    File: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
+    AcademicTitle: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    email: {
+    Email: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate: { isEmail: true },
     },
-    phone: {
+    Phone: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -56,17 +55,17 @@ Professor.init(
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    state: {
+    State: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: true,
     },
   },
   {
-    sequelize: sequelizedb,
+    sequelize: SequelizeDB,
     modelName: "Professor",
-    tableName: "professors",
-    timestamps: false,
+    tableName: "professor",
+    timestamps: true,
   }
 );
-export const ProfessorModel = sequelizedb.models.Professor;
+export const ProfessorModel = SequelizeDB.models.Professor;

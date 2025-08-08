@@ -4,7 +4,7 @@ import {ProfessorCRUDRouter} from "../Features/Professor/ProfessorCRUD/Professor
 
 const router = Router();
 
-router.use(ProfessorSearchRouter);
-router.use(ProfessorCRUDRouter);
+router.use("/Professor/Search",ProfessorSearchRouter);
+router.use("/Professor",ProfessorCRUDRouter);
 
 export const GeneralRouter = router;

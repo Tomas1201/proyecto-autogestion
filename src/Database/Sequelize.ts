@@ -1,8 +1,15 @@
 import { Sequelize } from "sequelize";
+import dotenv from "dotenv";
+dotenv.config();
 
-export const sequelizedb = new Sequelize("PAPU", "postgres", "1234", {
-  host: "localhost",
-  dialect: "postgres",
-  logging: console.log,
-  port: 5432,
-});
+export const SequelizeDB = new Sequelize(
+  process.env.DB_NAME || 'pepe',
+  process.env.DB_USER || 'postgres',
+  process.env.DB_PASSWORD || 'contraseña',
+  {
+    host: process.env.DB_HOST || 'localhost',
+    port: parseInt(process.env.DB_PORT || '5432', 10),
+    dialect: 'postgres',
+    logging: console.log,
+  }
+);

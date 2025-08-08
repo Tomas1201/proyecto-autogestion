@@ -1,5 +1,5 @@
 import { DataTypes, Model } from "sequelize";
-import { sequelizedb } from "../../Database/Sequelize.js";
+import { SequelizeDB } from "../../Database/Sequelize.js";
 
 export class Subject extends Model {
   public id!: number;
@@ -11,16 +11,16 @@ export class Subject extends Model {
 
 Subject.init(
   {
-    id: {
+    Id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
-    name: {
+    Name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    day: {
+    Day: {
       type: DataTypes.ENUM(
         "Monday",
         "Tuesday",
@@ -31,21 +31,21 @@ Subject.init(
       ),
       allowNull: false,
     },
-    startTime: {
+    StartTime: {
       type: DataTypes.TIME,
       allowNull: false,
     },
-    endTime: {
+    EndTime: {
       type: DataTypes.TIME,
       allowNull: false,
     },
   },
   {
-    sequelize: sequelizedb,
+    sequelize: SequelizeDB,
     modelName: "Subject",
-    tableName: "subjects",
+    tableName: "subject",
     timestamps: true,
   }
 );
 
-export const SubjectModel = sequelizedb.models.Subject;
+export const SubjectModel = SequelizeDB.models.Subject;

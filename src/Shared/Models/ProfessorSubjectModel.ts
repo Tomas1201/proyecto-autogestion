@@ -1,5 +1,5 @@
 import { DataTypes, Model } from "sequelize";
-import { sequelizedb } from "../../Database/Sequelize.js";
+import { SequelizeDB } from "../../Database/Sequelize.js";
 
 export class ProfessorSubject extends Model {
   public id!: number;
@@ -14,42 +14,42 @@ export class ProfessorSubject extends Model {
 
 ProfessorSubject.init(
   {
-    id: {
+    Id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
-    professorId: {
-      type: DataTypes.INTEGER,
+    ProfessorId: {
+      type: DataTypes.UUID,
       allowNull: false,
       references: {
-        model: "professors",
-        key: "id",
+        model: "Professor",
+        key: "Id",
       },
     },
-    subjectId: {
-      type: DataTypes.INTEGER,
+    SubjectId: {
+      type: DataTypes.UUID,
       allowNull: false,
       references: {
-        model: "subjects",
-        key: "id",
+        model: "Subject",
+        key: "Id",
       },
     },
-    role: {
+    Role: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    schedule: {
+    Schedule: {
       type: DataTypes.STRING,
       allowNull: false,
     },
   },
   {
-    sequelize: sequelizedb,
+    sequelize: SequelizeDB,
     modelName: "ProfessorSubject",
-    tableName: "professor_subjects",
+    tableName: "ProfessorSubject",
     timestamps: true,
   }
 );
 
-export const ProfessorSubjectModel = sequelizedb.models.ProfessorSubject;
+export const ProfessorSubjectModel = SequelizeDB.models.ProfessorSubject;

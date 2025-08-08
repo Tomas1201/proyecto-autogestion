@@ -1,5 +1,5 @@
 import { ScheduleService } from "./ScheduleService.js";
-import { ProfessorSubject } from "../Shared/Models/ProfessorSubjectModel.js";
+import { ProfessorSubject } from "../Models/ProfessorSubjectModel.js";
 
 const scheduleService = new ScheduleService();
 

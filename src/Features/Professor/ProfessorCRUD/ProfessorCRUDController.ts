@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { ProfessorService } from "./ProfessorCRUDService.js";
-import * as Validator from "../../../Professor/ProfessorValidatorMiddleware.js";
+import * as Validator from "../Middlewares/ProfessorValidatorMiddleware.js";
 import { NextFunction } from "express";
 import { Subject } from "../../../Shared/Models/SubjectModel.js";
 

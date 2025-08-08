@@ -1,5 +1,5 @@
-import { Subject } from "../Shared/Models/SubjectModel.js";
-import { ProfessorSubject } from "../Shared/Models/ProfessorSubjectModel.js";
+import { Subject } from "../Models/SubjectModel.js";
+import { ProfessorSubject } from "../Models/ProfessorSubjectModel.js";
 
 export class ScheduleService {
   async checkAvailability(

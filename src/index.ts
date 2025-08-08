@@ -1,7 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 import { ProfessorCRUDRouter } from "./Features/Professor/ProfessorCRUD/ProfessorCRUDRouter.js";
-import { sequelizedb } from "./Database/Sequelize.js";
+import { SequelizeDB } from "./Database/Sequelize.js";
 import { GeneralRouter } from "./Shared/GeneralRouter.js";
 
 const app = express();
@@ -16,12 +16,12 @@ app.use(
   }
 );
 
-sequelizedb
+SequelizeDB
   .authenticate()
   .then(() => console.log("Database connection established"))
   .catch((error: Error) => console.error("Database connection error:", error));
   
-sequelizedb.sync();
+SequelizeDB.sync();
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
