@@ -5,10 +5,10 @@ import {StudentSearchService} from './StudentSearchService.js';
 export const StudentSearchController = {
 
  getStudentsByName: async (req: Request, res: Response) => {
-    const { name } = req.params;
+    const { Name } = req.params;
 
     try {
-      const Students = await StudentSearchService.getByName(name);
+      const Students = await StudentSearchService.getByName(Name);
 
       if (!Students || Students.length === 0) {
         res
@@ -50,9 +50,9 @@ export const StudentSearchController = {
   },
 
   getBySubject: async (req: Request, res: Response) => {
-    const { asignatura } = req.params;
+    const { Subject } = req.params;
     try {
-      const alumnos = await StudentSearchService.getBySubject(asignatura);
+      const alumnos = await StudentSearchService.getBySubject(Subject);
       if (!alumnos || alumnos.length === 0) {
         res
           .status(404)
@@ -72,9 +72,9 @@ export const StudentSearchController = {
   },
 
   getByCareer: async (req: Request, res: Response) => {
-    const { carrera } = req.params;
+    const { Career } = req.params;
     try {
-      const alumnos = await StudentSearchService.getByCareer(carrera);
+      const alumnos = await StudentSearchService.getByCareer(Career);
       if (!alumnos || alumnos.length === 0) {
         res
           .status(404)

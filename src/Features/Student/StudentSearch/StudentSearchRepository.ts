@@ -19,8 +19,8 @@ async FindByName(Name: string): Promise<Student[] | null> {
       }
       const alumnos = await Student.findAll({
         where: {
-          nombre: {
-            [Op.like]: `%${Name.toLowerCase()}%`,
+          Name: {
+            [Op.iLike]: `%${Name.toLowerCase()}%`,
           },
         },
       });
@@ -39,7 +39,7 @@ async FindByName(Name: string): Promise<Student[] | null> {
       const query = {
         where: {
           LastName: {
-            [Op.like]: `%${LastName.toLowerCase()}%`,
+            [Op.iLike]: `%${LastName.toLowerCase()}%`,
           },
         },
       };
@@ -102,7 +102,7 @@ async FindByName(Name: string): Promise<Student[] | null> {
   async FindByDni(DNI: number): Promise<Student | null> {
     try {
       const alumnos = await Student.findAll({
-        where: { dni: DNI },
+        where: { Dni: DNI },
       });
       return alumnos.length > 0 ? (alumnos[0] as Student) : null;
     } catch (error) {
@@ -114,7 +114,7 @@ async FindByName(Name: string): Promise<Student[] | null> {
   async FindByEmail(Email: string): Promise<Student | null> {
     try {
       const alumnos = await Student.findAll({
-        where: { email: Email },
+        where: { Email: Email },
       });
       return alumnos.length > 0 ? (alumnos[0] as Student) : null;
     } catch (error) {
@@ -127,7 +127,7 @@ async FindByName(Name: string): Promise<Student[] | null> {
     try {
       const query = {
         where: {
-          status: {
+          Status: {
             [Op.eq]: status,
           },
         },
@@ -146,8 +146,8 @@ async FindByName(Name: string): Promise<Student[] | null> {
     try {
       const alumnos = await Student.findAll({
         where: {
-          carrera: {
-            [Op.like]: `%${carrera.toLowerCase()}%`,
+          Career: {
+            [Op.iLike]: `%${carrera.toLowerCase()}%`,
           },
         },
       });
