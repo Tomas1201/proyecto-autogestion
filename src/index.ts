@@ -1,10 +1,10 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import AlumnoRouter from './Features/Student/StudentCRUD/StudentCRUDRouter.js';
+import {GeneralRouter} from './Features/GeneralRouter.js';
 
 
 import { SequelizeDB } from './Database/Sequelize.js';
-import a from './Database/Relaciones.js'; // Importar las relaciones
+import a from './Shared/Relaciones.js'; // Importar las relaciones
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 a;
-app.use('/api/v1/alumnos', AlumnoRouter); 
+app.use('/api/v1/students', GeneralRouter); 
 
 
 SequelizeDB.authenticate()

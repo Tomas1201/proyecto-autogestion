@@ -1,7 +1,7 @@
 import { DataTypes, Model } from "sequelize";
 import { SequelizeDB } from "../../../Database/Sequelize.js";
 
-export class Horario extends Model {
+export class Schedule extends Model {
   public id!: string; // UUIDV4
   public dia!: string;
   public hora_inicio!: string;
@@ -13,36 +13,33 @@ export class Horario extends Model {
   public readonly updatedAt!: Date;
 }
 
-Horario.init(
+Schedule.init(
   {
-    id: {
+    Id: {
       type: DataTypes.UUID,
-  defaultValue: DataTypes.UUIDV4,
-  primaryKey: true,
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true,
     },
-    dia: {
+    Day: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    hora_inicio: {
+    StartTime: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    hora_fin: {
+    FinalTime: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    aula: {
+    Classroom: {
       type: DataTypes.STRING,
       allowNull: false,
     },
   },
   {
     sequelize: SequelizeDB,
-    modelName: "Horario",
-    tableName: "horarios",
     timestamps: true, // Agrega createdAt y updatedAt
-    createdAt: "fecha_creacion",
-    updatedAt: "fecha_actualizacion",
+    tableName: "Schedule", // Nombre de la tabla en la base de datos
   }
 );

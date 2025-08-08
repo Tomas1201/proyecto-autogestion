@@ -24,7 +24,7 @@ Professor.init({
     type: DataTypes.STRING,
     allowNull: false,
   },
-  dni: {
+  Dni: {
     type: DataTypes.STRING,
     allowNull: false,
     unique: true,
@@ -34,7 +34,7 @@ Professor.init({
     allowNull: false,
     unique: true,
   },
-  titulo_academico: {
+  AcademicTitle: {
     type: DataTypes.STRING,
     allowNull: false,
   },
@@ -46,7 +46,7 @@ Professor.init({
     type: DataTypes.STRING,
     allowNull: false,
   },
-  disponibilidad_horaria: {
+  ScheduleAvailability: {
     type: DataTypes.TEXT,
     allowNull: false,
   },
@@ -59,5 +59,6 @@ Professor.init({
 }, {
     sequelize: SequelizeDB,
   timestamps: true,
+  tableName: 'Professor', // Nombre de la tabla en la base de datos
 });
 

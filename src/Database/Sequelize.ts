@@ -11,7 +11,7 @@ export const SequelizeDB = new Sequelize(process.env.DB_NAME || 'pepe', process.
     logging: console.log, // Disable logging for cleaner output
      });
 
-     
+//SOY un GATO Miiiiiiiiiiiiiaaaaaaaaaaaaaauuuuuuuuuuuuu
 
 
 

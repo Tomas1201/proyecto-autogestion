@@ -1,7 +1,7 @@
 import { DataTypes, Model } from "sequelize";
-import { SequelizeDB } from "../../Database/Sequelize.js";
+import { SequelizeDB } from "../../../Database/Sequelize.js";
 
-export class AcademicPositionModelModel extends Model {
+export class AcademicPositionModel extends Model {
   public Id!: number;
   public CareerPlanId!: number;
   public SubjectId!: number;
@@ -15,7 +15,7 @@ export class AcademicPositionModelModel extends Model {
   public readonly updatedAt!: Date;
 }
 
-AcademicPositionModelModel.init(
+AcademicPositionModel.init(
   {
     Id: {
       type: DataTypes.INTEGER,
@@ -26,39 +26,39 @@ AcademicPositionModelModel.init(
       type: DataTypes.UUID,
       allowNull: false,
       references: {
-        model: "PlanCarrera",
-        key: "id",
+        model: "CareerPlan",
+        key: "Id",
       },
     },
-    asignaturaId: {
+    SubjectId: {
       type: DataTypes.UUID,
       allowNull: false,
       references: {
-        model: "Asignaturas",
-        key: "id",
+        model: "Subject",
+        key: "Id",
       },
     },
-    CicloElectivoId: {
+    CycleElectiveId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: "ciclo_electivo",
-        key: "id",
+        model: "CycleElective",
+        key: "Id",
       },
     },
-    profesorId: {
+    ProfessorId: {
       type: DataTypes.UUID,
       allowNull: false,
       references: {
-        model: "professors",
-        key: "id",
+        model: "Professor",
+        key: "Id",
       },
     },
-    cargaHoraria: {
+    Workload: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    isOptativa: {
+    IsOptional: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: false,
@@ -66,10 +66,7 @@ AcademicPositionModelModel.init(
   },
   {
     sequelize: SequelizeDB,
-    modelName: "PuestoAcademico",
-    tableName: "PuestoAcademico",
     timestamps: true,
-    createdAt: "fecha_creacion",
-    updatedAt: "fecha_actualizacion",
+    tableName: "AcademicPosition",
   }
 );

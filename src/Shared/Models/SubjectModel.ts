@@ -42,4 +42,5 @@ export class Subject extends Model {
 },{
     sequelize: SequelizeDB,
     timestamps: true, // Agrega createdAt y updatedAt
+    tableName: 'Subject', // Nombre de la tabla en la base de datos
 });

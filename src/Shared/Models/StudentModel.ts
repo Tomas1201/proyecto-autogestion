@@ -20,7 +20,7 @@ export class Student extends Model {
 }
 
 Student.init({
-   id: {
+   Id: {
   type: DataTypes.UUID,
   defaultValue: DataTypes.UUIDV4,
   primaryKey: true,
@@ -38,34 +38,29 @@ Student.init({
         allowNull: false,
         unique: true,
     },
-    legajo: {
+    File: {
         type: DataTypes.INTEGER,
         allowNull: false,
         unique: true,
     },
-    status: {
+    Status: {
         type: DataTypes.ENUM('activo', 'inactivo', 'graduado'),
         allowNull: false,
         defaultValue: 'activo',
     },
-    dni: {
+    Dni: {
         type: DataTypes.INTEGER,
         allowNull: false,
         unique: true,
     },
-    carrera: {
+    Career: {
         type: DataTypes.STRING,
         allowNull: true,   
-    },
-    createdAt: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: DataTypes.NOW,
-    },
-}, {
+    }
+    }, {
     sequelize: SequelizeDB,
-    tableName: 'Alumnos',
     timestamps: true,
+    tableName: 'Student', // Nombre de la tabla en la base de datos
 });
 
 

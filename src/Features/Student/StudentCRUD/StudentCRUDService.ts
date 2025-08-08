@@ -1,6 +1,6 @@
 import {StudentRepository} from './StudentCRUDRepository.js';   
 import { Student } from '../../../Shared/Models/StudentModel.js'; 
-import { AlumnoDTO } from '../../../Middlewares/StudentValidationMiddleware.js';
+import { StudentDTO } from '../StudentValidationMiddleware.js';
 
 const StudentRepositoryI = StudentRepository.getInstance();
 
@@ -29,45 +29,7 @@ export const StudentService = {
   },
 
 
-  getByName: async (name: string) => {
-    try {
-      const alumnos = await StudentRepositoryI.FindByName(name);
-      return alumnos;
-    } catch (error) {
-      console.error('Error fetching alumno by name:', error);
-      throw new Error('Database error');
-    }
-  },
-
-
-  getByLastName: async (apellido: string) => {
-    try {
-      const alumnos = await StudentRepositoryI.FindByLastName(apellido);
-      return alumnos;
-    } catch (error) {
-      console.error('Error fetching alumno by apellido:', error);
-      throw new Error('Database error');}
-    },
  
-    getBySubject: async (asignatura: string) => {
-      try{
-        const alumnos = await StudentRepositoryI.FindBySubject(asignatura);
-        return alumnos;
-      }catch (error){
-        console.error('Error fetching alumno by apellido:', error);
-      throw new Error('Database error');}
-      
-    },
-
- getByCareer: async (carrera: string) => {
-      try{
-        const alumnos = await StudentRepositoryI.FindByCareer(carrera);
-        return alumnos;
-      }catch (error){
-        console.error('Error fetching student by last name:', error);
-      throw new Error('Database error');}
-      
-    },
 
   Create: async (StudentData: Student) => {
     try {
