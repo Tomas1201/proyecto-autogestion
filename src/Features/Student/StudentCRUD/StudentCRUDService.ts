@@ -6,7 +6,7 @@ const StudentRepositoryI = StudentRepository.getInstance();
 
 export const StudentService = {
 
-  getById: async (id: number) => {
+  getById: async (id: string) => {
     try {
       const alumno = await StudentRepositoryI.FindById(id);
       return alumno;

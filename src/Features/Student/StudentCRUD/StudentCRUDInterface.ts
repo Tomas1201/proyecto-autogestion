@@ -4,7 +4,7 @@ import { Student } from '../../../Shared/Models/StudentModel.js'; // Asegúrate 
 export interface StudentInterface {
   FindAll(): Promise<Student[]>;
 
-  FindById(id: number): Promise<Student | null>;
+  FindById(id: string): Promise<Student | null>;
  
 
   //findByCicloElectivo(cicloElectivoId: number): Promise<Student[] | null>; 

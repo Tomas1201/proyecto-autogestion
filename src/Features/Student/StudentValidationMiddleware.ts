@@ -10,19 +10,19 @@ import { Request, Response, NextFunction } from "express";
 
 const StudentSchema = z.object({
   Id: z.uuid().optional(), // This field is not sent when creating a new student
-  FirstName: z.string().min(1, "First name is required"),
+  Name: z.string().min(1, "First name is required"),
   LastName: z.string().min(1, "Last name is required"),
   Email: z.email("Invalid email format"),
-  StudentId: z.number().int().positive("Student ID must be a positive integer").optional(), // This field is generated in the database
+  File: z.number().int().positive("Student ID must be a positive integer"), // This field is generated in the database
   Status: z.enum(["Active", "Inactive"], "Status must be either 'activo' or 'inactivo'").optional(),
   Dni: z.number("National ID must be numeric" )
     .int()
     .positive("National ID must be a positive integer"),
-  Majors: z.array(z.string()).optional(),
+  Career: z.array(z.string()).optional(),
 });
 
 const StudentUpdateSchema = z.object({
-  FirstName: z.string().min(1, "First name is required").optional(),
+  Name: z.string().min(1, "First name is required").optional(),
   LastName: z.string().min(1, "Last name is required").optional(),
   Email: z.email("Invalid email format").optional(),
   StudentId: z.number().int().positive("Student ID must be a positive integer").optional(),

@@ -3,13 +3,13 @@ import { SequelizeDB } from '../../Database/Sequelize.js';
 
 
 export class Student extends Model {
-    public id!: number;
-    public name!: string;
+    public Id!: number;
+    public Name!: string;
     public LastName!: string;
     public Email!: string;
-    public legajo!: number;
-    public status!: string;
-    public dni!: number;
+    public File!: number;
+    public Status!: string;
+    public Dni!: number;
     public Career!: string[];
     
 

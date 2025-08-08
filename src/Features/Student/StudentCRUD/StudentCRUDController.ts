@@ -7,13 +7,8 @@ export const StudentController = {
     const { Id } = req.params;
 
     try {
-      if (!Id || isNaN(Number(Id))) {
-        res
-          .status(400)
-          .json({ status: 400, message: "Invalid ID format", ERROR_CODE: 400 });
-        return;
-      }
-      const Student = await StudentService.getById(Number(Id));
+  
+      const Student = await StudentService.getById(Id);
       if (!Student) {
         res
           .status(404)

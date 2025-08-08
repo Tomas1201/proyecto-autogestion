@@ -17,7 +17,7 @@ export class StudentRepository implements StudentInterface {
   
   
 
-  async FindById(id: number): Promise<Student | null> {
+  async FindById(id: string): Promise<Student | null> {
     try {
       const alumno = await Student.findByPk(id);
       return alumno ? (alumno as Student) : null;
@@ -49,9 +49,9 @@ export class StudentRepository implements StudentInterface {
       const existingAlumno = await Student.findOne({
         where: {
           [Op.or]: [
-            { email: alumnoData.Email },
-            { dni: alumnoData.dni },
-            { legajo: alumnoData.legajo },
+            { Email: alumnoData.Email },
+            { Dni: alumnoData.Dni },
+            { File: alumnoData.File },
           ],
         },
       });
