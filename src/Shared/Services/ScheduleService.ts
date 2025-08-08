@@ -1,7 +1,9 @@
+/*
 import { Subject } from "../Models/SubjectModel.js";
 import { ProfessorSubject } from "../Models/ProfessorSubjectModel.js";
 
 export class ScheduleService {
+
   async checkAvailability(
     professorId: number,
     newSubjects: number[]
@@ -21,7 +23,7 @@ export class ScheduleService {
     for (const newSubject of newOnes) {
       for (const currentSubject of current) {
         if (
-          newSubject.day === currentSubject.day &&
+          newSubject.Day === currentSubject.day &&
           newSubject.startTime < currentSubject.endTime &&
           newSubject.endTime > currentSubject.startTime
         ) {
@@ -33,3 +35,4 @@ export class ScheduleService {
     }
   }
 }
+*/

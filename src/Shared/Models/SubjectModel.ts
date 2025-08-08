@@ -2,7 +2,7 @@ import { DataTypes, Model } from 'sequelize';
 import { SequelizeDB } from '../../Database/Sequelize.js';
 
 export class Subject extends Model {
-    public id!: string; // UUIDV4
+    public Id!: string; // UUIDV4
     public Name!: string;
     public Code!: string;
     public Hours!: number;
@@ -44,3 +44,5 @@ export class Subject extends Model {
     timestamps: true, // Agrega createdAt y updatedAt
     tableName: 'Subject', // Nombre de la tabla en la base de datos
 });
+
+export const SubjectModel = SequelizeDB.models.Subject;

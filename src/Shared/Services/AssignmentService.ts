@@ -1,3 +1,4 @@
+/*
 import { ScheduleService } from "./ScheduleService.js";
 import { ProfessorSubject } from "../Models/ProfessorSubjectModel.js";
 
@@ -35,4 +36,4 @@ export class AssignmentService {
 
     return { message: "Unassignment successful" };
   }
-}
+}*/

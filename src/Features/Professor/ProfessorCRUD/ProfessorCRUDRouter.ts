@@ -1,16 +1,16 @@
 import { Router } from "express";
 import * as ProfessorController from "./ProfessorCRUDController.js";
-const router = Router();
+const ProfessorCRUDRouter = Router();
 
-router.post("/professors", ProfessorController.registerProfessor);
-router.post(
+ProfessorCRUDRouter.post("/professors", ProfessorController.registerProfessor);
+ProfessorCRUDRouter.post(
   "/professors/registerToSubject/:id",
   ProfessorController.registerProfessorToSubject
 );
-router.get("/professors/search/state/:state", ProfessorController.searchByState);
-router.get("/professors", ProfessorController.searchProfessors);
-router.get("/professors/:id", ProfessorController.searchProfessorById);
-router.put("/professors/:id", ProfessorController.updateProfessor);
-router.put("/professors/archive/:id", ProfessorController.archiveProfessor);
-router.put("/professors/unarchive/:id", ProfessorController.unarchiveProfessor);
-export const ProfessorCRUDRouter = router;
+ProfessorCRUDRouter.get("/professors/search/state/:state", ProfessorController.searchByState);
+ProfessorCRUDRouter.get("/professors", ProfessorController.searchProfessors);
+ProfessorCRUDRouter.get("/professors/:id", ProfessorController.searchProfessorById);
+ProfessorCRUDRouter.put("/professors/:id", ProfessorController.updateProfessor);
+ProfessorCRUDRouter.put("/professors/archive/:id", ProfessorController.archiveProfessor);
+ProfessorCRUDRouter.put("/professors/unarchive/:id", ProfessorController.unarchiveProfessor);
+export {ProfessorCRUDRouter};
