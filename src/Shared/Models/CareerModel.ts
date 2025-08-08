@@ -44,7 +44,7 @@ export class Career extends Model {
   modelName: 'Career',
   timestamps: true, // Esto añade createdAt y updatedAt automáticamente
 });
-sequelizeDB.sync();
+
 export const CareerModel = sequelizeDB.models.Career;
 
 

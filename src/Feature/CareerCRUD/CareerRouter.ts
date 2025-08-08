@@ -1,10 +1,10 @@
 // src/routes/Career.Router.ts
 import { Router } from 'express';
 import { CareerController } from './CareerController.js';
-import { validate } from '../../Middlewares/validateRequest.js';
-import { createCareerSchema, UpdateCareerSchema, FindCareerByIdSchema } from '../../Middlewares/schemaValidator.js';
+import { validate } from '../../Shared/Middlewares/validateRequest.js';
+import { createCareerSchema, UpdateCareerSchema } from '../../Shared/Middlewares/schemaValidator.js';
 
-const router = Router();
+const CareerRouter = Router();
 
 const asyncHandler = (
   fn: (req: any, res: any, next: any) => Promise<any>
@@ -13,37 +13,34 @@ const asyncHandler = (
 };
 
 // GET all
-router.get(
+CareerRouter.get(
   '/',
   asyncHandler(CareerController.getAll)
 );
 
 // GET by ID con validación de params
-router.get(//VER SI ESTAN BIEN LAS VALIDACIONES CON ZODS
+CareerRouter.get(//VER SI ESTAN BIEN LAS VALIDACIONES CON ZODS
   '/:id',
-  validate({ params: CareerIdSchema }),
   asyncHandler(CareerController.getById)
 );
 
 // POST nueva Career con validación del body
-router.post(
+CareerRouter.post(
   '/',
   validate({ body: createCareerSchema }),
   asyncHandler(CareerController.create)
 );
 
 // PUT actualizar Career con validación de body + params
-router.put(
+CareerRouter.put(
   '/:id',
-  validate({ params: FindCareerByIdSchema, body: UpdateCareerSchema }),
   asyncHandler(CareerController.update)
 );
 
 // DELETE Career con validación de params
-router.delete(
+CareerRouter.delete(
   '/:id',
-  validate({ params: FindCareerByIdSchema }),
   asyncHandler(CareerController.delete)
 );
 
-export default router;
+export default CareerRouter;

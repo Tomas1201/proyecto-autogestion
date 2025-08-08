@@ -1,8 +1,8 @@
 // src/services/CareerService.ts
 
-import { CareerModel, Career} from '../../Models/Career/CareerModel.js'; // Tu modelo/interfaz Career
+import { CareerModel, Career} from '../../Shared/Models/CareerModel.js'; // Tu modelo/interfaz Career
 import { CareerInterface } from './CareerInterface.js'; // Tu interfaz del repositorio
-import { CareerRepository } from '../../Repositories/Career/CareerRepository.js'; // Tu implementación del repositorio
+import { CareerRepository } from './CareerRepository.js'; // Tu implementación del repositorio
 import { FindOptions } from 'sequelize'; // Para el método getAllCareers flexible
 
 

@@ -1,8 +1,8 @@
 
 import { CareerInterface } from '../../Feature/CareerCRUD/CareerInterface.js';
-import type { Career } from '../../Models/Career/CareerModel.js'; // Asegúrate de que la ruta sea correcta
+import type { Career } from '../../Shared/Models/CareerModel.js'; // Asegúrate de que la ruta sea correcta
 import { Op } from 'sequelize';
-import { CareerModel } from '../../Models/Career/CareerModel.js'; // Asegúrate de que la ruta sea correcta
+import { CareerModel } from '../../Shared/Models/CareerModel.js'; // Asegúrate de que la ruta sea correcta
 
 export class CareerRepository implements CareerInterface {
     // Aquí irían las implementaciones de los métodos definidos en CareerInterface

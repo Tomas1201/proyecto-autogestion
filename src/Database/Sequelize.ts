@@ -3,10 +3,14 @@ import { Sequelize } from 'sequelize';
 
 dotenv.config();
 
- export const sequelizeDB = new Sequelize(process.env.DB_NAME || 'Careers', process.env.DB_USER || 'root', process.env.DB_PASSWORD || 'ivo123', {
-    host: process.env.DB_HOST || 'postgres',
-    port: parseInt(process.env.DB_PORT || '3306', 10),
-    dialect: 'mysql',
+export const sequelizeDB = new Sequelize(
+  process.env.DB_NAME || 'pepe',
+  process.env.DB_USER || 'postgres',
+  process.env.DB_PASSWORD || 'contraseña',
+  {
+    host: process.env.DB_HOST || 'localhost',
+    port: parseInt(process.env.DB_PORT || '5432', 10),
+    dialect: 'postgres',
     logging: console.log,
-     });
-  
+  }
+);
