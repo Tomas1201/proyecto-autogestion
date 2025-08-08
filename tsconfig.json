@@ -16,6 +16,7 @@
        
     
      },
-     "include": ["src//*", "/*.ts","src/**/*.ts", "src/Alumno/Controllers", "src/Alumno/Models", "src/Features/Student/StudentCRUD/StudentCRUDController.ts", "src/Shared/Models/SubjectModel.ts", "srsrc/Models/CarreraAsignaturaModel.ts ","src/Shared/Models/StudentModel.ts", "src/Shared/Models/CareerModel.ts", "src/Features/Student/StudentReport", "src/Features/Student/StudentSearch"],
+     "include": ["src//*", "/*.ts","src/**/*.ts", "src/Alumno/Controllers", "src/Alumno/Models", "src/Features/Student/StudentCRUD/StudentCRUDController.ts", "src/Shared/Models/SubjectModel.ts", "srsrc/Models/CarreraAsignaturaModel.ts ","src/Shared/Models/StudentModel.ts", "src/Shared/Models/CareerModel.ts", "src/Features/Student/StudentReport", "src/Features/Student/StudentSearch",  "src/Professor/Controllers", "src/Professor/Models", "src/Repositories/ProfessorRepository.ts", "src/Professor/ProfessorRouter.ts", "src/Models/SubjectModel.ts", "src/Database/CarreraAsignaturaModel.ts", "src/Professor/ProfessorService.ts", "src/Features/Professor/Middlewares/ProfessorValidatorMiddleware.ts", "src/Database/CarrerasModel.ts"],
      "exclude": ["node_modules"]
    }
+  
