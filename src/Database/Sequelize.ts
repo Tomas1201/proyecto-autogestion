@@ -3,7 +3,7 @@ import { Sequelize } from 'sequelize';
 
 dotenv.config();
 
-export const sequelizeDB = new Sequelize(
+export const SequelizeDB = new Sequelize(
   process.env.DB_NAME || 'pepe',
   process.env.DB_USER || 'postgres',
   process.env.DB_PASSWORD || 'contraseña',

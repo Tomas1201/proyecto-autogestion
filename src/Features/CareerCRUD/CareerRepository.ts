@@ -1,5 +1,5 @@
 
-import { CareerInterface } from '../../Feature/CareerCRUD/CareerInterface.js';
+import { CareerInterface } from './CareerInterface.js';
 import type { Career } from '../../Shared/Models/CareerModel.js'; // Asegúrate de que la ruta sea correcta
 import { Op } from 'sequelize';
 import { CareerModel } from '../../Shared/Models/CareerModel.js'; // Asegúrate de que la ruta sea correcta
@@ -50,7 +50,7 @@ export class CareerRepository implements CareerInterface {
         }
     }
     
-      async create(CareerData: Omit<Career, 'id'>): Promise<Career> {
+      async create(CareerData: Omit<Career, 'id'> & { name: string }): Promise<Career> {
         try {
             
             

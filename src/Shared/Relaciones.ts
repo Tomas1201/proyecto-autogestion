@@ -2,7 +2,7 @@ import { Career } from './Models/CareerModel.js';
 import { C_AModel } from './Models/Domain/CareerSubjectModel.js'; 
 import { Subject } from './Models/SubjectModel.js'; 
 import { Registration } from './Models/Domain/RegistrationModel.js';
-import { Student} from './Models/StudentModel.js';
+import { Student } from './Models/StudentModel.js';
 import {CycleElectiveModel} from './Models/Domain/CycleElectiveModel.js';
 import { SequelizeDB } from '../Database/Sequelize.js';
 import {SubjectPlanModel} from './Models/Domain/SubjectPlanModel.js';

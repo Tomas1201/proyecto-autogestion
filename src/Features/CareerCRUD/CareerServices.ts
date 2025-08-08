@@ -10,7 +10,7 @@ export interface ICareerService {//Opcional
     getAllCareers(): Promise<Career[]>;
     getCareerById(id: number): Promise<Career | null>;
     getCareersByName(name: string): Promise<Career[] | null>;
-    createCareer(CareerData: Omit<Career, 'id'>): Promise<Career>;
+    createCareer(CareerData: Career): Promise<Career>;
     UpdateCareer(id: number, CareerData: Partial<Career>): Promise<boolean>;
     deleteCareer(id: number): Promise<boolean>;
 }
@@ -66,15 +66,13 @@ export class CareerService implements ICareerService {
         }
     }
 
-    public async createCareer(CareerData: Omit<Career, 'id'>): Promise<Career> {
-        console.log("Servicio: Intentando crear Career:", CareerData.name);
+    public async createCareer(CareerData: Career): Promise<Career> {
+        
         // Validaciones de negocio antes de llamar al repositorio
-        if (!CareerData.name || CareerData.name.trim() === '') {
+        if (!CareerData.Name || CareerData.Name.trim() === '') {
             throw new Error('El name de la Career es obligatorio.');
         }
-        if (CareerData.numberStudents <= 0) {
-            throw new Error('La cantidad de alumnos debe ser un número positivo.');
-        }
+        
 
         //Ver donde imlementar la siguiente validacion:  const existingCareer = await this.CareerRepository.findByName(CareerData.name);
         /*

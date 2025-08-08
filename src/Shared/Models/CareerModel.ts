@@ -1,15 +1,15 @@
-import { sequelizeDB } from "../../Database/Sequelize.js";
+import { SequelizeDB } from "../../Database/Sequelize.js";
 
 import { DataTypes, Model } from "sequelize";
 
 export class Career extends Model {
-  public id!: string; // UUIDV4
-  public nombre!: string;
-  public descripcion!: string;
-  public duracion!: number;
-  public titulo!: string;
-  public asignaturas_id!: number[];
-  public JefeCarrera_id!: number;
+  public Id!: string; // UUIDV4
+  public Name!: string;
+  public Description!: string;
+  public Duration!: number;
+  public Qualification!: string;
+  public SubjectId!: number[];
+  public  HeadOfCareerId!: number;
 
   // timestamps!
   public readonly createdAt!: Date;
@@ -53,3 +53,5 @@ Career.init(
     tableName: "Career", // Nombre de la tabla en la base de datos
   }
 );
+
+export const CareerModel = SequelizeDB.models.Career;

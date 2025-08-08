@@ -1,12 +1,6 @@
-
-import dotenv from 'dotenv';
-
 import a from './Shared/Relaciones.js'; // Importar las relaciones
-dotenv.config();
 import express from "express";
-//import { SequelizeDB } from "./Database/Sequelize.js";
-import ExportRetionship from "./Shared/ExportRelationship.js";
-import GeneralRouter from "./Feature/GeneralRouter.js"
+import GeneralRouter from "./Features/GeneralRouter.js"
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -18,7 +12,6 @@ a;
 app.use('/api/v1/students', GeneralRouter); 
 
 
-ExportRetionship;
 app.use("/Career", GeneralRouter);
 
 
