@@ -5,27 +5,10 @@ import { SubjectModel } from "../../../Shared/Models/SubjectModel.js";
 
 export class ProfessorService {
   async registerProfessor(data: any) {
-    console.log("Data received for professor registration:", data);
-    if (
-      !data.id ||
-      !data.firstName ||
-      !data.dni ||
-      !data.fileNumber ||
-      !data.academicTitle ||
-      !data.email ||
-      !data.phone ||
-      !data.timeAvailability
-    ) {
-      throw new Error("All fields are required");
-    }
-
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
-      throw new Error("Invalid email format");
-    }
+    
 
     const existing = await professorRepository.findByDniOrFileNumber(
-      data.dni,
-      data.fileNumber
+      data.Dni,
     );
     if (existing) {
       throw new Error("Professor with same DNI or file number already exists");

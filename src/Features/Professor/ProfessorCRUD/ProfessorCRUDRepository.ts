@@ -18,8 +18,8 @@ export class ProfessorRepository {
     });
   }
 
-  async findByDniOrFileNumber(dni: string, fileNumber: string) {
-    return await ProfessorModel.findOne({ where: { dni, fileNumber } });
+  async findByDniOrFileNumber(Dni: string) {
+    return await ProfessorModel.findOne({ where: { Dni:Dni } });
   }
 
   async updateById(id: number, data: Partial<any>) {

@@ -20,8 +20,10 @@ export const registerProfessor = async (
       data: professor,
     });
   } catch (error: any) {
+    
     if (error.name === "ZodError") {
       res.status(400).json({ errors: error.errors });
+      console.log("zod");
     } else {
       res.status(400).json({ error: error.message });
     }
@@ -116,7 +118,7 @@ export const updateProfessor = async (
 ): Promise<void> => {
   try {
     const validatedData = Validator.UpdateProfessorSchema.parse(req.body);
-    const id = Number(validatedData.id);
+    const id = Number(validatedData.Id);
     const updated = await service.updateProfessor(id, validatedData);
     res.status(200).json({
       code: "UPDATED",

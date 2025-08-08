@@ -50,19 +50,19 @@ export class CareerRepository implements CareerInterface {
         }
     }
     
-      async create(CareerData: Omit<Career, 'id'> & { name: string }): Promise<Career> {
+      async create(CareerData: Career): Promise<Career> {
         try {
             
             
-            const ifExist = await CareerModel.findOne({ where: { name: CareerData.name } });
+            const ifExist = await CareerModel.findOne({ where: { name: CareerData.Name } });
 
             if (ifExist) {
                 
-                throw new Error(`The Career with  name '${CareerData.name}' already exists.`);
+                throw new Error(`The Career with  name '${CareerData.Name}' already exists.`);
             }
 
             
-            const NewCareer = await CareerModel.create(CareerData);
+            const NewCareer = await CareerModel.create(CareerData as any);
             return NewCareer as Career;
 
         } catch (error) {

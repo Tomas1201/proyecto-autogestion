@@ -9,10 +9,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 a;
-app.use('/api/v1/students', GeneralRouter); 
+app.use('/api/v1/', GeneralRouter); 
 
 
-app.use("/Career", GeneralRouter);
+
 
 
 

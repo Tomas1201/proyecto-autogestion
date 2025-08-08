@@ -37,7 +37,7 @@ export class CareerService implements ICareerService {
     }
 
     public async getCareerById(id: number): Promise<Career | null> {
-        console.log(`Servicio: Solicitando Career por ID: ${id}`);
+        
         try {
             if (id <= 0) {
                 throw new Error('ID de Career inválido.');

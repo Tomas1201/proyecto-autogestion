@@ -9,7 +9,7 @@ export interface CareerInterface {
 
   findByName(name: string): Promise<Career[] | null>;
 
-  create(CareerData: Omit<Career, 'id'>): Promise<Career>; 
+  create(CareerData: Career): Promise<Career>; 
 
   update(id: number, CareerData: Partial<Career>): Promise<boolean>; 
 
