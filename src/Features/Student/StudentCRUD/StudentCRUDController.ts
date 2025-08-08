@@ -76,16 +76,11 @@ export const StudentController = {
   },
 
   UpdateStudent: async (req: Request, res: Response) => {
-    const { id } = req.params;
+    const { Id } = req.params;
     const alumno = req.body;
     try {
-      if (!id || isNaN(Number(id))) {
-        res
-          .status(400)
-          .json({ status: 400, message: "Invalid ID format", ERROR_CODE: 400 });
-        return;
-      }
-      const updatedAlumno = await StudentService.update(Number(id), alumno);
+      
+      const updatedAlumno = await StudentService.update(Id, alumno);
       if (!updatedAlumno) {
         res.status(404).json({ status: 404, message: "Alumno not found" });
         return;
@@ -98,18 +93,12 @@ export const StudentController = {
       return;
     }
   },
-
+//Equivalente a Delete
   ChangeStatusStudent: async (req: Request, res: Response) => {
-    const { id, status } = req.params;
+    const { Id, Status } = req.params;
     try {
-      if (!id || isNaN(Number(id))) {
-        res
-          .status(400)
-          .json({ status: 400, message: "Invalid ID format", ERROR_CODE: 
-400 });
-        return;
-      }
-      const UpdatedStudent = await StudentService.changeStatus(Number(id), status);
+      
+      const UpdatedStudent = await StudentService.changeStatus(Id, Status);
       if (!UpdatedStudent) {
         res.status(404).json({ status: 404, message: "Alumno not found" });
         return;

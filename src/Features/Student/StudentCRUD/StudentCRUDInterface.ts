@@ -12,6 +12,6 @@ export interface StudentInterface {
 
   Create(StudentData: Student): Promise<Student | null>; 
 
-  Update(id: number, StudentData: Student): Promise<boolean>; 
+  Update(id: string, StudentData: Student): Promise<boolean>; 
   
 }

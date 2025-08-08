@@ -8,7 +8,7 @@ const router = Router();
 router.get("/", StudentController.getAllStudents);
 
 // Devuelve un alumno por ID
-router.get("/:id", StudentController.getStudent);
+router.get("/:Id", StudentController.getStudent);
 
 
 
@@ -30,12 +30,12 @@ router.post(
 );
 
 // Actualiza un alumno por ID
-router.put("/:id", ValidateStudentUpdate, StudentController.UpdateStudent);
+router.put("/:Id", ValidateStudentUpdate, StudentController.UpdateStudent);
 
 
 /*Chequear reglas de negocio sobre este endpoint(puede el admin cambiarlo libremente?) */
 router.put(
-  "/:id/status/:status",
+  "/:Id/status/:Status",
   ValidateStudentUpdate,
  StudentController.ChangeStatusStudent
 );

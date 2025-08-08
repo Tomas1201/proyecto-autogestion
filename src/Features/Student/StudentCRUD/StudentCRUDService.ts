@@ -51,7 +51,7 @@ export const StudentService = {
     }
   },
 
-  update: async (id: number, alumnoData: Student) => {
+  update: async (id: string, alumnoData: Student) => {
     try {
       const updated = await StudentRepositoryI.Update(id, alumnoData);
       if (!updated) {
@@ -64,7 +64,7 @@ export const StudentService = {
     }
   },
 
-  changeStatus: async (id: number, status: string) => {
+  changeStatus: async (id: string, status: string) => {
     try {
       const updated = await StudentRepositoryI.ChangeStatus(id, status);
       if (!updated) { 
