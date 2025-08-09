@@ -7,7 +7,12 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+/* TO DO: See Zod Schema in realtion of Career Model and Router to create Career 
 
+Changes: Correction in GeneralRouter.
+Delte public SubjectId!: number[] in CarerModel.0ts
+
+*/
 a;
 app.use('/api/v1/students', GeneralRouter); 
 

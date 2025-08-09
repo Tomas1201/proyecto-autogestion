@@ -8,7 +8,7 @@ export class Career extends Model {
   public Description!: string;
   public Duration!: number;
   public Qualification!: string;
-  public SubjectId!: number[];
+ // public SubjectId!: number[];
   public  HeadOfCareerId!: number;
 
   // timestamps!
