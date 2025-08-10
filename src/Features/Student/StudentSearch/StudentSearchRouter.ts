@@ -4,13 +4,13 @@ import { StudentSearchController } from './StudentSearchController.js';
 const StudentSearchRouter = Router();
 
 // Devuelve un alumno por nombre
-StudentSearchRouter.get("/Name/:Name", StudentSearchController.getStudentsByName);
+StudentSearchRouter.get("/name/:Name", StudentSearchController.getStudentsByName);
 
 // Devuelve un alumno por apellido
-StudentSearchRouter.get("/LastName/:LastName", StudentSearchController.getStudentsByLastName);
+StudentSearchRouter.get("/lastname/:LastName", StudentSearchController.getStudentsByLastName);
 
-StudentSearchRouter.get("/Subject/:Subject", StudentSearchController.getBySubject);
+StudentSearchRouter.get("/subject/:Subject", StudentSearchController.getBySubject);
 
-StudentSearchRouter.get("/Career/:Career", StudentSearchController.getByCareer);
+StudentSearchRouter.get("/career/:Career", StudentSearchController.getByCareer);
 
 export { StudentSearchRouter };
