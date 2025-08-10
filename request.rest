@@ -1,0 +1,31 @@
+
+# Request REST API for Student Management
+GET http://localhost:3000/api/v1/student/students/
+
+GET http://localhost:3000/api/v1/student/students/:Id
+
+POST http://localhost:3000/api/v1/student/students/
+
+PUT http://localhost:3000/api/v1/student/students/:Id
+
+
+# Request REST API for Course Management 
+
+GET http://localhost:3000/api/v1/career/
+
+GET http://localhost:3000/api/v1/career/:Id
+
+POST http://localhost:3000/api/v1/career/
+
+PUT http://localhost:3000/api/v1/career/:Id
+
+
+# Request REST API for Professor Management
+
+GET http://localhost:3000/api/v1/professor/professors/
+
+GET http://localhost:3000/api/v1/professor/professors/:Id
+
+POST http://localhost:3000/api/v1/professor/professors/
+
+PUT http://localhost:3000/api/v1/professor/professors/:Id
