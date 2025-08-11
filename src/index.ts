@@ -11,7 +11,7 @@ app.use(express.urlencoded({ extended: true }));
 
 
 app.use('/api/v1/', GeneralRouter); 
-app.use('/career', CareerRouter); // Ensure the path is correct
+app.use('/Career', CareerRouter); // Ensure the path is correct
 
 
 
