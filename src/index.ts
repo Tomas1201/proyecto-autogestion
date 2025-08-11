@@ -13,11 +13,11 @@ Changes: Correction in GeneralRouter.
 Delte public SubjectId!: number[] in CarerModel.0ts
 
 */
-a;
+
 app.use('/api/v1/students', GeneralRouter); 
 
 
-app.use("/Career", GeneralRouter);
+app.use("/api/v1/Career", GeneralRouter);
 
 
 

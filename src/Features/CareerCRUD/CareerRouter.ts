@@ -43,4 +43,4 @@ CareerRouter.delete(
   asyncHandler(CareerController.delete)
 );
 
-export default CareerRouter;
+export{CareerRouter}
