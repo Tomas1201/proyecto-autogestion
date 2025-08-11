@@ -1,6 +1,7 @@
 import a from './Shared/Relaciones.js'; // Importar las relaciones
 import express from "express";
 import GeneralRouter from "./Features/GeneralRouter.js"
+import CareerRouter from './Features/CareerCRUD/CareerRouter.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -8,9 +9,9 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-a;
-app.use('/api/v1/', GeneralRouter); 
 
+app.use('/api/v1/', GeneralRouter); 
+app.use('/career', CareerRouter); // Ensure the path is correct
 
 
 
