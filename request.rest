@@ -31,11 +31,11 @@ POST http://localhost:3000/api/v1/Career
 Content-Type: application/json
 
 {
-    "Name":"Ingeniería en Sistemas",
-    "Description":"Carrera enfocada en el desarrollo de software y sistemas de información.",
-    "Duration": 5,
-    "Qualification": "Licenciatura",
-    "HeadOfCareerId": 3
+    "name":"Ingeniería en Sistemas",
+    "description":"Carrera enfocada en el desarrollo de software y sistemas de información.",
+    "duration": 5,
+    "qualification": "Licenciatura",
+    "headOfCareerId": 3
 }
 
 
