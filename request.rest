@@ -1,26 +1,38 @@
 
 # Request REST API for Student Management
-GET http://localhost:3000/api/v1/student/students/
+GET http://localhost:3000/api/v1/students/
 
 ###
 
-GET http://localhost:3000/api/v1/student/students/:Id
+GET http://localhost:3000/api/v1/students/13f427dd-5239-4071-ba58-bf0780b949ef
 
 ###
 
-POST http://localhost:3000/api/v1/student/students/
+POST http://localhost:3000/api/v1/students/
 content-type: application/json
+
 {
     "Name": "pepe",
     "LastName": "perez",
     "Email": "pepePerez@gmail.com",
-    "Dni": 34123467,
+    "File": 12345678,
+    "Dni": 34123467
     
 }
 
 ###
 
-PUT http://localhost:3000/api/v1/student/students/:Id
+PUT http://localhost:3000/api/v1/students/13f427dd-5239-4071-ba58-bf0780b949ef
+content-type: application/json
+
+{
+    "Name": "Juan",
+    "LastName": "perez",
+    "Email": "pepePerez@gmail.com",
+    "File": 12345678,
+    "Dni": 34123467
+    
+}
 
 ###
 # Request REST API for Course Management 

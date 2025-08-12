@@ -52,6 +52,7 @@ export class StudentRepository implements StudentInterface {
             { Email: alumnoData.Email },
             { Dni: alumnoData.Dni },
             { File: alumnoData.File },
+            
           ],
         },
       });
