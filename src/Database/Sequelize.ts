@@ -14,7 +14,7 @@ export const SequelizeDB = new Sequelize(
     logging: console.log, // Disable logging for cleaner output
      });
 
-//SOY un GATO Miiiiiiiiiiiiiaaaaaaaaaaaaaauuuuuuuuuuuuu
+
 
 
 

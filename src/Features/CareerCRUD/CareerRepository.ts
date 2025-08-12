@@ -5,8 +5,7 @@ import { Op } from 'sequelize';
 import { CareerModel } from '../../Shared/Models/CareerModel.js'; // Asegúrate de que la ruta sea correcta
 
 export class CareerRepository implements CareerInterface {
-    // Aquí irían las implementaciones de los métodos definidos en CareerInterface
-    // Implementación para obtener todas las Careers
+    
     async findAll(): Promise<Career[]> {
          try {
             const Careers = await CareerModel.findAll();
@@ -104,18 +103,5 @@ export class CareerRepository implements CareerInterface {
 
 
 }
-          
 
-            // Implementación para actualizar una Career existente
-         
-            
-            
-            /*const resultado = await Career.update({ name: 'Nuevo' }, { where: { id: 1 } });
-                console.log(resultado); // --> [1]
-
-                const [rowsUpdated] = resultado;
-                esto es equivalente a--->
-                const rowsUpdated = resultado[0];
-
- */
     

@@ -1,4 +1,4 @@
-import a from './Shared/Relaciones.js'; // Importar las relaciones
+import a from './Shared/Relaciones.js'; 
 import express from "express";
 import GeneralRouter from "./Features/GeneralRouter.js"
 import CareerRouter from './Features/CareerCRUD/CareerRouter.js';
@@ -11,7 +11,7 @@ app.use(express.urlencoded({ extended: true }));
 
 
 app.use('/api/v1/', GeneralRouter); 
-app.use('/Career', CareerRouter); // Ensure the path is correct
+app.use('/Career', CareerRouter); 
 
 
 

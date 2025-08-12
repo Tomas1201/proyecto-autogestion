@@ -49,8 +49,8 @@ Career.init(
   },
   {
     sequelize: SequelizeDB,
-    timestamps: true, // Agrega createdAt y updatedAt
-    tableName: "Career", // Nombre de la tabla en la base de datos
+    timestamps: true, 
+    tableName: "Career", 
   }
 );
 
