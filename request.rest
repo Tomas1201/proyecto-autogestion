@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 # Request REST API for Student Management
 GET http://localhost:3000/api/v1/students/
@@ -18,10 +19,26 @@ content-type: application/json
     "File": 12345678,
     "Dni": 34123467
     
+=======
+# Request REST API for Student Management GET http://localhost:3000/api/v1/student/students/
+
+###
+@host = http://localhost:3000
+@career_id = 3
+GET http://localhost:3000/api/v1/student/students/:Id
+
+###
+
+POST http://localhost:3000/api/v1/student/students/ content-type: application/json {
+
+    "Name": "pepe", "LastName": "perez", "Email": "pepePerez@gmail.com", "Dni": 34123467,
+
+>>>>>>> Develop-Ivo
 }
 
 ###
 
+<<<<<<< HEAD
 PUT http://localhost:3000/api/v1/students/13f427dd-5239-4071-ba58-bf0780b949ef
 content-type: application/json
 
@@ -36,6 +53,11 @@ content-type: application/json
 
 ###
 # Request REST API for Course Management 
+=======
+PUT http://localhost:3000/api/v1/student/students/:Id
+
+### # Request REST API for Course Management
+>>>>>>> Develop-Ivo
 
 GET http://localhost:3000/api/v1/career/
 
@@ -49,6 +71,7 @@ POST http://localhost:3000/api/v1/Career
 Content-Type: application/json
 
 {
+<<<<<<< HEAD
     "name":"Ingeniería en Sistemas",
     "description":"Carrera enfocada en el desarrollo de software y sistemas de información.",
     "duration": 5,
@@ -56,12 +79,27 @@ Content-Type: application/json
     "headOfCareerId": 3
 }
 
+=======
+    "Name":"Ingeniería en Sistemas",
+    "Description":"Carrera enfocada en el desarrollo de software y sistemas de información.",
+    "Duration": 5,
+    "Qualification": "Licenciatura",
+    "HeadOfCareerId":3
+    
+}
+
+
+>>>>>>> Develop-Ivo
 ###
 
 PUT http://localhost:3000/api/v1/career/:Id
 
+<<<<<<< HEAD
 ###
 # Request REST API for Professor Management
+=======
+### # Request REST API for Professor Management
+>>>>>>> Develop-Ivo
 
 GET http://localhost:3000/api/v1/professor/professors/
 

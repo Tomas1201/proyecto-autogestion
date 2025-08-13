@@ -3,15 +3,15 @@ import { SequelizeDB } from "../../Database/Sequelize.js";
 import { DataTypes, Model } from "sequelize";
 
 export class Career extends Model {
-  public Id!: string; // UUIDV4
+  public Id!: string; 
   public Name!: string;
   public Description!: string;
   public Duration!: number;
   public Qualification!: string;
-  public SubjectId!: number[];
+ 
   public  HeadOfCareerId!: number;
 
-  // timestamps!
+
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
@@ -45,6 +45,7 @@ Career.init(
 
     HeadOfCareerId: {
       type: DataTypes.INTEGER,
+      allowNull:true,
     },
   },
   {

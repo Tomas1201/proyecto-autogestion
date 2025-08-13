@@ -59,7 +59,7 @@ Professor.init({
 }, {
     sequelize: SequelizeDB,
   timestamps: true,
-  tableName: 'Professor', // Nombre de la tabla en la base de datos
+  tableName: 'Professor', 
 });
 
 export const ProfessorModel = SequelizeDB.models.Professor;

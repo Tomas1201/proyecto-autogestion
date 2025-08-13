@@ -1,6 +1,7 @@
 import a from './Shared/Relaciones.js'; 
 import express from "express";
 import GeneralRouter from "./Features/GeneralRouter.js"
+import { CareerRouter } from './Features/CareerCRUD/CareerRouter.js';
 
 
 const app = express();

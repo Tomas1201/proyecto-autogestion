@@ -39,8 +39,9 @@ export const CareerController = {
 
   async create(req: Request, res: Response) {
     try {
+      console.log(req.body);
       const Career = await CareerServices.createCareer(req.body);
-      res.status(201).json(Career);
+            res.status(201).json(Career);
       return;
     } catch (error) {
       if (error === 'There is already a Career with that name.') {
@@ -74,23 +75,5 @@ export const CareerController = {
   },
 
 
-  async delete(req: Request, res: Response) {
-    const id = parseInt(req.params.id);
-
-    try {
-      const deleted = await CareerServices.deleteCareer(id);
-
-      if (!deleted) {
-        res.status(404).json({ message: 'Career not found' });
-        return;
-      }
-
-      res.status(200).json({ message: 'Career successfully removed' });
-      return;
-    } catch (error) {
-      res.status(500).json({ message: 'Error deleting the Career', error: error });
-      return;
-    }
-  } 
 
 };

@@ -1,8 +1,8 @@
 
 import { CareerInterface } from './CareerInterface.js';
-import type { Career } from '../../Shared/Models/CareerModel.js'; // Asegúrate de que la ruta sea correcta
+import type { Career } from '../../Shared/Models/CareerModel.js'; 
 import { Op } from 'sequelize';
-import { CareerModel } from '../../Shared/Models/CareerModel.js'; // Asegúrate de que la ruta sea correcta
+import { CareerModel } from '../../Shared/Models/CareerModel.js'; 
 
 export class CareerRepository implements CareerInterface {
     
@@ -49,11 +49,11 @@ export class CareerRepository implements CareerInterface {
         }
     }
     
-      async create(CareerData: Career): Promise<Career> {
+      async create(CareerData: Omit<Career, 'Id'> & { Name: string }): Promise<Career> {
         try {
             
             
-            const ifExist = await CareerModel.findOne({ where: { name: CareerData.Name } });
+            const ifExist = await CareerModel.findOne({ where: { Name: CareerData.Name } });
 
             if (ifExist) {
                 
@@ -75,33 +75,24 @@ export class CareerRepository implements CareerInterface {
         
 
         
-        async update(id: number, CareerData: Partial<Career>): Promise<boolean> {
+        async update(Id: number, CareerData: Partial<Career>): Promise<boolean> {
             try {
                 const [rowsUpdated] = await CareerModel.update(CareerData, {
-                 where: { id },
+                 where: { Id },
            });
 
            return rowsUpdated > 0;
            } catch (error) {
-             console.error(`Error updating Career with ID ${id}:`, error);
+             console.error(`Error updating Career with ID ${Id}:`, error);
              throw new Error('Error updating the Career');
             }
 } 
     
-    async delete(id: number): Promise<boolean> { 
-        try {
-            const rowsDeleted = await CareerModel.destroy({
-                where: { id },
-            });
-            return rowsDeleted > 0;
-        } catch (error) {
-            console.error(`Error deleting Career with ID ${id}:`, error);
-            throw new Error('Database error during deletion');
-        }
-    }      
+    
+     
 
 
 
 }
 
-    
+           

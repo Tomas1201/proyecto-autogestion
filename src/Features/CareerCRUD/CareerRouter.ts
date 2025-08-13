@@ -1,4 +1,4 @@
-// src/routes/Career.Router.ts
+
 import { Router } from 'express';
 import { CareerController } from './CareerController.js';
 import { validate } from '../../Shared/Middlewares/validateRequest.js';
@@ -31,16 +31,11 @@ CareerRouter.post(
   asyncHandler(CareerController.create)
 );
 
-
 CareerRouter.put(
   '/:id',
   asyncHandler(CareerController.update)
 );
 
 
-CareerRouter.delete(
-  '/:id',
-  asyncHandler(CareerController.delete)
-);
 
-export default CareerRouter;
+export{CareerRouter}
