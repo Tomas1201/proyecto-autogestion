@@ -76,46 +76,25 @@ export class CareerRepository implements CareerInterface {
         
 
         
-        async update(id: number, CareerData: Partial<Career>): Promise<boolean> {
+        async update(Id: number, CareerData: Partial<Career>): Promise<boolean> {
             try {
                 const [rowsUpdated] = await CareerModel.update(CareerData, {
-                 where: { id },
+                 where: { Id },
            });
 
            return rowsUpdated > 0;
            } catch (error) {
-             console.error(`Error updating Career with ID ${id}:`, error);
+             console.error(`Error updating Career with ID ${Id}:`, error);
              throw new Error('Error updating the Career');
             }
 } 
     
-    async delete(id: number): Promise<boolean> { 
-        try {
-            const rowsDeleted = await CareerModel.destroy({
-                where: { id },
-            });
-            return rowsDeleted > 0;
-        } catch (error) {
-            console.error(`Error deleting Career with ID ${id}:`, error);
-            throw new Error('Database error during deletion');
-        }
-    }      
+    
+     
 
 
 
 }
           
 
-            // Implementación para actualizar una Career existente
-         
-            
-            
-            /*const resultado = await Career.update({ name: 'Nuevo' }, { where: { id: 1 } });
-                console.log(resultado); // --> [1]
-
-                const [rowsUpdated] = resultado;
-                esto es equivalente a--->
-                const rowsUpdated = resultado[0];
-
- */
-    
+           

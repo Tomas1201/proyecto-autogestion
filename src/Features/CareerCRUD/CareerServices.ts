@@ -12,7 +12,7 @@ export interface ICareerService {//Opcional
     getCareersByName(name: string): Promise<Career[] | null>;
     createCareer(CareerData: Career): Promise<Career>;
     UpdateCareer(id: number, CareerData: Partial<Career>): Promise<boolean>;
-    deleteCareer(id: number): Promise<boolean>;
+   
 }
 
 export class CareerService implements ICareerService {
@@ -124,26 +124,5 @@ export class CareerService implements ICareerService {
         }
     }
 
-    public async deleteCareer(id: number): Promise<boolean> {
-        console.log(`Servicio: Intentando eliminar Career con ID ${id}`);
-        try {
-            if (id <= 0) {
-                throw new Error('ID de Career inválido para la eliminación.');
-            }
-            // Opcional: Verificar si la Career existe antes de intentar eliminar
-            const exists = await this.CareerRepository.findById(id);
-            if (!exists) {
-                throw new Error(`La Career con ID ${id} no existe para eliminar.`);
-            }
-
-            const success = await this.CareerRepository.delete(id);
-            if (!success) {
-                throw new Error(`Could not delete Career with ID ${id}.`);
-            }
-            return success;
-        } catch (error) {
-            console.error(`Service Error: Failed to delete Career with ID ${id}.`, error);
-            throw error;
-        }
-    }
+   
 }

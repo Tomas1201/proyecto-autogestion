@@ -13,6 +13,6 @@ export interface CareerInterface {
 
   update(id: number, CareerData: Partial<Career>): Promise<boolean>; 
 
-  delete(id: number): Promise<boolean>; 
+  
 }
 
