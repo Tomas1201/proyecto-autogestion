@@ -1,12 +1,11 @@
 
 import { CareerInterface } from './CareerInterface.js';
-import type { Career } from '../../Shared/Models/CareerModel.js'; // Asegúrate de que la ruta sea correcta
+import type { Career } from '../../Shared/Models/CareerModel.js'; 
 import { Op } from 'sequelize';
-import { CareerModel } from '../../Shared/Models/CareerModel.js'; // Asegúrate de que la ruta sea correcta
+import { CareerModel } from '../../Shared/Models/CareerModel.js'; 
 
 export class CareerRepository implements CareerInterface {
-    // Aquí irían las implementaciones de los métodos definidos en CareerInterface
-    // Implementación para obtener todas las Careers
+    
     async findAll(): Promise<Career[]> {
          try {
             const Careers = await CareerModel.findAll();
