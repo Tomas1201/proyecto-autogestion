@@ -39,7 +39,9 @@ export const CareerController = {
 
   async create(req: Request, res: Response) {
     try {
+      console.log(req.body);
       const Career = await CareerServices.createCareer(req.body);
+      
       res.status(201).json(Career);
       return;
     } catch (error) {
@@ -89,6 +91,7 @@ export const CareerController = {
       return;
     } catch (error) {
       res.status(500).json({ message: 'Error deleting the Career', error: error });
+     
       return;
     }
   } 

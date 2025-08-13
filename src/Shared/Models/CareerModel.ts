@@ -45,6 +45,7 @@ Career.init(
 
     HeadOfCareerId: {
       type: DataTypes.INTEGER,
+      allowNull:true,
     },
   },
   {

@@ -14,7 +14,7 @@ Changes: Correction in GeneralRouter.
 Delte public SubjectId!: number[] in CarerModel.0ts
 
 */
-
+a;
 app.use('/api/v1/', GeneralRouter); 
 
 

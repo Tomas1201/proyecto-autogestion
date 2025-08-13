@@ -11,15 +11,15 @@ export const durationSchema = z.number()
 
 
 export const createCareerSchema = z.object({
-  name: z.string()
+  Name: z.string()
     .min(10, { message: "The name of the Career must have at least 50 characters." })
     .max(30, { message: "The Career name cannot exceed 255 characters.." }),
-  description: z.string()
+  Description: z.string()
     .min(20, { message: "The Career description must be at least 10 characters." }),
  
-  duration: durationSchema, 
-  qualification: z.string(),
-  headOfCareerId: z.number()
+  Duration: durationSchema, 
+  Qualification: z.string(),
+ HeadOfCareerId: z.number()
     .int({ message: "The Head of Career ID must be an integer." })
     .positive({ message: "The Head of Career ID must be a positive number." }),
 });

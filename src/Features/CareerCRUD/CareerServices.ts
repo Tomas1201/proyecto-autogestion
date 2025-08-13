@@ -68,28 +68,24 @@ export class CareerService implements ICareerService {
 
     public async createCareer(CareerData: Career): Promise<Career> {
         
-        // Validaciones de negocio antes de llamar al repositorio
+        
         if (!CareerData.Name || CareerData.Name.trim() === '') {
+            console.log('El name de la Career es obligatorio.');
+
             throw new Error('El name de la Career es obligatorio.');
         }
         
 
-        //Ver donde imlementar la siguiente validacion:  const existingCareer = await this.CareerRepository.findByName(CareerData.name);
-        /*
-        // Si la búsqueda devuelve resultados, significa que ya existe
-        if (existingCareer.length > 0) {
-            throw new Error('Ya existe una Career con ese name');
-        }*/
+
 
         try {
+            console.log(CareerData);
             const NewCareer = await this.CareerRepository.create(CareerData);
             return NewCareer;
         } catch (error: any) { // Puedes tipar 'error' de forma más específica si es necesario
             console.error('Servicio Error: Fallo al crear Career.', error);
             // Capturar errores específicos del repositorio (ej. "La Career ya existe")
-            if (error instanceof Error && error.message.includes('already exists')) {
-                throw error; // Re-lanzar el error de negocio específico
-            }
+            
             throw new Error('The Career could not be created due to an internal error.');
         }
     }
