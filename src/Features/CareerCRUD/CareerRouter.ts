@@ -15,25 +15,25 @@ const asyncHandler = (
 // GET all
 CareerRouter.get(
   '/',
-  asyncHandler(CareerController.getAll)
+  CareerController.getAll
 );
 
 
 CareerRouter.get(
-  '/:id',
-  asyncHandler(CareerController.getById)
+  '/:Id',
+  CareerController.getById
 );
 
 
 CareerRouter.post(
   '/',
   validate({ body: createCareerSchema }),
-  asyncHandler(CareerController.create)
+  CareerController.create
 );
 
 CareerRouter.put(
-  '/:id',
-  asyncHandler(CareerController.update)
+  '/:Id',
+  CareerController.update
 );
 
 

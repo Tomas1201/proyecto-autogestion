@@ -17,8 +17,9 @@ export class CareerRepository implements CareerInterface {
        
     }
     
-    async findById(id: number): Promise<Career | null> {
+    async findById(id: string): Promise<Career | null> {
         try {
+            console.log("ID EN REPOSSITORY"+id);
             const Career = await CareerModel.findByPk(id);
             return Career ? Career as Career : null;
         } catch (error) {
@@ -75,7 +76,7 @@ export class CareerRepository implements CareerInterface {
         
 
         
-        async update(Id: number, CareerData: Partial<Career>): Promise<boolean> {
+        async update(Id: string, CareerData: Partial<Career>): Promise<boolean> {
             try {
                 const [rowsUpdated] = await CareerModel.update(CareerData, {
                  where: { Id },

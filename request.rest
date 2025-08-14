@@ -23,27 +23,31 @@ GET http://localhost:3000/api/v1/career/
 
 ###
 
-GET http://localhost:3000/api/v1/career/:Id
-
+GET http://localhost:3000/api/v1/career/1a7192f3-79ec-4b0b-bf85-c6648058d323
 ###
-
 POST http://localhost:3000/api/v1/Career
 Content-Type: application/json
 
 {
-    "Name":"Ingeniería en Sistemas",
-    "Description":"Carrera enfocada en el desarrollo de software y sistemas de información.",
-    "Duration": 5,
+    "Name":"Ingenieria en Sistemas",
+    "Description":"Carrera efocada en el desarrollo de software y sistemas de información.",
+    "Duration": 2,
     "Qualification": "Licenciatura",
-    "HeadOfCareerId":3
+    "HeadOfCareerId":1
     
 }
 
 
 ###
 
-PUT http://localhost:3000/api/v1/career/:Id
+PUT http://localhost:3000/api/v1/career/1a7192f3-79ec-4b0b-bf85-c6648058d323 
+Content-Type: application/json
 
+{
+    "Description": "Esta es la nueva descripción para la carrera."
+}
+###
+GET http://localhost:3000/api/v1/name/Ingenieria%20en%20Sistemas
 ### # Request REST API for Professor Management
 
 GET http://localhost:3000/api/v1/professor/professors/

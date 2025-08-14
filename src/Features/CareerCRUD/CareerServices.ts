@@ -8,10 +8,10 @@ import { FindOptions } from 'sequelize';
 
 export interface ICareerService {
     getAllCareers(): Promise<Career[]>;
-    getCareerById(id: number): Promise<Career | null>;
+    getCareerById(Id: string): Promise<Career | null>;
     getCareersByName(name: string): Promise<Career[] | null>;
     createCareer(CareerData: Career): Promise<Career>;
-    UpdateCareer(id: number, CareerData: Partial<Career>): Promise<boolean>;
+    UpdateCareer(Id: string, CareerData: Partial<Career>): Promise<boolean>;
    
 }
 
@@ -36,12 +36,10 @@ export class CareerService implements ICareerService {
         }
     }
 
-    public async getCareerById(id: number): Promise<Career | null> {
+    public async getCareerById(id: string): Promise<Career | null> {
         console.log(`Servicio: Solicitando Career por ID: ${id}`);
         try {
-            if (id <= 0) {
-                throw new Error('ID de Career inválido.');
-            }
+            
             const Career = await this.CareerRepository.findById(id);
             return Career;
         } catch (error) {
@@ -89,32 +87,23 @@ export class CareerService implements ICareerService {
         }
     }
 
-    public async UpdateCareer(id: number, CareerData: Partial<Career>): Promise<boolean> {
-        
-        
-        if (id <= 0) {
-            throw new Error('Invalid Career ID for update.');
-        }
-        if (Object.keys(CareerData).length === 0) {
-            throw new Error('No data was provided to update.');
-        }
-        
+    public async UpdateCareer(Id: string, CareerData: Career): Promise<boolean> {        
 
         try {
           
 
-            const success = await this.CareerRepository.update(id, CareerData);
+            const success = await this.CareerRepository.update(Id, CareerData);
             if (!success) {
                 
-                const exists = await this.CareerRepository.findById(id);
+                const exists = await this.CareerRepository.findById(Id);
                 if (!exists) {
-                    throw new Error(`The Career with ID  ${id} was not found to update..`);
+                    throw new Error(`The Career with ID  ${Id} was not found to update..`);
                 }
-                throw new Error(`Could not update Career with ID${id}.`);
+                throw new Error(`Could not update Career with ID${Id}.`);
             }
             return success;
         } catch (error) {
-            console.error(`Service Error: Failed to update Career with ID${id}.`, error);
+            console.error(`Service Error: Failed to update Career with ID${Id}.`, error);
             throw error; 
         }
     }

@@ -17,7 +17,8 @@ export const CareerController = {
   },
 
   async getById(req: Request, res: Response) {
-    const id = parseInt(req.params.id);
+
+    const id = req.params.Id;
 
     try {
       const Career = await CareerServices.getCareerById(id);
@@ -55,9 +56,9 @@ export const CareerController = {
   },
 
   async update(req: Request, res: Response) {
-    const id = parseInt(req.params.id);
+    const id = req.params.Id;
     const data = req.body;
-
+  
     try {
       const updated = await CareerServices.UpdateCareer(id, data);
 
