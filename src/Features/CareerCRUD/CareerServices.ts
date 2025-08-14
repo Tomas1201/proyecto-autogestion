@@ -9,7 +9,7 @@ import { FindOptions } from 'sequelize';
 export interface ICareerService {
     getAllCareers(): Promise<Career[]>;
     getCareerById(Id: string): Promise<Career | null>;
-    getCareersByName(name: string): Promise<Career[] | null>;
+    getCareersByName(Name: string): Promise<Career[] | null>;
     createCareer(CareerData: Career): Promise<Career>;
     UpdateCareer(Id: string, CareerData: Partial<Career>): Promise<boolean>;
    
@@ -48,19 +48,19 @@ export class CareerService implements ICareerService {
         }
     }
 
-    public async getCareersByName(name: string): Promise<Career[] | null> {
-        console.log(`Servicio: Solicitando Careers por name: '${name}'`);
+    public async getCareersByName(Name: string): Promise<Career[] | null> {
+        console.log(`Servicio: Solicitando Careers por Name: '${Name}'`);
         try {
            
-            const Careers = await this.CareerRepository.findByName(name);
+            const Careers = await this.CareerRepository.findByName(Name);
             return Careers; 
         } catch (error) {
-            console.error(`Servicio Error: Fallo al obtener Careers por name '${name}'.`, error);
+            console.error(`Servicio Error: Fallo al obtener Careers por Name '${Name}'.`, error);
             
-            if (error instanceof Error && error.message.includes('Parámetro de name inválido')) {
+            if (error instanceof Error && error.message.includes('Parámetro de Name inválido')) {
                 throw error; 
             }
-            throw new Error(`No se pudieron recuperar las Careers por name '${name}' debido a un error.`);
+            throw new Error(`No se pudieron recuperar las Careers por Name '${Name}' debido a un error.`);
         }
     }
  
@@ -68,9 +68,9 @@ export class CareerService implements ICareerService {
         
         
         if (!CareerData.Name || CareerData.Name.trim() === '') {
-            console.log('El name de la Career es obligatorio.');
+            console.log('El Name de la Career es obligatorio.');
 
-            throw new Error('El name de la Career es obligatorio.');
+            throw new Error('El Name de la Career es obligatorio.');
         }
         
 

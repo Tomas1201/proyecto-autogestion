@@ -1,4 +1,3 @@
-// src/services/CareerService.ts
 
 import { CareerModel, Career } from "../../Shared/Models/CareerModel.js"; // Tu modelo/interfaz Career
 import { CareerSearchInterface } from "./CareerSearchInterface.js"; // Tu interfaz del repositorio
@@ -6,9 +5,9 @@ import { CareerSearchRepository } from "./CareerSearchRepository.js"; // Tu impl
 import { FindOptions } from "sequelize"; // Para el método getAllCareers flexible
 
 export interface ICareerSearchService {
-  //Opcional
+  
 
-  getCareersByName(name: string): Promise<Career[] | null>;
+  getCareersByName(Name: string): Promise<Career[] | null>;
 }
 
 export class CareerService implements ICareerSearchService {
@@ -21,26 +20,26 @@ export class CareerService implements ICareerSearchService {
     this.CareerSearchRepository = careerSearchRepository;
   }
 
-  public async getCareersByName(name: string): Promise<Career[] | null> {
-    console.log(`Servicio: Solicitando Careers por name: '${name}'`);
+  public async getCareersByName(Name: string): Promise<Career[] | null> {
+    console.log(`Servicio: Solicitando Careers por Name: '${Name}'`);
     try {
-      // La validación del parámetro 'name' ya se hace en el repositorio, pero podrías tener validaciones adicionales aquí.
-      const Careers = await this.CareerSearchRepository.findByName(name);
-      return Careers; // El repositorio ya devuelve [] o null
+      
+      const Careers = await this.CareerSearchRepository.findByName(Name);
+      return Careers; 
     } catch (error) {
       console.error(
-        `Servicio Error: Fallo al obtener Careers por name '${name}'.`,
+        `Servicio Error: Fallo al obtener Careers por Name '${Name}'.`,
         error
       );
-      // Capturar errores específicos del repositorio (ej. "Parámetro de name inválido")
+      
       if (
         error instanceof Error &&
-        error.message.includes("Parámetro de name inválido")
+        error.message.includes("Parámetro de Name inválido")
       ) {
-        throw error; // Re-lanzar el error de validación específico
+        throw error;
       }
       throw new Error(
-        `No se pudieron recuperar las Careers por name '${name}' debido a un error.`
+        `No se pudieron recuperar las Careers por Name '${Name}' debido a un error.`
       );
     }
   }

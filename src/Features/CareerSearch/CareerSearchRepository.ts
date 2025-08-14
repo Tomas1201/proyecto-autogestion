@@ -6,15 +6,15 @@ import { CareerModel } from '../../Shared/Models/CareerModel.js'; // Asegúrate 
 export class CareerSearchRepository implements CareerSearchInterface {
     
     
-    async findByName(name: string): Promise<Career[] | null> {
+    async findByName(Name: string): Promise<Career[] | null> {
         try {
-            if (!name || typeof name !== 'string') {
-                throw new Error('Invalid name parameter');
+            if (!Name || typeof Name !== 'string') {
+                throw new Error('Invalid Name parameter');
             }
             const query = {
                 where: {
-                    name: {
-                        [Op.like]: `%${name.toLowerCase()}%`
+                    Name: {
+                        [Op.like]: `%${Name.toLowerCase()}%`
                     }
                 }
             };
@@ -23,7 +23,7 @@ export class CareerSearchRepository implements CareerSearchInterface {
                     
             return Careers ? Careers as Career[] : null;
         } catch (error) {
-            console.error('Error searching for Career by name:', error);
+            console.error('Error searching for Career by Name:', error);
             throw error;
         }
     }   

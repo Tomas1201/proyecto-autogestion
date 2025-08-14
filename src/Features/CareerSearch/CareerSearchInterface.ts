@@ -3,7 +3,7 @@ import { FindOptions } from 'sequelize';
 export interface CareerSearchInterface {
   
 
-  findByName(name: string): Promise<Career[] | null>;
+  findByName(Name: string): Promise<Career[] | null>;
 
   
 }

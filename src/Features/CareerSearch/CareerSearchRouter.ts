@@ -2,6 +2,6 @@ import { Router } from "express";
 import { CareerController } from "./CareerSearchController.js";
 const CareerSearchRouter = Router();
 
-CareerSearchRouter.use("/name/:name", CareerController.getByName)
+CareerSearchRouter.get("/", CareerController.getByName)
 
-export default CareerSearchRouter;
+export {CareerSearchRouter};
