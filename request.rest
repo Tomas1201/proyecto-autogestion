@@ -47,7 +47,7 @@ Content-Type: application/json
     "Description": "Esta es la nueva descripción para la carrera."
 }
 ###
-GET http://localhost:3000/api/v1/Career/
+GET http://localhost:3000/api/v1/Career/Search?Name=Ingenieria%20en%20Sistemas
 
 ### # Request REST API for Professor Management
 

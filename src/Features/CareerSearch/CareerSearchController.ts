@@ -8,8 +8,8 @@ export const CareerController = {
   
   
   async getByName(req: Request, res: Response) {
-    const Name  = req.params.Name;
-
+    const Name  = req.query.Name;
+    console.log("Name", Name);
     try {
       const Careers = await CareerServices.getCareersByName(Name as string);
 

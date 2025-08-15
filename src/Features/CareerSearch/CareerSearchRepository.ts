@@ -14,7 +14,7 @@ export class CareerSearchRepository implements CareerSearchInterface {
             const query = {
                 where: {
                     Name: {
-                        [Op.like]: `%${Name.toLowerCase()}%`
+                        [Op.like]: `%${Name.toLocaleLowerCase()}%`
                     }
                 }
             };

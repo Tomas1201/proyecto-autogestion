@@ -74,7 +74,7 @@ export class CareerService implements ICareerService {
         }
         
 
-
+            CareerData.Name = CareerData.Name.toLowerCase();
 
         try {
             console.log(CareerData);
