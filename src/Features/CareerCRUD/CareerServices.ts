@@ -49,7 +49,7 @@ export class CareerService implements ICareerService {
     }
 
     public async getCareersByName(Name: string): Promise<Career[] | null> {
-        console.log(`Servicio: Solicitando Careers por Name: '${Name}'`);
+        console.log(`Service: Solicitando Careers por Name: '${Name}'`);
         try {
            
             const Careers = await this.CareerRepository.findByName(Name);
@@ -60,7 +60,7 @@ export class CareerService implements ICareerService {
             if (error instanceof Error && error.message.includes('Parámetro de Name inválido')) {
                 throw error; 
             }
-            throw new Error(`No se pudieron recuperar las Careers por Name '${Name}' debido a un error.`);
+            throw new Error(`could'nt recovery Career's Name '${Name}' becouse produce an error.`);
         }
     }
  
@@ -68,9 +68,9 @@ export class CareerService implements ICareerService {
         
         
         if (!CareerData.Name || CareerData.Name.trim() === '') {
-            console.log('El Name de la Career es obligatorio.');
+            
 
-            throw new Error('El Name de la Career es obligatorio.');
+            throw new Error("The Career's Name is mandatory. ");
         }
         
 
@@ -81,7 +81,7 @@ export class CareerService implements ICareerService {
             const NewCareer = await this.CareerRepository.create(CareerData);
             return NewCareer;
         } catch (error: any) { 
-            console.error('Servicio Error: Fallo al crear Career.', error);
+            console.error('Service Error: Faill to creat Career.', error);
                         
             throw new Error('The Career could not be created due to an internal error.');
         }

@@ -1,4 +1,4 @@
-import type { Career } from '../../Shared/Models/CareerModel.js'; // Asegúrate de que la ruta sea correcta
+import type { Career } from '../../Shared/Models/CareerModel.js'; 
 import { FindOptions } from 'sequelize';
 export interface CareerSearchInterface {
   

@@ -13,7 +13,7 @@ export interface ICareerSearchService {
 export class CareerService implements ICareerSearchService {
   private CareerSearchRepository: CareerSearchInterface;
 
-  // Inyección de dependencia del repositorio
+  
   constructor(
     careerSearchRepository: CareerSearchInterface = new CareerSearchRepository()
   ) {
