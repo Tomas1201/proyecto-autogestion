@@ -1,4 +1,5 @@
 
+import { HostNotFoundError } from 'sequelize';
 import * as z from 'zod';
 
 
@@ -40,8 +41,19 @@ export const findCareerByIdSchema = z.object({
     id: z.uuid({ message: "The Career ID must be a valid UUID." }),
   }),
 });
-
+export const CreateSubjectSchema = z.object({
+  Name: z.string()
+    .min(6, { message: "The name of the Subject must have at least 8 characters." })
+    .max(15, { message: "The Career name cannot exceed 15 characters.." }),
+  Description: z.string()
+    .min(20, { message: "The Career description must be at least 10 characters." }),
+ 
+  HoursLectures: z.number()
+    .int({ message: "The number of hours must be an integer." })
+    .positive({ message: "The number of hours must be a positive number." }),
+});
 
 export type CreateCareerDto = z.infer<typeof createCareerSchema>;
 export type UpdateCareerDto = z.infer<typeof UpdateCareerSchema>;
 export type CareerIdDto = z.infer<typeof findCareerByIdSchema>;
+export type CreateSubjectDto = z.infer<typeof CreateSubjectSchema>;

@@ -1,80 +1,80 @@
-/*import { Request, Response } from 'express';
-import { SubjectRepository } from './CareerRepository.js';
-import { SubjectService } from './CareerServices.js';
+import { Request, Response } from 'express';
+import { SubjectRepository } from './SubjectRepository.js';
+import { SubjectService } from './SubjectService.js';
 
-const CareerServices = new CareerService();
+const SubjectServices = new SubjectService();
 
-export const CareerController = {
-  async getAll(req: Request, res: Response) {
+export const SubjectController = {
+  async GetAll(req: Request, res: Response) {
     try {
-      const Careers = await CareerServices.getAllCareers();
-      res.status(200).json(Careers);
+      const Subject = await SubjectServices.GetAllSubject();
+      res.status(200).json(Subject);
       return;
     } catch (error) {
-      res.status(500).json({ message: 'Error to get Career', error: error });
+      res.status(500).json({ message: 'Error to get Subject', error: error });
       return;
     }
   },
 
-  async getById(req: Request, res: Response) {
+  async GetById(req: Request, res: Response) {
 
     const id = req.params.Id;
 
     try {
-      const Career = await CareerServices.getCareerById(id);
+      const Subject = await SubjectServices.GetSubjectById(id);
 
-      if (!Career) {
-        res.status(404).json({ message: 'Career not found' });
+      if (Subject) {
+        res.status(404).json({ message: 'Subject not found' });
         return;
       }
 
-      res.status(200).json(Career);
+      res.status(200).json(Subject);
       return;
     } catch (error) {
-      res.status(500).json({ message: 'Error to search Career', error: error });
+      res.status(500).json({ message: 'Error to search Subject', error: error });
       return;
     }
   },
 
   
 
-  async create(req: Request, res: Response) {
+  async Create(req: Request, res: Response) {
     try {
       console.log(req.body);
-      const Career = await CareerServices.createCareer(req.body);
-            res.status(201).json(Career);
+      const Subject = await SubjectServices.CreateSubject(req.body);
+            res.status(201).json(Subject);
       return;
     } catch (error) {
-      if (error === 'There is already a Career with that name.') {
+      if (error === 'There is already a Subject with that name.') {
          res.status(400).json({ message: error });
           return;
         }
 
-      res.status(500).json({ message: 'Error when creating a Career', error: error });
+      res.status(500).json({ message: 'Error when creating a Subject', error: error });
         return;
     }
   },
 
-  async update(req: Request, res: Response) {
+  async Update(req: Request, res: Response) {
     const id = req.params.Id;
     const data = req.body;
   
     try {
-      const updated = await CareerServices.UpdateCareer(id, data);
+      const updated = await SubjectServices.UpdateSubject(id, data);
 
       if (!updated) {
-        res.status(404).json({ message: 'Career not found or no changes' });
+        res.status(404).json({ message: 'Subject not found or no changes' });
         return;
       }
 
-      res.status(200).json({ message: 'Career updated correctly' });
+      res.status(200).json({ message: 'Subject updated correctly' });
       return
     } catch (error) {
-      res.status(500).json({ message: 'Error updating Career', error: error });
+      res.status(500).json({ message: 'Error updating Subject', error: error });
       return;
     }
   },
 
 
 
-};*/
+};
