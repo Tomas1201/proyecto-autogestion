@@ -9,6 +9,8 @@ import {SubjectPlanModel} from './Models/Domain/SubjectPlanModel.js';
 import { CareerPlanModel } from './Models/Domain/CareerPlanModel.js';
 import { AcademicPositionModel } from './Models/Domain/AcademicPositionModel.js';
 import { StudentCareer } from './Models/Domain/StudentCareerModel.js';
+ 
+import {Planning} from '../Shared/Models/PlanningModel.js';
 
 import { Professor } from './Models/ProfessorModel.js';
 import { Schedule } from './Models/Domain/ScheduleModel.js';
@@ -25,8 +27,17 @@ const a = [
   Subject.belongsToMany(Career, { through: C_AModel, foreignKey: 'SubjectId' }),
   Career.belongsToMany(Subject, { through: C_AModel, foreignKey: 'CareerId' }),
 
- // Asignatura.hasMany(Inscriptos, { foreignKey: 'asignatura_id' }),
- // Inscriptos.belongsTo(Asignatura, { foreignKey: 'asignatura_id' }),
+// Una asignatura tiene una planificación. Esto crea la clave foránea 'subjectId' en la tabla 'plannings'.
+Subject.hasOne(Planning, {
+  foreignKey: 'SubjectId',
+  as: 'Planning', // Alias para la relación (opcional pero recomendado)
+}),
+
+
+Planning.belongsTo(Subject, {
+  foreignKey: 'SubjectId',
+}),
+
   Student.hasMany(Registration, { foreignKey: 'StudentId' }),
   Registration.belongsTo(Student, { foreignKey: 'StudentId' }),
 
