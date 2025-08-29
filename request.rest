@@ -78,3 +78,16 @@ POST http://localhost:3000/api/v1/professor/professors/
 ###
 
 PUT http://localhost:3000/api/v1/professor/professors/:Id
+
+
+###
+
+GET http://localhost:3000/api/v1/students/search/name/pepe
+
+###
+
+GET http://localhost:3000/api/v1/students/search/lastname/perez
+
+###
+
+GET http://localhost:3000/api/v1/students/search/dni/34123467

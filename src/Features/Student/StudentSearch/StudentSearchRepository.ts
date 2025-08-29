@@ -14,7 +14,7 @@ export class StudentSearchRepository {
 
 async FindByName(Name: string): Promise<Student[] | null> {
     try {
-      if (!Name || typeof Name !== "string") {
+      if (!Name) {
         throw new Error("Invalid Name parameter");
       }
       const alumnos = await Student.findAll({
@@ -102,7 +102,9 @@ async FindByName(Name: string): Promise<Student[] | null> {
   async FindByDni(DNI: number): Promise<Student | null> {
     try {
       const alumnos = await Student.findAll({
-        where: { Dni: DNI },
+        where: { Dni: {
+          [Op.eq]: DNI}
+                },
       });
       return alumnos.length > 0 ? (alumnos[0] as Student) : null;
     } catch (error) {

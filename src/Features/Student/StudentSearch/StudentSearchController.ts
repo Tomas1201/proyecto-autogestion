@@ -93,5 +93,27 @@ export const StudentSearchController = {
     }
   },
 
+  getByDni: async (req: Request, res: Response) => {
+    const Dni = Number(req.params.Dni);
+    try {
+      const alumnos = await StudentSearchService.getByDni(Dni);
+      if (!alumnos) {
+        res
+          .status(404)
+          .json({
+            status: 404,
+            message: "No alumnos found with that DNI",
+          });
+        return;
+      }
+      res.status(200).json({ status: 200, data: alumnos });
+      return;
+    } catch (error) {
+      console.error("Error fetching alumno by DNI:", error);
+      res.status(500).json({ status: 500, message: "Internal server error" });
+      return;
+    }
+  },
+
 
 }

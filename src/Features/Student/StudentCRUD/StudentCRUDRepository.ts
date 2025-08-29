@@ -115,30 +115,4 @@ export class StudentRepository implements StudentInterface {
       throw new Error("Database error");
     }
   }
-  /*  No se deberia eliminar un alumno, sino desactivarlo o marcarlo como eliminado
-
-    d
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    elete: async (id: string) => {
-        try {
-            const deletedRows = await Student.destroy({
-                where: { id }
-            });
-            return deletedRows > 0;
-        } catch (error) {
-            console.error('Error deleting alumno:', error);
-            throw new Error('Database error');
-        }
-    },
-   */
 }

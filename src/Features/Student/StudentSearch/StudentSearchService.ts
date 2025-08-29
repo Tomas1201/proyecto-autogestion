@@ -47,4 +47,15 @@ export const StudentSearchService = {
       
     },
 
+    getByDni:async (dni: number) => {
+      try {
+        const alumnos = await StudentSearchRepositoryI.FindByDni(dni);
+        return alumnos;
+      } catch (error) {
+        console.error('Error fetching student by DNI:', error);
+        throw new Error('Database error');
+      }
+
+    }
+
 }
