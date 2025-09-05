@@ -1,50 +1,58 @@
 import {Request, Response, NextFunction} from 'express';
 import {StudentSearchRepository} from './StudentSearchRepository.js';
 
-const StudentSearchRepositoryI = StudentSearchRepository.getInstance();
+export class StudentSearchService {
+  private static instance: StudentSearchService;
+  private repository: StudentSearchRepository;
 
-export const StudentSearchService = {
+  private constructor() {
+    this.repository = StudentSearchRepository.getInstance();
+  }
 
+  public static getInstance(): StudentSearchService {
+    if (!StudentSearchService.instance) {
+      StudentSearchService.instance = new StudentSearchService();
+    }
+    return StudentSearchService.instance;
+  }
 
-
- getByName: async (name: string) => {
+  public async getByName(name: string) {
     try {
-      const alumnos = await StudentSearchRepositoryI.FindByName(name);
+      const alumnos = await this.repository.FindByName(name);
       return alumnos;
     } catch (error) {
       console.error('Error fetching alumno by name:', error);
       throw new Error('Database error');
     }
-  },
+  }
 
-
-  getByLastName: async (apellido: string) => {
+  public async getByLastName(apellido: string) {
     try {
-      const alumnos = await StudentSearchRepositoryI.FindByLastName(apellido);
+      const alumnos = await this.repository.FindByLastName(apellido);
       return alumnos;
     } catch (error) {
       console.error('Error fetching alumno by apellido:', error);
-      throw new Error('Database error');}
-    },
- 
-    getBySubject: async (asignatura: string) => {
-      try{
-        const alumnos = await StudentSearchRepositoryI.FindBySubject(asignatura);
-        return alumnos;
-      }catch (error){
-        console.error('Error fetching alumno by apellido:', error);
-      throw new Error('Database error');}
-      
-    },
+      throw new Error('Database error');
+    }
+  }
 
- getByCareer: async (carrera: string) => {
-      try{
-        const alumnos = await StudentSearchRepositoryI.FindByCareer(carrera);
-        return alumnos;
-      }catch (error){
-        console.error('Error fetching student by last name:', error);
-      throw new Error('Database error');}
-      
-    },
+  public async getBySubject(asignatura: string) {
+    try {
+      const alumnos = await this.repository.FindBySubject(asignatura);
+      return alumnos;
+    } catch (error) {
+      console.error('Error fetching alumno by asignatura:', error);
+      throw new Error('Database error');
+    }
+  }
 
+  public async getByCareer(carrera: string) {
+    try {
+      const alumnos = await this.repository.FindByCareer(carrera);
+      return alumnos;
+    } catch (error) {
+      console.error('Error fetching student by career:', error);
+      throw new Error('Database error');
+    }
+  }
 }
