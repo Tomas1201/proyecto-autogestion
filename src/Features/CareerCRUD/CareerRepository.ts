@@ -30,9 +30,7 @@ export class CareerRepository implements CareerInterface {
     
     async findByName(name: string): Promise<Career[] | null> {
         try {
-            if (!name || typeof name !== 'string') {
-                throw new Error('Invalid name parameter');
-            }
+            // La validación de entrada ya no es necesaria aquí, se traslada al servicio.
             const query = {
                 where: {
                     name: {
@@ -54,12 +52,8 @@ export class CareerRepository implements CareerInterface {
         try {
             
             
-            const ifExist = await CareerModel.findOne({ where: { Name: CareerData.Name } });
-
-            if (ifExist) {
-                
-                throw new Error(`The Career with  name '${CareerData.Name}' already exists.`);
-            }
+            // Se elimina la validación de si la carrera existe, ya que
+            // esa es una regla de negocio que le corresponde al servicio.
 
             
             const NewCareer = await CareerModel.create(CareerData);

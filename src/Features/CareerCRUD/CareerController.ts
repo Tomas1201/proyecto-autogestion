@@ -40,15 +40,15 @@ export const CareerController = {
 
   async create(req: Request, res: Response) {
     try {
-      console.log(req.body);
+      
       const Career = await CareerServices.createCareer(req.body);
             res.status(201).json(Career);
       return;
     } catch (error) {
-      if (error === 'There is already a Career with that name.') {
+      
          res.status(400).json({ message: error });
-          return;
-        }
+        
+        
 
       res.status(500).json({ message: 'Error when creating a Career', error: error });
         return;

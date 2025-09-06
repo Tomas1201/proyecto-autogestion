@@ -24,45 +24,39 @@ export class CareerService implements ICareerService {
     }
 
     public async getAllCareers(): Promise<Career[]> {
-        
-        try {
-            
+     //Ahora la clase solo tiene lógica de negocio. No hay `try/catch` para errores de la base de datos, 
+    // ya que esa es responsabilidad del repositorio. El servicio solo se preocupa de la
+    // validez de los datos y de la lógica de la aplicación    
+       
             const Careers = await this.CareerRepository.findAll();
             return Careers;
-        } catch (error) {
-            console.error('Service Error: Failed to get all Careers.', error);
-            
-            throw new Error('Careers could not be retrieved due to an internal error.');
+        
+           
         }
-    }
+    
 
-    public async getCareerById(id: string): Promise<Career | null> {
-        console.log(`Servicio: Solicitando Career por ID: ${id}`);
-        try {
-            
-            const Career = await this.CareerRepository.findById(id);
-            return Career;
-        } catch (error) {
-            console.error(`Servicio Error: Fallo al obtener la Career con ID ${id}.`, error);
-            throw new Error(`No se pudo recuperar la Career con ID ${id} debido a un error.`);
+    public async getCareerById(id: string): Promise<Career | null> {// Pero si aplicamos la libreria ZOD, se seguría implementando de esta forma la validación dela entrada?
+        //  Validación de entrada para cumplir el SRP: el servicio es responsable
+        // de la lógica de negocio, lo que incluye validar la entrada.
+        if (!id || typeof id !== 'string') {
+            throw new Error("Invalid ID provided.");
         }
+        const Career = await this.CareerRepository.findById(id);
+            return Career;
+         
     }
 
     public async getCareersByName(Name: string): Promise<Career[] | null> {
-        console.log(`Service: Solicitando Careers por Name: '${Name}'`);
-        try {
+      
+      if (!Name || typeof Name !== 'string' || Name.trim() === '') {
+            throw new Error("The name must be a non-empty string.");
+        }
            
             const Careers = await this.CareerRepository.findByName(Name);
             return Careers; 
-        } catch (error) {
-            console.error(`Servicio Error: Fallo al obtener Careers por Name '${Name}'.`, error);
-            
-            if (error instanceof Error && error.message.includes('Parámetro de Name inválido')) {
-                throw error; 
-            }
-            throw new Error(`could'nt recovery Career's Name '${Name}' becouse produce an error.`);
+        
         }
-    }
+    
  
     public async createCareer(CareerData: Career): Promise<Career> {
         
@@ -72,19 +66,20 @@ export class CareerService implements ICareerService {
 
             throw new Error("The Career's Name is mandatory. ");
         }
+        const ifExist = await CareerModel.findOne({ where: { Name: CareerData.Name } });
+        
+                    if (ifExist) {
+                        
+                        throw new Error(`The Career with  name '${CareerData.Name}' already exists.`);
+                    }
         
 
             CareerData.Name = CareerData.Name.toLowerCase();
 
-        try {
-            console.log(CareerData);
+       
             const NewCareer = await this.CareerRepository.create(CareerData);
             return NewCareer;
-        } catch (error: any) { 
-            console.error('Service Error: Faill to creat Career.', error);
-                        
-            throw new Error('The Career could not be created due to an internal error.');
-        }
+       
     }
 
     public async UpdateCareer(Id: string, CareerData: Career): Promise<boolean> {        
