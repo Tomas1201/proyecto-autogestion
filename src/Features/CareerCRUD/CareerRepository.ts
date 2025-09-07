@@ -41,7 +41,7 @@ export class CareerRepository implements CareerInterface {
             
             const Careers = await CareerModel.findAll(query);
                     
-            return Careers ? Careers as Career[] : null;
+            return Careers ? Careers as Career[] : [];
         } catch (error) {
             console.error('Error searching for Career by name:', error);
             throw error;

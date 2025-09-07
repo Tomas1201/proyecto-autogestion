@@ -18,8 +18,9 @@ export interface ICareerService {
 export class CareerService implements ICareerService {
     private CareerRepository: CareerInterface;
 
-    
-    constructor(careerRepository: CareerInterface = new CareerRepository()) {
+     // Se eliminó el valor por defecto para asegurar que la dependencia
+    // siempre sea inyectada, cumpliendo estrictamente con el DIP.= new CareerRepository())
+    constructor(careerRepository: CareerInterface ) {
         this.CareerRepository = careerRepository;
     }
 

@@ -1,6 +1,6 @@
 
 import { Router } from 'express';
-import { CareerController } from './CareerController.js';
+import { careerController } from './CareerController.js';
 import { validate } from '../../Shared/Middlewares/validateRequest.js';
 import { createCareerSchema, UpdateCareerSchema } from '../../Shared/Middlewares/schemaValidator.js';
 
@@ -15,25 +15,25 @@ const asyncHandler = (
 // GET all
 CareerRouter.get(
   '/',
-  CareerController.getAll
+  asyncHandler(careerController.getAll.bind(careerController))
 );
 
 
 CareerRouter.get(
   '/:Id',
-  CareerController.getById
+  asyncHandler(careerController.getById.bind(careerController))
 );
 
 
 CareerRouter.post(
   '/',
   validate({ body: createCareerSchema }),
-  CareerController.create
+  asyncHandler(careerController.create.bind(careerController))
 );
 
 CareerRouter.put(
   '/:Id',
-  CareerController.update
+  asyncHandler(careerController.update.bind(careerController))
 );
 
 

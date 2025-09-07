@@ -23,7 +23,7 @@ GET http://localhost:3000/api/v1/career/
 
 ###
 
-GET http://localhost:3000/api/v1/career/1a7192f3-79ec-4b0b-bf85-c6648058d323
+GET http://localhost:3000/api/v1/career/042fbf9e-7f90-47f5-8a2e-034c7e62b6bf
 ###
 POST http://localhost:3000/api/v1/Career
 Content-Type: application/json
@@ -40,7 +40,7 @@ Content-Type: application/json
 
 ###
 
-PUT http://localhost:3000/api/v1/career/1a7192f3-79ec-4b0b-bf85-c6648058d323 
+PUT http://localhost:3000/api/v1/career/042fbf9e-7f90-47f5-8a2e-034c7e62b6bf 
 Content-Type: application/json
 
 {
