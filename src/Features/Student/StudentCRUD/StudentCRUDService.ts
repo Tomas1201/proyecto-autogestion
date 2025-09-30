@@ -43,16 +43,6 @@ constructor(private StudentRepositoryI: StudentInterface) {}
     }
   }
 
-  async CreateSubjectRegistration (alumnoid: number, asignaturaid: number) {
-    try {
-      const newInscripcion = await this.StudentRepositoryI.CreateSubjectRegistration(alumnoid, asignaturaid);
-      return newInscripcion;
-    }catch (error) {
-      console.error('Error creating alumno inscripcion:', error);
-      throw new Error('Database error');
-    }
-  }
-
   async update(id: number, alumnoData: Student) {
     try {
       const updated = await this.StudentRepositoryI.Update(id, alumnoData);
@@ -65,19 +55,6 @@ constructor(private StudentRepositoryI: StudentInterface) {}
       throw new Error('Database error');
     }
   }
-
-  async changeStatus (id: number, status: string) {
-    try {
-      const updated = await this.StudentRepositoryI.ChangeStatus(id, status);
-      if (!updated) { 
-        throw new Error('Student not found or not updated');
-      }
-      return updated;
-    } catch (error) {
-      console.error('Error changing alumno status:', error);
-        return;
-      }
-    }
 
   
 }

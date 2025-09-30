@@ -70,23 +70,6 @@ export class StudentRepository implements StudentInterface {
     }
   }
 
-  CreateSubjectRegistration = async (
-    alumnoid: number,
-    asignatura_id: number
-  ): Promise<any> => {
-    try {
-      // Luego, crea la inscripción a la asignatura
-      const Registrationf = await Registration.create({
-        alumno_id: alumnoid,
-        PuestoAcademicoid: asignatura_id, // Asegúrate de que 'asignatura' sea un ID válido
-      });
-
-      return { alumno: Registrationf };
-    } catch (error) {
-      console.error("Error creating alumno and asignatura inscripcion:", error);
-      throw new Error("Database error");
-    }
-  };
   // Actualiza un alumno por ID
   async Update(id: number, alumnoData: Partial<Student>): Promise<boolean> {
     try {
@@ -96,21 +79,6 @@ export class StudentRepository implements StudentInterface {
       return updatedRows > 0 ? true : false;
     } catch (error) {
       console.error("Error updating alumno:", error);
-      throw new Error("Database error");
-    }
-  }
-
-  async ChangeStatus(id: number, status: string): Promise<boolean> {
-    try {
-      const [updatedRows] = await Student.update(
-        { status: status },
-        {
-          where: { id },
-        }
-      );
-      return updatedRows > 0 ? true : false;
-    } catch (error) {
-      console.error("Error changing alumno status:", error);
       throw new Error("Database error");
     }
   }

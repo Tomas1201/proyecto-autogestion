@@ -1,7 +1,7 @@
 import { StudentService } from "./StudentCRUDService.js";
 import { Request, Response, NextFunction } from "express";
 
-export class StudentController{
+export class StudentController {
 
   constructor(private StudentService: StudentService) {}
 
@@ -64,24 +64,6 @@ export class StudentController{
     }
   }
 
-  async CreateStudentSubject(req: Request, res: Response) {
-    const asignaturaid = Number(req.body.asignatura_id);
-    const alumnoid = Number(req.body.alumno_id);
-
-    try {
-      const newinscripcion = await this.StudentService.CreateSubjectRegistration(
-        alumnoid,
-        asignaturaid
-      );
-      res.json({ status: 201, data: newinscripcion });
-      return;
-    } catch (error) {
-      console.error("Error creating alumno inscripcion:", error);
-      res.status(500).json({ status: 500, message: "Internal server error" });
-      return;
-    }
-  }
-
   async UpdateStudent (req: Request, res: Response) {
     const { id } = req.params;
     const alumno = req.body;
@@ -101,30 +83,6 @@ export class StudentController{
       return;
     } catch (error) {
       console.error("Error updating alumno:", error);
-      res.status(500).json({ status: 500, message: "Internal server error" });
-      return;
-    }
-  }
-
-  async ChangeStatusStudent (req: Request, res: Response) {
-    const { id, status } = req.params;
-    try {
-      if (!id || isNaN(Number(id))) {
-        res
-          .status(400)
-          .json({ status: 400, message: "Invalid ID format", ERROR_CODE: 
-400 });
-        return;
-      }
-      const UpdatedStudent = await this.StudentService.changeStatus(Number(id), status);
-      if (!UpdatedStudent) {
-        res.status(404).json({ status: 404, message: "Alumno not found" });
-        return;
-      }
-      res.status(200).json({ status: 200, data: UpdatedStudent });
-      return;
-    } catch (error) {
-      console.error("Error changing student status:", error);
       res.status(500).json({ status: 500, message: "Internal server error" });
       return;
     }
