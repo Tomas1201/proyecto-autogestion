@@ -1,7 +1,7 @@
-import a from './Shared/Relaciones.js'; 
+import relations from './shared/relations.js'; 
 import express from "express";
-import GeneralRouter from "./Features/GeneralRouter.js"
-import { CareerRouter } from './Features/CareerCRUD/CareerRouter.js';
+import generalRouter from "./features/general.router.js"
+
 
 
 const app = express();
@@ -10,8 +10,8 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-a;
-app.use('/api/v1/', GeneralRouter); 
+relations;
+app.use('/api/v1/', generalRouter); 
 
 
 

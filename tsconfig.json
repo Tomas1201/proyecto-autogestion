@@ -16,7 +16,7 @@
        
     
      },
-     "include": ["src//*", "/*.ts","src/**/*.ts", "src/Alumno/Controllers", "src/Alumno/Models", "src/Features/Student/StudentCRUD/StudentCRUDController.ts", "src/Shared/Models/SubjectModel.ts", "srsrc/Models/CarreraAsignaturaModel.ts ","src/Shared/Models/StudentModel.ts", "src/Shared/Models/CareerModel.ts", "src/Features/Student/StudentReport", "src/Features/Student/StudentSearch",  "src/Professor/Controllers", "src/Professor/Models", "src/Repositories/ProfessorRepository.ts", "src/Professor/ProfessorRouter.ts", "src/Models/SubjectModel.ts", "src/Database/CarreraAsignaturaModel.ts", "src/Professor/ProfessorService.ts", "src/Features/Professor/Middlewares/ProfessorValidatorMiddleware.ts", "src/Database/CarrerasModel.ts"],
+     "include": ["src//*", "/*.ts","src/**/*.ts", "src/Alumno/Controllers", "src/Alumno/Models", "src/features/student/student-crud/student-crud.controller.ts", "src/shared/models/subject.model.ts", "srsrc/Models/CarreraAsignaturaModel.ts ","src/shared/models/student.model.ts", "src/shared/models/career.model.ts", "src/features/student/student-report", "src/features/student/student-search",  "src/Professor/Controllers", "src/Professor/Models", "src/Repositories/ProfessorRepository.ts", "src/Professor/ProfessorRouter.ts", "src/Models/SubjectModel.ts", "src/database/CarreraAsignaturaModel.ts", "src/Professor/ProfessorService.ts", "src/features/Professor/Middlewares/ProfessorValidatorMiddleware.ts", "src/database/CarrerasModel.ts"],
      "exclude": ["node_modules"]
    }
   
