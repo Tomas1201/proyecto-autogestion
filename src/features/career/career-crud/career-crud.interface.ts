@@ -1,4 +1,4 @@
-import type { Career } from '../../shared/models/career.model.js'; 
+import type { Career } from '../../../shared/models/career.model.js'; 
 import { FindOptions } from 'sequelize';
 export interface CareerInterface {
   findAll(queryOptions?: FindOptions): Promise<Career[]>;

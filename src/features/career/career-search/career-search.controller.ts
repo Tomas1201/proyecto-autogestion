@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import { CareerService } from './CareerSearchServices.js';
+import { CareerService } from './career-search.services.js';
 
 const CareerServices = new CareerService();
 

@@ -1,8 +1,8 @@
 
 
-import { CareerModel, Career} from '../../shared/models/career.model.js'; 
-import { CareerInterface } from './CareerInterface.js'; 
-import { CareerRepository } from './CareerRepository.js'; 
+import { CareerModel, Career} from '../../../shared/models/career.model.js'; 
+import { CareerInterface } from './career-crud.interface.js'; 
+import { CareerRepository } from './career-crud.repository.js'; 
 import { FindOptions } from 'sequelize'; 
 
 

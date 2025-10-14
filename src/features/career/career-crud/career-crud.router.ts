@@ -1,8 +1,8 @@
 
 import { Router } from 'express';
-import { CareerController } from './CareerController.js';
-import { validate } from '../../shared/middlewares/validate-request.validator.js';
-import { createCareerSchema, UpdateCareerSchema } from '../../shared/middlewares/schema.validator.js';
+import { CareerController } from './career-crud.controller.js';
+import { validate } from '../../../shared/middlewares/validate-request.validator.js';
+import { createCareerSchema, UpdateCareerSchema } from '../../../shared/middlewares/schema.validator.js';
 
 const CareerRouter = Router();
 

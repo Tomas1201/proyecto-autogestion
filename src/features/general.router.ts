@@ -1,6 +1,6 @@
 import { Router } from "express";
-import {CareerRouter} from "./CareerCRUD/CareerRouter.js";
-import CareerSearchRouter from "./CareerSearch/CareerSearchRouter.js";
+import {CareerRouter} from "./career/career-crud/career-crud.router.js";
+import CareerSearchRouter from "./career/career-search/career-search.router.js";
 import {studentCRUDRouter} from './student/student-crud/student-crud.router.js';
 import {StudentSearchRouter} from './student/student-search/student-search.router.js';
 import { ProfessorSearchRouter } from "./Professor/ProfessorSearch/ProfessorSearchRouter.js";

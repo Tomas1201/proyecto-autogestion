@@ -1,7 +1,7 @@
-import type { Career } from '../../shared/models/career.model.js'; // Asegúrate de que la ruta sea correcta
+import type { Career } from '../../../shared/models/career.model.js'; // Asegúrate de que la ruta sea correcta
 import { Op } from 'sequelize';
-import{CareerSearchInterface} from './CareerSearchInterface.js'; // Asegúrate de que la ruta sea correcta
-import { CareerModel } from '../../shared/models/career.model.js'; // Asegúrate de que la ruta sea correcta
+import{CareerSearchInterface} from './career-search.interface.js'; // Asegúrate de que la ruta sea correcta
+import { CareerModel } from '../../../shared/models/career.model.js'; // Asegúrate de que la ruta sea correcta
 
 export class CareerSearchRepository implements CareerSearchInterface {
     

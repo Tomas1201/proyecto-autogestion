@@ -1,8 +1,8 @@
 
-import { CareerInterface } from './CareerInterface.js';
-import type { Career } from '../../shared/models/career.model.js'; 
+import { CareerInterface } from './career-crud.interface.js';
+import type { Career } from '../../../shared/models/career.model.js'; 
 import { Op } from 'sequelize';
-import { CareerModel } from '../../shared/models/career.model.js'; 
+import { CareerModel } from '../../../shared/models/career.model.js'; 
 
 export class CareerRepository implements CareerInterface {
     

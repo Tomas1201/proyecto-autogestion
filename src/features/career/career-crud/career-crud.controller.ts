@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { CareerRepository } from './CareerRepository.js';
-import { CareerService } from './CareerServices.js';
+import { CareerRepository } from './career-crud.repository.js';
+import { CareerService } from './career-crud.services.js';
 
 const CareerServices = new CareerService();
 

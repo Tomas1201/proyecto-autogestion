@@ -1,8 +1,8 @@
 // src/services/CareerService.ts
 
-import { CareerModel, Career } from "../../shared/models/career.model.js"; 
-import { CareerSearchInterface } from "./CareerSearchInterface.js"; 
-import { CareerSearchRepository } from "./CareerSearchRepository.js"; 
+import { CareerModel, Career } from '../../../shared/models/career.model.js';; 
+import { CareerSearchInterface } from "./career-search.interface.js"; 
+import { CareerSearchRepository } from "./career-search.repository.js"; 
 import { FindOptions } from "sequelize"; 
 
 export interface ICareerSearchService {
