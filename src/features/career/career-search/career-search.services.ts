@@ -25,8 +25,8 @@ export class CareerService implements ICareerSearchService {
     console.log(`Servicio: Solicitando Careers por name: '${name}'`);
     try {
       
-      const Careers = await this.CareerSearchRepository.findByName(name);
-      return Careers; 
+      const careers = await this.CareerSearchRepository.findByName(name);
+      return careers; 
     } catch (error) {
       console.error(
         `Servicio Error: Fallo al obtener Careers por name '${name}'.`,

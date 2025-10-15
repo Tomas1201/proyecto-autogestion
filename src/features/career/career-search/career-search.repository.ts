@@ -19,9 +19,9 @@ export class CareerSearchRepository implements CareerSearchInterface {
                 }
             };
             
-            const Careers = await CareerModel.findAll(query);
+            const careers = await CareerModel.findAll(query);
                     
-            return Careers ? Careers as Career[] : null;
+            return careers ? careers as Career[] : null;
         } catch (error) {
             console.error('Error searching for Career by name:', error);
             throw error;

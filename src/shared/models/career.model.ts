@@ -3,13 +3,13 @@ import { SequelizeDB } from "../../database/sequelize.js";
 import { DataTypes, Model } from "sequelize";
 
 export class Career extends Model {
-  public Id!: string; 
-  public Name!: string;
-  public Description!: string;
-  public Duration!: number;
-  public Qualification!: string;
+  public id!: string; 
+  public name!: string;
+  public description!: string;
+  public duration!: number;
+  public qualification!: string;
  
-  public  HeadOfCareerId!: number;
+  public  headOfCareerId!: number;
 
 
   public readonly createdAt!: Date;
@@ -17,33 +17,33 @@ export class Career extends Model {
 }
 Career.init(
   {
-    Id: {
+    id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
     },
 
-    Name: {
+    name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
 
-    Description: {
+    description: {
       type: DataTypes.STRING,
       allowNull: false,
     },
 
-    Duration: {
+    duration: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
 
-    Qualification: {
+    qualification: {
       type: DataTypes.STRING,
       allowNull: false,
     },
 
-    HeadOfCareerId: {
+    headOfCareerId: {
       type: DataTypes.INTEGER,
       allowNull:true,
     },

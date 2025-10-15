@@ -7,8 +7,8 @@ const CareerServices = new CareerService();
 export const CareerController = {
   async getAll(req: Request, res: Response) {
     try {
-      const Careers = await CareerServices.getAllCareers();
-      res.status(200).json(Careers);
+      const careers = await CareerServices.getAllCareers();
+      res.status(200).json(careers);
       return;
     } catch (error) {
       res.status(500).json({ message: 'Error to get Career', error: error });
@@ -20,14 +20,14 @@ export const CareerController = {
     const id = parseInt(req.params.id);
 
     try {
-      const Career = await CareerServices.getCareerById(id);
+      const career = await CareerServices.getCareerById(id);
 
-      if (!Career) {
+      if (!career) {
         res.status(404).json({ message: 'Career not found' });
         return;
       }
 
-      res.status(200).json(Career);
+      res.status(200).json(career);
       return;
     } catch (error) {
       res.status(500).json({ message: 'Error to search Career', error: error });
@@ -40,8 +40,8 @@ export const CareerController = {
   async create(req: Request, res: Response) {
     try {
       console.log(req.body);
-      const Career = await CareerServices.createCareer(req.body);
-            res.status(201).json(Career);
+      const career = await CareerServices.createCareer(req.body);
+            res.status(201).json(career);
       return;
     } catch (error) {
       if (error === 'There is already a Career with that name.') {
@@ -59,7 +59,7 @@ export const CareerController = {
     const data = req.body;
 
     try {
-      const updated = await CareerServices.UpdateCareer(id, data);
+      const updated = await CareerServices.updateCareer(id, data);
 
       if (!updated) {
         res.status(404).json({ message: 'Career not found or no changes' });

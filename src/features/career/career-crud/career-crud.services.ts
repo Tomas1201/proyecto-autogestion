@@ -11,7 +11,7 @@ export interface ICareerService {
     getCareerById(id: number): Promise<Career | null>;
     getCareersByName(name: string): Promise<Career[] | null>;
     createCareer(CareerData: Career): Promise<Career>;
-    UpdateCareer(id: number, CareerData: Partial<Career>): Promise<boolean>;
+    updateCareer(id: number, CareerData: Partial<Career>): Promise<boolean>;
    
 }
 
@@ -42,8 +42,8 @@ export class CareerService implements ICareerService {
             if (id <= 0) {
                 throw new Error('ID de Career inválido.');
             }
-            const Career = await this.CareerRepository.findById(id);
-            return Career;
+            const career = await this.CareerRepository.findById(id);
+            return career;
         } catch (error) {
             console.error(`Servicio Error: Fallo al obtener la Career con ID ${id}.`, error);
             throw new Error(`No se pudo recuperar la Career con ID ${id} debido a un error.`);
@@ -54,8 +54,8 @@ export class CareerService implements ICareerService {
         console.log(`Servicio: Solicitando Careers por name: '${name}'`);
         try {
            
-            const Careers = await this.CareerRepository.findByName(name);
-            return Careers; 
+            const careers = await this.CareerRepository.findByName(name);
+            return careers; 
         } catch (error) {
             console.error(`Servicio Error: Fallo al obtener Careers por name '${name}'.`, error);
             
@@ -69,7 +69,7 @@ export class CareerService implements ICareerService {
     public async createCareer(CareerData: Career): Promise<Career> {
         
         
-        if (!CareerData.Name || CareerData.Name.trim() === '') {
+        if (!CareerData.name || CareerData.name.trim() === '') {
             console.log('El name de la Career es obligatorio.');
 
             throw new Error('El name de la Career es obligatorio.');
@@ -88,7 +88,7 @@ export class CareerService implements ICareerService {
         }
     }
 
-    public async UpdateCareer(id: number, CareerData: Partial<Career>): Promise<boolean> {
+    public async updateCareer(id: number, CareerData: Partial<Career>): Promise<boolean> {
         
         
         if (id <= 0) {

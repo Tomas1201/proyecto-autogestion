@@ -8,8 +8,8 @@ export class CareerRepository implements CareerInterface {
     
     async findAll(): Promise<Career[]> {
          try {
-            const Careers = await CareerModel.findAll();
-            return Careers ? Careers as Career[] : [];
+            const careers = await CareerModel.findAll();
+            return careers ? careers as Career[] : [];
         } catch (error) {
             console.error('Error fetching all Careers:', error);
             throw new Error('Database error');
@@ -19,8 +19,8 @@ export class CareerRepository implements CareerInterface {
     
     async findById(id: number): Promise<Career | null> {
         try {
-            const Career = await CareerModel.findByPk(id);
-            return Career ? Career as Career : null;
+            const career = await CareerModel.findByPk(id);
+            return career ? career as Career : null;
         } catch (error) {
             console.error('Error fetching Career by ID:', error);
             throw new Error('Database error');
@@ -30,7 +30,7 @@ export class CareerRepository implements CareerInterface {
     async findByName(name: string): Promise<Career[] | null> {
         try {
             if (!name || typeof name !== 'string') {
-                throw new Error('Invalid name parameter');
+                throw new Error('Invalid Name Parameter');
             }
             const query = {
                 where: {
@@ -40,29 +40,29 @@ export class CareerRepository implements CareerInterface {
                 }
             };
             
-            const Careers = await CareerModel.findAll(query);
+            const careers = await CareerModel.findAll(query);
                     
-            return Careers ? Careers as Career[] : null;
+            return careers ? careers as Career[] : null;
         } catch (error) {
             console.error('Error searching for Career by name:', error);
             throw error;
         }
     }
     
-      async create(CareerData: Omit<Career, 'Id'> & { Name: string }): Promise<Career> {
+      async create(CareerData: Omit<Career, 'Id'> & { name: string }): Promise<Career> {
         try {
             
             
-            const ifExist = await CareerModel.findOne({ where: { Name: CareerData.Name } });
+            const ifExist = await CareerModel.findOne({ where: { name: CareerData.name } });
 
             if (ifExist) {
                 
-                throw new Error(`The Career with  name '${CareerData.Name}' already exists.`);
+                throw new Error(`The Career with  name '${CareerData.name}' already exists.`);
             }
 
             
-            const NewCareer = await CareerModel.create(CareerData as any);
-            return NewCareer as Career;
+            const newCareer = await CareerModel.create(CareerData as any);
+            return newCareer as Career;
 
         } catch (error) {
             console.error('Error creating Career:', error);
@@ -75,15 +75,15 @@ export class CareerRepository implements CareerInterface {
         
 
         
-        async update(Id: number, CareerData: Partial<Career>): Promise<boolean> {
+        async update(id: number, CareerData: Partial<Career>): Promise<boolean> {
             try {
                 const [rowsUpdated] = await CareerModel.update(CareerData, {
-                 where: { Id },
+                 where: { id },
            });
 
            return rowsUpdated > 0;
            } catch (error) {
-             console.error(`Error updating Career with ID ${Id}:`, error);
+             console.error(`Error updating Career with ID ${id}:`, error);
              throw new Error('Error updating the Career');
             }
 } 

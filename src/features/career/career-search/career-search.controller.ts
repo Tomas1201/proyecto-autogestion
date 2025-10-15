@@ -11,15 +11,15 @@ export const CareerController = {
     const name  = req.params.name;
 
     try {
-      const Careers = await CareerServices.getCareersByName(name as string);
+      const careers = await CareerServices.getCareersByName(name as string);
 
-      if (!Careers) {
+      if (!careers) {
         
-        res.status(404).json({ message: 'No races with that name were found' });
+        res.status(404).json({ message: 'No career with that name were found' });
         return;
       }
 
-      res.status(200).json(Careers);
+      res.status(200).json(careers);
     } catch (error) {
       res.status(500).json({ message: 'Error  to search by name', error: error });
       return;
