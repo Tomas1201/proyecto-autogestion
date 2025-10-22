@@ -29,18 +29,18 @@ export class CareerService implements ICareerSearchService {
       return careers; 
     } catch (error) {
       console.error(
-        `Servicio Error: Fallo al obtener Careers por name '${name}'.`,
+        `Service Error: Failed to get Careers by name '${name}'.`,
         error
       );
       
       if (
         error instanceof Error &&
-        error.message.includes("Parámetro de name inválido")
+        error.message.includes("Invalid name parameter")
       ) {
         throw error; 
       }
       throw new Error(
-        `No se pudieron recuperar las Careers por name '${name}' debido a un error.`
+        `Careers could not be retrieved by name '${name}' due to an error.`
       );
     }
   }

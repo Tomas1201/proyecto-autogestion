@@ -27,8 +27,8 @@ export class CareerService implements ICareerService {
         
         try {
             
-            const Careers = await this.CareerRepository.findAll();
-            return Careers;
+            const careers = await this.CareerRepository.findAll();
+            return careers;
         } catch (error) {
             console.error('Service Error: Failed to get all Careers.', error);
             
@@ -40,29 +40,29 @@ export class CareerService implements ICareerService {
         
         try {
             if (id <= 0) {
-                throw new Error('ID de Career inválido.');
+                throw new Error('Invalid Career ID.');
             }
             const career = await this.CareerRepository.findById(id);
             return career;
         } catch (error) {
-            console.error(`Servicio Error: Fallo al obtener la Career con ID ${id}.`, error);
-            throw new Error(`No se pudo recuperar la Career con ID ${id} debido a un error.`);
+            console.error(`Service Error: Failed to get Career with ID ${id}.`, error);
+            throw new Error(`Could not retrieve Career with ID ${id} due to an error.`);
         }
     }
 
     public async getCareersByName(name: string): Promise<Career[] | null> {
-        console.log(`Servicio: Solicitando Careers por name: '${name}'`);
+        console.log(`Service: Requesting Careers by Name: '${name}'`);
         try {
            
             const careers = await this.CareerRepository.findByName(name);
             return careers; 
         } catch (error) {
-            console.error(`Servicio Error: Fallo al obtener Careers por name '${name}'.`, error);
+            console.error(`Service Error: Failed to get Careers by name '${name}'.`, error);
             
-            if (error instanceof Error && error.message.includes('Parámetro de name inválido')) {
+            if (error instanceof Error && error.message.includes('Invalid name parameter')) {
                 throw error; 
             }
-            throw new Error(`No se pudieron recuperar las Careers por name '${name}' debido a un error.`);
+            throw new Error(`Careers could not be retrieved by name'${name}' due to an error.`);
         }
     }
  
@@ -70,9 +70,9 @@ export class CareerService implements ICareerService {
         
         
         if (!CareerData.name || CareerData.name.trim() === '') {
-            console.log('El name de la Career es obligatorio.');
+            console.log('The name of the Career is mandatory.');
 
-            throw new Error('El name de la Career es obligatorio.');
+            throw new Error('The name of the Career is mandatory.');
         }
         
 
@@ -82,7 +82,7 @@ export class CareerService implements ICareerService {
             const NewCareer = await this.CareerRepository.create(CareerData);
             return NewCareer;
         } catch (error: any) { 
-            console.error('Servicio Error: Fallo al crear Career.', error);
+            console.error('Service Error: Failed to create Career.', error);
                         
             throw new Error('The Career could not be created due to an internal error.');
         }

@@ -39,7 +39,7 @@ export const CareerController = {
 
   async create(req: Request, res: Response) {
     try {
-      console.log(req.body);
+      
       const career = await CareerServices.createCareer(req.body);
             res.status(201).json(career);
       return;

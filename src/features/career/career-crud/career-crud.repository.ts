@@ -83,7 +83,7 @@ export class CareerRepository implements CareerInterface {
 
            return rowsUpdated > 0;
            } catch (error) {
-             console.error(`Error updating Career with ID ${id}:`, error);
+             
              throw new Error('Error updating the Career');
             }
 } 

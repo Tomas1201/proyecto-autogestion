@@ -12,7 +12,7 @@ const asyncHandler = (
   Promise.resolve(fn(req, res, next)).catch(next);
 };
 
-// GET all
+
 CareerRouter.get(
   '/',
   asyncHandler(CareerController.getAll)
