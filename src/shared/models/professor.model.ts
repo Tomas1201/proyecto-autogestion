@@ -2,55 +2,55 @@ import { DataTypes, Model, Sequelize } from 'sequelize';
 import {SequelizeDB} from '../../database/sequelize.js';
 
 export class Professor extends Model {
-  public Id!: string; // UUIDV4
-  public Name!: string;
-  public LastName!: string;
-  public Dni!: string;
-  public File!: string;
-  public titulo_academico!: string;
-  public Email!: string;
-  public Phone!: string;
-  public disponibilidad_horaria!: string;
-  public State!: boolean;
+  public id!: string; // UUIDV4
+  public name!: string;
+  public lastName!: string;
+  public dni!: string;
+  public file!: string;
+  public academicTitle!: string;
+  public email!: string;
+  public phone!: string;
+  public scheduleAvailability!: string;
+  public state!: boolean;
 }
 
 Professor.init({
-  Id: {
+  id: {
    type: DataTypes.UUID,
   defaultValue: DataTypes.UUIDV4,
   primaryKey: true,
   },
-  Name: {
+  name: {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  Dni: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    unique: true,
-  },
-  File: {
+  dni: {
     type: DataTypes.STRING,
     allowNull: false,
     unique: true,
   },
-  AcademicTitle: {
+  file: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
+  },
+  academicTitle: {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  Email: {
+  email: {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  Phone: {
+  phone: {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  ScheduleAvailability: {
+  scheduleAvailability: {
     type: DataTypes.TEXT,
     allowNull: false,
   },
-  State: {
+  state: {
     type: DataTypes.BOOLEAN,
     allowNull: false,
     defaultValue: true,

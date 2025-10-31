@@ -1,4 +1,3 @@
-
 # Request REST API for Student Management
 GET http://localhost:3000/api/v1/students/
 
@@ -56,7 +55,6 @@ Content-Type: application/json
     "HeadOfCareerId":3
     
 }
-
 
 ###
 
