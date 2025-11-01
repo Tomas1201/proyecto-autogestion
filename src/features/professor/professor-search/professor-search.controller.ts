@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { ProfessorService } from "../ProfessorCRUD/ProfessorCRUDService.js";
+import { ProfessorService } from "../professor-crud/professor-crud.service.js";
 import { NextFunction } from "express";
 
 const service = new ProfessorService();

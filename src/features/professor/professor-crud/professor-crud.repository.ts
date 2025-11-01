@@ -1,4 +1,7 @@
-import { ProfessorModel, Professor } from "../../../shared/models/professor.model.js";
+import {
+  ProfessorModel,
+  Professor,
+} from "../../../shared/models/professor.model.js";
 import { Op } from "sequelize";
 import { ProfessorSubjectModel } from "../../../shared/models/professor-subject.model.js";
 import { SubjectModel } from "../../../shared/models/subject.model.js";
@@ -7,19 +10,19 @@ export class ProfessorRepository {
   async create(data: any) {
     return await ProfessorModel.create(data);
   }
-  
+
   async findById(id: number) {
     return await ProfessorModel.findByPk(id);
   }
-  
+
   async findByNameAndDay(name: string, day: string) {
     return await SubjectModel.findOne({
       where: { name, day },
     });
   }
 
-  async findByDniOrFileNumber(Dni: string) {
-    return await ProfessorModel.findOne({ where: { Dni:Dni } });
+  async findByDniOrFileNumber(dni: string) {
+    return await ProfessorModel.findOne({ where: { dni: dni } });
   }
 
   async updateById(id: number, data: Partial<any>) {
@@ -51,7 +54,7 @@ export class ProfessorRepository {
       where: { professorId },
     });
   }
-  
+
   async searchByState(state: boolean) {
     try {
       const professors = await ProfessorModel.findAll({
@@ -93,7 +96,7 @@ export class ProfessorRepository {
       throw new Error("Error fetching professors by name");
     }
   }
-  
+
   async searchByLastName(lastName: string) {
     try {
       const professors = await ProfessorModel.findAll({
@@ -105,7 +108,7 @@ export class ProfessorRepository {
       throw new Error("Error fetching professors by last name");
     }
   }
-  
+
   async searchByDni(dni: string) {
     try {
       const professor = await ProfessorModel.findAll({ where: { dni } });
@@ -115,7 +118,7 @@ export class ProfessorRepository {
       throw new Error("Error fetching professor by DNI");
     }
   }
-  
+
   async searchByFileNumber(fileNumber: string) {
     try {
       const professor = await ProfessorModel.findAll({ where: { fileNumber } });
