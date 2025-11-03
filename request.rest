@@ -71,10 +71,12 @@ POST http://localhost:3000/api/v1/Subject
 Content-Type: application/json
 
 {
-    "name":"Matematicas Discretas",
+    "name": "MatematicasDiscretas",
     "code":"01010123",
     "hours":2,
-    "classroom":"A1",
+    "classroom":"A1"
     
     
 }
+###
+GET http://localhost:3000/api/v1/Subject/

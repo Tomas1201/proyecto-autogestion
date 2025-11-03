@@ -30,10 +30,10 @@ export class SubjectRepository implements SubjectInterface {
     
     
     
-    async create(SubjectData: Omit<Subject, 'Id'>): Promise<Subject> {
+    async create(SubjectData: Omit<Subject, 'Id'> & { name: string }): Promise<Subject> {
         try {
                     
-            const IfExist = await SubjectModel.findOne({ where: { Name: SubjectData.name } });
+            const IfExist = await SubjectModel.findOne({ where: { name: SubjectData.name } });
         
                     if (IfExist) {
                         
@@ -41,7 +41,7 @@ export class SubjectRepository implements SubjectInterface {
                     }
         
                     
-                    const NewSubject = await SubjectModel.create(SubjectData);
+                    const NewSubject = await SubjectModel.create(SubjectData as any);
                     return NewSubject as Subject;
         
                 } catch (error) {
