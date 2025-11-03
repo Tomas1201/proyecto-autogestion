@@ -1,11 +1,11 @@
 
 import { SubjectInterface } from './SubjectInterface.js';
-import  { Subject, SubjectModel } from '../../Shared/Models/SubjectModel'; 
+import  { Subject, SubjectModel } from '../../Shared/Models/subject.model.js'; 
 import { Op } from 'sequelize';
 
 export class SubjectRepository implements SubjectInterface {
     
-    async FindAll(): Promise<Subject[]> {
+    async findAll(): Promise<Subject[]> {
          try {
             const Subject = await SubjectModel.findAll();
             return Subject ? Subject as Subject[] : [];
@@ -18,9 +18,9 @@ export class SubjectRepository implements SubjectInterface {
 
    
     
-    async FindById(Id: string): Promise<Subject | null> {
+    async findById(id: string): Promise<Subject | null> {
         try {
-            const Subject = await SubjectModel.findByPk(Id);
+            const Subject = await SubjectModel.findByPk(id);
             return Subject ? Subject as Subject : null;
         } catch (error) {
             console.error('Error to find Subject by ID:', error);
@@ -30,14 +30,14 @@ export class SubjectRepository implements SubjectInterface {
     
     
     
-    async Create(SubjectData: Omit<Subject, 'Id'>): Promise<Subject> {
+    async create(SubjectData: Omit<Subject, 'Id'>): Promise<Subject> {
         try {
                     
-            const IfExist = await SubjectModel.findOne({ where: { Name: SubjectData.Name } });
+            const IfExist = await SubjectModel.findOne({ where: { Name: SubjectData.name } });
         
                     if (IfExist) {
                         
-                        throw new Error(`The Subject with  name '${SubjectData.Name}' already exists.`);
+                        throw new Error(`The Subject with  name '${SubjectData.name}' already exists.`);
                     }
         
                     
@@ -51,15 +51,15 @@ export class SubjectRepository implements SubjectInterface {
                 }
     }
     
-    async Update(Id: string, SubjectData: Partial<Subject>): Promise<boolean> {
+    async update(id: string, SubjectData: Partial<Subject>): Promise<boolean> {
           try {
                         const [RowsUpdated] = await SubjectModel.update(SubjectData, {
-                         where: { Id },
+                         where: { id },
                    });
         
                    return RowsUpdated > 0;
                    } catch (error) {
-                     console.error(`Error updating Subject with ID ${Id}:`, error);
+                     console.error(`Error updating Subject with ID ${id}:`, error);
                      throw new Error('Error updating the Subject');
                     }
     }

@@ -1,7 +1,7 @@
 import { ProfessorModel, Professor } from "../../../Shared/Models/ProfessorModel.js";
 import { Op } from "sequelize";
 import { ProfessorSubjectModel } from "../../../Shared/Models/ProfessorSubjectModel.js";
-import { SubjectModel } from "../../../Shared/Models/SubjectModel.js";
+import { SubjectModel } from "../../../Shared/Models/subject.model.js";
 
 export class ProfessorRepository {
   async create(data: any) {

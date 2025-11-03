@@ -64,3 +64,17 @@ POST http://localhost:3000/api/v1/professor/professors/
 ###
 
 PUT http://localhost:3000/api/v1/professor/professors/:Id
+
+
+### # Request REST API for Subject Management
+POST http://localhost:3000/api/v1/Subject
+Content-Type: application/json
+
+{
+    "name":"Matematicas Discretas",
+    "code":"01010123",
+    "hours":2,
+    "classroom":"A1",
+    
+    
+}

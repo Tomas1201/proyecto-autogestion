@@ -44,9 +44,9 @@ export const findCareerByIdSchema = z.object({
 export const CreateSubjectSchema = z.object({
   Name: z.string()
     .min(6, { message: "The name of the Subject must have at least 8 characters." })
-    .max(15, { message: "The Career name cannot exceed 15 characters.." }),
+    .max(20, { message: "The Career name cannot exceed 15 characters.." }),
   Description: z.string()
-    .min(20, { message: "The Career description must be at least 10 characters." }),
+    .min(10, { message: "The Career description must be at least 10 characters." }),
  
   HoursLectures: z.number()
     .int({ message: "The number of hours must be an integer." })

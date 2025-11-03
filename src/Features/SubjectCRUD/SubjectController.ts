@@ -1,11 +1,11 @@
 import { Request, Response } from 'express';
-import { SubjectRepository } from './SubjectRepository.js';
+import { SubjectRepository } from './subject.repository.js';
 import { SubjectService } from './SubjectService.js';
 
 const SubjectServices = new SubjectService();
 
 export const SubjectController = {
-  async GetAll(req: Request, res: Response) {
+  async getAll(req: Request, res: Response) {
     try {
       const Subject = await SubjectServices.GetAllSubject();
       res.status(200).json(Subject);
@@ -16,7 +16,7 @@ export const SubjectController = {
     }
   },
 
-  async GetById(req: Request, res: Response) {
+  async getById(req: Request, res: Response) {
 
     const id = req.params.Id;
 
@@ -38,7 +38,7 @@ export const SubjectController = {
 
   
 
-  async Create(req: Request, res: Response) {
+  async create(req: Request, res: Response) {
     try {
       console.log(req.body);
       const Subject = await SubjectServices.CreateSubject(req.body);
@@ -55,7 +55,7 @@ export const SubjectController = {
     }
   },
 
-  async Update(req: Request, res: Response) {
+  async update(req: Request, res: Response) {
     const id = req.params.Id;
     const data = req.body;
   

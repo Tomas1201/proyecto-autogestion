@@ -1,7 +1,7 @@
 import professorRepository from "./ProfessorCRUDRepository.js";
 import { ProfessorSubjectModel } from "../../../Shared/Models/ProfessorSubjectModel.js";
 import { ProfessorModel } from "../../../Shared/Models/ProfessorModel.js";
-import { SubjectModel } from "../../../Shared/Models/SubjectModel.js";
+import { SubjectModel } from "../../../Shared/Models/subject.model.js";
 
 export class ProfessorService {
   async registerProfessor(data: any) {

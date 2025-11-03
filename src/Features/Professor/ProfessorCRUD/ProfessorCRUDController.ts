@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { ProfessorService } from "./ProfessorCRUDService.js";
 import * as Validator from "../Middlewares/ProfessorValidatorMiddleware.js";
 import { NextFunction } from "express";
-import { Subject } from "../../../Shared/Models/SubjectModel.js";
+import { Subject } from "../../../Shared/Models/subject.model.js";
 
 const service = new ProfessorService();
 

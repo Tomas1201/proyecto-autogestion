@@ -1,4 +1,4 @@
-import type { Subject } from '../../Shared/Models/SubjectModel.js'; 
+import type { Subject } from '../../Shared/Models/subject.model.js'; 
 
 export interface SubjectSearchInterface {
   

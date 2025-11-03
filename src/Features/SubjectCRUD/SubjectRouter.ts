@@ -15,25 +15,25 @@ const asyncHandler = (
 // GET all
 SubjectRouter.get(
   '/',
-  SubjectController.GetAll
+  SubjectController.getAll
 );
 
 
 SubjectRouter.get(
   '/:Id',
-  SubjectController.GetById
+  SubjectController.getById
 );
 
 
 SubjectRouter.post(
   '/',
-  validate({ body: CreateSubjectSchema }),
-  SubjectController.Create
+ 
+  SubjectController.create
 );
 
 SubjectRouter.put(
   '/:Id',
-  SubjectController.Update
+  SubjectController.update
 );
 
 

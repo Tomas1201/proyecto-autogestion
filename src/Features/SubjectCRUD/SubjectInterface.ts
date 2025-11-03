@@ -1,16 +1,16 @@
 import { FindOptions } from 'sequelize';
-import  type { Subject } from '../../Shared/Models/SubjectModel.js'; 
+import  type { Subject } from '../../Shared/Models/subject.model.js'; 
 
 export interface SubjectInterface {
     
-    FindAll(queryOptions?: FindOptions): Promise<Subject[]>;
+    findAll(queryOptions?: FindOptions): Promise<Subject[]>;
      
-      FindById(Id: string): Promise<Subject | null>;
+      findById(Id: string): Promise<Subject | null>;
     
     
-      Create(SubjectData: Omit<Subject, 'Id'>): Promise<Subject>; 
+      create(SubjectData: Omit<Subject, 'Id'>): Promise<Subject>; 
     
-      Update(Id: string, SubjectData: Subject): Promise<boolean>; 
+      update(id: string, SubjectData: Subject): Promise<boolean>; 
   
   
 }

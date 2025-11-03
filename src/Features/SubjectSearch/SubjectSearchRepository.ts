@@ -1,6 +1,6 @@
 
 import { Op } from "sequelize";
-import { Subject, SubjectModel } from "../../Shared/Models/SubjectModel";
+import { Subject, SubjectModel } from "../../Shared/Models/subject.model";
 import { SubjectSearchInterface } from "./SubjectSearchInterface.js";
 export class SubjectSearchRepository implements SubjectSearchInterface{
 
