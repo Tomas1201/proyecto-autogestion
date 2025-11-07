@@ -9,6 +9,7 @@ import {SubjectPlanModel} from './models/domain/subject-plan.model.js';
 import { CareerPlanModel } from './models/domain/career-plan.model.js';
 import { AcademicPositionModel } from './models/domain/academic-position.model.js';
 import { StudentCareer } from './models/domain/student-career.model.js';
+import {UserModel} from './models/domain/user.model.js';
 
 import { Professor } from './models/professor.model.js';
 import { Schedule } from './models/domain/schedule.model.js';
@@ -20,6 +21,7 @@ const relations = [
   SubjectPlanModel,
   Professor,
   Schedule,
+  UserModel,
   Student.belongsToMany(Career, { through: StudentCareer, foreignKey: 'StudentId' }),
   Career.belongsToMany(Student, { through: StudentCareer, foreignKey: 'CareerId' }),
   Subject.belongsToMany(Career, { through: C_AModel, foreignKey: 'SubjectId' }),
