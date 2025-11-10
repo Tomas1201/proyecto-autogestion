@@ -15,34 +15,34 @@ export class Professor extends Model {
 }
 
 Professor.init({
-  Id: {
+  id: {
    type: DataTypes.UUID,
   defaultValue: DataTypes.UUIDV4,
   primaryKey: true,
   },
-  Name: {
+  name: {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  Dni: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    unique: true,
-  },
-  File: {
+  dni: {
     type: DataTypes.STRING,
     allowNull: false,
     unique: true,
   },
-  AcademicTitle: {
+  file: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
+  },
+  academicTitle: {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  Email: {
+  email: {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  Phone: {
+  phone: {
     type: DataTypes.STRING,
     allowNull: false,
   },

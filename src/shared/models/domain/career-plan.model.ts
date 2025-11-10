@@ -17,25 +17,25 @@ export class CareerPlanModel extends Model {
 
 CareerPlanModel.init(
   {
-    Id: {
+    id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
     },
-    CareerId: {
+    careerId: {
       type: DataTypes.UUID,
       allowNull: false,
       references: {
         model: "Career",
-        key: "Id",
+        key: "id",
       },
     },
-    CycleElectiveId: {
+    cycleElectiveId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
         model: "CycleElective",
-        key: "Id",
+        key: "id",
       },
     },
   },

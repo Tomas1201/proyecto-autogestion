@@ -11,6 +11,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 relations;
+
 app.use('/api/v1/', generalRouter); 
 
 

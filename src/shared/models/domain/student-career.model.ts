@@ -20,36 +20,36 @@ export class StudentCareer extends Model {
 
 StudentCareer.init(
   {
-    Id: {
+    id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    StudentId: {
+    studentId: {
       type: DataTypes.UUID,
       allowNull: false,
       references: {
         model: "Student", // Nombre de la tabla referenciada
-        key: "Id", // Clave primaria de la tabla referenciada
+        key: "id", // Clave primaria de la tabla referenciada
       },
     },
-    CareerId: {
+    careerId: {
       type: DataTypes.UUID,
       allowNull: false,
       references: {
         model: "Career", // Nombre de la tabla referenciada
-        key: "Id", // Clave primaria de la tabla referenciada
+        key: "id", // Clave primaria de la tabla referenciada
       },
     },
-    CareerPlanId: {
+    careerPlanId: {
       type: DataTypes.UUID,
       allowNull: false,
       references: {
         model: "CareerPlan", // Nombre de la tabla referenciada
-        key: "Id", // Clave primaria de la tabla referenciada
+        key: "id", // Clave primaria de la tabla referenciada
       },
     },
-    State: {
+    state: {
       type: DataTypes.STRING,
       allowNull: false,
       defaultValue: "active", // Estado por defecto

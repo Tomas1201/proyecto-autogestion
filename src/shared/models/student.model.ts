@@ -20,40 +20,40 @@ export class Student extends Model {
 }
 
 Student.init({
-   Id: {
+   id: {
   type: DataTypes.UUID,
   defaultValue: DataTypes.UUIDV4,
   primaryKey: true,
 },
-    Name: {
+    name: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    LastName: {
+    lastName: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    Email: {
+    email: {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,
     },
-    File: {
+    file: {
         type: DataTypes.INTEGER,
         allowNull: false,
         unique: true,
     },
-    Status: {
+    status: {
         type: DataTypes.ENUM('activo', 'inactivo', 'graduado'),
         allowNull: false,
         defaultValue: 'activo',
     },
-    Dni: {
+    dni: {
         type: DataTypes.INTEGER,
         allowNull: false,
         unique: true,
     },
-    Career: {
+    career: {
         type: DataTypes.STRING,
         allowNull: true,   
     }

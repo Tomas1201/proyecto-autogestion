@@ -9,7 +9,7 @@ import {SubjectPlanModel} from './models/domain/subject-plan.model.js';
 import { CareerPlanModel } from './models/domain/career-plan.model.js';
 import { AcademicPositionModel } from './models/domain/academic-position.model.js';
 import { StudentCareer } from './models/domain/student-career.model.js';
-import {UserModel} from './models/domain/user.model.js';
+import {UserModel} from '../features/auth/users.model.js';
 
 import { Professor } from './models/professor.model.js';
 import { Schedule } from './models/domain/schedule.model.js';

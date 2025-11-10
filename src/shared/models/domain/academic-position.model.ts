@@ -17,48 +17,48 @@ export class AcademicPositionModel extends Model {
 
 AcademicPositionModel.init(
   {
-    Id: {
+    id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    CareerPlanId: {
+    careerPlanId: {
       type: DataTypes.UUID,
       allowNull: false,
       references: {
         model: "CareerPlan",
-        key: "Id",
+        key: "id",
       },
     },
-    SubjectId: {
+    subjectId: {
       type: DataTypes.UUID,
       allowNull: false,
       references: {
         model: "Subject",
-        key: "Id",
+        key: "id",
       },
     },
-    CycleElectiveId: {
+    cycleElectiveId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
         model: "CycleElective",
-        key: "Id",
+        key: "id",
       },
     },
-    ProfessorId: {
+    professorId: {
       type: DataTypes.UUID,
       allowNull: false,
       references: {
         model: "Professor",
-        key: "Id",
+        key: "id",
       },
     },
-    Workload: {
+    workload: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    IsOptional: {
+    isOptional: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: false,

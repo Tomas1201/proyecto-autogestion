@@ -15,27 +15,27 @@ export class Subject extends Model {
 
 
    Subject.init({
-    Id:{
+    id:{
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
     },
-    Name:{
+    name:{
         type: DataTypes.STRING,
         allowNull: false,
     },
-    Code:{
+    code:{
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,
     },
-    Hours:{
+    hours:{
         type: DataTypes.INTEGER,
     },
     horariosid:{
         type: DataTypes.INTEGER,
     },
-    Classroom:{
+    classroom:{
         type: DataTypes.STRING,
     },
 

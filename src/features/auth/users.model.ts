@@ -4,7 +4,7 @@ import { SequelizeDB } from '../../database/sequelize.js';
 export class User extends Model {
     public id!: string;
     public email!: string;
-    public password_hash!: string;
+    public password!: string;
     public role!: string;
 
     public readonly createdAt!: Date;
@@ -20,14 +20,15 @@ User.init(
     },
     email: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        unique: true,
     },
-    password_hash: {
+    password: {
         type: DataTypes.STRING,
         allowNull: false
     },
     role: {
-        type: DataTypes.STRING,
+        type: DataTypes.ENUM('ADMIN', 'PROFESOR', 'STUDENT'),
         allowNull: false
     }
 },

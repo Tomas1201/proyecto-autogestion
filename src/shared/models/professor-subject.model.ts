@@ -14,32 +14,32 @@ export class ProfessorSubject extends Model {
 
 ProfessorSubject.init(
   {
-    Id: {
+    id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
-    ProfessorId: {
+    professorId: {
       type: DataTypes.UUID,
       allowNull: false,
       references: {
         model: "Professor",
-        key: "Id",
+        key: "id",
       },
     },
-    SubjectId: {
+    subjectId: {
       type: DataTypes.UUID,
       allowNull: false,
       references: {
         model: "Subject",
-        key: "Id",
+        key: "id",
       },
     },
-    Role: {
+    role: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    Schedule: {
+    schedule: {
       type: DataTypes.STRING,
       allowNull: false,
     },

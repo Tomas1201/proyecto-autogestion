@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/Tomas1201/proyecto-autogestion#readme",
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "dotenv": "^17.2.0",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
@@ -33,6 +34,7 @@
     "zod": "^4.0.5"
   },
   "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
     "@types/express": "^5.0.3",
     "@types/jsonwebtoken": "^9.0.10",
     "ts-node-dev": "^2.0.0",

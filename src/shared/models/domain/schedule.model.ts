@@ -15,24 +15,24 @@ export class Schedule extends Model {
 
 Schedule.init(
   {
-    Id: {
+    id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
     },
-    Day: {
+    day: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    StartTime: {
+    startTime: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    FinalTime: {
+    finalTime: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    Classroom: {
+    classroom: {
       type: DataTypes.STRING,
       allowNull: false,
     },
