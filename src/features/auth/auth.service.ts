@@ -17,26 +17,29 @@ export class AuthService{
         this.authRepository = AuthRepository.getInstance();
     }
 
-    async validateUser(email: string, password_hash: string){
-        const user = await this.authRepository.findUser(email);
+
+
+    async validateUser(file: string, password: string){
+
+        const user = await this.authRepository.findUser(file);
         console.log(user);
 
         if(user === null ){
             return null;
         }else{
-            const compare = await verifyPassword(password_hash, user.password);
+            const compare = await verifyPassword(password, user.password);
             
             if(!compare){
                 throw new Error("Token no válido");
             }
-        const token = generateToken(user.id, user.role);   
+        const token = generateToken(user.id,file, user.role);   
         
         return token;
         }
     }
 
      async validateNewUser(userData: User){
-        const user = await this.authRepository.findUser(userData.email);
+        const user = await this.authRepository.findUser(userData.file);
         
         if(user === null ){
              

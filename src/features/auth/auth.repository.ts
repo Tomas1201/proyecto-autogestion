@@ -12,11 +12,11 @@ export class AuthRepository{
   }
   constructor() {}
 
-  async findUser(email: string): Promise<User | null>{
+  async findUser(file: string): Promise<User | null>{
     return await User.findOne({
       where: {
         [Op.and]: [
-          { email: email },
+          { file: file },
         ]
       }
     });

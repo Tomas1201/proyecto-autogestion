@@ -1,11 +1,12 @@
 import { Router } from "express";
 import { studentController } from "./student-crud.controller.js";
 import { ValidateStudent,ValidateStudentUpdate} from "../student-validation.middleware.js";
-
+import { authorize, ROLES } from "../../../shared/middlewares/protection.middleware.js";
 const router = Router();
 
+
 // Devuelve todos los alumnos
-router.get("/", studentController.getAllStudents);
+router.get("/", authorize([ROLES.ADMIN]),studentController.getAllStudents);
 
 // Devuelve un alumno por ID
 router.get("/:Id", studentController.getStudent);
@@ -13,7 +14,7 @@ router.get("/:Id", studentController.getStudent);
 
 
 // Crea un nuevo alumno
-router.post("/", ValidateStudent, studentController.CreateStudent);
+router.post("/", ValidateStudent, authorize([ROLES.ADMIN]),studentController.CreateStudent);
 
 /*
 El usuario tendra que mandar un JSON con los siguientes datos:
@@ -24,24 +25,26 @@ El usuario tendra que mandar un JSON con los siguientes datos:
 }
 */
 router.post(
-  "/carrera/inscripcion",
+  "/carrera/inscripcion",authorize([ROLES.ADMIN]),
   ValidateStudent,
  studentController.CreateStudentSubject
 );
 
 // Actualiza un alumno por ID
-router.put("/:Id", ValidateStudentUpdate, studentController.UpdateStudent);
+router.put("/:Id", ValidateStudentUpdate, authorize([ROLES.ADMIN]),studentController.UpdateStudent);
 
 
 /*Chequear reglas de negocio sobre este endpoint(puede el admin cambiarlo libremente?) */
 router.put(
   "/:Id/status/:Status",
+  authorize([ROLES.ADMIN]),
   ValidateStudentUpdate,
  studentController.ChangeStatusStudent
 );
 
 router.post(
   "/asignatura/:asignaturaid/inscripcion/alumno/:alumnoid",
+  authorize([ROLES.ADMIN]),
  studentController.CreateStudentSubject
 );
 //router.delete('/:id', studentController.changeStateAlumno);

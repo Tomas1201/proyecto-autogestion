@@ -8,19 +8,20 @@ const authService = AuthService.getInstance();
 
 export const login = async (req: Request, res: Response): Promise<any> =>{
     try {
-        const { email, password } = req.body;
+        //Que pasa si ya tiene cookie?
+        // const {jwt_auth} = req.cookies
+
+        const { file, password } = req.body;
 
         // Validar credenciales
-        const user = await authService.validateUser(email, password);
-
+        const user = await authService.validateUser(file, password);
+        console.log(user)
         if (user === null) {
         res.status(401).json({ message: 'Credenciales inválidas o usuario no existe' });
         return;
         }
 
-        // Generar token JWT
-      
-        console.log(user);  
+          
         // Configurar cookie segura
         res.cookie('jwt_auth', user, {
             httpOnly: true, 

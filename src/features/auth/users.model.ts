@@ -3,7 +3,7 @@ import { SequelizeDB } from '../../database/sequelize.js';
 
 export class User extends Model {
     public id!: string;
-    public email!: string;
+    public file!: string;
     public password!: string;
     public role!: string;
 
@@ -18,7 +18,7 @@ User.init(
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
     },
-    email: {
+    file: {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,
