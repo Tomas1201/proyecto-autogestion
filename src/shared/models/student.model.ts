@@ -1,64 +1,63 @@
-import { DataTypes, Model } from 'sequelize';
-import { SequelizeDB } from '../../database/sequelize.js';
-
+import { DataTypes, Model } from "sequelize";
+import { SequelizeDB } from "../../database/sequelize.js";
 
 export class Student extends Model {
-    public Id!: number;
-    public Name!: string;
-    public LastName!: string;
-    public Email!: string;
-    public File!: number;
-    public Status!: string;
-    public Dni!: number;
-    public Career!: string[];
-    
+  public Id!: number;
+  public Name!: string;
+  public LastName!: string;
+  public Email!: string;
+  public File!: number;
+  public Status!: string;
+  public Dni!: number;
+  public Career!: string[];
 
-    // timestamps!
-    public readonly createdAt!: Date;
-    public readonly updatedAt!: Date;
-
+  public readonly createdAt!: Date;
+  public readonly updatedAt!: Date;
 }
 
-Student.init({
-   Id: {
-  type: DataTypes.UUID,
-  defaultValue: DataTypes.UUIDV4,
-  primaryKey: true,
-},
-    Name: {
-        type: DataTypes.STRING,
-        allowNull: false,
+Student.init(
+  {
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true,
     },
-    LastName: {
-        type: DataTypes.STRING,
-        allowNull: false,
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
-    Email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
+    lastName: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
-    File: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        unique: true,
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
     },
-    Status: {
-        type: DataTypes.ENUM('activo', 'inactivo', 'graduado'),
-        allowNull: false,
-        defaultValue: 'activo',
+    file: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      unique: true,
     },
-    Dni: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        unique: true,
+    status: {
+      type: DataTypes.ENUM("activo", "inactivo", "graduado"),
+      allowNull: false,
+      defaultValue: "activo",
     },
-    Career: {
-        type: DataTypes.STRING,
-        allowNull: true,   
-    }
-    }, {
+    dni: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      unique: true,
+    },
+    career: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+  },
+  {
     sequelize: SequelizeDB,
     timestamps: true,
-    tableName: 'Student', // Nombre de la tabla en la base de datos
-});
+    tableName: "Student", // Nombre de la tabla en la base de datos
+  }
+);

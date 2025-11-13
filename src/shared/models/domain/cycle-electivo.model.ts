@@ -16,33 +16,33 @@ export class CycleElectiveModel extends Model {
 
 CycleElectiveModel.init(
   {
-    Id: {
+    id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    Name: {
+    name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    Year: {
+    year: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    StartTime: {
+    startTime: {
       type: DataTypes.DATE,
       allowNull: false,
     },
-    FinalTime: {
+    finalTime: {
       type: DataTypes.DATE,
       allowNull: false,
     },
-    State: {
+    state: {
       type: DataTypes.STRING,
       allowNull: false,
       defaultValue: "activo", // Valores posibles: 'activo', 'inactivo'
     },
-    FourMonthPeriod: {
+    fourMonthPeriod: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },

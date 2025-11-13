@@ -11,14 +11,14 @@ SequelizeDB.define("CareerSubject", {
     type: DataTypes.INTEGER,
     references: {
       model: "Career", // Nombre de la tabla referenciada
-      key: "Id", // Clave primaria de la tabla referenciada
+      key: "id", // Clave primaria de la tabla referenciada
     },
   },
   SubjectId: {
     type: DataTypes.INTEGER,
     references: {
       model: "Subject", // Nombre de la tabla referenciada
-      key: "Id", // Clave primaria de la tabla referenciada
+      key: "id", // Clave primaria de la tabla referenciada
     },
   },
   StudentId: {

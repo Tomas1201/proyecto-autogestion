@@ -1,22 +1,18 @@
-import professorRepository from "./ProfessorCRUDRepository.js";
+import professorRepository from "./professor-crud.repository.js";
 import { ProfessorSubjectModel } from "../../../shared/models/professor-subject.model.js";
 import { ProfessorModel } from "../../../shared/models/professor.model.js";
 import { SubjectModel } from "../../../shared/models/subject.model.js";
 
 export class ProfessorService {
   async registerProfessor(data: any) {
-    
-
-    const existing = await professorRepository.findByDniOrFileNumber(
-      data.Dni,
-    );
+    const existing = await professorRepository.findByDniOrFileNumber(data.Dni);
     if (existing) {
       throw new Error("Professor with same DNI or file number already exists");
     }
 
     return await professorRepository.create(data);
   }
-  
+
   async registerProfessorToSubject(data: any) {
     console.log("Data received for subject assignment:", data);
     if (!data.professorId || !data.subjectId || !data.role || !data.schedule) {
@@ -48,7 +44,7 @@ export class ProfessorService {
   async searchProfessors(query: any) {
     return await professorRepository.findAll();
   }
-  
+
   async searchByState(state: boolean) {
     return await professorRepository.searchByState(state);
   }
@@ -58,23 +54,23 @@ export class ProfessorService {
     if (!professor) throw new Error("Professor not found");
     return professor;
   }
-  
+
   async searchByName(name: string) {
     return await professorRepository.searchByName(name);
   }
-  
+
   async searchByLastName(lastName: string) {
     return await professorRepository.searchByLastName(lastName);
   }
-  
+
   async searchByDni(dni: string) {
     return await professorRepository.searchByDni(dni);
   }
-  
+
   async searchByFileNumber(fileNumber: string) {
     return await professorRepository.searchByFileNumber(fileNumber);
   }
-  
+
   async updateProfessor(id: number, data: Partial<any>) {
     if (data.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
       throw new Error("Invalid email format");

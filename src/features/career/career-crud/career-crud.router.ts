@@ -3,7 +3,7 @@ import { Router } from 'express';
 import { CareerController } from './career-crud.controller.js';
 import { validate } from '../../../shared/middlewares/validate-request.validator.js';
 import { createCareerSchema, UpdateCareerSchema } from '../../../shared/middlewares/schema.validator.js';
-
+import { authorize,ROLES } from '../../../shared/middlewares/protection.middleware.js';
 const CareerRouter = Router();
 
 const asyncHandler = (
@@ -14,7 +14,7 @@ const asyncHandler = (
 
 
 CareerRouter.get(
-  '/',
+  '/',authorize([ROLES.ADMIN]),
   asyncHandler(CareerController.getAll)
 );
 
@@ -24,15 +24,17 @@ CareerRouter.get(
   asyncHandler(CareerController.getById)
 );
 
-
+//Solo administrador
 CareerRouter.post(
   '/',
+  authorize([ROLES.ADMIN]),
   validate({ body: createCareerSchema }),
   asyncHandler(CareerController.create)
 );
-
+//Solo administrador
 CareerRouter.put(
   '/:id',
+  authorize([ROLES.ADMIN]),
   asyncHandler(CareerController.update)
 );
 

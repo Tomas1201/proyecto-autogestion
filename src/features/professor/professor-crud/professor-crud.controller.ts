@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { ProfessorService } from "./ProfessorCRUDService.js";
-import * as Validator from "../Middlewares/ProfessorValidatorMiddleware.js";
+import { ProfessorService } from "./professor-crud.service.js";
+import * as Validator from "../middlewares/professor-validator.middleware.js";
 import { NextFunction } from "express";
 import { Subject } from "../../../shared/models/subject.model.js";
 
@@ -20,7 +20,6 @@ export const registerProfessor = async (
       data: professor,
     });
   } catch (error: any) {
-    
     if (error.name === "ZodError") {
       res.status(400).json({ errors: error.errors });
       console.log("zod");
@@ -118,7 +117,7 @@ export const updateProfessor = async (
 ): Promise<void> => {
   try {
     const validatedData = Validator.UpdateProfessorSchema.parse(req.body);
-    const id = Number(validatedData.Id);
+    const id = Number(validatedData.id);
     const updated = await service.updateProfessor(id, validatedData);
     res.status(200).json({
       code: "UPDATED",
@@ -133,7 +132,6 @@ export const updateProfessor = async (
     }
   }
 };
-
 
 export const archiveProfessor = async (
   req: Request,

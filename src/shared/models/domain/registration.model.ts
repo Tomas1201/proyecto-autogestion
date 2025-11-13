@@ -13,17 +13,17 @@ export class Registration extends Model {
 
 Registration.init(
   {
-    Id: {
+    id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
     },
-    AcademicPositionId: {
+    academicPositionId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
         model: "AcademicPosition",
-        key: "Id",
+        key: "id",
       },
     },
   },

@@ -17,32 +17,32 @@ export class SubjectPlanModel extends Model {
 
 SubjectPlanModel.init(
   {
-    Id: {
+    id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    CareerPlanId: {
+    careerPlanId: {
       type: DataTypes.UUID,
       allowNull: false,
       references: {
         model: "CareerPlan", // Nombre de la tabla referenciada
-        key: "Id", // Clave primaria de la tabla referenciada
+        key: "id", // Clave primaria de la tabla referenciada
       },
     },
-    SubjectId: {
+    subjectId: {
       type: DataTypes.UUID,
       allowNull: false,
       references: {
         model: "Subject", // Nombre de la tabla referenciada
-        key: "Id", // Clave primaria de la tabla referenciada
+        key: "id", // Clave primaria de la tabla referenciada
       },
     },
-    Workload: {
+    workload: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    IsOptional: {
+    isOptional: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: false,
