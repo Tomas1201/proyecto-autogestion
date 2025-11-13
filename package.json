@@ -2,7 +2,7 @@
   "name": "proyecto-autogestion",
   "version": "1.0.0",
   "description": "Sistema de autogestion academica",
-  "main": "index.ts",
+  "main": "index.js",
   "type": "module",
   "scripts": {
     "start": "node index.js",
