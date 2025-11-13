@@ -1,6 +1,6 @@
 
 
-import { SubjectModel, Subject} from '../../Shared/Models/subject.model.js'; 
+import { SubjectModel, Subject} from '../../shared/models/subject.model.js'; 
 import { SubjectInterface } from './SubjectInterface.js'; 
 import { SubjectRepository } from './subject.repository.js'; 
 import { FindOptions } from 'sequelize'; 
@@ -53,14 +53,14 @@ export class SubjectService implements ISubjectService {
     public async CreateSubject(SubjectData: Subject): Promise<Subject> {
         
         
-        if (!SubjectData.name || SubjectData.name.trim() === '') {
+        if (!SubjectData.Name || SubjectData.Name.trim() === '') {
             
 
             throw new Error("The Career's Name is mandatory. ");
         }
         
 
-            SubjectData.name = SubjectData.name.toLowerCase();
+            SubjectData.Name = SubjectData.Name.toLowerCase();
 
         try {
             console.log(SubjectData);
