@@ -2,12 +2,12 @@ import { DataTypes, Model } from "sequelize";
 import { SequelizeDB } from "../../database/sequelize.js";
 
 export class Subject extends Model {
-  public Id!: string;
-  public Name!: string;
-  public Code!: string;
-  public Hours!: number;
+  public id!: string;
+  public name!: string;
+  public code!: string;
+  public hours!: number;
   public horariosId!: number;
-  public Classroom!: string;
+  public classroom!: string;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }

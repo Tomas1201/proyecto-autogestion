@@ -53,14 +53,14 @@ export class SubjectService implements ISubjectService {
     public async CreateSubject(SubjectData: Subject): Promise<Subject> {
         
         
-        if (!SubjectData.Name || SubjectData.Name.trim() === '') {
+        if (!SubjectData.name || SubjectData.name.trim() === '') {
             
 
             throw new Error("The Career's Name is mandatory. ");
         }
         
 
-            SubjectData.Name = SubjectData.Name.toLowerCase();
+            SubjectData.name = SubjectData.name.toLowerCase();
 
         try {
             console.log(SubjectData);
