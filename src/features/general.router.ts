@@ -5,6 +5,7 @@ import {studentCRUDRouter} from './student/student-crud/student-crud.router.js';
 import {StudentSearchRouter} from './student/student-search/student-search.router.js';
 import { ProfessorSearchRouter } from "./Professor/ProfessorSearch/ProfessorSearchRouter.js";
 import {ProfessorCRUDRouter} from "./Professor/ProfessorCRUD/ProfessorCRUDRouter.js";
+import { SubjectRouter } from "./SubjectCRUD/SubjectRouter.js";
 
  const generalRouter = Router();
 
@@ -14,5 +15,6 @@ generalRouter.use('/students', studentCRUDRouter);
 generalRouter.use('/students/search', StudentSearchRouter);
 generalRouter.use("/professor/search",ProfessorSearchRouter);
 generalRouter.use("/professor",ProfessorCRUDRouter);
+generalRouter.use("/subject",SubjectRouter);
 
 export default generalRouter;
