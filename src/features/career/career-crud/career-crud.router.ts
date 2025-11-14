@@ -14,7 +14,7 @@ const asyncHandler = (
 
 
 CareerRouter.get(
-  '/',authorize([ROLES.ADMIN]),
+  '/',
   asyncHandler(CareerController.getAll)
 );
 
@@ -27,14 +27,14 @@ CareerRouter.get(
 //Solo administrador
 CareerRouter.post(
   '/',
-  authorize([ROLES.ADMIN]),
+  
   validate({ body: createCareerSchema }),
   asyncHandler(CareerController.create)
 );
 //Solo administrador
 CareerRouter.put(
   '/:id',
-  authorize([ROLES.ADMIN]),
+  
   asyncHandler(CareerController.update)
 );
 

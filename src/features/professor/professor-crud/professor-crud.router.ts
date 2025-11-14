@@ -1,38 +1,38 @@
 import { Router } from "express";
 import * as ProfessorController from "./professor-crud.controller.js";
-import { authorize, ROLES } from "../../../shared/middlewares/protection.middleware.js";
+
 const ProfessorCRUDRouter = Router();
 
 //Solo administrador
-ProfessorCRUDRouter.post("/professors", authorize([ROLES.ADMIN]),ProfessorController.registerProfessor);
+ProfessorCRUDRouter.post("/professors",ProfessorController.registerProfessor);
 
 //Solo administrador
 ProfessorCRUDRouter.post(
-  "/professors/registerToSubject/:id",authorize([ROLES.ADMIN]),
+  "/professors/registerToSubject/:id",
   ProfessorController.registerProfessorToSubject
 );
 
 ProfessorCRUDRouter.get(
-  "/professors/search/state/:state",authorize([ROLES.ADMIN]),
+  "/professors/search/state/:state",
   ProfessorController.searchByState
 );
 
-ProfessorCRUDRouter.get("/professors",authorize([ROLES.ADMIN]) ,ProfessorController.searchProfessors);
+ProfessorCRUDRouter.get("/professors" ,ProfessorController.searchProfessors);
 
 ProfessorCRUDRouter.get(
   "/professors/:id",
   ProfessorController.searchProfessorById
 );
 
-ProfessorCRUDRouter.put("/professors/:id",authorize([ROLES.ADMIN]) ,ProfessorController.updateProfessor);
+ProfessorCRUDRouter.put("/professors/:id" ,ProfessorController.updateProfessor);
 
 ProfessorCRUDRouter.put(
-  "/professors/archive/:id",authorize([ROLES.ADMIN]),
+  "/professors/archive/:id",
   ProfessorController.archiveProfessor
 );
 
 ProfessorCRUDRouter.put(
-  "/professors/unarchive/:id",authorize([ROLES.ADMIN]),
+  "/professors/unarchive/:id",
   ProfessorController.unarchiveProfessor
 );
 
