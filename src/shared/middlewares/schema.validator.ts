@@ -11,13 +11,13 @@ export const durationSchema = z.number()
 
 
 export const createCareerSchema = z.object({
-  Name: z.string()
+  name: z.string()
     .min(10, { message: "The name of the Career must have at least 10 characters." })
     .max(30, { message: "The Career name cannot exceed 30 characters.." }),
-  Description: z.string()
+  description: z.string()
     .min(20, { message: "The Career description must be at least 20 characters." }),
  
-  Duration: durationSchema, 
+  duration: durationSchema, 
   
 });
 
