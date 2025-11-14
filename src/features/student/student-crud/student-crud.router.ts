@@ -31,7 +31,7 @@ router.post(
 );
 
 // Actualiza un alumno por ID
-router.put("/:Id", ValidateStudentUpdate,studentController.UpdateStudent);
+router.put("/:id", ValidateStudentUpdate,studentController.UpdateStudent);
 
 
 /*Chequear reglas de negocio sobre este endpoint(puede el admin cambiarlo libremente?) */

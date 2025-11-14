@@ -92,7 +92,7 @@ export class StudentRepository implements StudentInterface {
   async Update(id: string, alumnoData: Partial<Student>): Promise<boolean> {
     try {
       const [updatedRows] = await Student.update(alumnoData, {
-        where: { Id:id },
+        where: { id:id },
       });
       return updatedRows > 0 ? true : false;
     } catch (error) {

@@ -78,10 +78,10 @@ export const studentController = {
 
  
   UpdateStudent: async (req: Request, res: Response) => {
-    const { Id } = req.params;
+    const { id } = req.params;
     const alumno = req.body;
     try {
-      const updatedAlumno = await StudentService.update(Id, alumno);
+      const updatedAlumno = await StudentService.update(id, alumno);
       if (!updatedAlumno) {
        res.status(404).json({ status: 404, message: "Student not found or no changes were made" });
        return;
