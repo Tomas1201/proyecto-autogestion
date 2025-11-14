@@ -5,8 +5,8 @@ export class Subject extends Model {
   public id!: string;
   public name!: string;
   public code!: string;
-  public hours!: number;
-  public horariosId!: number;
+  public hours!: number; // puede ser nulo
+  public horariosId!: number; // puede ser nulo
   public classroom!: string;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
@@ -30,12 +30,15 @@ Subject.init(
     },
     hours: {
       type: DataTypes.INTEGER,
+      allowNull: true,
     },
     horariosid: {
       type: DataTypes.INTEGER,
+      allowNull: true,
     },
     classroom: {
       type: DataTypes.STRING,
+      allowNull: false,
     },
   },
   {

@@ -11,8 +11,8 @@ import {SubjectRouter} from "./SubjectCRUD/SubjectRouter.js";
 generalRouter.use("/auth", authRouter)
 generalRouter.use("/career", CareerRouter);
 generalRouter.use("/career/search", CareerSearchRouter);
-generalRouter.use('/students', studentCRUDRouter);
-generalRouter.use('/students/search', StudentSearchRouter);
+generalRouter.use('/student', studentCRUDRouter);
+generalRouter.use('/student/search', StudentSearchRouter);
 generalRouter.use("/professor/search",ProfessorSearchRouter);
 generalRouter.use("/professor",ProfessorCRUDRouter);
 generalRouter.use("/subject",SubjectRouter);

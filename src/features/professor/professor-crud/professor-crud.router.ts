@@ -4,35 +4,35 @@ import * as ProfessorController from "./professor-crud.controller.js";
 const ProfessorCRUDRouter = Router();
 
 //Solo administrador
-ProfessorCRUDRouter.post("/professors",ProfessorController.registerProfessor);
+ProfessorCRUDRouter.post("/",ProfessorController.registerProfessor);
 
 //Solo administrador
 ProfessorCRUDRouter.post(
-  "/professors/registerToSubject/:id",
+  "/registerToSubject/:id",
   ProfessorController.registerProfessorToSubject
 );
 
 ProfessorCRUDRouter.get(
-  "/professors/search/state/:state",
+  "/search/state/:state",
   ProfessorController.searchByState
 );
 
-ProfessorCRUDRouter.get("/professors" ,ProfessorController.searchProfessors);
+ProfessorCRUDRouter.get("/" ,ProfessorController.searchProfessors);
 
 ProfessorCRUDRouter.get(
-  "/professors/:id",
+  "/:id",
   ProfessorController.searchProfessorById
 );
 
-ProfessorCRUDRouter.put("/professors/:id" ,ProfessorController.updateProfessor);
+ProfessorCRUDRouter.put("/:id" ,ProfessorController.updateProfessor);
 
 ProfessorCRUDRouter.put(
-  "/professors/archive/:id",
+  "/archive/:id",
   ProfessorController.archiveProfessor
 );
 
 ProfessorCRUDRouter.put(
-  "/professors/unarchive/:id",
+  "/unarchive/:id",
   ProfessorController.unarchiveProfessor
 );
 

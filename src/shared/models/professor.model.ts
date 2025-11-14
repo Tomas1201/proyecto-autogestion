@@ -11,7 +11,10 @@ export class Professor extends Model {
   public Email!: string;
   public Phone!: string;
   public disponibilidad_horaria!: string;
-  public State!: boolean;
+  public State!: boolean; // puede ser nulo
+
+  public readonly createdAt!: Date;
+  public readonly updatedAt!: Date;
 }
 
 Professor.init({
@@ -46,13 +49,13 @@ Professor.init({
     type: DataTypes.STRING,
     allowNull: false,
   },
-  ScheduleAvailability: {
+  scheduleAvailability: {
     type: DataTypes.TEXT,
     allowNull: false,
   },
-  State: {
+  state: {
     type: DataTypes.BOOLEAN,
-    allowNull: false,
+    allowNull: true,
     defaultValue: true,
   },
 

@@ -9,7 +9,7 @@ export class Student extends Model {
   public File!: number;
   public Status!: string;
   public Dni!: number;
-  public Career!: string[];
+  public Career!: string[]; // puede ser nulo
 
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;

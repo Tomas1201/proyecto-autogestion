@@ -9,7 +9,7 @@ export class Career extends Model {
   public duration!: number;
   public qualification!: string;
  
-  public  headOfCareerId!: number;
+  public  headOfCareerId!: number; // puede ser nulo
 
 
   public readonly createdAt!: Date;
