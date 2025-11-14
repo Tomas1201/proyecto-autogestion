@@ -35,6 +35,6 @@ const relations = [
   Student.hasMany(Registration, { foreignKey: "StudentId" }),
   Registration.belongsTo(Student, { foreignKey: "StudentId" }),
 
-  SequelizeDB.sync({ force: true }),
+  
 ];
 export default relations;
