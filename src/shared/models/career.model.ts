@@ -7,10 +7,6 @@ export class Career extends Model {
   public name!: string;
   public description!: string;
   public duration!: number;
-  public qualification!: string;
- 
-  public  headOfCareerId!: number; // puede ser nulo
-
 
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
@@ -38,15 +34,7 @@ Career.init(
       allowNull: false,
     },
 
-    qualification: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-
-    headOfCareerId: {
-      type: DataTypes.INTEGER,
-      allowNull:true,
-    },
+    
   },
   {
     sequelize: SequelizeDB,
