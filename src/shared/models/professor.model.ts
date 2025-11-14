@@ -3,15 +3,15 @@ import {SequelizeDB} from '../../database/sequelize.js';
 
 export class Professor extends Model {
   public Id!: string; // UUIDV4
-  public Name!: string;
-  public LastName!: string;
-  public Dni!: string;
-  public File!: string;
-  public titulo_academico!: string;
-  public Email!: string;
-  public Phone!: string;
-  public disponibilidad_horaria!: string;
-  public State!: boolean; // puede ser nulo
+  public name!: string;
+  public lastName!: string;
+  public dni!: string;
+  public file!: string;
+  public academicTitle!: string;
+  public email!: string;
+  public phone!: string;
+  public scheduleAvailability!: string;
+  public state!: boolean; // puede ser nulo
 
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
