@@ -49,9 +49,9 @@ export class StudentRepository implements StudentInterface {
       const existingAlumno = await Student.findOne({
         where: {
           [Op.or]: [
-            { Email: alumnoData.Email },
-            { Dni: alumnoData.Dni },
-            { File: alumnoData.File },
+            { email: alumnoData.email },
+            { dni: alumnoData.dni },
+            { file: alumnoData.file },
             
           ],
         },

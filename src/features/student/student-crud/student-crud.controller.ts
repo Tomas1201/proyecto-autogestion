@@ -5,10 +5,10 @@ import { Request, Response, NextFunction } from "express";
 export const studentController = {
  
   getStudent: async (req: Request, res: Response, next: NextFunction) => {
-    const { Id } = req.params;
+    const { id } = req.params;
 
     try {
-      const Student = await StudentService.getById(Id);
+      const Student = await StudentService.getById(id);
       if (!Student) {
         res
           .status(404)

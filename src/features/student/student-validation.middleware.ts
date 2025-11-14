@@ -2,29 +2,29 @@ import { z } from "zod";
 import { Request, Response, NextFunction } from "express";
 
 const StudentSchema = z.object({
-  Id: z.uuid().optional(), // This field is not sent when creating a new student
-  Name: z.string().min(1, "First name is required"),
-  LastName: z.string().min(1, "Last name is required"),
-  Email: z.email("Invalid email format"),
-  File: z.number().int().positive("Student ID must be a positive integer"), // This field is generated in the database
-  Status: z.enum(["Active", "Inactive"], "Status must be either 'activo' or 'inactivo'").optional(),
-  Dni: z.number("National ID must be numeric" )
+  id: z.uuid().optional(), // This field is not sent when creating a new student
+  name: z.string().min(1, "First name is required"),
+  lastName: z.string().min(1, "Last name is required"),
+  email: z.email("Invalid email format"),
+  file: z.number().int().positive("Student ID must be a positive integer"), // This field is generated in the database
+  status: z.enum(["Active", "Inactive"], "Status must be either 'activo' or 'inactivo'").optional(),
+  dni: z.number("National ID must be numeric" )
     .int()
     .positive("National ID must be a positive integer"),
-  Career: z.array(z.string()).optional(),
+  career: z.array(z.string()).optional(),
 });
 
 const StudentUpdateSchema = z.object({
-  Name: z.string().min(1, "First name is required").optional(),
-  LastName: z.string().min(1, "Last name is required").optional(),
-  Email: z.email("Invalid email format").optional(),
-  StudentId: z.number().int().positive("Student ID must be a positive integer").optional(),
-  Status: z.enum(["Active", "Inactive", "Graduated", "Free"],"Invalid status value" ).optional(),
-  Dni: z.number("National ID must be numeric" )
+  name: z.string().min(1, "First name is required").optional(),
+  lastName: z.string().min(1, "Last name is required").optional(),
+  email: z.email("Invalid email format").optional(),
+  studentId: z.number().int().positive("Student ID must be a positive integer").optional(),
+  status: z.enum(["Active", "Inactive", "Graduated", "Free"],"Invalid status value" ).optional(),
+  dni: z.number("National ID must be numeric" )
     .int()
     .positive("National ID must be a positive integer")
     .optional(),
-  Majors: z.array(z.string()).optional(),
+  majors: z.array(z.string()).optional(),
 });
 
 export const ValidateStudent = async (
