@@ -2,7 +2,7 @@ import { DataTypes, Model } from "sequelize";
 import { SequelizeDB } from "../../database/sequelize.js";
 
 export class Student extends Model {
-  public id!: number;
+  public id!: string;
   public name!: string;
   public lastName!: string;
   public email!: string;

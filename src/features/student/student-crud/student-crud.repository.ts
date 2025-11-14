@@ -91,13 +91,15 @@ export class StudentRepository implements StudentInterface {
   // Actualiza un alumno por ID
   async Update(id: string, alumnoData: Partial<Student>): Promise<boolean> {
     try {
+      
       const [updatedRows] = await Student.update(alumnoData, {
         where: { id:id },
       });
       return updatedRows > 0 ? true : false;
+
     } catch (error) {
       console.error("Error updating alumno:", error);
-      throw new Error("Database error");
+      throw new Error("Database error1");
     }
   }
 
