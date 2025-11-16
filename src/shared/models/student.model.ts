@@ -37,6 +37,7 @@ Student.init(
     },
     file: {
       type: DataTypes.INTEGER,
+      autoIncrement: true,
       allowNull: false,
       unique: true,
     },
