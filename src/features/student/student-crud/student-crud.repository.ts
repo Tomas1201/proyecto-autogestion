@@ -9,7 +9,7 @@ interface StudentCreationAttributes {
   name: string;
   lastName: string;
   email: string;
-  status: "activo" | "inactivo" | "graduado";
+  status: string;
   dni: number;
   career?: string[]; // opcional al crear
 }
