@@ -101,7 +101,7 @@ export class StudentRepository implements StudentInterface {
   // Actualiza un alumno por ID
   async Update(id: string, alumnoData: Partial<Student>): Promise<boolean> {
     try {
-      
+      console.log(alumnoData);
       const [updatedRows] = await Student.update(alumnoData, {
         where: { id:id },
       });
