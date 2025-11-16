@@ -5,6 +5,15 @@ import { Registration } from "../../../shared/models/domain/registration.model.j
 import { SequelizeDB } from "../../../database/sequelize.js"; // Importar el modelo de inscriptos si es necesario
 import { AcademicPositionModel } from "../../../shared/models/domain/academic-position.model.js";
 
+interface StudentCreationAttributes {
+  name: string;
+  lastName: string;
+  email: string;
+  status: "activo" | "inactivo" | "graduado";
+  dni: number;
+  career?: string[]; // opcional al crear
+}
+
 export class StudentRepository implements StudentInterface {
   static instance: StudentRepository;
   static getInstance(): StudentRepository {
@@ -44,14 +53,14 @@ export class StudentRepository implements StudentInterface {
  
 
   // Crea un nuevo alumno
-  async Create(alumnoData: Student): Promise<Student | null> {
+  async Create(alumnoData: StudentCreationAttributes): Promise<Student | null> {
     try {
       const existingAlumno = await Student.findOne({
         where: {
           [Op.or]: [
             { email: alumnoData.email },
             { dni: alumnoData.dni },
-            { file: alumnoData.file },
+            
             
           ],
         },
@@ -66,8 +75,9 @@ export class StudentRepository implements StudentInterface {
       return newAlumno as Student;
     } catch (error) {
       console.error("Error creating alumno:", error);
-      return null; // O puedes lanzar un error según tu lógica
       throw new Error("Database error");
+      return null; // O puedes lanzar un error según tu lógica
+      
     }
   }
 
