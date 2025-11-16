@@ -18,7 +18,7 @@ const StudentUpdateSchema = z.object({
   lastName: z.string().min(1, "Last name is required").optional(),
   email: z.email("Invalid email format").optional(),
   studentId: z.number().int().positive("Student ID must be a positive integer").optional(),
-  status: z.enum(["Active", "Inactive", "Graduated", "Free"],"Invalid status value" ).optional(),
+  status: z.enum(["activo", "inactivo", "graduado", "libre"],"Invalid status value" ).optional(),
   dni: z.number("National ID must be numeric" )
     .int()
     .positive("National ID must be a positive integer")
