@@ -1,0 +1,142 @@
+# Request REST API for Student Management
+GET http://localhost:3000/api/v1/students/
+
+###
+
+GET http://localhost:3000/api/v1/students/13f427dd-5239-4071-ba58-bf0780b949ef
+
+###
+
+POST http://localhost:3000/api/v1/students/
+content-type: application/json
+
+{
+    "Name": "pepe",
+    "LastName": "perez",
+    "Email": "pepePerez@gmail.com",
+    "File": 12345678,
+    "Dni": 34123467
+}
+
+###
+
+PUT http://localhost:3000/api/v1/students/13f427dd-5239-4071-ba58-bf0780b949ef
+content-type: application/json
+
+{
+    "Name": "Juan",
+    "LastName": "perez",
+    "Email": "pepePerez@gmail.com",
+    "File": 12345678,
+    "Dni": 34123467
+}
+
+###
+
+# Request REST API for Career Management
+
+GET http://localhost:3000/api/v1/career/
+
+###
+
+GET http://localhost:3000/api/v1/career/1
+
+###
+
+POST http://localhost:3000/api/v1/career
+Content-Type: application/json
+
+{
+    "Name":"Ingeniería en Sistemas",
+    "Description":"Carrera enfocada en el desarrollo de software y sistemas de información.",
+    "Duration": 5,
+    "Qualification": "Licenciatura",
+    "HeadOfCareerId":3
+}
+
+###
+
+PUT http://localhost:3000/api/v1/career/1
+Content-Type: application/json
+
+{
+    "Name":"Ingeniería Actualizada",
+    "Description":"Cambio de descripción",
+    "Duration": 4,
+    "Qualification": "Licenciatura",
+    "HeadOfCareerId":2
+}
+
+###
+
+# Request REST API for Professor Management
+
+GET http://localhost:3000/api/v1/professor/
+
+###
+
+GET http://localhost:3000/api/v1/professor/1
+
+###
+
+POST http://localhost:3000/api/v1/professor/
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "dni": "12345678",
+  "file": "998877",
+  "academicTitle": "Lic. Matemática",
+  "email": "john.doe@example.com",
+  "phone": "1122334455",
+  "scheduleAvailability": "Lunes a Viernes 8-12",
+  "state": true
+}
+
+###
+
+PUT http://localhost:3000/api/v1/professor/1
+Content-Type: application/json
+
+{
+  "name": "John Updated",
+  "dni": "12345678",
+  "file": "998877",
+  "academicTitle": "Lic. Física",
+  "email": "john.updated@example.com",
+  "phone": "1199887766",
+  "scheduleAvailability": "Lunes a Viernes 10-16",
+  "state": true
+}
+
+###
+
+# Busquedas de estudiantes
+
+GET http://localhost:3000/api/v1/students/search/name/pepe
+
+###
+
+GET http://localhost:3000/api/v1/students/search/lastname/perez
+
+###
+
+GET http://localhost:3000/api/v1/students/search/dni/34123467
+
+###
+
+# Subject CRUD
+
+POST http://localhost:3000/api/v1/subject
+Content-Type: application/json
+
+{
+    "name": "MatematicasDiscretas",
+    "code": "01010123",
+    "hours": 2,
+    "classroom": "A1"
+}
+
+###
+
+GET http://localhost:3000/api/v1/subject/

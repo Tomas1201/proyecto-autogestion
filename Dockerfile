@@ -1,24 +1,38 @@
-FROM mysql:8.4.2
+FROM node:18-alpine AS builder
 
-# Set environment variables
-ENV MYSQL_ROOT_PASSWORD=root
-ENV MYSQL_DATABASE=example_db
-ENV MYSQL_USER=user
+WORKDIR /usr/src/app
 
-# Copy initialization scripts
-COPY ./init.sql /docker-entrypoint-initdb.d/
+# Instala TypeScript y dependencias
+COPY package*.json ./
+RUN npm install
 
-# Expose the MySQL port
-EXPOSE 3306
+# Copia el código fuente (archivos .ts)
+COPY . .
 
-# Health check to ensure MySQL is running
-HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-  CMD mysqladmin ping -h localhost || exit 1
+# Ejecuta la compilación de TypeScript (asume que tienes un script 'build' en package.json)
+# Este comando crea la carpeta de salida (e.g., 'dist' o 'build') con archivos .js
+RUN npm run build
 
-# Use a custom configuration file
-COPY ./my.cnf /etc/mysql/conf.d/
+# ---
+# ETAPA 2: Ejecución (Runtime)
+FROM node:18-alpine
 
-# Set the default command to run MySQL
-CMD ["mysqld"]
-# Optional: Add a volume for persistent data storage
-VOLUME /var/lib/mysql
+# Define el directorio de trabajo
+WORKDIR /usr/src/app
+
+# Copia solo los archivos JavaScript compilados y las dependencias de producción
+# Cambia 'dist' por el nombre de tu carpeta de salida si es diferente
+COPY --from=builder /usr/src/app/dist ./dist
+COPY --from=builder /usr/src/app/node_modules ./node_modules
+COPY --from=builder /usr/src/app/package.json ./package.json
+
+# Define la variable de entorno para la configuración de Node.js
+ENV NODE_ENV production
+
+# Expone el puerto de la aplicación
+EXPOSE 3000
+
+# El comando de inicio debe apuntar al archivo JavaScript compilado
+# Por ejemplo: CMD [ "node", "dist/index.js" ]
+# Ajusta 'dist/index.js' a tu punto de entrada real
+CMD [ "node", "dist/index.js" ]

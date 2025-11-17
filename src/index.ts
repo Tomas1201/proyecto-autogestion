@@ -1,37 +1,34 @@
-import express from 'express';
-import dotenv from 'dotenv';
-import AlumnoRouter from './Alumno/AlumnoRouter.js';
+import relations from './shared/relations.js'; 
+import express from "express";
+import generalRouter from "./features/general.router.js"
+import cors from 'cors';
 
-//import {Normalizador} from './Utils/Sanitizador.js';
-import { SequelizeDB } from './Database/Sequelize.js';
-import a from './Database/Relaciones.js'; // Importar las relaciones
-dotenv.config();
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-
+const corsOptions = {
+    // Si tu frontend corre en localhost:5173
+    origin: 'http://localhost:4200', 
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true, // Permite cookies y headers de autenticación si son necesarios
+    optionsSuccessStatus: 204
+};
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-a;
-app.use('/api/v1/alumnos', AlumnoRouter); 
+relations;
+
+app.use('/api/v1/', generalRouter); 
 
 
 
-
-import { Carrera, CarreraModel } from './Database/CarrerasModel.js';
-
-SequelizeDB.authenticate()
-  .then(() => {
-    console.log('Database connection has been established successfully.');
-  })
-  .catch((error) => {
-    console.error('Unable to connect to the database:', error);
-  }
-  );
 
 
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
+
+export default app;

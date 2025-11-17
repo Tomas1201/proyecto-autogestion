@@ -1,19 +1,41 @@
 {
-     "compilerOptions": {
-       "incremental": true,
-       "target": "es2020",
-       "module": "ES2022",
-       "moduleResolution": "bundler",
-       "sourceMap": true,
-       "outDir": "./dist",
-       "esModuleInterop": true,
-       "forceConsistentCasingInFileNames": true,
-       "strict": true,
-       "alwaysStrict": true,
-       "skipLibCheck": true,
-       "emitDecoratorMetadata": true,
-       "experimentalDecorators": true
-     },
-     "include": ["src//*", "/*.ts", "src/Alumno/Controllers", "src/Alumno/Models", "src/Alumno/AlumnoController.ts", "src/Database/AsignaturaModel.ts", "src/Database/CarreraAsignaturaModel.ts", "src/Alumno/AlumnoModel.ts", "src/Database/CarrerasModel.ts"],
-     "exclude": ["node_modules"]
-   }
+  "compilerOptions": {
+    "incremental": true,
+    "target": "es2020",
+    "module": "ES2022",
+    "moduleResolution": "bundler",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "alwaysStrict": true,
+    "skipLibCheck": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
+  },
+  "include": [
+    "src//*",
+    "/*.ts",
+    "src/**/*.ts",
+    "src/Alumno/Controllers",
+    "src/Alumno/Models",
+    "src/features/student/student-crud/student-crud.controller.ts",
+    "src/shared/models/subject.model.ts",
+    "srsrc/Models/CarreraAsignaturaModel.ts ",
+    "src/shared/models/student.model.ts",
+    "src/shared/models/career.model.ts",
+    "src/features/student/student-report",
+    "src/features/student/student-search",
+    "src/Professor/Controllers",
+    "src/Professor/Models",
+    "src/Repositories/ProfessorRepository.ts",
+    "src/Professor/ProfessorRouter.ts",
+    "src/Models/SubjectModel.ts",
+    "src/database/CarreraAsignaturaModel.ts",
+    "src/Professor/ProfessorService.ts",
+    "src/features/professor/middlewares/professor-validator.middleware.ts",
+    "src/database/CarrerasModel.ts"
+  ],
+  "exclude": ["node_modules"]
+}
