@@ -5,6 +5,7 @@ export class Registration extends Model {
   public id!: string; // UUIDV4
   public StudentId!: number;
   public AcademicPositionId!: number;
+  public status!: string;
 
   // timestamps!
   public readonly CreatedAt!: Date;
@@ -25,6 +26,11 @@ Registration.init(
         model: "AcademicPosition",
         key: "id",
       },
+    },
+    status: {
+      type: DataTypes.ENUM('ENROLLED', 'PASSED', 'FAILED'),
+      allowNull: false,
+      defaultValue: 'ENROLLED',
     },
   },
   {

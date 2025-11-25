@@ -9,6 +9,7 @@ import { SubjectPlanModel } from "./models/domain/subject-plan.model.js";
 import { CareerPlanModel } from "./models/domain/career-plan.model.js";
 import { AcademicPositionModel } from "./models/domain/academic-position.model.js";
 import { StudentCareer } from "./models/domain/student-career.model.js";
+import { Correlation } from "./models/domain/correlations.model.js";
 import { UserModel } from "../features/auth/users.model.js";
 
 import { Professor } from "./models/professor.model.js";
@@ -22,6 +23,7 @@ const relations = [
   Professor,
   Schedule,
   UserModel,
+  Correlation,
   Student.belongsToMany(Career, {
     through: StudentCareer,
     foreignKey: "StudentId",
@@ -30,10 +32,19 @@ const relations = [
     through: StudentCareer,
     foreignKey: "CareerId",
   }),
-  Subject.belongsToMany(Career, { through: C_AModel, foreignKey: "SubjectId" }),
-  Career.belongsToMany(Subject, { through: C_AModel, foreignKey: "CareerId" }),
+
+  // Career has many CareerPlans
+  Career.hasMany(CareerPlanModel, { foreignKey: 'careerId' }),
+  CareerPlanModel.belongsTo(Career, { foreignKey: 'careerId' }),
+
+  // CareerPlan has many Subjects through SubjectPlan
+  CareerPlanModel.belongsToMany(Subject, { through: SubjectPlanModel, foreignKey: 'careerPlanId' }),
+  Subject.belongsToMany(CareerPlanModel, { through: SubjectPlanModel, foreignKey: 'subjectId' }),
+
   Student.hasMany(Registration, { foreignKey: "StudentId" }),
   Registration.belongsTo(Student, { foreignKey: "StudentId" }),
+  Registration.belongsTo(AcademicPositionModel, { foreignKey: "academicPositionId" }),
+  AcademicPositionModel.hasMany(Registration, { foreignKey: "academicPositionId" }),
 
   SequelizeDB.sync({ force: true })
 ];

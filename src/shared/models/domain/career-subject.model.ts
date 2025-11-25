@@ -8,14 +8,14 @@ SequelizeDB.define("CareerSubject", {
     autoIncrement: true,
   },
   CareerId: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.UUID,
     references: {
       model: "Career", // Nombre de la tabla referenciada
       key: "id", // Clave primaria de la tabla referenciada
     },
   },
   SubjectId: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.UUID,
     references: {
       model: "Subject", // Nombre de la tabla referenciada
       key: "id", // Clave primaria de la tabla referenciada

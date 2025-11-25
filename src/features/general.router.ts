@@ -7,7 +7,11 @@ import { ProfessorSearchRouter } from "./professor/professor-search/professor-se
 import {ProfessorCRUDRouter} from "./professor/professor-crud/professor-crud.router.js";
 import {authRouter} from "./auth/auth.router.js";
 import {SubjectRouter} from "./SubjectCRUD/SubjectRouter.js";
+import { careerSubjectRouter } from "./career-subject/career-subject.router.js";
+import { registrationRouter } from "./registration/registration.router.js";
+
  const generalRouter = Router();
+
 generalRouter.use("/auth", authRouter)
 generalRouter.use("/career", CareerRouter);
 generalRouter.use("/career/search", CareerSearchRouter);
@@ -16,5 +20,7 @@ generalRouter.use('/student/search', StudentSearchRouter);
 generalRouter.use("/professor/search",ProfessorSearchRouter);
 generalRouter.use("/professor",ProfessorCRUDRouter);
 generalRouter.use("/subject",SubjectRouter);
+generalRouter.use("/careersubject", careerSubjectRouter);
+generalRouter.use("/registrations", registrationRouter);
 
 export default generalRouter;

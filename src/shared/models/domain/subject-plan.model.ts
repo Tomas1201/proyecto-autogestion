@@ -3,12 +3,13 @@ import { SequelizeDB } from "../../../database/sequelize.js";
 
 export class SubjectPlanModel extends Model {
   public id!: number;
-  public planCarreraId!: number;
-  public asignaturaId!: number;
-  public anio!: number;
-  public cuatrimestre!: number;
-  public cargaHoraria!: number;
-  public isoptativa!: boolean;
+  public careerPlanId!: string;
+  public subjectId!: string;
+  public year!: number;
+  public fourMonthPeriod!: number;
+  public workload!: number;
+  public isOptional!: boolean;
+  public isAnnual!: boolean;
 
   // timestamps!
   public readonly createdAt!: Date;
@@ -37,6 +38,19 @@ SubjectPlanModel.init(
         model: "Subject", // Nombre de la tabla referenciada
         key: "id", // Clave primaria de la tabla referenciada
       },
+    },
+    year: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    fourMonthPeriod: {
+      type: DataTypes.INTEGER,
+      allowNull: true, // Puede ser nulo si isAnnual es true
+    },
+    isAnnual: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
     },
     workload: {
       type: DataTypes.INTEGER,

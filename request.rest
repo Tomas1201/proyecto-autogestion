@@ -140,3 +140,62 @@ Content-Type: application/json
 ###
 
 GET http://localhost:3000/api/v1/subject/
+
+###
+
+# Career Plan and Subject Management
+
+@careerId = 524e7398-64c4-4973-9685-93536c41104b
+@careerPlanId = some-career-plan-uuid
+@subjectId = 3a8f7b12-4f4b-4f1e-8b3d-83e3c1f3d3f3
+@subjectPlanId = 1
+
+# Get all subjects for a career (with plan details)
+GET http://localhost:3000/api/v1/careers/{{careerId}}/subjects
+
+###
+
+# Add a subject to a career plan
+POST http://localhost:3000/api/v1/career-plans/{{careerPlanId}}/subjects
+Content-Type: application/json
+
+{
+    "subjectId": "{{subjectId}}",
+    "year": 1,
+    "fourMonthPeriod": 1,
+    "isAnnual": false,
+    "workload": 5,
+    "isOptional": false
+}
+
+###
+
+# Remove a subject from a career plan
+DELETE http://localhost:3000/api/v1/subject-plans/{{subjectPlanId}}
+
+###
+
+# Student Registration
+
+@studentId = 13f427dd-5239-4071-ba58-bf0780b949ef
+@academicPositionId = 1
+@registrationId = 1
+
+# Register a student for a subject (via Academic Position)
+POST http://localhost:3000/api/v1/registrations
+Content-Type: application/json
+
+{
+    "studentId": "{{studentId}}",
+    "academicPositionId": {{academicPositionId}}
+}
+
+###
+
+# Get all registrations for a student
+GET http://localhost:3000/api/v1/students/{{studentId}}/registrations
+
+###
+
+# Drop a subject registration
+DELETE http://localhost:3000/api/v1/registrations/{{registrationId}}

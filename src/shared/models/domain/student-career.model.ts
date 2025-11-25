@@ -1,11 +1,9 @@
-/*Revisando implementacion, sujeto a remocion */
+
 
 import { Model, DataTypes } from "sequelize";
 import { SequelizeDB } from "../../../database/sequelize.js";
 
-/*
-Relacion entre alumnos inscriptos a carreras
- */
+
 export class StudentCareer extends Model {
   public id!: number;
   public alumnoId!: number;
@@ -29,35 +27,35 @@ StudentCareer.init(
       type: DataTypes.UUID,
       allowNull: false,
       references: {
-        model: "Student", // Nombre de la tabla referenciada
-        key: "id", // Clave primaria de la tabla referenciada
+        model: "Student",
+        key: "id", 
       },
     },
     careerId: {
       type: DataTypes.UUID,
       allowNull: false,
       references: {
-        model: "Career", // Nombre de la tabla referenciada
-        key: "id", // Clave primaria de la tabla referenciada
+        model: "Career",
+        key: "id", 
       },
     },
     careerPlanId: {
       type: DataTypes.UUID,
       allowNull: false,
       references: {
-        model: "CareerPlan", // Nombre de la tabla referenciada
-        key: "id", // Clave primaria de la tabla referenciada
+        model: "CareerPlan",
+        key: "id",
       },
     },
     state: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: "active", // Estado por defecto
+      defaultValue: "active",
     },
   },
   {
     sequelize: SequelizeDB,
     timestamps: true,
-    tableName: "StudentCareer", // Nombre de la tabla en la base de datos
+    tableName: "StudentCareer",
   }
 );
