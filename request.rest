@@ -199,3 +199,31 @@ GET http://localhost:3000/api/v1/students/{{studentId}}/registrations
 
 # Drop a subject registration
 DELETE http://localhost:3000/api/v1/registrations/{{registrationId}}
+
+###
+
+# Correlation Management
+
+@subjectToTakeId = uuid-goes-here
+@subjectRequiredId = uuid-goes-here
+@correlationId = 1
+
+# Create a new prerequisite rule
+POST http://localhost:3000/api/v1/correlations
+Content-Type: application/json
+
+{
+    "subjectToTake": "{{subjectToTakeId}}",
+    "subjectRequiedId": "{{subjectRequiredId}}",
+    "careerId": "{{careerId}}"
+}
+
+###
+
+# Get all prerequisite rules for a career
+GET http://localhost:3000/api/v1/careers/{{careerId}}/correlations
+
+###
+
+# Delete a prerequisite rule
+DELETE http://localhost:3000/api/v1/correlations/{{correlationId}}

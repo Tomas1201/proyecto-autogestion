@@ -9,6 +9,7 @@ import {authRouter} from "./auth/auth.router.js";
 import {SubjectRouter} from "./SubjectCRUD/SubjectRouter.js";
 import { careerSubjectRouter } from "./career-subject/career-subject.router.js";
 import { registrationRouter } from "./registration/registration.router.js";
+import { correlationRouter } from "./correlation/correlation.router.js";
 
  const generalRouter = Router();
 
@@ -22,5 +23,6 @@ generalRouter.use("/professor",ProfessorCRUDRouter);
 generalRouter.use("/subject",SubjectRouter);
 generalRouter.use("/careersubject", careerSubjectRouter);
 generalRouter.use("/registrations", registrationRouter);
+generalRouter.use("/correlations", correlationRouter);
 
 export default generalRouter;
