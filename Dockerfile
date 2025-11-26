@@ -15,7 +15,7 @@ RUN npm run build
 
 # ---
 # ETAPA 2: Ejecución (Runtime)
-FROM node:18-alpine
+FROM node:20-alpine
 
 # Define el directorio de trabajo
 WORKDIR /usr/src/app
