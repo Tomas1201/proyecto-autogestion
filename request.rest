@@ -1,26 +1,26 @@
 # Request REST API for Student Management
-GET http://localhost:3000/api/v1/students/
+GET http://localhost:3000/api/v1/student/
 
 ###
 
-GET http://localhost:3000/api/v1/students/13f427dd-5239-4071-ba58-bf0780b949ef
+GET http://localhost:3000/api/v1/student/13f427dd-5239-4071-ba58-bf0780b949ef
 
 ###
 
-POST http://localhost:3000/api/v1/students/
+POST http://localhost:3000/api/v1/student/
 content-type: application/json
 
 {
-    "Name": "pepe",
-    "LastName": "perez",
-    "Email": "pepePerez@gmail.com",
-    "File": 12345678,
-    "Dni": 34123467
+    "name": "pepe",
+    "lastName": "perez",
+    "email": "pepePerez@gmail.com",
+    "file": 12345678,
+    "dni": 34123467
 }
 
 ###
 
-PUT http://localhost:3000/api/v1/students/13f427dd-5239-4071-ba58-bf0780b949ef
+PUT http://localhost:3000/api/v1/student/13f427dd-5239-4071-ba58-bf0780b949ef
 content-type: application/json
 
 {
@@ -47,11 +47,11 @@ POST http://localhost:3000/api/v1/career
 Content-Type: application/json
 
 {
-    "Name":"Ingeniería en Sistemas",
-    "Description":"Carrera enfocada en el desarrollo de software y sistemas de información.",
-    "Duration": 5,
-    "Qualification": "Licenciatura",
-    "HeadOfCareerId":3
+    "name":"Ingeniería en Sistemas",
+    "description":"Carrera enfocada en el desarrollo de software y sistemas de información.",
+    "duration": 5,
+    "qualification": "Licenciatura",
+    "headOfCareerId":3
 }
 
 ###

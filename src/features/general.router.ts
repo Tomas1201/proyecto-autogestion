@@ -1,6 +1,7 @@
 import { Router } from "express";
 import {CareerRouter} from "./career/career-crud/career-crud.router.js";
 import CareerSearchRouter from "./career/career-search/career-search.router.js";
+import { careerPlanRouter } from "./career-plan/career-plan.router.js";
 import {studentCRUDRouter} from './student/student-crud/student-crud.router.js';
 import {StudentSearchRouter} from './student/student-search/student-search.router.js';
 import { ProfessorSearchRouter } from "./professor/professor-search/professor-search.router.js";
@@ -16,6 +17,7 @@ import { correlationRouter } from "./correlation/correlation.router.js";
 generalRouter.use("/auth", authRouter)
 generalRouter.use("/career", CareerRouter);
 generalRouter.use("/career/search", CareerSearchRouter);
+generalRouter.use("/career-plan",careerPlanRouter);
 generalRouter.use('/student', studentCRUDRouter);
 generalRouter.use('/student/search', StudentSearchRouter);
 generalRouter.use("/professor/search",ProfessorSearchRouter);

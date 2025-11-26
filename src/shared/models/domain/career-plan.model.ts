@@ -1,18 +1,14 @@
-import { DataTypes, Model, Sequelize } from "sequelize";
+import { DataTypes, Model, Sequelize, InferAttributes, InferCreationAttributes, CreationOptional } from "sequelize";
 import { SequelizeDB } from "../../../database/sequelize.js";
 
-/*
-Modelo que representa el plan de carrera, que vincula una carrera con un ciclo electivo.
-Cada plan de carrera puede tener múltiples asignaturas y está asociado a un ciclo electivo específico.
-*/
-export class CareerPlanModel extends Model {
-  public id!: string; // UUIDV4
-  public carreraId!: number;
-  public CicloElectivoId!: number;
+export class CareerPlanModel extends Model<InferAttributes<CareerPlanModel>, InferCreationAttributes<CareerPlanModel>> {
+  declare id: CreationOptional<string>;
+  declare careerId: string;
+  declare cycleElectiveId: number;
 
   // timestamps!
-  public readonly createdAt!: Date;
-  public readonly updatedAt!: Date;
+  declare readonly createdAt: CreationOptional<Date>;
+  declare readonly updatedAt: CreationOptional<Date>;
 }
 
 CareerPlanModel.init(
@@ -38,6 +34,8 @@ CareerPlanModel.init(
         key: "id",
       },
     },
+    createdAt: DataTypes.DATE,
+    updatedAt: DataTypes.DATE,
   },
   {
     sequelize: SequelizeDB,
