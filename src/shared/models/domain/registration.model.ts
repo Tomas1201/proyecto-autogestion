@@ -3,8 +3,8 @@ import { DataTypes, Model } from "sequelize";
 
 export class Registration extends Model {
   public id!: string; // UUIDV4
-  public StudentId!: number;
-  public AcademicPositionId!: number;
+  public studentId!: number;
+  public academicPositionId!: number;
   public status!: string;
 
   // timestamps!
@@ -24,6 +24,14 @@ Registration.init(
       allowNull: false,
       references: {
         model: "AcademicPosition",
+        key: "id",
+      },
+    },
+    studentId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: "Student",
         key: "id",
       },
     },

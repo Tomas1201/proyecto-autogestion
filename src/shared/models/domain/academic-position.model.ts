@@ -2,13 +2,13 @@ import { DataTypes, Model } from "sequelize";
 import { SequelizeDB } from "../../../database/sequelize.js";
 
 export class AcademicPositionModel extends Model {
-  public Id!: number;
-  public CareerPlanId!: number;
-  public SubjectId!: number;
+  public id!: number;
+  public careerPlanId!: number;
+  public subjectId!: number;
   public year!: number;
-  public FourMonthPeriod!: number;
-  public ElectiveCycleId!: number;
-  public ProfessorId!: number;
+  public fourMonthPeriod!: number;
+  public electiveCycleId!: number;
+  public professorId!: number;
 
   // timestamps!
   public readonly createdAt!: Date;

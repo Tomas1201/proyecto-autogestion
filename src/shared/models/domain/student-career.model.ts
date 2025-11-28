@@ -6,9 +6,9 @@ import { SequelizeDB } from "../../../database/sequelize.js";
 
 export class StudentCareer extends Model {
   public id!: number;
-  public alumnoId!: number;
-  public carreraId!: number;
-  public PlanCarreraId!: number;
+  public studentId!: number;
+  public careerId!: number;
+  public careerPlanId!: number;
   public state!: string;
 
   // timestamps!

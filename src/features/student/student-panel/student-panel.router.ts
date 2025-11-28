@@ -5,7 +5,7 @@ import { authorize, ROLES } from "../../../shared/middlewares/protection.middlew
 const router = Router();
 
 // Protect all routes with STUDENT role
-router.use(authorize([ROLES.USER]));
+//router.use(authorize([ROLES.USER]));
 
 router.get('/careers', StudentPanelController.getCareers);
 router.get('/available-subjects', StudentPanelController.getAvailableSubjects);

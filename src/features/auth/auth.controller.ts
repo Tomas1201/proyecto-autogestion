@@ -31,7 +31,7 @@ export const login = async (req: Request, res: Response): Promise<any> =>{
         });
 
          res.status(200).json({
-            message: 'Login exitoso',
+            message: 'Login exitoso', token: user
         });
         return;
     } catch (error) {
@@ -44,7 +44,9 @@ export const login = async (req: Request, res: Response): Promise<any> =>{
 export const register = async (req: Request, res: Response): Promise<any> =>{
     try {
         const data = req.body;
+        console.log(data)
         const existingUser = await authService.validateNewUser(data);
+        console.log(existingUser)
         
         if (existingUser) {
             res.status(409).json({ message: 'El usuario ya existe' });

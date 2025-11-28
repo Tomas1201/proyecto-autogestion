@@ -28,7 +28,7 @@ User.init(
         allowNull: false
     },
     role: {
-        type: DataTypes.ENUM('ADMIN', 'PROFESOR', 'STUDENT'),
+        type: DataTypes.ENUM('ADMIN', 'PROFESSOR', 'STUDENT'),
         allowNull: false
     }
 },

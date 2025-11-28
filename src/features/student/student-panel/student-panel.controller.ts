@@ -7,15 +7,9 @@ export const StudentPanelController = {
 
     getCareers: async (req: Request, res: Response) => {
         try {
-            const { jwt_token } = req.cookies;
-            if (!jwt_token) {
-                res.status(401).json({ message: "Unauthorized" });
-                return;
-            }
-            const decoded: any = decodeToken(jwt_token);
-            const studentId = decoded.userid;
+          const {file} = req.body
 
-            const careers = await StudentPanelService.getCareers(studentId);
+            const careers = await StudentPanelService.getCareers(file);
             res.status(200).json({ status: "OK", data: careers });
         } catch (error) {
             console.error(error);
@@ -25,15 +19,9 @@ export const StudentPanelController = {
 
     getAvailableSubjects: async (req: Request, res: Response) => {
         try {
-            const { jwt_token } = req.cookies;
-            if (!jwt_token) {
-                res.status(401).json({ message: "Unauthorized" });
-                return;
-            }
-            const decoded: any = decodeToken(jwt_token);
-            const studentId = decoded.userid;
+            const {file} = req.body;
 
-            const subjects = await StudentPanelService.getAvailableSubjects(studentId);
+            const subjects = await StudentPanelService.getAvailableSubjects(file);
             res.status(200).json({ status: "OK", data: subjects });
         } catch (error) {
             console.error(error);
@@ -43,13 +31,7 @@ export const StudentPanelController = {
 
     registerForSubject: async (req: Request, res: Response) => {
         try {
-            const { jwt_token } = req.cookies;
-            if (!jwt_token) {
-                res.status(401).json({ message: "Unauthorized" });
-                return;
-            }
-            const decoded: any = decodeToken(jwt_token);
-            const studentId = decoded.userid;
+            const {file} = req.body;
             const { subjectId } = req.body;
 
             if (!subjectId) {
@@ -57,7 +39,7 @@ export const StudentPanelController = {
                 return;
             }
 
-            const result = await StudentPanelService.registerForSubject(Number(studentId), Number(subjectId));
+            const result = await StudentPanelService.registerForSubject(Number(file), Number(subjectId));
             res.status(201).json(result);
         } catch (error) {
             console.error("Error in registerForSubject:", error);
@@ -67,14 +49,9 @@ export const StudentPanelController = {
 
     getAttendance: async (req: Request, res: Response) => {
         try {
-            const { jwt_token } = req.cookies;
-            if (!jwt_token) {
-                res.status(401).json({ message: "Unauthorized" });
-                return;
-            }
-            const decoded: any = decodeToken(jwt_token);
+            const {file} = req.body;
 
-            const student = await Student.findOne({ where: { file: decoded.file } });
+            const student = await Student.findOne({ where: { file: file } });
             if (!student) {
                 res.status(404).json({ message: "Student not found" });
                 return;
@@ -91,13 +68,8 @@ export const StudentPanelController = {
 
     getGrades: async (req: Request, res: Response) => {
         try {
-            const { jwt_token } = req.cookies;
-            if (!jwt_token) {
-                res.status(401).json({ message: "Unauthorized" });
-                return;
-            }
-            const decoded: any = decodeToken(jwt_token);
-            const student = await Student.findOne({ where: { file: decoded.file } });
+            const {file} = req.body;
+            const student = await Student.findOne({ where: { file: file } });
             if (!student) {
                 res.status(404).json({ message: "Student not found" });
                 return;
@@ -113,13 +85,8 @@ export const StudentPanelController = {
 
     getAvailableFinalExams: async (req: Request, res: Response) => {
         try {
-            const { jwt_token } = req.cookies;
-            if (!jwt_token) {
-                res.status(401).json({ message: "Unauthorized" });
-                return;
-            }
-            const decoded: any = decodeToken(jwt_token);
-            const student = await Student.findOne({ where: { file: decoded.file } });
+            const {file} = req.body;
+            const student = await Student.findOne({ where: { file: file } });
             if (!student) {
                 res.status(404).json({ message: "Student not found" });
                 return;
@@ -135,13 +102,8 @@ export const StudentPanelController = {
 
     registerForFinalExam: async (req: Request, res: Response) => {
         try {
-            const { jwt_token } = req.cookies;
-            if (!jwt_token) {
-                res.status(401).json({ message: "Unauthorized" });
-                return;
-            }
-            const decoded: any = decodeToken(jwt_token);
-            const student = await Student.findOne({ where: { file: decoded.file } });
+            const {file} = req.body;
+            const student = await Student.findOne({ where: { file: file } });
             if (!student) {
                 res.status(404).json({ message: "Student not found" });
                 return;

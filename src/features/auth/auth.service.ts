@@ -3,6 +3,11 @@ import {generateToken, verifyToken} from "../../shared/services/jwt.service.js";
 import {User} from "./users.model.js";
 import {verifyPassword, hashPassword} from "./hashing-auth.service.js"
 
+enum Role {
+    ADMIN = 'ADMIN',
+    PROFESSOR = 'PROFESSOR',
+    STUDENT = 'STUDENT'
+}
 export class AuthService{
     static instance: AuthService;
     static getInstance(): AuthService {
@@ -41,7 +46,7 @@ export class AuthService{
      async validateNewUser(userData: User){
         const user = await this.authRepository.findUser(userData.file);
         
-        if(user === null ){
+        if(user === null && (userData.role === Role.ADMIN || userData.role === Role.PROFESSOR || userData.role === Role.STUDENT)){
              
             userData.password= await hashPassword(userData.password);
             this.authRepository.createUser(userData);
