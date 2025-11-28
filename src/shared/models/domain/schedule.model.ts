@@ -3,10 +3,11 @@ import { SequelizeDB } from "../../../database/sequelize.js";
 
 export class Schedule extends Model {
   public id!: string; // UUIDV4
-  public dia!: string;
-  public hora_inicio!: string;
-  public hora_fin!: string;
-  public aula!: string;
+  public day!: string;
+  public startTime!: string;
+  public finalTime!: string;
+  public classroom!: string;
+  public academicPositionId!: number;
 
   // timestamps!
   public readonly createdAt!: Date;
@@ -36,10 +37,18 @@ Schedule.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    academicPositionId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: "AcademicPosition",
+        key: "id",
+      },
+    },
   },
   {
     sequelize: SequelizeDB,
-    timestamps: true, // Agrega createdAt y updatedAt
-    tableName: "Schedule", // Nombre de la tabla en la base de datos
+    timestamps: true,
+    tableName: "Schedule",
   }
 );
