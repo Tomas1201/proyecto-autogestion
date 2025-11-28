@@ -24,6 +24,11 @@ ProfessorCRUDRouter.get(
   ProfessorController.searchProfessorById
 );
 
+ProfessorCRUDRouter.get(
+  "/:id/subjects",
+  ProfessorController.getProfessorSubjects
+);
+
 ProfessorCRUDRouter.put("/:id" ,ProfessorController.updateProfessor);
 
 ProfessorCRUDRouter.put(

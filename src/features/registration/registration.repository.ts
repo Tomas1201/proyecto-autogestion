@@ -40,4 +40,48 @@ export class RegistrationRepository {
   public async deleteRegistration(registrationId: string): Promise<number> {
     return Registration.destroy({ where: { id: registrationId } });
   }
+  public async updateRegistration(registrationId: string, status: string, grade?: number): Promise<[number]> {
+    return Registration.update(
+      { status, grade },
+      { where: { id: registrationId } }
+    );
+
+  }
+
+  public async findRegistrationsBySubject(subjectId: string): Promise<any[]> {
+    // Find all AcademicPositions for this subject
+    const academicPositions = await AcademicPositionModel.findAll({
+      where: { subjectId }
+    });
+    
+    const academicPositionIds = academicPositions.map(ap => ap.Id);
+    
+    if (academicPositionIds.length === 0) return [];
+
+    // Find registrations for these positions
+    const registrations = await Registration.findAll({
+      where: { academicPositionId: academicPositionIds },
+      // We need student details. Assuming Registration has association to Student (via studentId)
+      // If not defined in model, we might need to fetch students manually.
+      // Let's assume we need to fetch manually for safety as I didn't see explicit 'include' in other repos.
+    });
+
+    // Fetch students manually
+    const results = await Promise.all(registrations.map(async (reg: any) => {
+      const student = await import("../../shared/models/student.model.js").then(m => m.Student.findByPk(reg.studentId));
+      return {
+        registrationId: reg.id,
+        status: reg.status,
+        grade: reg.grade,
+        studentId: reg.studentId,
+        name: student ? student.name : 'Unknown',
+        lastName: student ? student.lastName : 'Unknown',
+        dni: student ? student.dni : 'Unknown',
+        file: student ? student.file : 'Unknown'
+      };
+    }));
+
+    return results;
+  }
 }
+

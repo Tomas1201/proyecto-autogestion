@@ -76,4 +76,20 @@ export class RegistrationService {
   public async deleteRegistration(registrationId: string): Promise<number> {
     return this.repository.deleteRegistration(registrationId);
   }
+  public async updateRegistration(registrationId: string, status: string, grade?: number): Promise<void> {
+    const registration = await Registration.findByPk(registrationId);
+    if (!registration) {
+      throw new Error("Registration not found");
+    }
+
+    if (grade !== undefined && (grade < 1 || grade > 10)) {
+      throw new Error("Grade must be between 1 and 10");
+    }
+
+    await this.repository.updateRegistration(registrationId, status, grade);
+  }
+
+  public async getRegistrationsBySubject(subjectId: string): Promise<any[]> {
+    return this.repository.findRegistrationsBySubject(subjectId);
+  }
 }

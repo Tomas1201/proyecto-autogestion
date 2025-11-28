@@ -21,3 +21,15 @@ registrationRouter.delete(
   "/:registrationId",
   (req, res) => controller.deleteRegistration(req, res)
 );
+
+// Actualizar inscripción (nota/estado)
+registrationRouter.put(
+  "/:registrationId",
+  (req, res) => controller.updateRegistration(req, res)
+);
+
+// Obtener inscripciones por materia
+registrationRouter.get(
+  "/subject/:subjectId",
+  (req, res) => controller.getRegistrationsBySubject(req, res)
+);
