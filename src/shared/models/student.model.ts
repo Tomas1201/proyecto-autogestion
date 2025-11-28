@@ -9,7 +9,6 @@ export class Student extends Model {
   public file!: number;
   public status!: string;
   public dni!: number;
-  public career!: string[]; // puede ser nulo
 
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
@@ -50,10 +49,6 @@ Student.init(
       type: DataTypes.INTEGER,
       allowNull: false,
       unique: true,
-    },
-    career: {
-      type: DataTypes.ARRAY(DataTypes.STRING),
-      allowNull: true,
     },
   },
   {
