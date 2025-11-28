@@ -6,6 +6,7 @@ export class Registration extends Model {
   public studentId!: number;
   public academicPositionId!: number;
   public status!: string;
+  public grade!: number | null;
 
   // timestamps!
   public readonly CreatedAt!: Date;
@@ -39,6 +40,10 @@ Registration.init(
       type: DataTypes.ENUM('ENROLLED', 'PASSED', 'FAILED'),
       allowNull: false,
       defaultValue: 'ENROLLED',
+    },
+    grade: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
     },
   },
   {

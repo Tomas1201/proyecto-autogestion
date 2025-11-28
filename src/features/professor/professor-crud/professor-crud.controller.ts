@@ -29,6 +29,24 @@ export const registerProfessor = async (
   }
 };
 
+export const getProfessorSubjects = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const id = Number(req.params.id);
+    const subjects = await service.getProfessorSubjects(id);
+    res.status(200).json({ data: subjects });
+  } catch (error: any) {
+    if (error.name === "ZodError") {
+      res.status(400).json({ errors: error.errors });
+    } else {
+      res.status(400).json({ error: error.message });
+    }
+  }
+};
+
 export const registerProfessorToSubject = async (
   req: Request,
   res: Response,

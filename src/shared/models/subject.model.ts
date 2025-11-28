@@ -48,4 +48,4 @@ Subject.init(
   }
 );
 
-export const SubjectModel = SequelizeDB.models.Subject;
+export const SubjectModel = Subject;

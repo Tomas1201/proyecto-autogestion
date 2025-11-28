@@ -14,6 +14,9 @@ import { correlationRouter } from "./correlation/correlation.router.js";
 import { StudentPanelRouter } from "./student/student-panel/student-panel.router.js";
 import { AcademicManagementRouter } from './professor/academic-management/academic-management.router.js';
 
+import { attendanceRouter } from "./attendance/attendance.router.js";
+import { finalExamRouter } from "./final-exam/final-exam.router.js";
+
 const generalRouter = Router();
 
 generalRouter.use("/auth", authRouter)
@@ -28,7 +31,7 @@ generalRouter.use("/subject", SubjectRouter);
 generalRouter.use("/careersubject", careerSubjectRouter);
 generalRouter.use("/registrations", registrationRouter);
 generalRouter.use("/correlations", correlationRouter);
-generalRouter.use("/student-panel", StudentPanelRouter);
-generalRouter.use("/academic-management", AcademicManagementRouter);
+generalRouter.use("/attendance", attendanceRouter);
+generalRouter.use("/final-exams", finalExamRouter);
 
 export default generalRouter;

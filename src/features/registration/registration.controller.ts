@@ -50,4 +50,36 @@ export class RegistrationController {
       res.status(500).json({ message: "Error deleting registration", error: error.message });
     }
   }
+  public async updateRegistration(req: Request, res: Response): Promise<void> {
+    try {
+      const { registrationId } = req.params;
+      const { status, grade } = req.body;
+
+      if (!status) {
+        res.status(400).json({ message: "Status is required" });
+        return;
+      }
+
+      await this.service.updateRegistration(registrationId, status, grade);
+      res.status(200).json({ message: "Registration updated successfully" });
+    } catch (error: any) {
+      if (error.message === "Registration not found") {
+        res.status(404).json({ message: error.message });
+      } else if (error.message.includes("Grade must be")) {
+        res.status(400).json({ message: error.message });
+      } else {
+        res.status(500).json({ message: "Error updating registration", error: error.message });
+      }
+    }
+  }
+
+  public async getRegistrationsBySubject(req: Request, res: Response): Promise<void> {
+    try {
+      const { subjectId } = req.params;
+      const result = await this.service.getRegistrationsBySubject(subjectId);
+      res.status(200).json(result);
+    } catch (error: any) {
+      res.status(500).json({ message: "Error retrieving registrations", error: error.message });
+    }
+  }
 }

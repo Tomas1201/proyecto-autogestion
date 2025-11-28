@@ -226,4 +226,492 @@ GET http://localhost:3000/api/v1/careers/{{careerId}}/correlations
 ###
 
 # Delete a prerequisite rule
-DELETE http://localhost:3000/api/v1/correlations/{{correlationId}}
+###
+
+# Professor Panel & Grades Management
+
+@professorId = 123e4567-e89b-12d3-a456-426614174000
+@registrationIdToUpdate = 1
+
+# Get Professor Details
+GET http://localhost:3000/api/v1/professor/{{professorId}}
+
+###
+
+# Update Student Grade and Status
+PUT http://localhost:3000/api/v1/registrations/{{registrationIdToUpdate}}
+Content-Type: application/json
+
+{
+    "status": "PASSED",
+    "grade": 9
+}
+
+###
+
+# Update Student Status only (e.g. FAILED)
+PUT http://localhost:3000/api/v1/career/1
+Content-Type: application/json
+
+{
+    "Name":"Ingeniería Actualizada",
+    "Description":"Cambio de descripción",
+    "Duration": 4,
+    "Qualification": "Licenciatura",
+    "HeadOfCareerId":2
+}
+
+###
+
+# Request REST API for Professor Management
+
+GET http://localhost:3000/api/v1/professor/
+
+###
+
+GET http://localhost:3000/api/v1/professor/1
+
+###
+
+POST http://localhost:3000/api/v1/professor/
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "dni": "12345678",
+  "file": "998877",
+  "academicTitle": "Lic. Matemática",
+  "email": "john.doe@example.com",
+  "phone": "1122334455",
+  "scheduleAvailability": "Lunes a Viernes 8-12",
+  "state": true
+}
+
+###
+
+PUT http://localhost:3000/api/v1/professor/1
+Content-Type: application/json
+
+{
+  "name": "John Updated",
+  "dni": "12345678",
+  "file": "998877",
+  "academicTitle": "Lic. Física",
+  "email": "john.updated@example.com",
+  "phone": "1199887766",
+  "scheduleAvailability": "Lunes a Viernes 10-16",
+  "state": true
+}
+
+###
+
+# Busquedas de estudiantes
+
+GET http://localhost:3000/api/v1/students/search/name/pepe
+
+###
+
+GET http://localhost:3000/api/v1/students/search/lastname/perez
+
+###
+
+GET http://localhost:3000/api/v1/students/search/dni/34123467
+
+###
+
+# Subject CRUD
+
+POST http://localhost:3000/api/v1/subject
+Content-Type: application/json
+
+{
+    "name": "MatematicasDiscretas",
+    "code": "01010123",
+    "hours": 2,
+    "classroom": "A1"
+}
+
+###
+
+GET http://localhost:3000/api/v1/subject/
+
+###
+
+# Career Plan and Subject Management
+
+@careerId = 524e7398-64c4-4973-9685-93536c41104b
+@careerPlanId = some-career-plan-uuid
+@subjectId = 3a8f7b12-4f4b-4f1e-8b3d-83e3c1f3d3f3
+@subjectPlanId = 1
+
+# Get all subjects for a career (with plan details)
+GET http://localhost:3000/api/v1/careers/{{careerId}}/subjects
+
+###
+
+# Add a subject to a career plan
+POST http://localhost:3000/api/v1/career-plans/{{careerPlanId}}/subjects
+Content-Type: application/json
+
+{
+    "subjectId": "{{subjectId}}",
+    "year": 1,
+    "fourMonthPeriod": 1,
+    "isAnnual": false,
+    "workload": 5,
+    "isOptional": false
+}
+
+###
+
+# Remove a subject from a career plan
+DELETE http://localhost:3000/api/v1/subject-plans/{{subjectPlanId}}
+
+###
+
+# Student Registration
+
+@studentId = 13f427dd-5239-4071-ba58-bf0780b949ef
+@academicPositionId = 1
+@registrationId = 1
+
+# Register a student for a subject (via Academic Position)
+POST http://localhost:3000/api/v1/registrations
+Content-Type: application/json
+
+{
+    "studentId": "{{studentId}}",
+    "academicPositionId": {{academicPositionId}}
+}
+
+###
+
+# Get all registrations for a student
+GET http://localhost:3000/api/v1/students/{{studentId}}/registrations
+
+###
+
+# Drop a subject registration
+DELETE http://localhost:3000/api/v1/registrations/{{registrationId}}
+
+###
+
+# Correlation Management
+
+@subjectToTakeId = uuid-goes-here
+@subjectRequiredId = uuid-goes-here
+@correlationId = 1
+
+# Create a new prerequisite rule
+POST http://localhost:3000/api/v1/correlations
+Content-Type: application/json
+
+{
+    "subjectToTake": "{{subjectToTakeId}}",
+    "subjectRequiedId": "{{subjectRequiredId}}",
+    "careerId": "{{careerId}}"
+}
+
+###
+
+# Get all prerequisite rules for a career
+GET http://localhost:3000/api/v1/careers/{{careerId}}/correlations
+
+###
+
+# Delete a prerequisite rule
+###
+
+# Professor Panel & Grades Management
+
+@professorId = 123e4567-e89b-12d3-a456-426614174000
+@registrationIdToUpdate = 1
+
+# Get Professor Details
+GET http://localhost:3000/api/v1/professor/{{professorId}}
+
+###
+
+# Update Student Grade and Status
+PUT http://localhost:3000/api/v1/registrations/{{registrationIdToUpdate}}
+Content-Type: application/json
+
+{
+    "status": "PASSED",
+    "grade": 9
+}
+
+###
+
+# Update Student Status only (e.g. FAILED)
+PUT http://localhost:3000/api/v1/registrations/{{registrationIdToUpdate}}
+Content-Type: application/json
+
+{
+    "status": "FAILED",
+    "grade": 2
+}
+
+###
+
+}
+
+###
+
+# Request REST API for Professor Management
+
+GET http://localhost:3000/api/v1/professor/
+
+###
+
+GET http://localhost:3000/api/v1/professor/1
+
+###
+
+POST http://localhost:3000/api/v1/professor/
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "dni": "12345678",
+  "file": "998877",
+  "academicTitle": "Lic. Matemática",
+  "email": "john.doe@example.com",
+  "phone": "1122334455",
+  "scheduleAvailability": "Lunes a Viernes 8-12",
+  "state": true
+}
+
+###
+
+PUT http://localhost:3000/api/v1/professor/1
+Content-Type: application/json
+
+{
+  "name": "John Updated",
+  "dni": "12345678",
+  "file": "998877",
+  "academicTitle": "Lic. Física",
+  "email": "john.updated@example.com",
+  "phone": "1199887766",
+  "scheduleAvailability": "Lunes a Viernes 10-16",
+  "state": true
+}
+
+###
+
+# Busquedas de estudiantes
+
+GET http://localhost:3000/api/v1/students/search/name/pepe
+
+###
+
+GET http://localhost:3000/api/v1/students/search/lastname/perez
+
+###
+
+GET http://localhost:3000/api/v1/students/search/dni/34123467
+
+###
+
+# Subject CRUD
+
+POST http://localhost:3000/api/v1/subject
+Content-Type: application/json
+
+{
+    "name": "MatematicasDiscretas",
+    "code": "01010123",
+    "hours": 2,
+    "classroom": "A1"
+}
+
+###
+
+GET http://localhost:3000/api/v1/subject/
+
+###
+
+# Career Plan and Subject Management
+
+@careerId = 524e7398-64c4-4973-9685-93536c41104b
+@careerPlanId = some-career-plan-uuid
+@subjectId = 3a8f7b12-4f4b-4f1e-8b3d-83e3c1f3d3f3
+@subjectPlanId = 1
+
+# Get all subjects for a career (with plan details)
+GET http://localhost:3000/api/v1/careers/{{careerId}}/subjects
+
+###
+
+# Add a subject to a career plan
+POST http://localhost:3000/api/v1/career-plans/{{careerPlanId}}/subjects
+Content-Type: application/json
+
+{
+    "subjectId": "{{subjectId}}",
+    "year": 1,
+    "fourMonthPeriod": 1,
+    "isAnnual": false,
+    "workload": 5,
+    "isOptional": false
+}
+
+###
+
+# Remove a subject from a career plan
+DELETE http://localhost:3000/api/v1/subject-plans/{{subjectPlanId}}
+
+###
+
+# Student Registration
+
+@studentId = 13f427dd-5239-4071-ba58-bf0780b949ef
+@academicPositionId = 1
+@registrationId = 1
+
+# Register a student for a subject (via Academic Position)
+POST http://localhost:3000/api/v1/registrations
+Content-Type: application/json
+
+{
+    "studentId": "{{studentId}}",
+    "academicPositionId": {{academicPositionId}}
+}
+
+###
+
+# Get all registrations for a student
+GET http://localhost:3000/api/v1/students/{{studentId}}/registrations
+
+###
+
+# Drop a subject registration
+DELETE http://localhost:3000/api/v1/registrations/{{registrationId}}
+
+###
+
+# Correlation Management
+
+@subjectToTakeId = uuid-goes-here
+@subjectRequiredId = uuid-goes-here
+@correlationId = 1
+
+# Create a new prerequisite rule
+POST http://localhost:3000/api/v1/correlations
+Content-Type: application/json
+
+{
+    "subjectToTake": "{{subjectToTakeId}}",
+    "subjectRequiedId": "{{subjectRequiredId}}",
+    "careerId": "{{careerId}}"
+}
+
+###
+
+# Get all prerequisite rules for a career
+GET http://localhost:3000/api/v1/careers/{{careerId}}/correlations
+
+###
+
+# Delete a prerequisite rule
+###
+
+# Professor Panel & Grades Management
+
+@professorId = 123e4567-e89b-12d3-a456-426614174000
+@registrationIdToUpdate = 1
+
+# Get Professor Details
+GET http://localhost:3000/api/v1/professor/{{professorId}}
+
+###
+
+# Update Student Grade and Status
+PUT http://localhost:3000/api/v1/registrations/{{registrationIdToUpdate}}
+Content-Type: application/json
+
+{
+    "status": "PASSED",
+    "grade": 9
+}
+
+###
+
+# Update Student Status only (e.g. FAILED)
+PUT http://localhost:3000/api/v1/registrations/{{registrationIdToUpdate}}
+Content-Type: application/json
+
+{
+    "status": "FAILED",
+    "grade": 2
+}
+
+###
+
+# Get Professor Subjects (New Endpoint)
+GET http://localhost:3000/api/v1/professor/{{professorId}}/subjects
+
+###
+
+# Get Registrations by Subject (New Endpoint)
+@subjectId = 101
+GET http://localhost:3000/api/v1/registrations/subject/{{subjectId}}
+
+###
+
+# Attendance Management
+
+# Save Attendance
+POST http://localhost:3000/api/v1/attendance
+Content-Type: application/json
+
+{
+    "subjectId": "{{subjectId}}",
+    "date": "2024-11-28",
+    "students": [
+        { "studentId": "{{studentId}}", "isPresent": true }
+    ]
+}
+
+###
+
+# Get Attendance
+GET http://localhost:3000/api/v1/attendance/subject/{{subjectId}}/date/2024-11-28
+
+###
+
+# Final Exams Management
+
+# Create Final Exam
+POST http://localhost:3000/api/v1/final-exams
+Content-Type: application/json
+
+{
+    "subjectId": "{{subjectId}}",
+    "date": "2024-12-15T09:00:00Z",
+    "classroom": "Aula Magna"
+}
+
+###
+
+# Get Exams by Subject
+GET http://localhost:3000/api/v1/final-exams/subject/{{subjectId}}
+
+###
+
+# Get Exam Registrations
+@finalExamId = 1
+GET http://localhost:3000/api/v1/final-exams/{{finalExamId}}/registrations
+
+###
+
+# Update Exam Grade
+@examRegistrationId = 1
+PUT http://localhost:3000/api/v1/final-exams/registrations/{{examRegistrationId}}
+Content-Type: application/json
+
+{
+    "grade": 8,
+    "status": "PASSED"
+}
