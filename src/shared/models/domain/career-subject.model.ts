@@ -21,12 +21,7 @@ SequelizeDB.define("CareerSubject", {
       key: "id", // Clave primaria de la tabla referenciada
     },
   },
-  StudentId: {
-    type: DataTypes.INTEGER,
-  },
-  EvaluationId: {
-    type: DataTypes.INTEGER,
-  },
+
 });
 
 export const C_AModel = SequelizeDB.models.CareerSubject;
