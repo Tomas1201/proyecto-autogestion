@@ -1,6 +1,7 @@
-import {StudentRepository} from './student-crud.repository.js';   
-import { Student } from '../../../shared/models/student.model.js'; 
-import { StudentDTO } from '../student-validation.middleware.js';
+import { StudentRepository } from './student-crud.repository.js';
+import { Student } from '../../../shared/models/student.model.js';
+import { Registration } from '../../../shared/models/domain/registration.model.js';
+import { AcademicPositionModel } from '../../../shared/models/domain/academic-position.model.js';
 
 const StudentRepositoryI = StudentRepository.getInstance();
 
@@ -15,7 +16,7 @@ export const StudentService = {
       throw new Error('Database error');
     }
 
-    },
+  },
 
 
   getAll: async () => {
@@ -28,8 +29,6 @@ export const StudentService = {
     }
   },
 
-
- 
 
   Create: async (StudentData: Student) => {
     try {
@@ -45,10 +44,40 @@ export const StudentService = {
     try {
       const newInscripcion = await StudentRepositoryI.CreateSubjectRegistration(alumnoid, asignaturaid);
       return newInscripcion;
-    }catch (error) {
+    } catch (error) {
       console.error('Error creating alumno inscripcion:', error);
       throw new Error('Database error');
     }
+  },
+
+  registerStudentToSubject: async (data: any) => {
+    console.log("Data received for student subject assignment:", data);
+    if (!data.studentId || !data.subjectId) {
+      throw new Error("studentId and subjectId are required");
+    }
+
+    // Find AcademicPosition for the subject
+    const academicPosition = await AcademicPositionModel.findOne({
+      where: { subjectId: data.subjectId }
+    });
+
+    if (!academicPosition) {
+      throw new Error("No academic position found for this subject");
+    }
+
+    const existing = await Registration.findOne({
+      where: { studentId: data.studentId, academicPositionId: academicPosition.id },
+    });
+
+    if (existing) {
+      throw new Error("Student already assigned to this subject (Academic Position)");
+    }
+
+    return await Registration.create({
+      studentId: data.studentId,
+      academicPositionId: academicPosition.id,
+      status: data.status || 'ENROLLED'
+    });
   },
 
   update: async (id: string, alumnoData: Student) => {
@@ -67,29 +96,14 @@ export const StudentService = {
   changeStatus: async (id: string, status: string) => {
     try {
       const updated = await StudentRepositoryI.ChangeStatus(id, status);
-      if (!updated) { 
+      if (!updated) {
         throw new Error('Student not found or not updated');
       }
       return updated;
     } catch (error) {
       console.error('Error changing alumno status:', error);
-        return;
-      }
-    },
-
-  /*
-  delete: async (id: string) => {
-    try {
-      const deleted = await AlumnoRepository.delete(id);
-      if (!deleted) {
-        throw new Error('Student not found or not deleted');
-      }
-      return deleted;
-    } catch (error) {
-      console.error('Error deleting alumno:', error);
-      throw new Error('Database error');
+      return;
     }
-  }
-  */  
- 
+  },
+
 }

@@ -2,12 +2,12 @@ import { z } from "zod";
 import { Request, Response, NextFunction } from "express";
 
 const StudentSchema = z.object({
-  id: z.uuid().optional(), 
+  id: z.uuid().optional(),
   name: z.string().min(1, "First name is required"),
   lastName: z.string().min(1, "Last name is required"),
   email: z.email("Invalid email format"),
   status: z.enum(["Active", "Inactive"], "Status must be either 'activo' or 'inactivo'").optional(),
-  dni: z.number("National ID must be numeric" )
+  dni: z.number("National ID must be numeric")
     .int()
     .positive("National ID must be a positive integer"),
   career: z.array(z.string()).optional(),
@@ -18,8 +18,8 @@ const StudentUpdateSchema = z.object({
   lastName: z.string().min(1, "Last name is required").optional(),
   email: z.email("Invalid email format").optional(),
   studentId: z.number().int().positive("Student ID must be a positive integer").optional(),
-  status: z.enum(["activo", "inactivo", "graduado", "libre"],"Invalid status value" ).optional(),
-  dni: z.number("National ID must be numeric" )
+  status: z.enum(["activo", "inactivo", "graduado", "libre"], "Invalid status value").optional(),
+  dni: z.number("National ID must be numeric")
     .int()
     .positive("National ID must be a positive integer")
     .optional(),
@@ -61,5 +61,11 @@ export const ValidateStudentUpdate = async (
     return;
   }
 };
+
+export const AssignStudentSubjectSchema = z.object({
+  studentId: z.string().uuid("Student ID must be a valid UUID"),
+  subjectId: z.string().uuid("Subject ID must be a valid UUID"),
+  status: z.enum(["Cursando", "Aprobada", "Regular", "Libre"]).optional(),
+});
 
 export type StudentDTO = z.infer<typeof StudentSchema>;
