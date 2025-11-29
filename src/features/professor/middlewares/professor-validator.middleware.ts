@@ -33,3 +33,10 @@ export const SearchProfessorSchema = z.object({
 });
 
 export const UpdateProfessorSchema = ProfessorSchema.partial();
+
+export const AssignSubjectSchema = z.object({
+  professorId: z.string().uuid("Professor ID must be a valid UUID"),
+  subjectId: z.string().uuid("Subject ID must be a valid UUID"),
+  role: z.enum(["Titular", "Adjunto", "JTP", "Ayudante"]),
+  schedule: z.string().min(1, "Schedule is required"),
+});

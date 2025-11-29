@@ -11,7 +11,7 @@ export class ProfessorRepository {
     return await ProfessorModel.create(data);
   }
 
-  async findById(id: number) {
+  async findById(id: string) {
     return await ProfessorModel.findByPk(id);
   }
 

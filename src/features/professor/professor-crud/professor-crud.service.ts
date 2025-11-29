@@ -49,7 +49,7 @@ export class ProfessorService {
     return await professorRepository.searchByState(state);
   }
 
-  async searchProfessorById(id: number) {
+  async searchProfessorById(id: string) {
     const professor = await professorRepository.findById(id);
     if (!professor) throw new Error("Professor not found");
     return professor;
@@ -110,7 +110,7 @@ export class ProfessorService {
     return professor;
   }
 
-  async getProfessorSubjects(professorId: number) {
+  async getProfessorSubjects(professorId: string) {
     const assignments = await ProfessorSubjectModel.findAll({
       where: { professorId },
       include: [{ model: SubjectModel, as: 'subject' }] // Assuming association exists or we fetch manually

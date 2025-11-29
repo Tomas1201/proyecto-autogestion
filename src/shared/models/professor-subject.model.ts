@@ -53,3 +53,6 @@ ProfessorSubject.init(
 );
 
 export const ProfessorSubjectModel = SequelizeDB.models.ProfessorSubject;
+
+import { SubjectModel } from "./subject.model.js";
+ProfessorSubjectModel.belongsTo(SubjectModel, { foreignKey: 'subjectId', as: 'subject' });

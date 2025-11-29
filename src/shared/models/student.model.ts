@@ -72,6 +72,7 @@ Student.init(
               file: student.file.toString(),
               password: hashedPassword,
               role: 'STUDENT',
+              entityId: student.id,
             });
             console.log(`User created for student ${student.file}`);
           } else {

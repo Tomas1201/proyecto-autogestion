@@ -79,6 +79,7 @@ Professor.init({
             file: professor.file,
             password: hashedPassword,
             role: 'PROFESSOR',
+            entityId: professor.id,
           });
           console.log(`User created for professor ${professor.file}`);
         } else {

@@ -36,14 +36,14 @@ export const getProfessorSubjects = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const id = Number(req.params.id);
+    const {id} = req.params;
     const subjects = await service.getProfessorSubjects(id);
     res.status(200).json({ data: subjects });
-  } catch (error: any) {
-    if (error.name === "ZodError") {
-      res.status(400).json({ errors: error.errors });
+  } catch (error) {
+    if (error === "ZodError") {
+      res.status(400).json({ errors: error });
     } else {
-      res.status(400).json({ error: error.message });
+      res.status(400).json({ error: error });
     }
   }
 };
@@ -54,7 +54,7 @@ export const registerProfessorToSubject = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const validatedData = Validator.SearchProfessorSchema.parse(req.body);
+    const validatedData = Validator.AssignSubjectSchema.parse(req.body);
     const registration = await service.registerProfessorToSubject(
       validatedData
     );
@@ -78,7 +78,7 @@ export const searchProfessorById = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const id = Number(req.params.id);
+    const { id } = req.params;
     const professor = await service.searchProfessorById(id);
     if (!professor) {
       res.status(404).json({ error: "Professor not found" });
