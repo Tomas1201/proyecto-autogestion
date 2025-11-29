@@ -7,13 +7,13 @@ const router = Router();
 // Protect all routes with STUDENT role
 //router.use(authorize([ROLES.USER]));
 
-router.get('/careers', StudentPanelController.getCareers);
-router.get('/available-subjects', StudentPanelController.getAvailableSubjects);
-router.post('/register-subject', StudentPanelController.registerForSubject);
+router.get('/careers/:studentId', StudentPanelController.getCareers);
+router.get('/available-subjects/:studentId', StudentPanelController.getAvailableSubjects);
+router.post('/register-subject/:studentId/subjectId/:subjectId', StudentPanelController.registerForSubject);
 
-router.get('/attendance', StudentPanelController.getAttendance);
-router.get('/grades', StudentPanelController.getGrades);
-router.get('/final-exams', StudentPanelController.getAvailableFinalExams);
-router.post('/register-final-exam', StudentPanelController.registerForFinalExam);
+router.get('/attendance/:studentId', StudentPanelController.getAttendance);
+router.get('/grades/:studentId', StudentPanelController.getGrades);
+router.get('/final-exams/:studentId', StudentPanelController.getAvailableFinalExams);
+router.post('/register-final-exam/:studentId/finalExamId/:finalExamId', StudentPanelController.registerForFinalExam);
 
 export const StudentPanelRouter = router;

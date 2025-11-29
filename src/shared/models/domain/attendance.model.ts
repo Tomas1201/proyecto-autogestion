@@ -2,7 +2,7 @@ import { DataTypes, Model } from "sequelize";
 import { SequelizeDB } from "../../../database/sequelize.js";
 
 export class Attendance extends Model {
-  public id!: number;
+  public id!: string;
   public registrationId!: string; // Links to Registration (Student+Subject)
   public date!: Date;
   public isPresent!: boolean;
@@ -15,9 +15,9 @@ export class Attendance extends Model {
 Attendance.init(
   {
     id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
-      autoIncrement: true,
     },
     registrationId: {
       type: DataTypes.UUID,

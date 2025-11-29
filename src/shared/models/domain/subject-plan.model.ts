@@ -2,14 +2,14 @@ import { DataTypes, Model } from "sequelize";
 import { SequelizeDB } from "../../../database/sequelize.js";
 
 export class SubjectPlanModel extends Model {
-  public id!: number;
+  public id!: string;
   public careerPlanId!: string;
   public subjectId!: string;
   public year!: number;
   public fourMonthPeriod!: number;
   public workload!: number;
   public isOptional!: boolean;
-  public isAnnual!: boolean;
+  public isAnnual!: boolean ;
 
   // timestamps!
   public readonly createdAt!: Date;
@@ -19,9 +19,9 @@ export class SubjectPlanModel extends Model {
 SubjectPlanModel.init(
   {
     id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
-      autoIncrement: true,
     },
     careerPlanId: {
       type: DataTypes.UUID,

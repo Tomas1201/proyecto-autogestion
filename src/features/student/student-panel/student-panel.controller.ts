@@ -7,9 +7,9 @@ export const StudentPanelController = {
 
     getCareers: async (req: Request, res: Response) => {
         try {
-          const {file} = req.body
+          const {studentId} = req.params;
 
-            const careers = await StudentPanelService.getCareers(file);
+            const careers = await StudentPanelService.getCareers(studentId);
             res.status(200).json({ status: "OK", data: careers });
         } catch (error) {
             console.error(error);
@@ -19,9 +19,9 @@ export const StudentPanelController = {
 
     getAvailableSubjects: async (req: Request, res: Response) => {
         try {
-            const {file} = req.body;
+            const {studentId} = req.params;
 
-            const subjects = await StudentPanelService.getAvailableSubjects(file);
+            const subjects = await StudentPanelService.getAvailableSubjects(studentId);
             res.status(200).json({ status: "OK", data: subjects });
         } catch (error) {
             console.error(error);
@@ -31,15 +31,15 @@ export const StudentPanelController = {
 
     registerForSubject: async (req: Request, res: Response) => {
         try {
-            const {file} = req.body;
-            const { subjectId } = req.body;
+            const {studentId} = req.params;
+            const { subjectId } = req.params;
 
             if (!subjectId) {
                 res.status(400).json({ message: "Subject ID is required" });
                 return;
             }
 
-            const result = await StudentPanelService.registerForSubject(Number(file), Number(subjectId));
+            const result = await StudentPanelService.registerForSubject(studentId, subjectId);
             res.status(201).json(result);
         } catch (error) {
             console.error("Error in registerForSubject:", error);
@@ -49,15 +49,15 @@ export const StudentPanelController = {
 
     getAttendance: async (req: Request, res: Response) => {
         try {
-            const {file} = req.body;
+            const {studentId} = req.params;
 
-            const student = await Student.findOne({ where: { file: file } });
+            const student = await Student.findOne({ where: { file: studentId } });
             if (!student) {
                 res.status(404).json({ message: "Student not found" });
                 return;
             }
 
-            const result = await StudentPanelService.getAttendance(Number(student.id));
+            const result = await StudentPanelService.getAttendance(student.id);
 
             res.json(result);
         } catch (error) {
@@ -68,14 +68,14 @@ export const StudentPanelController = {
 
     getGrades: async (req: Request, res: Response) => {
         try {
-            const {file} = req.body;
-            const student = await Student.findOne({ where: { file: file } });
+            const {studentId} = req.params;
+            const student = await Student.findOne({ where: { id: studentId } });
             if (!student) {
                 res.status(404).json({ message: "Student not found" });
                 return;
             }
 
-            const result = await StudentPanelService.getGrades(Number(student.id));
+            const result = await StudentPanelService.getGrades(studentId);
             res.json(result);
         } catch (error) {
             console.error("Error in getGrades:", error);
@@ -85,14 +85,14 @@ export const StudentPanelController = {
 
     getAvailableFinalExams: async (req: Request, res: Response) => {
         try {
-            const {file} = req.body;
-            const student = await Student.findOne({ where: { file: file } });
+            const {studentId} = req.params;
+            const student = await Student.findOne({ where: { id: studentId } });
             if (!student) {
                 res.status(404).json({ message: "Student not found" });
                 return;
             }
 
-            const result = await StudentPanelService.getAvailableFinalExams(Number(student.id));
+            const result = await StudentPanelService.getAvailableFinalExams(studentId);
             res.json(result);
         } catch (error) {
             console.error("Error in getAvailableFinalExams:", error);
@@ -102,15 +102,15 @@ export const StudentPanelController = {
 
     registerForFinalExam: async (req: Request, res: Response) => {
         try {
-            const {file} = req.body;
-            const student = await Student.findOne({ where: { file: file } });
+            const {studentId} = req.params;
+            const student = await Student.findOne({ where: { id: studentId } });
             if (!student) {
                 res.status(404).json({ message: "Student not found" });
                 return;
             }
             const { finalExamId } = req.body;
 
-            const result = await StudentPanelService.registerForFinalExam(Number(student.id), finalExamId);
+            const result = await StudentPanelService.registerForFinalExam(student.id, finalExamId);
             res.status(201).json(result);
         } catch (error) {
             console.error("Error in registerForFinalExam:", error);

@@ -3,7 +3,7 @@ import { SequelizeDB } from "../../../database/sequelize.js";
 
 export class FinalExamRegistration extends Model {
     public id!: number;
-    public studentId!: number;
+    public studentId!: string;
     public finalExamId!: number;
     public grade!: number;
     public state!: string; // 'registered', 'passed', 'failed', 'absent'

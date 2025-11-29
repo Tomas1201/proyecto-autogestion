@@ -2,8 +2,8 @@ import { DataTypes, Model } from "sequelize";
 import { SequelizeDB } from "../../../database/sequelize.js";
 
 export class Exam extends Model {
-    public id!: number;
-    public academicPositionId!: number;
+    public id!: string;
+    public academicPositionId!: string;
     public date!: Date;
     public description!: string;
     public type!: string; // 'partial', 'final' (though final might be separate model if logic differs)
@@ -15,12 +15,12 @@ export class Exam extends Model {
 Exam.init(
     {
         id: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.UUID,
+            defaultValue: DataTypes.UUIDV4,
             primaryKey: true,
-            autoIncrement: true,
         },
         academicPositionId: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.UUID,
             allowNull: false,
             references: {
                 model: "AcademicPosition",

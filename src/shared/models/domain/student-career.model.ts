@@ -5,10 +5,10 @@ import { SequelizeDB } from "../../../database/sequelize.js";
 
 
 export class StudentCareer extends Model {
-  public id!: number;
-  public studentId!: number;
-  public careerId!: number;
-  public careerPlanId!: number;
+  public id!: string;
+  public studentId!: string;
+  public careerId!: string;
+  public careerPlanId!: string;
   public state!: string;
 
   // timestamps!
@@ -19,9 +19,10 @@ export class StudentCareer extends Model {
 StudentCareer.init(
   {
     id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
-      autoIncrement: true,
+     
     },
     studentId: {
       type: DataTypes.UUID,

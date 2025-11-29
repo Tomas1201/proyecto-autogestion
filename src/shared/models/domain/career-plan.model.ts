@@ -4,7 +4,7 @@ import { SequelizeDB } from "../../../database/sequelize.js";
 export class CareerPlanModel extends Model<InferAttributes<CareerPlanModel>, InferCreationAttributes<CareerPlanModel>> {
   declare id: CreationOptional<string>;
   declare careerId: string;
-  declare cycleElectiveId: number;
+  declare cycleElectiveId: string;
 
   // timestamps!
   declare readonly createdAt: CreationOptional<Date>;
@@ -27,7 +27,7 @@ CareerPlanModel.init(
       },
     },
     cycleElectiveId: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.UUID,
       allowNull: false,
       references: {
         model: "CycleElective",

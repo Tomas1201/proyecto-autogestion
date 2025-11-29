@@ -2,9 +2,9 @@ import { DataTypes, Model } from "sequelize";
 import { SequelizeDB } from "../../../database/sequelize.js";
 
 export class Grade extends Model {
-    public id!: number;
-    public studentId!: number;
-    public examId!: number;
+    public id!: string;
+    public studentId!: string;
+    public examId!: string;
     public value!: number;
     public feedback!: string;
 
@@ -15,9 +15,9 @@ export class Grade extends Model {
 Grade.init(
     {
         id: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.UUID,
+            defaultValue: DataTypes.UUIDV4,
             primaryKey: true,
-            autoIncrement: true,
         },
         studentId: {
             type: DataTypes.UUID,
@@ -28,7 +28,7 @@ Grade.init(
             },
         },
         examId: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.UUID,
             allowNull: false,
             references: {
                 model: "Exam",

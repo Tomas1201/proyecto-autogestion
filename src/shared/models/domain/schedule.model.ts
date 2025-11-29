@@ -38,7 +38,7 @@ Schedule.init(
       allowNull: false,
     },
     academicPositionId: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.UUID,
       allowNull: false,
       references: {
         model: "AcademicPosition",

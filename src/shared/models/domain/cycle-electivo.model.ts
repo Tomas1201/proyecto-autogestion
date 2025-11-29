@@ -2,7 +2,7 @@ import { SequelizeDB } from "../../../database/sequelize.js";
 import { DataTypes, Model } from "sequelize";
 
 export class CycleElectiveModel extends Model {
-  public id!: number;
+  public id!: string;
   public anio!: number;
   public fecha_inicio!: Date;
   public fecha_fin!: Date;
@@ -17,9 +17,9 @@ export class CycleElectiveModel extends Model {
 CycleElectiveModel.init(
   {
     id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
-      autoIncrement: true,
     },
     name: {
       type: DataTypes.STRING,

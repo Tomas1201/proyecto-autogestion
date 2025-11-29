@@ -2,9 +2,9 @@ import { DataTypes, Model } from "sequelize";
 import { SequelizeDB } from "../../../database/sequelize.js";
 
 export class AcademicPositionModel extends Model {
-  public id!: number;
-  public careerPlanId!: number;
-  public subjectId!: number;
+  public id!: string;
+  public careerPlanId!: string;
+  public subjectId!: string;
   public year!: number;
   public fourMonthPeriod!: number;
   public electiveCycleId!: number;
@@ -18,9 +18,9 @@ export class AcademicPositionModel extends Model {
 AcademicPositionModel.init(
   {
     id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
-      autoIncrement: true,
     },
     careerPlanId: {
       type: DataTypes.UUID,
@@ -39,7 +39,7 @@ AcademicPositionModel.init(
       },
     },
     cycleElectiveId: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.UUID,
       allowNull: false,
       references: {
         model: "CycleElective",

@@ -28,7 +28,7 @@ export class RegistrationRepository {
       }],
     });
 
-    const subjectIds = passedRegistrations.map(reg => (reg as any).AcademicPositionModel.subjectId);
+    const subjectIds = passedRegistrations.map((reg: any) => reg.AcademicPositionModel.subjectId);
 
     return Subject.findAll({
       where: {
@@ -54,7 +54,7 @@ export class RegistrationRepository {
       where: { subjectId }
     });
     
-    const academicPositionIds = academicPositions.map(ap => ap.Id);
+    const academicPositionIds = academicPositions.map((ap: any) => ap.id);
     
     if (academicPositionIds.length === 0) return [];
 

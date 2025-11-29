@@ -13,7 +13,7 @@ import { Career } from "../../../shared/models/career.model.js";
 import { Op } from "sequelize";
 
 export class StudentPanelService {
-    static async getCareers(studentId: number) {
+    static async getCareers(studentId: string) {
         try {
             // Manual fetch to avoid association issues
             const studentCareers = await StudentCareer.findAll({ where: { studentId: studentId } });
@@ -31,7 +31,7 @@ export class StudentPanelService {
         }
     }
 
-    static async getAvailableSubjects(studentId: number) {
+    static async getAvailableSubjects(studentId: string) {
         try {
             // 1. Get Student's Active Career
             const studentCareer = await StudentCareer.findOne({ where: { studentId: studentId, state: 'active' } });
@@ -65,7 +65,7 @@ export class StudentPanelService {
         }
     }
 
-    static async registerForSubject(studentId: number, academicPositionId: number) {
+    static async registerForSubject(studentId: string, academicPositionId: string) {
         try {
             // Check if already registered
             const existing = await Registration.findOne({ where: { studentId: studentId, academicPositionId: academicPositionId } });
@@ -74,7 +74,6 @@ export class StudentPanelService {
             const registration = await Registration.create({
                 studentId: studentId,
                 academicPositionId: academicPositionId,
-                date: new Date(),
                 status: 'active' // Assuming a status field
             });
             return registration;
@@ -84,7 +83,7 @@ export class StudentPanelService {
         }
     }
 
-    static async getAttendance(studentId: number) {
+    static async getAttendance(studentId: string) {
         try {
             const attendance = await Attendance.findAll({
                 where: { studentId },
@@ -97,7 +96,7 @@ export class StudentPanelService {
         }
     }
 
-    static async getGrades(studentId: number) {
+    static async getGrades(studentId: string) {
         try {
             const grades = await Grade.findAll({
                 where: { studentId },
@@ -110,7 +109,7 @@ export class StudentPanelService {
         }
     }
 
-    static async getAvailableFinalExams(studentId: number) {
+    static async getAvailableFinalExams(studentId: string) {
         try {
             const studentCareer = await StudentCareer.findOne({ where: { studentId: studentId, state: 'active' } });
             if (!studentCareer) return [];
@@ -133,7 +132,7 @@ export class StudentPanelService {
         }
     }
 
-    static async registerForFinalExam(studentId: number, finalExamId: number) {
+    static async registerForFinalExam(studentId: string, finalExamId: string) {
         try {
             // Check if already registered
             const existing = await FinalExamRegistration.findOne({ where: { studentId, finalExamId } });

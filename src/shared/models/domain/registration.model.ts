@@ -3,8 +3,8 @@ import { DataTypes, Model } from "sequelize";
 
 export class Registration extends Model {
   public id!: string; // UUIDV4
-  public studentId!: number;
-  public academicPositionId!: number;
+  public studentId!: string;
+  public academicPositionId!: string;
   public status!: string;
   public grade!: number | null;
 
@@ -21,7 +21,7 @@ Registration.init(
       primaryKey: true,
     },
     academicPositionId: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.UUID,
       allowNull: false,
       references: {
         model: "AcademicPosition",
@@ -29,7 +29,7 @@ Registration.init(
       },
     },
     studentId: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.UUID,
       allowNull: false,
       references: {
         model: "Student",

@@ -1,6 +1,6 @@
 export interface CareerPlanCreationAttributes {
     careerId: string;
-    cycleElectiveId: number;
+    cycleElectiveId: string;
 }
 
 export interface CareerPlanAttributes extends CareerPlanCreationAttributes {

@@ -33,5 +33,7 @@ generalRouter.use("/registrations", registrationRouter);
 generalRouter.use("/correlations", correlationRouter);
 generalRouter.use("/attendance", attendanceRouter);
 generalRouter.use("/final-exams", finalExamRouter);
+generalRouter.use("/student-panel", StudentPanelRouter);
+generalRouter.use("/academic-management", AcademicManagementRouter);
 
 export default generalRouter;
