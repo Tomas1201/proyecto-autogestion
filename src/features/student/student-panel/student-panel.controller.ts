@@ -51,7 +51,7 @@ export const StudentPanelController = {
         try {
             const {studentId} = req.params;
 
-            const student = await Student.findOne({ where: { file: studentId } });
+            const student = await Student.findOne({ where: { id: studentId } });
             if (!student) {
                 res.status(404).json({ message: "Student not found" });
                 return;
@@ -75,7 +75,7 @@ export const StudentPanelController = {
                 return;
             }
 
-            const result = await StudentPanelService.getGrades(studentId);
+            const result = await StudentPanelService.getGrades(student.id);
             res.json(result);
         } catch (error) {
             console.error("Error in getGrades:", error);

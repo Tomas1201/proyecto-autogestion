@@ -19,12 +19,13 @@ export const registerProfessor = async (
       message: "Professor registered successfully",
       data: professor,
     });
-  } catch (error: any) {
-    if (error.name === "ZodError") {
-      res.status(400).json({ errors: error.errors });
+  } catch (error) {
+    if (error === "ZodError") {
+      res.status(400).json({ errors: error });
       console.log("zod");
+      console.log(error);
     } else {
-      res.status(400).json({ error: error.message });
+      res.status(400).json({ error: error });
     }
   }
 };

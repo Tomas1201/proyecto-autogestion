@@ -1,5 +1,5 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
-import {SequelizeDB} from '../../database/sequelize.js';
+import { SequelizeDB } from '../../database/sequelize.js';
 
 export class Professor extends Model {
   public id!: string; // UUIDV4
@@ -19,11 +19,15 @@ export class Professor extends Model {
 
 Professor.init({
   id: {
-   type: DataTypes.UUID,
-  defaultValue: DataTypes.UUIDV4,
-  primaryKey: true,
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
+    primaryKey: true,
   },
   name: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  lastName: {
     type: DataTypes.STRING,
     allowNull: false,
   },
@@ -60,9 +64,31 @@ Professor.init({
   },
 
 }, {
-    sequelize: SequelizeDB,
+  sequelize: SequelizeDB,
   timestamps: true,
-  tableName: 'Professor', 
+  tableName: 'Professor',
+  hooks: {
+    afterCreate: async (professor: Professor) => {
+      try {
+        const { User } = SequelizeDB.models;
+        const { hashPassword } = await import('../../features/auth/hashing-auth.service.js');
+
+        if (User) {
+          const hashedPassword = await hashPassword(professor.dni);
+          await User.create({
+            file: professor.file,
+            password: hashedPassword,
+            role: 'PROFESSOR',
+          });
+          console.log(`User created for professor ${professor.file}`);
+        } else {
+          console.error('User model not found in SequelizeDB models');
+        }
+      } catch (error) {
+        console.error('Error creating user for professor:', error);
+      }
+    }
+  }
 });
 
 export const ProfessorModel = SequelizeDB.models.Professor;
