@@ -3,11 +3,11 @@ import { SequelizeDB } from "../../../database/sequelize.js";
 
 export class Attendance extends Model {
   public id!: string;
-  public registrationId!: string; // Links to Registration (Student+Subject)
+  public registrationId!: string; 
   public date!: Date;
   public isPresent!: boolean;
 
-  // timestamps!
+  
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }

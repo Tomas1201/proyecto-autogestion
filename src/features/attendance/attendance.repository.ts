@@ -12,11 +12,11 @@ export class AttendanceRepository {
   }
 
   async findBySubjectAndDate(subjectId: string, date: string) {
-    // This requires joining Registration -> AcademicPosition -> Subject
-    // For simplicity, we'll fetch registrations first or rely on frontend sending registrationIds
-    // But to "get attendance for a subject", we need to know which registrations belong to that subject.
     
-    // Let's assume we pass registrationIds from service.
+    
+    
+    
+    
     return []; 
   }
   

@@ -1,10 +1,9 @@
+import { number } from "zod";
 import { Career } from "../../shared/models/career.model.js";
-import { CareerPlanModel } from "../../shared/models/domain/career-plan.model.js";
 import { SubjectPlanModel } from "../../shared/models/domain/subject-plan.model.js";
 import { Subject } from "../../shared/models/subject.model.js";
 
 export interface SubjectPlanData {
-  careerPlanId: string;
   subjectId: string;
   year: number;
   fourMonthPeriod?: number;
@@ -22,15 +21,11 @@ export class CareerSubjectRepository {
     return Career.findByPk(careerId, {
       attributes: ['id', 'name'],
       include: [{
-        model: CareerPlanModel,
-        attributes: ['id'],
+        model: SubjectPlanModel,
+        attributes: ['id', 'year', 'fourMonthPeriod', 'isAnnual'], 
         include: [{
-          model: SubjectPlanModel,
-          attributes: ['id', 'year', 'fourMonthPeriod', 'isAnnual'], // also get id now
-          include: [{
-            model: Subject,
-            attributes: { exclude: ['createdAt', 'updatedAt'] }
-          }]
+          model: Subject,
+          attributes: { exclude: ['createdAt', 'updatedAt'] }
         }]
       }]
     });

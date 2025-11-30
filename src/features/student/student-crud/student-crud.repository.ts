@@ -2,7 +2,7 @@ import { Op } from "sequelize";
 import { Student } from "../../../shared/models/student.model.js";
 import { StudentInterface } from "./student-crud.interface.js";
 import { Registration } from "../../../shared/models/domain/registration.model.js";
-import { SequelizeDB } from "../../../database/sequelize.js"; // Importar el modelo de inscriptos si es necesario
+import { SequelizeDB } from "../../../database/sequelize.js"; 
 import { AcademicPositionModel } from "../../../shared/models/domain/academic-position.model.js";
 
 interface StudentCreationAttributes {
@@ -11,7 +11,7 @@ interface StudentCreationAttributes {
   email: string;
   status: string;
   dni: number;
-  career?: string[]; // opcional al crear
+  career?: string[]; 
 }
 
 export class StudentRepository implements StudentInterface {
@@ -40,7 +40,7 @@ export class StudentRepository implements StudentInterface {
     try {
       const alumnos = await Student.findAll();
       return alumnos ? (alumnos as Student[]) : [];
-      // condicion ? true : false
+      
     } catch (error) {
       console.error("Error fetching all alumnos:", error);
       throw new Error("Database error");
@@ -48,11 +48,11 @@ export class StudentRepository implements StudentInterface {
   }
 
 
-  // Devuelve un alumno por apellido
+  
 
  
 
-  // Crea un nuevo alumno
+  
   async Create(alumnoData: StudentCreationAttributes): Promise<Student | null> {
     try {
       const existingAlumno = await Student.findOne({
@@ -69,14 +69,14 @@ export class StudentRepository implements StudentInterface {
         console.error(
           "Student with the same email, dni or legajo already exists"
         );
-        return null; // O lanzar un error según tu lógica
+        return null; 
       }
       const newAlumno = await Student.create(alumnoData as any);
       return newAlumno as Student;
     } catch (error) {
       console.error("Error creating alumno:", error);
       throw new Error("Database error");
-      return null; // O puedes lanzar un error según tu lógica
+      return null; 
       
     }
   }
@@ -86,10 +86,10 @@ export class StudentRepository implements StudentInterface {
     asignatura_id: number
   ): Promise<any> => {
     try {
-      // Luego, crea la inscripción a la asignatura
+      
       const Registrationf = await Registration.create({
         alumno_id: alumnoid,
-        PuestoAcademicoid: asignatura_id, // Asegúrate de que 'asignatura' sea un ID válido
+        PuestoAcademicoid: asignatura_id, 
       });
 
       return { alumno: Registrationf };
@@ -98,7 +98,7 @@ export class StudentRepository implements StudentInterface {
       throw new Error("Database error");
     }
   };
-  // Actualiza un alumno por ID
+  
   async Update(id: string, alumnoData: Partial<Student>): Promise<boolean> {
     try {
       console.log(alumnoData);

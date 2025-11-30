@@ -6,9 +6,9 @@ export class ExamRegistration extends Model {
   public studentId!: string;
   public finalExamId!: number;
   public grade!: number | null;
-  public status!: string; // 'REGISTERED', 'PASSED', 'FAILED', 'ABSENT'
+  public status!: string; 
 
-  // timestamps!
+  
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }

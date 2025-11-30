@@ -6,7 +6,7 @@ export class Exam extends Model {
     public academicPositionId!: string;
     public date!: Date;
     public description!: string;
-    public type!: string; // 'partial', 'final' (though final might be separate model if logic differs)
+    public type!: string; 
 
     public readonly createdAt!: Date;
     public readonly updatedAt!: Date;

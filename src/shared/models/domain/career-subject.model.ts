@@ -10,15 +10,15 @@ SequelizeDB.define("CareerSubject", {
   CareerId: {
     type: DataTypes.UUID,
     references: {
-      model: "Career", // Nombre de la tabla referenciada
-      key: "id", // Clave primaria de la tabla referenciada
+      model: "Career", 
+      key: "id", 
     },
   },
   SubjectId: {
     type: DataTypes.UUID,
     references: {
-      model: "Subject", // Nombre de la tabla referenciada
-      key: "id", // Clave primaria de la tabla referenciada
+      model: "Subject", 
+      key: "id", 
     },
   },
 

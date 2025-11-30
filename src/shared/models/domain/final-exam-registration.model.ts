@@ -6,7 +6,7 @@ export class FinalExamRegistration extends Model {
     public studentId!: string;
     public finalExamId!: number;
     public grade!: number;
-    public state!: string; // 'registered', 'passed', 'failed', 'absent'
+    public state!: string; 
     public feedback!: string;
 
     public readonly createdAt!: Date;
@@ -38,7 +38,7 @@ FinalExamRegistration.init(
         },
         grade: {
             type: DataTypes.FLOAT,
-            allowNull: true, // Null until graded
+            allowNull: true, 
         },
         state: {
             type: DataTypes.ENUM('registered', 'passed', 'failed', 'absent'),

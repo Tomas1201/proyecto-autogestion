@@ -9,13 +9,13 @@ export class CareerSubjectController {
       const { careerPlanId } = req.params;
       const subjectData = req.body;
 
-      // Basic validation
+      
       if (!subjectData.subjectId || !subjectData.year || !subjectData.workload) {
         res.status(400).json({ message: "Missing required fields in body (subjectId, year, workload)" });
         return;
       }
 
-      const result = await this.service.addSubjectToPlan(careerPlanId, subjectData);
+      const result = await this.service.addSubjectToPlan(subjectData);
       res.status(201).json({ message: "Subject added to plan successfully", data: result });
     } catch (error: any) {
       if (error.message.includes("not found")) {

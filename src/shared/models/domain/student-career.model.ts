@@ -11,7 +11,7 @@ export class StudentCareer extends Model {
   public careerPlanId!: string;
   public state!: string;
 
-  // timestamps!
+  
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }

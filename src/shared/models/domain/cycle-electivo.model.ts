@@ -3,13 +3,13 @@ import { DataTypes, Model } from "sequelize";
 
 export class CycleElectiveModel extends Model {
   public id!: string;
-  public anio!: number;
-  public fecha_inicio!: Date;
-  public fecha_fin!: Date;
-  public estado!: string;
-  public cuatrimestre!: number;
+  public year!: number;
+  public startTime!: Date;
+  public finalTime!: Date;
+  public state!: string;
+  public fourMonthPeriod!: number;
 
-  // timestamps!
+  
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
@@ -20,10 +20,6 @@ CycleElectiveModel.init(
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
-    },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false,
     },
     year: {
       type: DataTypes.INTEGER,
@@ -40,7 +36,7 @@ CycleElectiveModel.init(
     state: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: "activo", // Valores posibles: 'activo', 'inactivo'
+      defaultValue: "activo", 
     },
     fourMonthPeriod: {
       type: DataTypes.INTEGER,
@@ -49,7 +45,7 @@ CycleElectiveModel.init(
   },
   {
     sequelize: SequelizeDB,
-    timestamps: true, // Agrega createdAt y updatedAt
-    tableName: "CycleElective", // Nombre de la tabla en la base de datos
+    timestamps: true, 
+    tableName: "CycleElective", 
   }
 );

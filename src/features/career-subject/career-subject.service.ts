@@ -1,17 +1,11 @@
-import { CareerPlanModel } from "../../shared/models/domain/career-plan.model.js";
 import { Subject } from "../../shared/models/subject.model.js";
 import { CareerSubjectRepository, SubjectPlanData } from "./career-subject.repository.js";
 
 export class CareerSubjectService {
   private repository = new CareerSubjectRepository();
 
-  public async addSubjectToPlan(careerPlanId: string, subjectData: Omit<SubjectPlanData, 'careerPlanId'>): Promise<any> {
-    // Validate that the career plan and subject exist
-    const careerPlan = await CareerPlanModel.findByPk(careerPlanId);
-    if (!careerPlan) {
-      throw new Error("Career Plan not found");
-    }
-
+  public async addSubjectToPlan(subjectData: Omit<SubjectPlanData, 'careerPlanId'>): Promise<any> {
+    
     const subject = await Subject.findByPk(subjectData.subjectId);
     if (!subject) {
       throw new Error("Subject not found");
@@ -19,7 +13,6 @@ export class CareerSubjectService {
 
     const fullData: SubjectPlanData = {
       ...subjectData,
-      careerPlanId,
     };
 
     return this.repository.addSubjectToPlan(fullData);
@@ -32,14 +25,14 @@ export class CareerSubjectService {
       throw new Error("Career not found");
     }
 
-    const plan = careerData.CareerPlanModels?.[0];
+    const plan = careerData.SubjectPlanModels?.[0];
     if (!plan || !plan.SubjectPlanModels) {
       return [];
     }
 
     const formattedSubjects = (plan.SubjectPlanModels as any[]).map(subjectPlan => {
       return {
-        subjectPlanId: subjectPlan.id, // Pass the ID for the DELETE endpoint
+        subjectPlanId: subjectPlan.id, 
         year: subjectPlan.year,
         fourMonthPeriod: subjectPlan.fourMonthPeriod,
         isAnnual: subjectPlan.isAnnual,

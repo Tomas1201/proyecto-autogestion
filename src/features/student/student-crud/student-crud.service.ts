@@ -56,7 +56,7 @@ export const StudentService = {
       throw new Error("studentId and subjectId are required");
     }
 
-    // Find AcademicPosition for the subject
+    
     const academicPosition = await AcademicPositionModel.findOne({
       where: { subjectId: data.subjectId }
     });

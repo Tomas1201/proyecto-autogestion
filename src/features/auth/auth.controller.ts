@@ -1,4 +1,4 @@
-// src/controllers/auth.controller.ts (Ejemplo de Login)
+
 import { Request, Response } from 'express';
 import { AuthService } from "./auth.service.js";
 import { sys } from 'typescript';
@@ -8,12 +8,12 @@ const authService = AuthService.getInstance();
 
 export const login = async (req: Request, res: Response): Promise<any> =>{
     try {
-        //Que pasa si ya tiene cookie?
-        // const {jwt_auth} = req.cookies
+        
+        
 
         const { file, password } = req.body;
 
-        // Validar credenciales
+        
         const user = await authService.validateUser(file, password);
         console.log(user)
         if (user === null) {
@@ -22,7 +22,7 @@ export const login = async (req: Request, res: Response): Promise<any> =>{
         }
 
           
-        // Configurar cookie segura
+        
         res.cookie('jwt_auth', user, {
             httpOnly: true, 
             secure: process.env.NODE_ENV === 'production', 

@@ -13,7 +13,7 @@ export class CorrelationService {
       throw new Error("A subject cannot be a prerequisite of itself.");
     }
 
-    // Validate existence of all entities
+    
     const career = await Career.findByPk(careerId);
     if (!career) {
       throw new Error("Career not found.");

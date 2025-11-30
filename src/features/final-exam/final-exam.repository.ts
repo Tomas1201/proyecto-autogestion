@@ -10,7 +10,7 @@ export class FinalExamRepository {
   async findExamRegistrations(finalExamId: number) {
     const registrations = await ExamRegistration.findAll({ where: { finalExamId } });
     
-    // Manual join for student details
+    
     const results = await Promise.all(registrations.map(async (reg: any) => {
       const student = await Student.findByPk(reg.studentId);
       return {

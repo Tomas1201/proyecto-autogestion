@@ -5,8 +5,8 @@ export class Subject extends Model {
   public id!: string;
   public name!: string;
   public code!: string;
-  public hours!: number; // puede ser nulo
-  public horariosId!: number; // puede ser nulo
+  public hours!: number; 
+  public horariosId!: number; 
   public classroom!: string;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;

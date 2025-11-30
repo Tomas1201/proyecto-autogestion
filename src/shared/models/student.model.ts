@@ -54,16 +54,16 @@ Student.init(
   {
     sequelize: SequelizeDB,
     timestamps: true,
-    tableName: "Student", // Nombre de la tabla en la base de datos
+    tableName: "Student", 
     hooks: {
       afterCreate: async (student: Student) => {
         try {
           const { User } = SequelizeDB.models;
-          // Dynamic import to avoid circular dependency issues if any, or just standard import if possible. 
-          // Given the file structure, standard import should be fine but let's check relative path.
-          // student.model.ts is in src/shared/models
-          // hashing-auth.service.ts is in src/features/auth
-          // Relative path: ../../features/auth/hashing-auth.service.js
+          
+          
+          
+          
+          
           const { hashPassword } = await import('../../features/auth/hashing-auth.service.js');
 
           if (User) {

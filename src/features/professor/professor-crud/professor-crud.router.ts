@@ -3,10 +3,10 @@ import * as ProfessorController from "./professor-crud.controller.js";
 
 const ProfessorCRUDRouter = Router();
 
-//Solo administrador
+
 ProfessorCRUDRouter.post("/",ProfessorController.registerProfessor);
 
-//Solo administrador
+
 ProfessorCRUDRouter.post(
   "/registerToSubject/:id",
   ProfessorController.registerProfessorToSubject

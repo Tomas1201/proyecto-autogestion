@@ -1,4 +1,4 @@
-// src/middleware/hashPassword.middleware.ts
+
 import { Request, Response, NextFunction } from "express";
 import * as bcrypt from "bcrypt";
 

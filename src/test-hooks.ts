@@ -8,8 +8,8 @@ async function testHooks() {
         await SequelizeDB.authenticate();
         console.log('Connection has been established successfully.');
 
-        // Sync models (be careful with force: true in production, using alter here or just relying on existing tables if possible, but for test we might need to ensure tables exist)
-        // For this test, let's assume tables exist or sync them.
+        
+        
         await SequelizeDB.sync();
 
         console.log('Creating Student...');
@@ -25,7 +25,7 @@ async function testHooks() {
         });
         console.log('Student created:', student.id);
 
-        // Wait a bit for hook to run (it's async but usually awaited in the same transaction/process flow if not specifically detached, but here it is awaited in the hook definition)
+        
 
         const userStudent = await User.findOne({ where: { file: studentFile.toString() } });
         if (userStudent) {

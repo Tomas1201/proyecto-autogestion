@@ -35,7 +35,7 @@ export const authorize = (allowedRoles: ROLES[]) => {
         }
         
         if (allowedRoles.includes(userRole)) {
-            // Si el rol está permitido, continuamos con el siguiente manejador de ruta
+            
             next();
         } else {
         

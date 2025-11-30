@@ -6,7 +6,7 @@ export class AttendanceService {
   private registrationRepository = new RegistrationRepository();
 
   async saveAttendance(data: { subjectId: string; date: string; students: { studentId: string; isPresent: boolean }[] }) {
-    // 1. Get registrations for the subject to map studentId -> registrationId
+    
     const registrations = await this.registrationRepository.findRegistrationsBySubject(data.subjectId);
     
     const attendanceRecords = data.students.map(s => {
@@ -21,8 +21,8 @@ export class AttendanceService {
 
     if (attendanceRecords.length === 0) return [];
 
-    // Check if attendance already exists for this date/registrations to avoid duplicates?
-    // For MVP, we just insert. Or we could destroy previous for that date.
+    
+    
     
     return await this.repository.createBulk(attendanceRecords);
   }
@@ -33,14 +33,14 @@ export class AttendanceService {
     
     const attendances = await this.repository.findByRegistrationIdsAndDate(registrationIds, date);
     
-    // Merge with student info
+    
     return registrations.map(reg => {
       const att = attendances.find(a => a.registrationId === reg.registrationId);
       return {
         studentId: reg.studentId,
         name: reg.name,
         lastName: reg.lastName,
-        isPresent: att ? att.isPresent : false // Default to false if not recorded
+        isPresent: att ? att.isPresent : false 
       };
     });
   }

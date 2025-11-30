@@ -3,14 +3,14 @@ import { SequelizeDB } from "../../../database/sequelize.js";
 
 export class AcademicPositionModel extends Model {
   public id!: string;
-  public careerPlanId!: string;
+  public careerId!: string;
   public subjectId!: string;
   public year!: number;
   public fourMonthPeriod!: number;
   public electiveCycleId!: number;
   public professorId!: number;
 
-  // timestamps!
+  
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
@@ -22,11 +22,11 @@ AcademicPositionModel.init(
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
     },
-    careerPlanId: {
+    careerId: {
       type: DataTypes.UUID,
       allowNull: false,
       references: {
-        model: "CareerPlan",
+        model: "Career",
         key: "id",
       },
     },
@@ -38,7 +38,7 @@ AcademicPositionModel.init(
         key: "id",
       },
     },
-    cycleElectiveId: {
+    electiveCycleId: {
       type: DataTypes.UUID,
       allowNull: false,
       references: {

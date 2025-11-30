@@ -1,5 +1,4 @@
 import { StudentCareer } from "../../../shared/models/domain/student-career.model.js";
-import { CareerPlanModel } from "../../../shared/models/domain/career-plan.model.js";
 import { SubjectPlanModel } from "../../../shared/models/domain/subject-plan.model.js";
 import { AcademicPositionModel } from "../../../shared/models/domain/academic-position.model.js";
 import { Registration } from "../../../shared/models/domain/registration.model.js";
@@ -15,7 +14,7 @@ import { Op } from "sequelize";
 export class StudentPanelService {
     static async getCareers(studentId: string) {
         try {
-            // Manual fetch to avoid association issues
+            
             const studentCareers = await StudentCareer.findAll({ where: { studentId: studentId } });
             const careerIds = studentCareers.map(sc => sc.careerId);
 
@@ -33,18 +32,18 @@ export class StudentPanelService {
 
     static async getAvailableSubjects(studentId: string) {
         try {
-            // 1. Get Student's Active Career
+            
             const studentCareer = await StudentCareer.findOne({ where: { studentId: studentId, state: 'active' } });
             if (!studentCareer) return [];
 
-            // 2. Get Subjects in the Plan
-            const planSubjects = await SubjectPlanModel.findAll({ where: { careerPlanId: studentCareer.careerPlanId } });
+            
+            const planSubjects = await SubjectPlanModel.findAll({ where: { careerId: studentCareer.careerId } });
             const subjectIds = planSubjects.map(ps => ps.subjectId);
 
             if (subjectIds.length === 0) return [];
 
-            // 3. Get Available Academic Positions (Classes) for these subjects
-            // Filter by current year/semester if possible, but for now just all open ones
+            
+            
             const academicPositions = await AcademicPositionModel.findAll({
                 where: {
                     subjectId: { [Op.in]: subjectIds }
@@ -52,7 +51,7 @@ export class StudentPanelService {
                 include: [Subject]
             });
 
-            // 4. Filter out subjects already registered
+            
             const registrations = await Registration.findAll({ where: { studentId: studentId } });
             const registeredPositionIds = registrations.map(r => r.academicPositionId);
 
@@ -67,14 +66,14 @@ export class StudentPanelService {
 
     static async registerForSubject(studentId: string, academicPositionId: string) {
         try {
-            // Check if already registered
+            
             const existing = await Registration.findOne({ where: { studentId: studentId, academicPositionId: academicPositionId } });
             if (existing) throw new Error("Already registered");
 
             const registration = await Registration.create({
                 studentId: studentId,
                 academicPositionId: academicPositionId,
-                status: 'active' // Assuming a status field
+                status: 'active' 
             });
             return registration;
         } catch (error) {
@@ -114,13 +113,13 @@ export class StudentPanelService {
             const studentCareer = await StudentCareer.findOne({ where: { studentId: studentId, state: 'active' } });
             if (!studentCareer) return [];
 
-            const planSubjects = await SubjectPlanModel.findAll({ where: { careerPlanId: studentCareer.careerPlanId } });
+            const planSubjects = await SubjectPlanModel.findAll({ where: { careerId: studentCareer.careerId } });
             const subjectIds = planSubjects.map(ps => ps.subjectId);
 
             const finalExams = await FinalExam.findAll({
                 where: {
                     subjectId: { [Op.in]: subjectIds },
-                    date: { [Op.gt]: new Date() } // Future exams
+                    date: { [Op.gt]: new Date() } 
                 },
                 include: [Subject]
             });
@@ -134,7 +133,7 @@ export class StudentPanelService {
 
     static async registerForFinalExam(studentId: string, finalExamId: string) {
         try {
-            // Check if already registered
+            
             const existing = await FinalExamRegistration.findOne({ where: { studentId, finalExamId } });
             if (existing) throw new Error("Already registered for this exam");
 

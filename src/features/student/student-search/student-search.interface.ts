@@ -1,4 +1,4 @@
-import { Student } from '../../../shared/models/student.model.js'; // Asegúrate de que la ruta sea correcta
+import { Student } from '../../../shared/models/student.model.js'; 
 
 export interface StudentInterface {
   
@@ -16,7 +16,7 @@ export interface StudentInterface {
 
   FindByEmail(Email: string): Promise<Student | null>;
 
-  //findByCicloElectivo(cicloElectivoId: number): Promise<Student[] | null>; 
+  
 
   FindByStatus(Status: string): Promise<Student[] | null>;
   

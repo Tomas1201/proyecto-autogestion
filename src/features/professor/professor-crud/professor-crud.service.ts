@@ -113,13 +113,13 @@ export class ProfessorService {
   async getProfessorSubjects(professorId: string) {
     const assignments = await ProfessorSubjectModel.findAll({
       where: { professorId },
-      include: [{ model: SubjectModel, as: 'subject' }] // Assuming association exists or we fetch manually
+      include: [{ model: SubjectModel, as: 'subject' }] 
     });
     
-    // If association 'as: subject' is not set up in model definition, we might need to fetch subjects manually.
-    // Let's check if we can rely on include. If not, I'll fetch manually to be safe.
     
-    // Manual fetch approach to be safe given I haven't verified the association setup in Sequelize init
+    
+    
+    
     const results = await Promise.all(assignments.map(async (assignment: any) => {
       const subject = await SubjectModel.findByPk(assignment.subjectId);
       return {

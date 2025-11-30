@@ -2,14 +2,14 @@ import { DataTypes, Model } from "sequelize";
 import { SequelizeDB } from "../../../database/sequelize.js";
 
 export class Schedule extends Model {
-  public id!: string; // UUIDV4
+  public id!: string; 
   public day!: string;
   public startTime!: string;
   public finalTime!: string;
   public classroom!: string;
   public academicPositionId!: number;
 
-  // timestamps!
+  
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }

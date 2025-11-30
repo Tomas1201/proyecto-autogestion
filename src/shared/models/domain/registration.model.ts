@@ -2,13 +2,13 @@ import { SequelizeDB } from "../../../database/sequelize.js";
 import { DataTypes, Model } from "sequelize";
 
 export class Registration extends Model {
-  public id!: string; // UUIDV4
+  public id!: string; 
   public studentId!: string;
   public academicPositionId!: string;
   public status!: string;
   public grade!: number | null;
 
-  // timestamps!
+  
   public readonly CreatedAt!: Date;
   public readonly UpdatedAt!: Date;
 }
@@ -49,6 +49,6 @@ Registration.init(
   {
     sequelize: SequelizeDB,
     timestamps: true,
-    tableName: "Registration", // Nombre de la tabla en la base de datos
+    tableName: "Registration", 
   }
 );

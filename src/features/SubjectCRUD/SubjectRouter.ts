@@ -11,7 +11,7 @@ const asyncHandler = (
   Promise.resolve(fn(req, res, next)).catch(next);
 };
 
-// GET all
+
 SubjectRouter.get(
   '/',
   SubjectController.getAll

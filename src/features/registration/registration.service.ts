@@ -2,7 +2,6 @@ import { RegistrationRepository } from "./registration.repository.js";
 import { AcademicPositionModel } from "../../shared/models/domain/academic-position.model.js";
 import { StudentCareer } from "../../shared/models/domain/student-career.model.js";
 import { Correlation } from "../../shared/models/domain/correlations.model.js";
-import { CareerPlanModel } from "../../shared/models/domain/career-plan.model.js";
 import { Student } from "../../shared/models/student.model.js";
 import { Registration } from "../../shared/models/domain/registration.model.js";
 
@@ -10,7 +9,7 @@ export class RegistrationService {
   private repository = new RegistrationRepository();
 
   public async createRegistration(studentId: string, academicPositionId: number): Promise<Registration> {
-    // 1. Validate existence of student and academic position
+    
     const student = await Student.findByPk(studentId);
     if (!student) {
       throw new Error("Student not found");
@@ -21,21 +20,17 @@ export class RegistrationService {
       throw new Error("Academic Position not found");
     }
 
-    const { subjectId, careerPlanId } = academicPosition as any;
+    const { subjectId } = academicPosition as any;
 
-    // 2. Validate student is enrolled in the career
-    const careerPlan = await CareerPlanModel.findByPk(careerPlanId);
-    if (!careerPlan) {
-      throw new Error("Career Plan not found");
-    }
-    const { careerId } = careerPlan as any;
+    
+    const { careerId } = academicPosition as any;
 
     const studentCareer = await StudentCareer.findOne({ where: { studentId, careerId, state: 'active' } });
     if (!studentCareer) {
       throw new Error(`Student is not enrolled in this career.`);
     }
 
-    // 3. Validate prerequisites
+    
     const requiredSubjects = await Correlation.findAll({
       where: {
         subjectToTake: subjectId,
@@ -55,7 +50,7 @@ export class RegistrationService {
       }
     }
 
-    // 4. Check if already enrolled or passed
+    
     const existingRegistration = await Registration.findOne({
         where: { studentId, academicPositionId }
     });
@@ -65,7 +60,7 @@ export class RegistrationService {
         if(existingRegistration.status === 'ENROLLED') throw new Error("Student is already enrolled in this subject.");
     }
 
-    // 5. Create registration
+    
     return this.repository.createRegistration(studentId, academicPositionId);
   }
 

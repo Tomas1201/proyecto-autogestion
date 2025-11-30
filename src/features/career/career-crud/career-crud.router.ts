@@ -24,14 +24,14 @@ CareerRouter.get(
   asyncHandler(CareerController.getById)
 );
 
-//Solo administrador
+
 CareerRouter.post(
   '/',
   
   validate({ body: createCareerSchema }),
   asyncHandler(CareerController.create)
 );
-//Solo administrador
+
 CareerRouter.put(
   '/:id',
   

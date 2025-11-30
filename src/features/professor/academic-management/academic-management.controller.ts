@@ -8,11 +8,11 @@ import { Student } from '../../../shared/models/student.model.js';
 
 export class AcademicManagementController {
 
-    // Attendance
+    
     static async recordAttendance(req: Request, res: Response) {
         try {
             const { academicPositionId, date, students } = req.body;
-            // students: [{ studentId, isPresent, observations }]
+            
 
             const attendanceRecords = await Promise.all(students.map(async (s: any) => {
                 return Attendance.create({
@@ -31,7 +31,7 @@ export class AcademicManagementController {
         }
     }
 
-    // Exams
+    
     static async createExam(req: Request, res: Response) {
         try {
             const { academicPositionId, date, description, type } = req.body;
@@ -43,11 +43,11 @@ export class AcademicManagementController {
         }
     }
 
-    // Grades
+    
     static async recordGrades(req: Request, res: Response) {
         try {
             const { examId, grades } = req.body;
-            // grades: [{ studentId, value, feedback }]
+            
 
             const gradeRecords = await Promise.all(grades.map(async (g: any) => {
                 return Grade.create({
@@ -65,7 +65,7 @@ export class AcademicManagementController {
         }
     }
 
-    // Final Exams
+    
     static async createFinalExam(req: Request, res: Response) {
         try {
             const { subjectId, date, professorId, classroom } = req.body;
@@ -80,7 +80,7 @@ export class AcademicManagementController {
     static async gradeFinalExam(req: Request, res: Response) {
         try {
             const { finalExamId, grades } = req.body;
-            // grades: [{ studentId, grade, state, feedback }]
+            
 
             const updates = await Promise.all(grades.map(async (g: any) => {
                 const registration = await FinalExamRegistration.findOne({
@@ -88,7 +88,7 @@ export class AcademicManagementController {
                 });
                 if (registration) {
                     registration.grade = g.grade;
-                    registration.state = g.state; // 'passed', 'failed', 'absent'
+                    registration.state = g.state; 
                     registration.feedback = g.feedback;
                     await registration.save();
                     return registration;

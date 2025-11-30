@@ -64,7 +64,7 @@ async FindByName(Name: string): Promise<Student[] | null> {
             required: true,
             include: [
               {
-                model: SequelizeDB.models.Subject, // Ajusta según tu estructura real
+                model: SequelizeDB.models.Subject, 
                 as: "Subject",
                 attributes: [],
                 where: {

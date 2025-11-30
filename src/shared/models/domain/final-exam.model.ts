@@ -7,7 +7,7 @@ export class FinalExam extends Model {
   public date!: Date;
   public classroom!: string;
 
-  // timestamps!
+  
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }

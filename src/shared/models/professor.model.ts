@@ -2,7 +2,7 @@ import { DataTypes, Model, Sequelize } from 'sequelize';
 import { SequelizeDB } from '../../database/sequelize.js';
 
 export class Professor extends Model {
-  public id!: string; // UUIDV4
+  public id!: string; 
   public name!: string;
   public lastName!: string;
   public dni!: string;
@@ -11,7 +11,7 @@ export class Professor extends Model {
   public email!: string;
   public phone!: string;
   public scheduleAvailability!: string;
-  public state!: boolean; // puede ser nulo
+  public state!: boolean; 
 
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;

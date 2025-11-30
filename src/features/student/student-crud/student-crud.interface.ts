@@ -1,5 +1,5 @@
 
-import { Student } from '../../../shared/models/student.model.js'; // Asegúrate de que la ruta sea correcta
+import { Student } from '../../../shared/models/student.model.js'; 
 
 interface StudentCreationAttributes {
   name: string;
@@ -7,7 +7,7 @@ interface StudentCreationAttributes {
   email: string;
   status: string;
   dni: number;
-  career?: string[]; // opcional al crear
+  career?: string[]; 
 }
 
 export interface StudentInterface {
@@ -16,7 +16,7 @@ export interface StudentInterface {
   FindById(id: string): Promise<Student | null>;
  
 
-  //findByCicloElectivo(cicloElectivoId: number): Promise<Student[] | null>; 
+  
 
 
   Create(StudentData: StudentCreationAttributes): Promise<Student | null>; 

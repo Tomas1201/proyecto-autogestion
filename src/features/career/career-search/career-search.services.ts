@@ -1,4 +1,4 @@
-// src/services/CareerService.ts
+
 
 import { CareerModel, Career } from '../../../shared/models/career.model.js';; 
 import { CareerSearchInterface } from "./career-search.interface.js"; 
