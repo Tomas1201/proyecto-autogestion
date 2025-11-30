@@ -8,8 +8,9 @@ export class CycleElectiveModel extends Model {
   public finalTime!: Date;
   public state!: string;
   public fourMonthPeriod!: number;
+  public examTablesEnabled!: boolean;
 
-  
+
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
@@ -36,16 +37,21 @@ CycleElectiveModel.init(
     state: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: "activo", 
+      defaultValue: "activo",
     },
     fourMonthPeriod: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    examTablesEnabled: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
+    },
   },
   {
     sequelize: SequelizeDB,
-    timestamps: true, 
-    tableName: "CycleElective", 
+    timestamps: true,
+    tableName: "CycleElective",
   }
 );
