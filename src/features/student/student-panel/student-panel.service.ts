@@ -10,12 +10,11 @@ import { FinalExamRegistration } from "../../../shared/models/domain/final-exam-
 import { Subject } from "../../../shared/models/subject.model.js";
 import { Career } from "../../../shared/models/career.model.js";
 import { Op } from "sequelize";
-import { CycleElectiveRepository } from "../../cycle-elective/cycle-elective.repository.js";
 
 export class StudentPanelService {
     static async getCareers(studentId: string) {
         try {
-
+            
             const studentCareers = await StudentCareer.findAll({ where: { studentId: studentId } });
             const careerIds = studentCareers.map(sc => sc.careerId);
 
@@ -33,18 +32,18 @@ export class StudentPanelService {
 
     static async getAvailableSubjects(studentId: string) {
         try {
-
+            
             const studentCareer = await StudentCareer.findOne({ where: { studentId: studentId, state: 'active' } });
             if (!studentCareer) return [];
 
-
+            
             const planSubjects = await SubjectPlanModel.findAll({ where: { careerId: studentCareer.careerId } });
             const subjectIds = planSubjects.map(ps => ps.subjectId);
 
             if (subjectIds.length === 0) return [];
 
-
-
+            
+            
             const academicPositions = await AcademicPositionModel.findAll({
                 where: {
                     subjectId: { [Op.in]: subjectIds }
@@ -52,7 +51,7 @@ export class StudentPanelService {
                 include: [Subject]
             });
 
-
+            
             const registrations = await Registration.findAll({ where: { studentId: studentId } });
             const registeredPositionIds = registrations.map(r => r.academicPositionId);
 
@@ -67,14 +66,14 @@ export class StudentPanelService {
 
     static async registerForSubject(studentId: string, academicPositionId: string) {
         try {
-
+            
             const existing = await Registration.findOne({ where: { studentId: studentId, academicPositionId: academicPositionId } });
             if (existing) throw new Error("Already registered");
 
             const registration = await Registration.create({
                 studentId: studentId,
                 academicPositionId: academicPositionId,
-                status: 'active'
+                status: 'active' 
             });
             return registration;
         } catch (error) {
@@ -120,7 +119,7 @@ export class StudentPanelService {
             const finalExams = await FinalExam.findAll({
                 where: {
                     subjectId: { [Op.in]: subjectIds },
-                    date: { [Op.gt]: new Date() }
+                    date: { [Op.gt]: new Date() } 
                 },
                 include: [Subject]
             });
@@ -134,12 +133,7 @@ export class StudentPanelService {
 
     static async registerForFinalExam(studentId: string, finalExamId: string) {
         try {
-            const cycleRepository = new CycleElectiveRepository();
-            const currentCycle = await cycleRepository.getCurrentCycle();
-            if (!currentCycle || !currentCycle.examTablesEnabled) {
-                throw new Error("Exam tables are currently disabled. You cannot register for exams.");
-            }
-
+            
             const existing = await FinalExamRegistration.findOne({ where: { studentId, finalExamId } });
             if (existing) throw new Error("Already registered for this exam");
 

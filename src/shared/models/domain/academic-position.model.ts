@@ -3,10 +3,14 @@ import { SequelizeDB } from "../../../database/sequelize.js";
 
 export class AcademicPositionModel extends Model {
   public id!: string;
-  public subjectPlanId!: string;
-  public electiveCycleId!: string;
-  public professorId!: string;
+  public careerId!: string;
+  public subjectId!: string;
+  public year!: number;
+  public fourMonthPeriod!: number;
+  public electiveCycleId!: number;
+  public professorId!: number;
 
+  
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
@@ -18,11 +22,19 @@ AcademicPositionModel.init(
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
     },
-    subjectPlanId: {
+    careerId: {
       type: DataTypes.UUID,
       allowNull: false,
       references: {
-        model: "SubjectPlan",
+        model: "Career",
+        key: "id",
+      },
+    },
+    subjectId: {
+      type: DataTypes.UUID,
+      allowNull: false,
+      references: {
+        model: "Subject",
         key: "id",
       },
     },
@@ -41,7 +53,16 @@ AcademicPositionModel.init(
         model: "Professor",
         key: "id",
       },
-    }
+    },
+    workload: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    isOptional: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
+    },
   },
   {
     sequelize: SequelizeDB,
