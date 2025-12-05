@@ -15,6 +15,7 @@ import { AcademicManagementRouter } from './professor/academic-management/academ
 
 import { attendanceRouter } from "./attendance/attendance.router.js";
 import { finalExamRouter } from "./final-exam/final-exam.router.js";
+import { cycleElectiveRouter } from "./cycle-elective/cycle-elective.router.js";
 
 const generalRouter = Router();
 
@@ -33,5 +34,6 @@ generalRouter.use("/attendance", attendanceRouter);
 generalRouter.use("/final-exams", finalExamRouter);
 generalRouter.use("/student-panel", StudentPanelRouter);
 generalRouter.use("/academic-management", AcademicManagementRouter);
+generalRouter.use("/cycle-elective", cycleElectiveRouter);
 
 export default generalRouter;
