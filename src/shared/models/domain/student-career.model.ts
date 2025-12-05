@@ -8,7 +8,6 @@ export class StudentCareer extends Model {
   public id!: string;
   public studentId!: string;
   public careerId!: string;
-  public careerPlanId!: string;
   public state!: string;
 
   
@@ -37,14 +36,6 @@ StudentCareer.init(
       allowNull: false,
       references: {
         model: "Career",
-        key: "id", 
-      },
-    },
-    careerPlanId: {
-      type: DataTypes.UUID,
-      allowNull: false,
-      references: {
-        model: "CareerPlan",
         key: "id",
       },
     },
